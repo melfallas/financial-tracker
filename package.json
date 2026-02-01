@@ -1,6 +1,6 @@
 {
   "name": "financial-tracker",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "scripts": {
     "ng": "ng",
     "start": "npm run new-patch && ng serve",
@@ -18,6 +18,11 @@
     "push-all": "npm run new-patch && aic2 -a -t conventional && git push"
   },
   "private": true,
+  "commit-and-tag-version": {
+    "skip": {
+      "tag": true
+    }
+  },
   "devDependencies": {
     "commit-and-tag-version": "^12.6.1"
   }

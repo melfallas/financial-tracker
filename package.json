@@ -1,0 +1,17 @@
+{
+  "name": "financial-tracker",
+  "version": "0.0.1",
+  "scripts": {
+    "ng": "ng",
+    "start": "ng serve",
+    "dev": "ng serve",
+    "build": "ng build",
+    "watch": "ng build --watch --configuration development",
+    "test": "ng test",
+    "push": "aic2 -t conventional && git push",
+    "push-all": "aic2 -a -t conventional && git push"
+  },
+  "private": true,
+  "dependencies": {},
+  "devDependencies": {}
+}

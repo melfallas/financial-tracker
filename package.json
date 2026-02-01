@@ -1,6 +1,6 @@
 {
   "name": "financial-tracker",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "scripts": {
     "ng": "ng",
     "start": "npm run new-patch && ng serve",
@@ -9,6 +9,7 @@
     "watch": "npm run new-patch && ng build --watch --configuration development",
     "test": "npm run new-patch && ng test",
     "release": "commit-and-tag-version",
+    "releasem": "npm run new-minor && commit-and-tag-version",
     "new-patch": "npm --no-git-tag-version version patch",
     "new-minor": "npm --no-git-tag-version version minor",
     "new-major": "npm --no-git-tag-version version major",

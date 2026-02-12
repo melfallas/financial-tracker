@@ -1,6 +1,6 @@
 {
   "name": "financial-tracker",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "scripts": {
     "ng": "ng",
     "start": "npm run new-patch && ng serve",
@@ -9,7 +9,9 @@
     "watch": "npm run new-patch && ng build --watch --configuration development",
     "test": "npm run new-patch && ng test",
     "release": "commit-and-tag-version",
-    "releasem": "npm run new-minor && commit-and-tag-version",
+    "releasep": "commit-and-tag-version --skip.tag",
+    "releasem": "commit-and-tag-version --release-as minor --skip.tag",
+    "releasen": "commit-and-tag-version --release-as major --skip.tag",
     "new-patch": "npm --no-git-tag-version version patch",
     "new-minor": "npm --no-git-tag-version version minor",
     "new-major": "npm --no-git-tag-version version major",
@@ -19,11 +21,7 @@
     "push-all": "npm run new-patch && aic2 -a -t conventional && git push"
   },
   "private": true,
-  "commit-and-tag-version": {
-    "skip": {
-      "tag": true
-    }
-  },
+  "commit-and-tag-version": {},
   "devDependencies": {
     "commit-and-tag-version": "^12.6.1"
   }

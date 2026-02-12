@@ -1,6 +1,6 @@
 {
   "name": "financial-tracker",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "scripts": {
     "ng": "ng",
     "start": "npm run new-patch && ng serve",
@@ -15,6 +15,7 @@
     "new-patch": "npm --no-git-tag-version version patch",
     "new-minor": "npm --no-git-tag-version version minor",
     "new-major": "npm --no-git-tag-version version major",
+    "branch": "git checkout -b ",
     "commit": "npm run new-patch && aic2 -t conventional",
     "commit-all": "npm run new-patch && aic2 -a -t conventional",
     "push": "npm run new-patch && aic2 -t conventional && git push",

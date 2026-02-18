@@ -1,6 +1,6 @@
 {
   "name": "financial-tracker",
-  "version": "0.2.20",
+  "version": "0.2.21",
   "scripts": {
     "ng": "ng",
     "start": "npm run new-patch && ng serve",
@@ -14,8 +14,8 @@
     "releasen": "commit-and-tag-version --skip.tag --release-as major",
     "tag": "npm run tagn",
     "tagp": "commit-and-tag-version",
-    "tagm": "commit-and-tag-version --release-as minor",
-    "tagn": "commit-and-tag-version --release-as major",
+    "tagm": "commit-and-tag-version --release-as minor git push --follow-tags origin develop",
+    "tagn": "commit-and-tag-version --release-as major git push --follow-tags origin develop",
     "new-patch": "npm --no-git-tag-version version patch",
     "new-minor": "npm --no-git-tag-version version minor",
     "new-major": "npm --no-git-tag-version version major",

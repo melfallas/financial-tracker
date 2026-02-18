@@ -1,6 +1,6 @@
 {
   "name": "financial-tracker",
-  "version": "0.2.5",
+  "version": "0.2.6",
   "scripts": {
     "ng": "ng",
     "start": "npm run new-patch && ng serve",
@@ -15,7 +15,8 @@
     "new-patch": "npm --no-git-tag-version version patch",
     "new-minor": "npm --no-git-tag-version version minor",
     "new-major": "npm --no-git-tag-version version major",
-    "branch": "git checkout -b ",
+    "branch": "sh -c 'git checkout -b $BRANCH && git branch --set-upstream-to=origin/$BRANCH'",
+    "branchN": "sh -c 'git checkout -b $BRANCH && git branch --set-upstream-to=origin/$BRANCH && git push -u origin $BRANCH'",
     "merge": "git checkout develop && git merge @{-1} --no-edit && git push",
     "mergedel": "git checkout develop && git merge @{-1} --no-edit && git push && git branch -d @{-1} && git push origin --delete @{-1}",
     "reset": "git fetch origin && git reset --hard @{u}",

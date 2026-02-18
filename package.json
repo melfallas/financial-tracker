@@ -1,6 +1,6 @@
 {
   "name": "financial-tracker",
-  "version": "0.2.7",
+  "version": "0.2.8",
   "scripts": {
     "ng": "ng",
     "start": "npm run new-patch && ng serve",
@@ -19,13 +19,14 @@
     "branchLN": "sh -c 'git checkout -b $BRANCH && git branch --set-upstream-to=origin/$BRANCH && git push -u origin $BRANCH'",
     "branch": "node -e \"const b=process.argv[1]; require('child_process').execSync(`git checkout -b ${b} && git branch --set-upstream-to=origin/${b}`, {stdio:'inherit'})\"",
     "branchN": "node -e \"const b=process.argv[1]; require('child_process').execSync(`git checkout -b ${b} && git branch --set-upstream-to=origin/${b} && git push -u origin ${b}`, {stdio:'inherit'})\"",
+    "delete": "git checkout develop && git branch -d @{-1} && git push",
     "merge": "git checkout develop && git merge @{-1} --no-edit && git push",
     "mergedel": "git checkout develop && git merge @{-1} --no-edit && git push && git branch -d @{-1} && git push origin --delete @{-1}",
-    "reset": "git fetch origin && git reset --hard @{u}",
     "commit": "npm run new-patch && aic2 -t conventional",
     "commit-all": "npm run new-patch && aic2 -a -t conventional",
     "push": "npm run new-patch && aic2 -t conventional && git push",
-    "push-all": "npm run new-patch && aic2 -a -t conventional && git push"
+    "push-all": "npm run new-patch && aic2 -a -t conventional && git push",
+    "reset": "git fetch origin && git reset --hard @{u}"
   },
   "private": true,
   "commit-and-tag-version": {},

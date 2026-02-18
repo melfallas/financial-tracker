@@ -1,6 +1,6 @@
 {
   "name": "financial-tracker",
-  "version": "0.2.17",
+  "version": "0.2.19",
   "scripts": {
     "ng": "ng",
     "start": "npm run new-patch && ng serve",
@@ -27,7 +27,7 @@
     "merge": "git checkout develop && git merge @{-1} --no-edit && git push",
     "mergeB": "git checkout develop && git merge @{-1} --no-edit && git push --",
     "mergeb": "node -e \"const b=process.argv[1]; require('child_process').execSync(`git checkout ${b} && git merge @{-1} --no-edit && git push -- `, {stdio:'inherit'})\"",
-    "mergedel": "git checkout develop && git merge @{-1} --no-edit && git push && git branch -d @{-1} && git push origin --delete @{-1} -- ",
+    "mergedel": "git checkout develop && git merge @{-1} --no-edit && git push && git branch -d @{-1} && git push origin --delete @{-1}",
     "commit": "npm run new-patch && aic2 -t conventional",
     "commit-all": "npm run new-patch && aic2 -a -t conventional",
     "push": "npm run new-patch && aic2 -t conventional && git push",

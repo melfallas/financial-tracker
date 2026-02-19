@@ -1,6 +1,6 @@
 {
   "name": "financial-tracker",
-  "version": "0.3.31",
+  "version": "0.3.33",
   "scripts": {
     "ng": "ng",
     "start": "pnpm run patch && ng serve",

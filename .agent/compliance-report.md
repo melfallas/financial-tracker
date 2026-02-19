@@ -13,4 +13,11 @@
 4. **Architecture Alignment:** Does the file location match the Core/Shared/Feature layer definition? Yes (`navigation` feature)
 5. **Template Separation:** Are `templateUrl` and `styleUrl` used for components over 10 lines? Yes
 
+---
+
+**Date:** 2026-02-19
+**Task:** Refactor HomePage and DocPage according to project standards (Template/Style separation, OnPush strategy).
+**Status:** PASSED
+**Violations:** None
+**Files Detected:** src/app/home-page/home-page.ts, src/app/doc-page/doc-page.ts
 **Refactor Suggestions:** None

@@ -1,0 +1,254 @@
+:root {
+    --primary-color: #007bff;
+    --primary-dark: #0056b3;
+    --secondary-color: #6c757d;
+    --background-color: #f8f9fa;
+    --surface-color: #ffffff;
+    --text-color: #343a40;
+    --heading-color: #004085;
+    --success-color: #28a745;
+    --warning-color: #E85D04;
+    --border-color: #dee2e6;
+    --shadow-color: rgba(0, 0, 0, 0.08);
+    --font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+}
+
+body {
+    font-family: var(--font-family);
+    margin: 0;
+    background-color: var(--background-color);
+    color: var(--text-color);
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+    box-sizing: border-box;
+    min-height: 100vh;
+}
+
+.container {
+    width: 100%;
+    max-width: 1100px;
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+.main-header {
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+h1 {
+    color: var(--heading-color);
+    font-size: 2.25rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+}
+
+.subtitle {
+    font-size: 1.1rem;
+    color: var(--secondary-color);
+    margin-top: 0;
+}
+
+.card {
+    background-color: var(--surface-color);
+    border-radius: 12px;
+    box-shadow: 0 4px 12px var(--shadow-color);
+    padding: 25px;
+    transition: box-shadow 0.3s ease;
+}
+
+.card:hover {
+    box-shadow: 0 8px 24px var(--shadow-color);
+}
+
+.card-header {
+    margin: -25px -25px 25px -25px;
+    padding: 20px 25px;
+    border-bottom: 1px solid var(--border-color);
+    border-radius: 12px 12px 0 0;
+    font-size: 1.25rem;
+    color: var(--heading-color);
+    background-color: #f8f9fa;
+}
+
+.card-header.no-border {
+    border-bottom: none;
+}
+
+/* Sección de Moneda */
+.currency-selector {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.currency-button {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 25px;
+    font-size: 1rem;
+    font-weight: 600;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    cursor: pointer;
+    background-color: var(--surface-color);
+    color: var(--secondary-color);
+    transition: all 0.3s ease;
+    flex-grow: 1;
+    justify-content: center;
+}
+
+.currency-button .flag-icon {
+    width: 24px;
+    height: 24px;
+}
+
+.currency-button.active {
+    background-color: var(--primary-color);
+    color: white;
+    border-color: var(--primary-dark);
+    box-shadow: 0 4px 8px rgba(0, 123, 255, 0.2);
+}
+
+.currency-button:not(.active):hover {
+    background-color: #e9ecef;
+    border-color: #adb5bd;
+}
+
+/* Sección de Monto */
+.investment-amount {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+}
+
+.investment-amount label {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text-color);
+}
+
+.input-wrapper {
+    display: flex;
+    align-items: center;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    overflow: hidden;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.input-wrapper:focus-within {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.25);
+}
+
+.currency-symbol {
+    padding: 0 15px;
+    background-color: #e9ecef;
+    font-weight: 600;
+    font-size: 1.1rem;
+    color: var(--secondary-color);
+    align-self: stretch;
+    display: flex;
+    align-items: center;
+}
+
+.investment-amount input {
+    padding: 12px 15px;
+    font-size: 1.2rem;
+    font-weight: 500;
+    border: none;
+    outline: none;
+    width: 200px;
+    text-align: right;
+    background-color: var(--surface-color);
+}
+
+/* Sección de Info Depósito */
+.deposit-info {
+    padding: 20px;
+    text-align: center;
+}
+
+.offer-validity {
+    font-size: 1rem;
+    color: var(--warning-color);
+    font-weight: 600;
+}
+
+/* Tablas */
+.tables-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 25px;
+}
+
+.table-wrapper {
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th, td {
+    padding: 14px;
+    text-align: left;
+    border-bottom: 1px solid var(--border-color);
+}
+
+th {
+    background-color: #e9ecef;
+    color: var(--secondary-color);
+    font-weight: 600;
+    text-align: center;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+td {
+    text-align: center;
+}
+
+tr:last-child td {
+    border-bottom: none;
+}
+
+td.highlight-yield {
+    font-weight: 600;
+    color: var(--success-color);
+}
+
+td.highlight-total {
+    font-weight: 600;
+    color: var(--primary-dark);
+}
+
+/* Responsividad */
+@media (max-width: 992px) {
+    .tables-container {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 768px) {
+    body {
+        padding: 10px;
+    }
+    h1 { font-size: 1.8rem; }
+    .subtitle { font-size: 1rem; }
+    .card { padding: 20px; }
+    .card-header { padding: 15px 20px; font-size: 1.1rem; margin: -20px -20px 20px -20px;}
+    .currency-selector { flex-direction: column; gap: 10px; }
+}
+
+@media (max-width: 480px) {
+    .investment-amount input { width: 150px; }
+    th, td { padding: 10px; font-size: 0.9rem; }
+}

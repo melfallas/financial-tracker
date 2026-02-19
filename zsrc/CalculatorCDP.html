@@ -1,0 +1,89 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora de Inversión a Plazo</title>
+    <!-- Enlace a la hoja de estilos CSS -->
+    <link rel="stylesheet" href="CalculatorCDP.css">
+    <!-- El atributo 'defer' asegura que el script se ejecute después de que el HTML sea analizado -->
+    <script src="CalculatorCDP.js" defer></script>
+</head>
+<body>
+
+    <div class="container">
+        <header class="main-header">
+            <h1>Calculadora de Inversión a Plazo</h1>
+            <p class="subtitle">Proyecta tus ganancias con nuestras tasas preferenciales.</p>
+        </header>
+
+        <div class="card">
+            <h2 class="card-header">1. Selecciona la Moneda</h2>
+            <div class="currency-selector">
+                <button id="btnColones" class="currency-button active">
+                    <!-- Bandera de Costa Rica (SVG en línea) -->
+                    <svg width="24" height="24" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg" class="flag-icon"><circle cx="15" cy="15" r="14.5" fill="white" stroke="#dee2e6"/><path d="M15 30C23.2843 30 30 23.2843 30 15C30 6.71573 23.2843 0 15 0C6.71573 0 0 6.71573 0 15C0 23.2843 6.71573 30 15 30Z" fill="#00205B"/><path d="M15 27C21.6274 27 27 21.6274 27 15C27 8.37258 21.6274 3 15 3C8.37258 3 3 8.37258 3 15C3 21.6274 8.37258 27 15 27Z" fill="#FFFFFF"/><path d="M15 22.5C19.1421 22.5 22.5 19.1421 22.5 15C22.5 10.8579 19.1421 7.5 15 7.5C10.8579 7.5 7.5 10.8579 7.5 15C7.5 19.1421 10.8579 22.5 15 22.5Z" fill="#CE1126"/></svg>
+                    <span>Colones (CRC)</span>
+                </button>
+                <button id="btnDolares" class="currency-button">
+                     <!-- Bandera de Estados Unidos (SVG en línea) -->
+                    <svg width="24" height="24" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg" class="flag-icon"><circle cx="15" cy="15" r="14.5" fill="white" stroke="#dee2e6"/><path fill-rule="evenodd" clip-rule="evenodd" d="M0 15C0 6.71573 6.71573 0 15 0C23.2843 0 30 6.71573 30 15C30 23.2843 23.2843 30 15 30C6.71573 30 0 23.2843 0 15Z" fill="#B22234"/><path d="M18.8235 0V11.25H30V13.5H18.8235V30H16.5882V13.5H0V11.25H16.5882V0H18.8235Z" fill="white"/><path d="M0 11.25H13.2353V0H0V11.25Z" fill="#3C3B6E"/></svg>
+                    <span>Dólares (USD)</span>
+                </button>
+            </div>
+        </div>
+
+        <div class="card">
+             <h2 class="card-header">2. Define el Monto</h2>
+            <div class="investment-amount">
+                <label for="amount">Monto a Invertir:</label>
+                <div class="input-wrapper">
+                    <span id="currencySymbol" class="currency-symbol">CRC</span>
+                    <input type="text" id="amount" value="100,000.00" inputmode="decimal">
+                </div>
+            </div>
+        </div>
+
+        <div class="card deposit-info">
+             <h2 id="depositTitle" class="card-header no-border">Depósitos a Plazo Colones (CRC)</h2>
+             <p id="offerValidity" class="offer-validity">Válido hasta el YYYY-MM-DD</p>
+        </div>
+
+
+        <div class="tables-container">
+            <div class="table-wrapper card">
+                <h2 class="card-header">Tasas de Rendimiento Anual</h2>
+                <table id="yieldTable">
+                    <thead>
+                        <tr>
+                            <th>Plazo</th>
+                            <th>Rendimiento</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Filas generadas por JavaScript -->
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="table-wrapper card">
+                <h2 class="card-header">Proyección de la Inversión</h2>
+                <table id="projectionTable">
+                    <thead>
+                        <tr>
+                            <th>Importe</th>
+                            <th>Plazo</th>
+                            <th>Total Acumulado</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Filas generadas por JavaScript -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

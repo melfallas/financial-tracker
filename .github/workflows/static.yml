@@ -51,7 +51,7 @@ jobs:
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./dist/financial-tracker/browser
+          publish_dir: ./dist/financial-tracker
           publish_branch: gh-pages
           clean: true
 

@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.4.0](https://github.com/melfallas/financial-tracker/compare/v0.3.0...v0.4.0) (2026-02-19)
+
+
+### Features
+
+* **docs:** introduce internal documentation page ([b5b589f](https://github.com/melfallas/financial-tracker/commit/b5b589fae328c82429f147fe279960ca92b67238))
+* **project:** initialize new Angular application structure ([7028aef](https://github.com/melfallas/financial-tracker/commit/7028aefe44455c020262afe1685497fcb309e5ad))
+* **routing:** add hash location strategy ([2887b9c](https://github.com/melfallas/financial-tracker/commit/2887b9ca6e2f39df8f55f4003fccc24312b21eae))
+
+
+### Bug Fixes
+
+* **ci:** correct Angular build command in workflow ([579ac40](https://github.com/melfallas/financial-tracker/commit/579ac40e141d1077ebf608c983ea06b17032c436))
+
 ## 0.3.0 (2026-02-18)
 
 

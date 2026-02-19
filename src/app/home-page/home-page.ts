@@ -55,7 +55,7 @@ import { RouterLink } from '@angular/router';
       </svg>
       <!-- <h1>{{ title() }}</h1> -->
       <h1>Financial Tracker</h1>
-      <p>Congratulations! Your app is running. 🎉</p>
+      <p>Congratulations! Your app is running now. 🎉</p>
     </div>
     <div class="divider" role="separator" aria-label="Divider"></div>
     <div class="right-side">

@@ -53,7 +53,8 @@ import { RouterLink } from '@angular/router';
           <clipPath id="a"><path fill="#fff" d="M0 0h982v239H0z" /></clipPath>
         </defs>
       </svg>
-      <h1>{{ title() }}</h1>
+      <!-- <h1>{{ title() }}</h1> -->
+      <h1>Financial Tracker</h1>
       <p>Congratulations! Your app is running. 🎉</p>
     </div>
     <div class="divider" role="separator" aria-label="Divider"></div>

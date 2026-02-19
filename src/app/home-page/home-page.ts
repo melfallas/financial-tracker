@@ -60,16 +60,7 @@ import { RouterLink } from '@angular/router';
     <div class="divider" role="separator" aria-label="Divider"></div>
     <div class="right-side">
       <div class="pill-group">
-        @for (item of [
-          { title: 'Go to Home', link: '/', isInternal: true },
-          { title: 'Go to Docs', link: '/doc', isInternal: true },
-          { title: 'Go to About', link: '/about', isInternal: true },
-          { title: 'Learn with Tutorials', link: 'https://angular.dev/tutorials', isInternal: false },
-          { title: 'Prompt and best practices for AI', link: 'https://angular.dev/ai/develop-with-ai', isInternal: false },
-          { title: 'CLI Docs', link: 'https://angular.dev/tools/cli', isInternal: false },
-          { title: 'Angular Language Service', link: 'https://angular.dev/tools/language-service', isInternal: false },
-          { title: 'Angular DevTools', link: 'https://angular.dev/tools/devtools', isInternal: false },
-        ]; track item.title) {
+        @for (item of menuItems(); track item.title) {
           @if (item.isInternal) {
             <a
               class="pill"
@@ -354,4 +345,14 @@ import { RouterLink } from '@angular/router';
 })
 export class HomePage {
   protected readonly title = signal('financial-tracker');
+  protected readonly menuItems = signal([
+    { title: 'Go to Home', link: '/', isInternal: true },
+    { title: 'Go to Docs', link: '/doc', isInternal: true },
+    { title: 'Go to About', link: '/about', isInternal: true },
+    { title: 'Learn with Tutorials', link: 'https://angular.dev/tutorials', isInternal: false },
+    { title: 'Prompt and best practices for AI', link: 'https://angular.dev/ai/develop-with-ai', isInternal: false },
+    { title: 'CLI Docs', link: 'https://angular.dev/tools/cli', isInternal: false },
+    { title: 'Angular Language Service', link: 'https://angular.dev/tools/language-service', isInternal: false },
+    { title: 'Angular DevTools', link: 'https://angular.dev/tools/devtools', isInternal: false },
+  ]);
 }

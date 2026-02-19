@@ -1,7 +1,7 @@
 # Compliance Report
 
 **Date:** 2026-02-19
-**Task:** Recreate AboutPage component in navigation feature with premium design.
+**Task:** Recreate AboutPage component and refactor HomePage/DocPage to use signals for menu management.
 **Status:** PASSED
 **Violations:** None
 

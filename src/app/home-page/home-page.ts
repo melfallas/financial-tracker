@@ -61,8 +61,9 @@ import { RouterLink } from '@angular/router';
     <div class="right-side">
       <div class="pill-group">
         @for (item of [
+          { title: 'Go to Home', link: '/', isInternal: true },
           { title: 'Go to Docs', link: '/doc', isInternal: true },
-          { title: 'About Us', link: '/about', isInternal: true },
+          { title: 'Go to About', link: '/about', isInternal: true },
           { title: 'Learn with Tutorials', link: 'https://angular.dev/tutorials', isInternal: false },
           { title: 'Prompt and best practices for AI', link: 'https://angular.dev/ai/develop-with-ai', isInternal: false },
           { title: 'CLI Docs', link: 'https://angular.dev/tools/cli', isInternal: false },

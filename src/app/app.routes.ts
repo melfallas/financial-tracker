@@ -9,4 +9,8 @@ export const routes: Routes = [
     path: 'doc',
     loadComponent: () => import('./doc-page/doc-page').then((m) => m.DocPage),
   },
+  {
+    path: 'about',
+    loadComponent: () => import('./navigation/about/about').then((m) => m.AboutPage),
+  },
 ];

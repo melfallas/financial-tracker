@@ -45,23 +45,23 @@ jobs:
 
       - name: Build Angular App for Production
         # run: pnpm ng build --configuration production --base-href /financial-tracker/
-        run: pnpm ng build --configuration production --base-href /financial-tracker/
+        run: pnpm ng build --configuration production --base-href /financial-tracker/ --deploy-url /financial-tracker/
 
-      # - name: Deploy to GitHub Pages
-      #   uses: peaceiris/actions-gh-pages@v3
-      #   with:
-      #     github_token: ${{ secrets.GITHUB_TOKEN }}
-      #     publish_dir: ./dist/financial-tracker/browser
-      #     publish_branch: gh-pages
-      #     clean: true
-
-      # Deploy to Github pages
       - name: Deploy to GitHub Pages
-        uses: crazy-max/ghaction-github-pages@v3.1.0
+        uses: peaceiris/actions-gh-pages@v3
         with:
-          build_dir: dist/financial-tracker/browser
-        env:
-          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./dist/financial-tracker/browser
+          publish_branch: gh-pages
+          clean: true
+
+      # # Deploy to Github pages
+      # - name: Deploy to GitHub Pages
+      #   uses: crazy-max/ghaction-github-pages@v3.1.0
+      #   with:
+      #     build_dir: dist/financial-tracker/browser
+      #   env:
+      #     GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
 
 # jobs:
 #   # Single deploy job since we're just deploying

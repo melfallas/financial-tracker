@@ -1,5 +1,32 @@
 # AGENTS.md - Angular 21+ Standards & Workspace Rules
 
+## External Context
+
+This agent must synchronize its behavior rules and coding standards based on the global [Agents.md](https://agents.md/) standard.
+
+## Synchronization Instruction
+
+- **Source of Truth:** Before performing any coding task, consult the definitions at `https://agents.md/spec/`.
+- **Precedence:** Rules defined in the external standard take priority over the model's general assumptions.
+- **Validation:** If an Angular task violates the principles of `Agents.md`, notify the user before proceeding.
+
+## Activation Context
+
+Any modifications to files matching `src/**/*.ts`, `src/**/*.html`, or `src/**/*.scss`.
+
+## Automated Trigger Rules
+
+- **Watch Patterns:** `src/**/*.ts`, `src/**/*.html`, `src/**/*.scss`
+- **Action:** Upon any modification request to these files, perform a "Pre-flight Check" against the standards defined in this document.
+
+## Mandatory General Rules
+
+- **Architecture:** Exclusively use **Standalone Components**. Do not create or use `NgModules`.
+- **State Management:** Prefer **Signals** (`computed`, `effect`) over `BehaviorSubject` for reactive state management within components.
+- **Control Flow:** Use the new control flow syntax (`@if`, `@for`, `@switch`) instead of structural directives (`*ngIf`, `*ngFor`).
+- **Style:** Strictly follow the [Official Angular Style Guide](https://angular.dev/style-guide).
+- **Naming Convention:** Services must include the `.service.ts` suffix and components must include the `.component.ts` suffix.
+
 ## Agent Identity
 
 - **Name:** Angi
@@ -123,6 +150,14 @@ Strictly enforce the following organization:
 - **No Complex Logic:** Keep templates clean. Move complex calculations to `computed()` signals in the TS file.
 - **Encapsulation:** Use `ViewEncapsulation.Emulated` (default).
 
-## Instructions for the Model
+## Instructions for the LLM
+
+### Validation Workflow
+
+1. **Analyze:** Before generating or modifying code, check if the change follows the standards, and rules defined in this document.
+2. **Verify Architecture:** Ensure files stay within their assigned layer (Core, Shared, or Feature).
+3. **Report:** If a violation is found (e.g., using `*ngIf` instead of `@if`), stop and ask the user: "This change violates the Angular 21 standards defined in AGENTS.md. Should I refactor it to follow the standard?"
+
+### Additional Instructions
 
 "You must act as a guardian of this architecture. If I ask to create a service in a Feature folder that should be global, you must suggest moving it to Core. Always prioritize Signals over manual RxJS subscriptions."

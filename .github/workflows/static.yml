@@ -8,7 +8,7 @@ on:
     branches:
       - main
       - develop
-      - feature/TS-01_Initial_Angular_Project_Structure
+      - feature/TS-02_Initial_Angular_Standard_Rules
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:

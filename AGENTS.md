@@ -25,7 +25,7 @@ Any modifications to files matching `src/**/*.ts`, `src/**/*.html`, or `src/**/*
 - **State Management:** Prefer **Signals** (`computed`, `effect`) over `BehaviorSubject` for reactive state management within components.
 - **Control Flow:** Use the new control flow syntax (`@if`, `@for`, `@switch`) instead of structural directives (`*ngIf`, `*ngFor`).
 - **Style:** Strictly follow the [Official Angular Style Guide](https://angular.dev/style-guide).
-- **Naming Convention:** Services must include the `.service.ts` suffix and components must include the `.component.ts` suffix.
+- **Naming Convention:** Services must include the `.service.ts` suffix and components must not include the `.component` suffix.
 
 ## Agent Identity
 
@@ -99,7 +99,7 @@ The agent must strictly follow and enforce this directory structure:
 _Goal: Maintain a maintainable and searchable structure_
 
 - **L (Locate):** Structure files so finding code is intuitive.
-- **I (Identify):** Name files clearly (e.g., `feature-name.component.ts`).
+- **I (Identify):** Name files clearly (e.g., `feature-name.ts`).
 - **F (Flat):** Keep the folder structure as flat as possible (no more than 7 sub-levels).
 - **T (Try to stay DRY):** Avoid code duplication but prioritize readability over premature abstraction.
 

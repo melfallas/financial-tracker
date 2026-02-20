@@ -20,4 +20,12 @@
 **Status:** PASSED
 **Violations:** None
 **Files Detected:** src/app/home-page/home-page.ts, src/app/doc-page/doc-page.ts
+
+---
+
+**Date:** 2026-02-19
+**Task:** Applied /refactor-by-standards to DocPage (restored OnPush strategy).
+**Status:** PASSED
+**Violations:** None
+**Files Detected:** src/app/doc-page/doc-page.ts
 **Refactor Suggestions:** None

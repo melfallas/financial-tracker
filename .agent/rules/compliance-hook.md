@@ -23,7 +23,7 @@ Before concluding the task, the agent must update or generate a file at `.agent/
 
 ## The agent will append the following structure to the report:
 
-**Date:** [Current Date]
+**DateTime:** [Current Date in format "YYYY-MM-DDTHH:mm:ss"]
 **Task:** [Brief description of the change]
 **Status:** [PASSED / FAILED / WARNING]
 **Violations:** [List any deviation from the standards or "None"]

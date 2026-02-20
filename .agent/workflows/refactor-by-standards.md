@@ -10,4 +10,4 @@ Planning: Generate a detailed Implementation Plan to resolve these deviations.
 
 Execution: Once approved, apply the changes using atomic diffs.
 
-Validation: Ensure strict atomic consistency with existing dependencies and perform a final walkthrough to verify the refactor.
+Validation: Ensure strict consistency with existing dependencies and perform a final walkthrough to verify the refactor.

@@ -72,6 +72,7 @@ The agent must strictly follow and enforce this directory structure:
 ### 1. Components Anatomy & Structure
 
 - Keep components small and focused on a single responsibility
+- Do not add Component suffix to the component class name
 - Use `input()` and `output()` functions instead of decorators
 - Use `computed()` for derived state
 - Set `changeDetection: ChangeDetectionStrategy.OnPush` in `@Component` decorator
@@ -205,7 +206,7 @@ feature-name/
 
 ## 5. Prohibitions
 
-- **No Generic Folders:** Never create folders named `components/`, `services/`, or `interfaces/` inside a feature directory.
+- **No Generic Folders:** Never create folders named `pages/`, `components/`, `services/`, or `interfaces/` inside a feature directory.
 - **No Inline Styles/Templates:** Keep HTML and CSS in their separate files within the component folder to ensure scannability.
 - **Flat Feature Folders:** Do not nest features more than 2-3 levels deep. If a feature becomes too complex, split it into a new top-level feature area.
 

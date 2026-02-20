@@ -188,7 +188,7 @@ feature-name/
 ## 3. Directory Hierarchy
 
 - **`src/app/core/`**: Only for singleton services (Auth, Logging), guards, and interceptors that are instantiated once for the entire app.
-- **`src/app/shared/`**: Global reusable UI components (buttons, inputs), pipes, and directives.
+- **`src/app/shared/`**: Global reusable UI components (buttons, inputs), pipes, and directives. The `src/app/shared/` folder always must to contain the components, pipes, and directives folders hosting the components, pipes, and directives that are used in multiple features.
 - **`src/app/[feature]/`**: All logic related to a specific business feature.
 - Place feature-specific services and models directly in the feature root (e.g., `membership.service.ts`).
 - Place specific sub-views in sub-directories.

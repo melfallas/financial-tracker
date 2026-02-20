@@ -1,9 +1,9 @@
 import { Component, signal, ChangeDetectionStrategy } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { Navbar } from '../../../shared/components/navbar/navbar';
 
 @Component({
   selector: 'app-home-page',
-  imports: [RouterLink],
+  imports: [Navbar],
   templateUrl: './home-page.html',
   styleUrl: './home-page.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

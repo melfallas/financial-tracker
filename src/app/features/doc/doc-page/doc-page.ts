@@ -14,6 +14,7 @@ export class DocPage {
   protected readonly menuItems = signal([
     { title: 'Go to Home', link: '/', isInternal: true },
     { title: 'Go to Docs', link: '/doc', isInternal: true },
+    { title: 'Compound Interest Calculator', link: '/financial-tools/compound-interest', isInternal: true },
     { title: 'Go to About', link: '/about', isInternal: true },
     { title: 'Learn with Tutorials', link: 'https://angular.dev/tutorials', isInternal: false },
     { title: 'Prompt and best practices for AI', link: 'https://angular.dev/ai/develop-with-ai', isInternal: false },

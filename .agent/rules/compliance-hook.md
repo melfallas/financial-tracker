@@ -6,7 +6,7 @@ trigger: always_on
 
 ### Trigger Condition
 
-- **When:** Any modification affecting >2 lines of code or creating new files in `src/app/`.
+- **When:** Any modification affecting >20 lines of code or creating new files in `src/app/`.
 - **Target Files:** `src/**/*.ts`, `src/**/*.html`.
 
 ### Automated Action

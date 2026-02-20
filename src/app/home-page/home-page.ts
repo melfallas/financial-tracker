@@ -9,7 +9,7 @@ import { RouterLink } from '@angular/router';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HomePage {
-  protected readonly title = signal('financial-tracker');
+  protected readonly title = signal('Financial Tracker');
   protected readonly menuItems = signal([
     { title: 'Go to Home', link: '/', isInternal: true },
     { title: 'Go to Docs', link: '/doc', isInternal: true },

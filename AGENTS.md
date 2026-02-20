@@ -212,6 +212,43 @@ feature-name/
 
 ---
 
+# Rules for Using Aliases in Angular
+
+## 🎯 Purpose
+
+Ensure that all imports in Angular projects use **aliases** instead of long relative paths (`../../../`), improving readability, maintainability, and consistency across the codebase.
+
+## 📌 Rules
+
+### 1. Alias Definition
+
+- Every Angular project **MUST** define aliases in `tsconfig.json` or `tsconfig.app.json`.
+- Aliases **MUST** point to key directories such as:
+  - `@shared/*` → `src/app/shared/*`
+  - `@core/*` → `src/app/core/*`
+  - `@features/*` → `src/app/features/*`
+  - `@env/*` → `src/environments/*`
+
+Example in `tsconfig.json`:
+
+```json
+{
+  "compilerOptions": {
+    "baseUrl": "./",
+    "paths": {
+      "@shared/*": ["src/app/shared/*"],
+      "@core/*": ["src/app/core/*"],
+      "@features/*": ["src/app/features/*"],
+      "@env/*": ["src/environments/*"]
+    }
+  }
+}
+```
+
+---
+
+# LLM Instructions
+
 ## Instructions for the LLM
 
 ### Validation Workflow
@@ -223,3 +260,7 @@ feature-name/
 ### Additional Instructions
 
 "You must act as a guardian of this architecture. If I ask to create a service in a Feature folder that should be global, you must suggest moving it to Core. Always prioritize Signals over manual RxJS subscriptions."
+
+```
+
+```

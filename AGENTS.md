@@ -150,6 +150,67 @@ Strictly enforce the following organization:
 - **No Complex Logic:** Keep templates clean. Move complex calculations to `computed()` signals in the TS file.
 - **Encapsulation:** Use `ViewEncapsulation.Emulated` (default).
 
+---
+
+# Project Structure Rules: Angular 21 Feature-Based Pattern
+
+You must strictly adhere to the following architectural and naming conventions for this project.
+
+## 1. Core Principles
+
+- **LIFT Rule:** Locate code quickly, Identify code at a glance, Flat structure as much as possible, Try to be DRY.
+- **Folders-by-Feature:** Organize by functional areas (e.g., `membership`, `training-plans`), not by file type.
+- **One Concept Per File:** One class per file (one component, one service, etc.).
+
+## 2. Component Structure & Naming
+
+For every component, you must create a dedicated folder with the following **four-file** structure.
+
+### **Naming Convention Exception**
+
+- **Do NOT** use the `.component` suffix in the filename.
+- **DO** use the `.ts`, `.html`, `.css`, and `.spec.ts` extensions.
+- **Internal Class Naming:** Even if the filename is `membership-list.ts`, the class inside must still be named `MembershipListComponent`.
+
+### **Component File Pattern**
+
+```text
+feature-name/
+└── component-name/
+    ├── component-name.ts       (Logic & Metadata)
+    ├── component-name.html     (Template)
+    ├── component-name.css      (Styles)
+    └── component-name.spec.ts  (Unit Tests)
+
+```
+
+## 3. Directory Hierarchy
+
+- **`src/app/core/`**: Only for singleton services (Auth, Logging), guards, and interceptors that are instantiated once for the entire app.
+- **`src/app/shared/`**: Global reusable UI components (buttons, inputs), pipes, and directives.
+- **`src/app/[feature]/`**: All logic related to a specific business feature.
+- Place feature-specific services and models directly in the feature root (e.g., `membership.service.ts`).
+- Place specific sub-views in sub-directories.
+
+## 4. Specific File Naming
+
+| Type                  | Naming Pattern        | Example                    |
+| --------------------- | --------------------- | -------------------------- |
+| **Components**        | `[name].ts`           | `plan-editor.ts`           |
+| **Services**          | `[name].service.ts`   | `training-plan.service.ts` |
+| **Pipes**             | `[name].pipe.ts`      | `convert-unit.pipe.ts`     |
+| **Directives**        | `[name].directive.ts` | `highlight.directive.ts`   |
+| **Models/Interfaces** | `[name].model.ts`     | `membership.model.ts`      |
+| **Guards**            | `[name].guard.ts`     | `auth.guard.ts`            |
+
+## 5. Prohibitions
+
+- **No Generic Folders:** Never create folders named `components/`, `services/`, or `interfaces/` inside a feature directory.
+- **No Inline Styles/Templates:** Keep HTML and CSS in their separate files within the component folder to ensure scannability.
+- **Flat Feature Folders:** Do not nest features more than 2-3 levels deep. If a feature becomes too complex, split it into a new top-level feature area.
+
+---
+
 ## Instructions for the LLM
 
 ### Validation Workflow

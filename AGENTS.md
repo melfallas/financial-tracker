@@ -170,8 +170,9 @@ For every component, you must create a dedicated folder with the following **fou
 ### **Naming Convention Exception**
 
 - **Do NOT** use the `.component` suffix in the filename.
+- **Do NOT** use the `Component` suffix in the class name.
 - **DO** use the `.ts`, `.html`, `.css`, and `.spec.ts` extensions.
-- **Internal Class Naming:** Even if the filename is `membership-list.ts`, the class inside must still be named `MembershipListComponent`.
+- **Internal Class Naming:** If the filename is `membership-list.ts`, the class inside must still be named `MembershipList`.
 
 ### **Component File Pattern**
 

@@ -8,7 +8,7 @@ on:
     branches:
       - main
       - develop
-      - feature/TS-01_Initial_Angular_Project_Structure
+      - feature/TS-02_Initial_Angular_Standard_Rules
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -42,7 +42,7 @@ jobs:
         with:
           node-version: 22
           cache: 'pnpm'
-          package-manager: 'pnpm'
+          # package-manager: 'pnpm'
 
       - name: Install dependencies
         run: pnpm install
@@ -62,7 +62,7 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./dist/financial-tracker/browser
           publish_branch: gh-pages
-          clean: true
+          # clean: true
 
       # # Deploy to Github pages
       # - name: Deploy to GitHub Pages

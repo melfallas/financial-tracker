@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.5.0](https://github.com/melfallas/financial-tracker/compare/v0.4.0...v0.5.0) (2026-02-21)
+
+
+### Features
+
+* **about:** add About Us page with premium design ([8dda76c](https://github.com/melfallas/financial-tracker/commit/8dda76cc4a434b7cc08cf8afffa05a6d106b7be4))
+* **financial-tools:** add compound interest calculator ([ee4cb4b](https://github.com/melfallas/financial-tracker/commit/ee4cb4b03fc964d1d32aec1dc1cd2059198122df))
+* **navigation:** enhance dynamic internal/external links ([16de1a4](https://github.com/melfallas/financial-tracker/commit/16de1a49406378204ad066bbb1a5968176d436eb))
+
 ## [0.4.0](https://github.com/melfallas/financial-tracker/compare/v0.3.0...v0.4.0) (2026-02-19)
 
 

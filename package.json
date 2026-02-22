@@ -1,13 +1,15 @@
 {
   "name": "financial-tracker",
-  "version": "0.5.7",
+  "version": "0.5.8",
   "scripts": {
     "ng": "ng",
     "start": "pnpm run patch && ng serve",
     "dev": "pnpm run patch && ng serve",
     "build": "pnpm run patch && ng build",
     "watch": "pnpm run patch && ng build --watch --configuration development",
-    "test": "pnpm vitest --globals",
+    "test": "ng test",
+    "test:run": "pnpm run test",
+    "testv": "pnpm vitest --globals",
     "test:watch": "pnpm vitest --globals --watch",
     "release": "pnpm run releasem",
     "releasep": "commit-and-tag-version --skip.tag",

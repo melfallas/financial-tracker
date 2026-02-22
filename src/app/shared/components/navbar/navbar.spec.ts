@@ -2,7 +2,6 @@ import { render, screen } from '@testing-library/angular';
 import { Navbar } from './navbar';
 import { provideRouter } from '@angular/router';
 
-
 describe('Navbar', () => {
   it('should create', async () => {
     const { fixture } = await render(Navbar, {

@@ -42,7 +42,7 @@ Any modifications to files matching `src/**/*.ts`, `src/**/*.html`, or `src/**/*
 - **Framework:** Angular 21+ (Standalone components only, no NgModules).
 - **Language:** TypeScript 5.x+ (Strict mode enabled).
 - **Reactivity:** Signal-based state management preferred over RxJS for component state.
-- **Styles:** Tailwind CSS v4 + & SCSS with BEM methodology; CSS Variables for theming.
+- **Styles:** Tailwind CSS v4 with variables integrated into Tailwind engine + & SCSS with BEM methodology with CSS Variables for theming.
 - **UI Library:** PrimeNG
 - **Unit Testing:** Angular Testing, @testing-library/angular, jsdom environment
 - **Code Coverage:** @vitest/coverage-v8

@@ -75,8 +75,8 @@ Users in high-inflation environments (e.g., Argentina, Mexico) who need to under
 ### 5.1 Visual Identity
 
 - **Color Palette:** \* 80% Base: Deep Blue (`#1A237E`) & Cloud Gray (`#ECEFF1`).
-- 15% Interaction: Emerald Green (`#00C853`).
-- 5% CTA: Orange (`#F57C00`).
+- 15% Interaction: Emerald Green (#00C853).
+- 5% CTA: Emerald Green (#00C853) - Focused on growth contrast.
 
 - **Design Pattern:** Mobile-First, high-contrast text, and generous white space.
 

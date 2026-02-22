@@ -17,11 +17,10 @@ All components must adhere to this distribution to ensure a balanced, profession
 - `Cloud Gray (#ECEFF1)`: Used for main app backgrounds and section separation.
 
 - **15% Success & Interaction (Positive Reinforcement):**
-- `Emerald Green (#00C853)`: Used for "Growth" indicators, success messages, and valid states.
 - `Teal Bright (#009688)`: Used for interactive elements like sliders and secondary buttons.
 
 - **5% Conversion (The "Call to Action"):**
-- `CTA Orange (#F57C00)`: Reserved strictly for the "Download PDF" button and primary lead capture.
+- `Emerald Green (#00C853)`: Reserved strictly for the "Download PDF" button and primary lead capture.
 - `Golden Amber (#FFB300)`: Used for "Warning" states in inflation dashboards.
 
 #### 2. Visual Hierarchy & "The Wealth Gap"
@@ -62,7 +61,7 @@ The core UX mission is to visualize the "Pain" (Inflation) vs. the "Solution" (I
 ### 🛡️ UX Constraints (Immutable)
 
 1. **Anti-Clutter Policy:** No more than 3 primary data points per mobile screen.
-2. **Color Integrity:** Never use `CTA Orange` for anything other than conversion buttons.
+2. **Color Integrity:** Never use `Emerald Green` for anything other than growth indicators and conversion buttons.
 3. **Contextual i18n:** Ensure that Spanish text (which is usually 20-25% longer than English) does not break card containers. Use `text-overflow: ellipsis` or dynamic font sizing.
 
 **Winston:** "The **UX Knowledge Base** is now finalized. This ensures that even if the code evolves, the 'Premium Fin-Tracker' feel remains untouched."

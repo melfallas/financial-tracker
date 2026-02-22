@@ -11,8 +11,8 @@
 - **Mobile-First:** Strict responsive design. Layouts are `flex-col` by default, scaling to `md:flex-row`.
 - **Color Palette (80/15/5):**
 - **80% (Base):** `Deep Blue (#1A237E)`, `Cloud Gray (#ECEFF1)`, `Charcoal (#37474F)`.
-- **15% (Success/Feedback):** `Emerald Green (#00C853)`, `Teal Bright (#009688)`.
-- **5% (Action):** `CTA Orange (#F57C00)`, `Golden Amber (#FFB300)`.
+- **15% (Success/Feedback):** `Teal Bright (#009688)`.
+- **5% (Action/CTA):** `Emerald Green (#00C853)`.
 
 - **Psychology:** **Skeleton Loaders** are used to minimize cognitive load, and **Soft Red** is applied for critical inflation alerts.
 
@@ -60,8 +60,7 @@ src/
   --color-deep-blue: #1a237e;
   --color-cloud-gray: #eceff1;
   --color-emerald-green: #00c853;
-  --color-soft-red: #d32f2f;
-  --color-cta-orange: #f57c00;
+  --color-cta-green: #00c853;
 
   --font-sans: 'Inter', sans-serif;
 }

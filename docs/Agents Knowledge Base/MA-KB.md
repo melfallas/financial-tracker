@@ -18,8 +18,8 @@
 - **Branding:** Strictly **Financial Tracker**.
 - **80/15/5 Rule:**
 - **Deep Blue (#1A237E):** Stability and Trust (80%).
-- **Emerald Green (#00C853):** Growth and Action (15%).
-- **CTA Orange (#F57C00):** Conversion Focus (5%).
+- **Teal Bright (#009688):** Interaction (15%).
+- **Emerald Green (#00C853):** Conversion Focus (5%).
 
 - **Typography:** Inter (Sans-serif) for high readability in data-heavy views.
 

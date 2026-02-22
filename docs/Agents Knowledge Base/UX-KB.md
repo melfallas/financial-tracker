@@ -10,13 +10,12 @@
 
 This system establishes a visual hierarchy to minimize cognitive load and maximize lead conversion.
 
-| Layer                  | Usage                      | Hex Code                  | Tailwind v4 Variable |
-| ---------------------- | -------------------------- | ------------------------- | -------------------- |
-| **80% Base (Trust)**   | Backgrounds & Main Text    | `#1A237E` (Deep Blue)     | `--color-primary`    |
-| **80% Base (Surface)** | Card Backgrounds           | `#ECEFF1` (Cloud Gray)    | `--color-surface`    |
-| **15% Action**         | Growth & Success           | `#00C853` (Emerald Green) | `--color-action`     |
-| **15% Action (Alt)**   | Interactivity & UI Accents | `#009688` (Teal)          | `--color-action-alt` |
-| **5% Conversion**      | **Call to Action (CTA)**   | `#F57C00` (Orange)        | `--color-cta`        |
+| Layer                  | Usage                    | Hex Code                  | Tailwind v4 Variable |
+| ---------------------- | ------------------------ | ------------------------- | -------------------- |
+| **80% Base (Trust)**   | Backgrounds & Main Text  | `#1A237E` (Deep Blue)     | `--color-primary`    |
+| **80% Base (Surface)** | Card Backgrounds         | `#ECEFF1` (Cloud Gray)    | `--color-surface`    |
+| **15% Action**         | General UI & Success     | `#009688` (Teal Bright)   | `--color-action`     |
+| **5% Conversion**      | **Call to Action (CTA)** | `#00C853` (Emerald Green) | `--color-cta`        |
 
 ## 3. Typography
 
@@ -39,7 +38,7 @@ This system establishes a visual hierarchy to minimize cognitive load and maximi
 ### B. Modals: Lead Capture Funnel
 
 - **Friction Reduction:** Strictly limited to 3 fields (First Name, Last Name, Email).
-- **Submit Button:** `CTA Orange` with an elevation effect (hover shadow) to signify "Clickability."
+- **Submit Button:** `Emerald Green` with an elevation effect (hover shadow) to signify "Growth & Completion."
 - **Success State:** A green checkmark animation followed by an automatic redirect/download after 3 seconds.
 
 ### C. Assets: Micro-interactions
@@ -62,9 +61,8 @@ Winston (Architect) must implement these tokens within the **Assets** layer:
 @theme {
   --color-primary: #1a237e;
   --color-surface: #eceff1;
-  --color-action: #00c853;
-  --color-action-alt: #009688;
-  --color-cta: #f57c00;
+  --color-action: #009688;
+  --color-cta: #00c853;
   --color-error: #d32f2f;
 
   --font-sans: 'Inter', system-ui, sans-serif;

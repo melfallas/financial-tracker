@@ -41,7 +41,9 @@ Any modifications to files matching `src/**/*.ts`, `src/**/*.html`, or `src/**/*
 - **Reactivity:** Signal-based state management preferred over RxJS for component state.
 - **Styles:** Tailwind CSS v4 + & SCSS with BEM methodology; CSS Variables for theming.
 - **UI Library:** PrimeNG
-- **Testing:** Vitest + Playwright
+- **Unit Testing:** Vitest, @testing-library/angular, jsdom environment
+- **Code Coverage:** @vitest/coverage-v8
+- **E2E Testing:** Playwright
 - **Package Manager:** pnpm
 - **Version Control:** Git
 - **Commit Messages:** Conventional Commits

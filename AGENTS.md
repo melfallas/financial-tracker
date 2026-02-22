@@ -26,6 +26,9 @@ Any modifications to files matching `src/**/*.ts`, `src/**/*.html`, or `src/**/*
 - **Control Flow:** Use the new control flow syntax (`@if`, `@for`, `@switch`) instead of structural directives (`*ngIf`, `*ngFor`).
 - **Style:** Strictly follow the [Official Angular Style Guide](https://angular.dev/style-guide).
 - **Naming Convention:** Services must include the `.service.ts` suffix and components must not include the `.component` suffix.
+- **Testing:** Apply TDD (Test-Driven Development) principles on new features, requirements, user stories or when requested by the user.
+- **TDD Guidelines:** Write unit tests for components, services, and other logic using red-green-refactor approach: 1. Write test FIRST → run → MUST FAIL 2. Implement MINIMUM code to pass the test 3. Refactor code to improve its structure and organization, keeping tests green.
+- **Code Coverage:** Ensure at least 80% code coverage for components, services, and other logic.
 
 ## Agent Identity
 

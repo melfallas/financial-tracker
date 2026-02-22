@@ -18,3 +18,7 @@ Before starting the the task, the agent must verify and execute the following ta
 1. Write test FIRST → run → MUST FAIL
 2. Implement MINIMUM code to pass
 3. Refactor keeping tests green
+
+### Code Coverage Rules:
+
+1. Ensure at least 80% code coverage for components, services, and other logic

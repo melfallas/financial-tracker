@@ -1,18 +1,16 @@
 import { Component, signal, ChangeDetectionStrategy } from '@angular/core';
 import { Navbar } from '@shared/components/navbar/navbar';
-// import { APP_VERSION } from '@environments/version';
-import { APP_VERSION } from '../../../../environments/version';
 
 @Component({
-  selector: 'app-home-page',
+  selector: 'app-contact-page',
   imports: [Navbar],
-  templateUrl: './home-page.html',
-  styleUrl: './home-page.scss',
+  templateUrl: './contact-page.html',
+  styleUrl: './contact-page.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class HomePage {
-  version = APP_VERSION;
-  protected readonly title = signal('Financial Tracker');
+export class ContactPage {
+  public readonly title = signal('Contact');
+  protected readonly description = signal('Get in touch with us!');
   protected readonly menuItems = signal([
     { title: 'Go to Home', link: '/', isInternal: true },
     { title: 'Go to Docs', link: '/doc', isInternal: true },

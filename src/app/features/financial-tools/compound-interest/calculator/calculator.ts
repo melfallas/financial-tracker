@@ -22,6 +22,7 @@ export class Calculator {
   protected readonly menuItems = signal<MenuItem[]>([
     { title: 'Inicio', link: '/', isInternal: true },
     { title: 'Documentación', link: '/doc', isInternal: true },
+    { title: 'Contacto', link: '/contact', isInternal: true },
     { title: 'Calculadora de interés compuesto', link: '/financial-tools/compound-interest', isInternal: true },
     { title: 'Acerca de', link: '/about', isInternal: true },
   ]);

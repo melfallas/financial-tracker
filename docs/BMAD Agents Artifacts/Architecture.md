@@ -1,113 +1,76 @@
-# 📘 KB: FIN-TRACKER GLOBAL MVP (English Version)
+# 📘 Technical Architecture: Fin-Tracker Global MVP
 
-### 1. Core Architecture (Angular 21 + Signals)
+## 1. 🏗️ High-Level Methodology: Spec-Driven Development (SDD)
 
-- **State Management:** Strict use of `Signals` for granular reactivity. `RxJS` is reserved solely for asynchronous data streams (HTTP, Supabase).
-- **Methodology:** **BMAD** Architecture (Base, Modals, Assets, Data) with flat naming conventions (no `.component` suffix).
-- **Dependency Injection:** Services are consumed using the `inject()` function to ensure modern, cleaner code.
+**Fin-Tracker Global** follows the **Spec-Driven Development (SDD)** lifecycle within the BMAD framework. Every feature must be defined in the specification (PRD/Backlog) and validated in **Storybook** before being integrated into the main application logic.
 
-### 2. Design System & UX (Sally's Rules)
+### SDD Workflow:
 
-- **Mobile-First:** Strict responsive design. Layouts are `flex-col` by default, scaling to `md:flex-row`.
-- **Color Palette (80/15/5):**
-- **80% (Base):** `Deep Blue (#1A237E)`, `Cloud Gray (#ECEFF1)`, `Charcoal (#37474F)`.
-- **15% (Success/Feedback):** `Teal Bright (#009688)`.
-- **5% (Action/CTA):** `Emerald Green (#00C853)`.
-
-- **Psychology:** **Skeleton Loaders** are used to minimize cognitive load, and **Soft Red** is applied for critical inflation alerts.
-
-### 3. Financial Engine (Inflation-Adjusted)
-
-- **Currency Engine:** Native support for **USD, EUR, and LATAM Currencies** (ARS, MXN, CRC, etc.).
-- **Inflation Gap:** Dynamic "Wealth Gap" calculation that subtracts annual inflation impact from nominal compound interest returns.
-- **Data Source:** Architectural provision for live market APIs and Supabase persistence.
-
-### 4. Infrastructure & Integration
-
-- **Persistence:** Repository Pattern (`ILeadRepository`). Initial implementation via `LocalStorage`, ready to migrate to **Supabase** (Phase 2).
-- **i18n (Localization):** Bilingual system (**Spanish/English**) via JSON translation files. Language selection updates currency formats and UI labels instantly.
-- **Automation:** Local PDF generation summarizing the investment projection and automated welcome email logic (Resend/SendGrid).
+1. **Definition:** Define the feature and its acceptance criteria in `Backlog.md`.
+2. **Scaffold:** Create the standalone component and service shell (English only).
+3. **Island Dev (Storybook):** Develop the UI and logic in isolation using Storybook.
+4. **Integration:** Connect to the routing system and persistence layer.
+5. **PO Audit:** Validate using the `PO_Checklist.md`.
 
 ---
 
-## 🛠️ Technical Implementation Blueprint
+## 2. 🧠 Frontend Architecture (Angular 21)
 
-### Directory Structure
-
-```text
-src/
-├── app/
-│   ├── core/                  # Singletons & Contracts
-│   │   ├── services/          # currency.service.ts, translation.service.ts
-│   │   └── interfaces/        # i-lead-repository.ts, i-email.service.ts
-│   ├── infrastructure/        # Implementations
-│   │   ├── local-lead.repo.ts # Phase 1 Storage
-│   │   └── resend-email.ts    # Email logic
-│   ├── shared/                # Common Utils
-│   │   ├── utils/             # finance-math.ts
-│   │   └── types/             # index.ts (Lead, Currency)
-│   └── features/              # UI Components (Flat naming)
-│       ├── lead-form/         # lead-form (.ts, .html, .stories.ts)
-│       ├── calculator/        # compound-interest (.ts, .html)
-│       └── market-status/     # inflation-dashboard
-
-```
-
-### Tailwind v4 Configuration (`src/styles.css`)
-
-```css
-@theme {
-  --color-deep-blue: #1a237e;
-  --color-cloud-gray: #eceff1;
-  --color-emerald-green: #00c853;
-  --color-cta-green: #00c853;
-
-  --font-sans: 'Inter', sans-serif;
-}
-```
-
-### Core Logic Snippet: The Wealth Gap Engine
-
-```typescript
-/**
- * Advanced financial projection.
- * Adjusted for local inflation based on currency selection.
- */
-export const calculateProjection = (
-  initial: number,
-  rate: number,
-  inflation: number,
-  years: number,
-) => {
-  const nominal = initial * Math.pow(1 + rate / 100, years);
-  const realValue = nominal / Math.pow(1 + inflation / 100, years);
-  return { nominal, realValue };
-};
-```
+- **State Management:** Granular reactivity using **Angular Signals**. `computed()` signals handle all financial conversions (USD -> Local).
+- **Zoneless:** Optimized for performance without `Zone.js` overhead.
+- **Naming Convention:** **Flat & Clean**. Suffixes like `.component.ts` or `.component.html` are strictly forbidden.
+  - _Example:_ `hero-realtime.ts`, `hero-realtime.html`, `hero-realtime.stories.ts`.
+- **Dependency Injection:** Modern `inject()` usage for all services.
 
 ---
 
-## 🛡️ Stored Project Constraints
+## 🎨 3. Design System & Design Tokens (Tailwind v4)
 
-1. **Code Policy:** All source code and technical comments must be in **English**.
-2. **Conversational Policy:** Spanish for team communication.
-3. **UI Policy:** Mobile-First by default.
-4. **Brand Integrity:** Adherence to the **80/15/5** color rule.
+We implement the **80/15/5 Rule** directly into the Tailwind v4 engine (`src/styles.css`).
 
-### 📋 Technical Blueprint Summary (Snapshot)
+### Design Tokens:
 
-| Componente      | Lógica Clave                  | UI/UX Feature               |
-| --------------- | ----------------------------- | --------------------------- |
-| `LeadForm`      | Signal-based Validation       | Success Feedback (Emerald)  |
-| `Calculator`    | `calculateAdvancedProjection` | Multi-currency Slider       |
-| `MarketStatus`  | `fearGreedValue()` Signal     | Responsive Grid             |
-| `InflationDash` | `INFLATION_DATA` Lookup       | High-Volatility Alert (Red) |
+- **80% (Base - Trust):**
+  - Deep Blue (`#1A3C6E`): Stability and brand identity.
+  - Cloud Gray (`#ECEFF1`): Surface and background.
+- **15% (Action - Guidance):**
+  - Teal Bright (`#009688`): Innovation, interactive icons, and secondary buttons.
+- **5% (Conversion - Growth):**
+  - **Emerald Green (`#00C853`)**: Reserved strictly for Primary CTAs and "Success" feedback.
+
+### Responsive Strategy:
+
+- **Mobile-First:** All flex containers are `flex-col` by default.
+- **Breakpoint Logic:** Use `md:` for tablet/desktop side-by-side transitions.
 
 ---
 
-### 🛡️ Saved Constraints (Memory Bank)
+## 📈 4. The Wealth Gap Engine (Financial Logic)
 
-1. **Language:** Conversación en Español / Código y Comentarios en Inglés.
-2. **Naming:** No use of `.component.ts` or `.component.html` suffixes.
-3. **Units:** All math done in USD internally; converted to local currency for Display Only.
-4. **Testing:** Every feature must have a corresponding Storybook story with mobile viewport testing.
+The core logic is encapsulated in `src/app/shared/utils/finance-math.ts` to ensure mathematical purity.
+
+### Core Calculation:
+
+- **Nominal FV:** `initial * (1 + monthly_rate)^months`
+- **Real FV:** `nominal_fv / (1 + periodic_inflation_rate)^periods`
+- **The Gap:** `nominal_fv - real_fv` (The "Wealth Erosion" story).
+
+---
+
+## 🔧 5. Data & Persistence Layer
+
+- **Repository Pattern:** `ILeadRepository` interface abstracts the storage mechanism.
+- **Phase 1 (MVP):** `LocalStorageService` for local-only lead persistence.
+- **Phase 2 (Scalability):** `SupabaseService` (PostgreSQL) for cloud storage and RLS (Row Level Security).
+- **External APIs:**
+  - **ExchangeRate-API:** For real-time currency conversion (USD/EUR/LATAM).
+  - **Resend/SendGrid:** (Phase 2) For personalized PDF delivery.
+
+---
+
+## 🛡️ 6. Engineering Constraints (Non-Negotiable)
+
+1. **Language:** UI supports ES/EN; **Source Code & Comments** are 100% English.
+2. **Testing:** All features must include a Storybook story for Viewport (Mobile/Desktop) validation.
+3. **Performance:** < 1.5s visual load time on mobile networks.
+4. **Naming:** Class names must match filenames without suffixes (e.g., class `LeadFormStore` in `lead-form-store.ts`).

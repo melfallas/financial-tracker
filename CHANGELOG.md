@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.6.0](https://github.com/melfallas/financial-tracker/compare/v0.5.0...v0.6.0) (2026-02-22)
+
+
+### Features
+
+* **contact-page:** add dedicated contact page ([3db0c57](https://github.com/melfallas/financial-tracker/commit/3db0c57a46a4a42815427e61a4d174b82fd2c691))
+* **setup:** initialize new Angular project structure ([bd157ae](https://github.com/melfallas/financial-tracker/commit/bd157aec242e4b803430bd6608991e60b874b7dc))
+* **testimonials:** implement testimonials page and update navigation ([40523b8](https://github.com/melfallas/financial-tracker/commit/40523b8971e9bed29c2eddda114fadb9d4aa31c3))
+* **versioning:** display application version on home page ([28cfe30](https://github.com/melfallas/financial-tracker/commit/28cfe30fa4e33b017a86fd2e2cf5f7ec536de478))
+
 ## [0.5.0](https://github.com/melfallas/financial-tracker/compare/v0.4.0...v0.5.0) (2026-02-21)
 
 

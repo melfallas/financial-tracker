@@ -1,5 +1,7 @@
 import { Component, signal, ChangeDetectionStrategy } from '@angular/core';
 import { Navbar } from '@shared/components/navbar/navbar';
+// import { APP_VERSION } from '@environments/version';
+import { APP_VERSION } from '../../../../environments/version';
 
 @Component({
   selector: 'app-home-page',
@@ -9,10 +11,13 @@ import { Navbar } from '@shared/components/navbar/navbar';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HomePage {
+  version = APP_VERSION;
   protected readonly title = signal('Financial Tracker');
   protected readonly menuItems = signal([
     { title: 'Go to Home', link: '/', isInternal: true },
     { title: 'Go to Docs', link: '/doc', isInternal: true },
+    { title: 'Testimonials', link: '/testimonials', isInternal: true },
+    { title: 'Contact', link: '/contact', isInternal: true },
     { title: 'Compound Interest Calculator', link: '/financial-tools/compound-interest', isInternal: true },
     { title: 'Go to About', link: '/about', isInternal: true },
     { title: 'Learn with Tutorials', link: 'https://angular.dev/tutorials', isInternal: false },

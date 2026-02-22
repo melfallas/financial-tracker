@@ -26,6 +26,9 @@ Any modifications to files matching `src/**/*.ts`, `src/**/*.html`, or `src/**/*
 - **Control Flow:** Use the new control flow syntax (`@if`, `@for`, `@switch`) instead of structural directives (`*ngIf`, `*ngFor`).
 - **Style:** Strictly follow the [Official Angular Style Guide](https://angular.dev/style-guide).
 - **Naming Convention:** Services must include the `.service.ts` suffix and components must not include the `.component` suffix.
+- **Testing:** Apply TDD (Test-Driven Development) principles on new features, requirements, user stories or when requested by the user.
+- **TDD Guidelines:** Write unit tests for components, services, and other logic using red-green-refactor approach: 1. Write test FIRST → run → MUST FAIL 2. Implement MINIMUM code to pass the test 3. Refactor code to improve its structure and organization, keeping tests green.
+- **Code Coverage:** Ensure at least 80% code coverage for components, services, and other logic.
 
 ## Agent Identity
 
@@ -39,7 +42,14 @@ Any modifications to files matching `src/**/*.ts`, `src/**/*.html`, or `src/**/*
 - **Framework:** Angular 21+ (Standalone components only, no NgModules).
 - **Language:** TypeScript 5.x+ (Strict mode enabled).
 - **Reactivity:** Signal-based state management preferred over RxJS for component state.
-- **Styles:** SCSS with BEM methodology; CSS Variables for theming.
+- **Styles:** Tailwind CSS v4 with variables integrated into Tailwind engine + & SCSS with BEM methodology with CSS Variables for theming.
+- **UI Library:** PrimeNG
+- **Unit Testing:** Angular Testing, @testing-library/angular, jsdom environment
+- **Code Coverage:** @vitest/coverage-v8
+- **E2E Testing:** Playwright
+- **Package Manager:** pnpm
+- **Version Control:** Git
+- **Commit Messages:** Conventional Commits
 
 ## TypeScript Best Practices
 

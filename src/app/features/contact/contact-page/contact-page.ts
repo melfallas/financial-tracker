@@ -2,15 +2,15 @@ import { Component, signal, ChangeDetectionStrategy } from '@angular/core';
 import { Navbar } from '@shared/components/navbar/navbar';
 
 @Component({
-  selector: 'app-doc-page',
+  selector: 'app-contact-page',
   imports: [Navbar],
-  templateUrl: './doc-page.html',
-  styleUrl: './doc-page.scss',
+  templateUrl: './contact-page.html',
+  styleUrl: './contact-page.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class DocPage {
-  protected readonly title = signal('Documentation');
-  protected readonly description = signal('This is the doc !');
+export class ContactPage {
+  public readonly title = signal('Contact');
+  protected readonly description = signal('Get in touch with us!');
   protected readonly menuItems = signal([
     { title: 'Go to Home', link: '/', isInternal: true },
     { title: 'Go to Docs', link: '/doc', isInternal: true },

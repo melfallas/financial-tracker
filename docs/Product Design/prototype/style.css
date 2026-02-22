@@ -1,0 +1,285 @@
+/* ================= VARIABLES DE COLOR (Tu Paleta) ================= */
+:root {
+    --deep-blue: #1A3C6E;   /* Estructura, títulos, botón secundario */
+    --neon-green: #00C853;  /* Botón principal, highlights de éxito */
+    --amber: #FFC107;       /* Alertas leves (no usado en este hero) */
+    --teal: #009688;        /* Iconos, detalles tecnológicos */
+    --orange: #F57C00;      /* Botones de acción secundaria (no usado aquí) */
+    --red: #D32F2F;         /* Errores (no usado aquí) */
+    --cloud-gray: #ECEFF1;  /* Fondos principales */
+    --cloud-gray: #FCFCFC;  /* Fondos principales */
+    --cloud-gray-light: #FCFCFC;
+    --charcoal: #37474F;    /* Texto de cuerpo */
+    --white: #FFFFFF;       /* Texto en botones, fondos de dropdown */
+    --clear: #F3F5F8;
+}
+
+/* Reset básico */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: var(--cloud-gray);
+    color: var(--charcoal);
+    line-height: 1.6;
+}
+
+/* Contenedor utilitario para centrar contenido */
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Estilos de Botones Globales */
+.btn {
+    display: inline-block;
+    padding: 12px 24px;
+    border-radius: 4px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    border: none;
+    cursor: pointer;
+}
+
+/* Botón Principal (Verde Neón - Hero CTA) */
+.btn-primary {
+    background-color: var(--neon-green);
+    color: var(--white);
+    font-size: 1.1rem;
+    box-shadow: 0 4px 14px rgba(0, 200, 83, 0.3); /* Sombra verde suave */
+}
+
+.btn-primary:hover {
+    background-color: #00a844; /* Un poco más oscuro al pasar el mouse */
+    transform: translateY(-2px);
+}
+
+/* Botón Secundario (Azul Marino - Header) */
+.btn-secondary {
+    background-color: var(--deep-blue);
+    color: var(--white);
+    font-size: 0.95rem;
+    padding: 10px 20px;
+}
+
+.btn-secondary:hover {
+    background-color: #132c52;
+}
+
+/* ================= HEADER STYLES ================= */
+.site-header {
+    background-color: var(--cloud-gray); /* Fondo limpio */
+    background-color: var(--clear);
+    background-color: var(--white);
+    padding: 1.2rem 0;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    border-bottom: 1px solid rgba(0,0,0,0.05);
+}
+
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Navegación */
+.main-nav ul {
+    list-style: none;
+    display: flex;
+    gap: 2rem;
+}
+
+.main-nav a {
+    text-decoration: none;
+    color: var(--deep-blue);
+    font-weight: 500;
+    font-size: 1rem;
+    transition: color 0.3s;
+    display: flex;
+    align-items: center;
+}
+
+.main-nav a:hover {
+    color: var(--teal); /* Usamos el Teal para el hover, da un toque moderno */
+}
+
+.arrow {
+    font-size: 0.8rem;
+    margin-left: 5px;
+}
+
+/* Dropdowns (Simple CSS Hover) */
+.has-dropdown {
+    position: relative;
+    display: none;
+}
+
+.dropdown {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: var(--white);
+    box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+    min-width: 180px;
+    flex-direction: column !important;
+    gap: 0 !important;
+    padding: 10px 0;
+    border-radius: 4px;
+}
+
+.has-dropdown:hover .dropdown {
+    display: flex;
+}
+
+.dropdown li a {
+    padding: 10px 20px;
+    color: var(--charcoal);
+}
+
+.dropdown li a:hover {
+    background-color: var(--cloud-gray);
+    color: var(--deep-blue);
+}
+
+/* Mobile toggle hidden on desktop */
+.mobile-menu-toggle {
+    display: none;
+}
+
+/* ================= HERO SECTION STYLES ================= */
+.hero-section {
+    position: relative;
+    padding: 4rem 0;
+    overflow: hidden; /* Para contener el efecto de la imagen */
+    min-height: 80vh; /* Altura mínima para verse grande */
+    display: flex;
+    align-items: center;
+}
+
+.hero-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+    z-index: 2; /* Asegura que el contenido esté sobre el overlay */
+}
+
+/* Contenido de Texto (Izquierda) */
+.hero-content {
+    flex: 1;
+    max-width: 550px; /* Evita que el texto se estire demasiado */
+}
+
+.hero-content h1 {
+    font-size: 3.5rem;
+    color: var(--deep-blue);
+    line-height: 1.2;
+    margin-bottom: 1.5rem;
+    font-weight: 700;
+}
+
+/* El texto destacado en Verde Neón */
+.highlight-text {
+    color: var(--neon-green);
+}
+
+.hero-subtext {
+    font-size: 1.15rem;
+    color: var(--charcoal);
+    margin-bottom: 2.5rem;
+    max-width: 480px;
+}
+
+/* Imagen (Derecha) */
+.hero-image-container {
+    flex: 1;
+    display: flex;
+    justify-content: flex-end;
+    position: relative;
+}
+
+.hero-img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    /* Un pequeño efecto de sombra para separarla del fondo */
+    box-shadow: 20px 20px 60px rgba(0,0,0,0.1); 
+}
+
+/* Efecto de Overlay Diagonal (Opcional, para imitar la referencia) */
+/* Creamos un degradado que cubre parte de la imagen */
+.hero-overlay {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(to right, var(--cloud-gray) 10%, rgba(236, 239, 241, 0) 100%);
+    z-index: 1;
+    pointer-events: none; /* Permite hacer clic a través del overlay */
+    /* Este clip-path crea el corte diagonal */
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 20% 100%);
+}
+
+
+/* ================= RESPONSIVE (Móvil básico) ================= */
+@media (max-width: 768px) {
+    .header-container {
+        padding: 0 20px;
+    }
+
+    /* Ocultar navegación desktop y mostrar toggle */
+    .main-nav, .btn-secondary {
+        display: none;
+    }
+    
+    .mobile-menu-toggle {
+        display: block;
+        background: none;
+        border: none;
+        cursor: pointer;
+    }
+    .mobile-menu-toggle span {
+        display: block;
+        width: 25px;
+        height: 3px;
+        background-color: var(--deep-blue);
+        margin: 5px 0;
+    }
+
+    /* Stack Hero Section */
+    .hero-container {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .hero-content {
+        margin-bottom: 3rem;
+        max-width: 100%;
+    }
+    
+    .hero-content h1 {
+        font-size: 2.5rem;
+    }
+
+    .hero-subtext {
+        margin: 0 auto 2rem auto;
+    }
+    
+    .hero-image-container {
+        justify-content: center;
+    }
+
+    .hero-overlay {
+        display: none; /* Simplificamos el fondo en móvil */
+    }
+}

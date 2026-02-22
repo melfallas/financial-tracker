@@ -1,24 +1,27 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { render, screen } from '@testing-library/angular';
 import { Navbar } from './navbar';
 import { provideRouter } from '@angular/router';
 
+
 describe('Navbar', () => {
-  let component: Navbar;
-  let fixture: ComponentFixture<Navbar>;
+  it('should create', async () => {
+    const { fixture } = await render(Navbar, {
+      providers: [provideRouter([])],
+      componentInputs: { items: [] }, // replaces fixture.componentRef.setInput
+    });
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      imports: [Navbar],
-      providers: [provideRouter([])]
-    }).compileComponents();
-
-    fixture = TestBed.createComponent(Navbar);
-    component = fixture.componentInstance;
-    fixture.componentRef.setInput('items', []);
-    fixture.detectChanges();
+    // Verify that the component instance was created
+    expect(fixture.componentInstance).toBeTruthy();
   });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
+  it('should render with empty items', async () => {
+    await render(Navbar, {
+      providers: [provideRouter([])],
+      componentInputs: { items: [] },
+    });
+
+    // Example: check that no list items are rendered
+    const navItems = screen.queryAllByRole('listitem');
+    expect(navItems.length).toBe(0);
   });
 });

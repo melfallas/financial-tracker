@@ -19,6 +19,10 @@ Before starting the the task, the agent must verify and execute the following ta
 2. Implement MINIMUM code to pass
 3. Refactor keeping tests green
 
+### Testing Libraries Rules:
+
+1. Prefer usage of @testing-library/angular over TestBed as possible
+
 ### Code Coverage Rules:
 
 1. Ensure at least 80% code coverage for components, services, and other logic

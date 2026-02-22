@@ -16,6 +16,7 @@ export class HomePage {
   protected readonly menuItems = signal([
     { title: 'Go to Home', link: '/', isInternal: true },
     { title: 'Go to Docs', link: '/doc', isInternal: true },
+    { title: 'Testimonials', link: '/testimonials', isInternal: true },
     { title: 'Contact', link: '/contact', isInternal: true },
     { title: 'Compound Interest Calculator', link: '/financial-tools/compound-interest', isInternal: true },
     { title: 'Go to About', link: '/about', isInternal: true },

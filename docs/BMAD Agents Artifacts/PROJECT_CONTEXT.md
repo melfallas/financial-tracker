@@ -22,9 +22,9 @@ This prompt is designed to be pasted into any AI assistant or given to a lead de
 
 ### 2. The "Sally" Design System (80/15/5)
 
-- **Primary (80%):** `--color-deep-blue: #1A237E`, `--color-cloud-gray: #ECEFF1`.
+- **Primary (80%):** `--color-deep-blue: #1A3C6E`, `--color-cloud-gray: #ECEFF1`.
 - **Accent (15%):** `--color-emerald-green: #00C853` (Success), `--color-teal-bright: #009688` (UI Interactive).
-- **CTA (5%):** `--color-cta-orange: #F57C00` (Strictly for conversion/PDF download).
+- **CTA (5%):** `--color-emerald-green: #00C853` (All conversion actions and CTAs). Orange (`#F57C00`) for subtle alert indicators only.
 - **UX Principles:** Mobile-First, Skeleton Loaders for all data fetching, and high-contrast "Wealth Gap" charts.
 
 ### 3. Core Logic & Constraints

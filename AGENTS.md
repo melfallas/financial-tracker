@@ -42,8 +42,15 @@ Any modifications to files matching `src/**/*.ts`, `src/**/*.html`, or `src/**/*
 - **Framework:** Angular 21+ (Standalone components only, no NgModules).
 - **Language:** TypeScript 5.x+ (Strict mode enabled).
 - **Reactivity:** Signal-based state management preferred over RxJS for component state.
-- **Styles:** Tailwind CSS v4 with variables integrated into Tailwind engine + & SCSS with BEM methodology with CSS Variables for theming.
-- **UI Library:** PrimeNG
+- **Styles:** Tailwind CSS v4 with CSS variable design tokens integrated into the Tailwind engine. Tailwind serves as the master styling layer for layouts, spacing, color tokens, and visual customization of PrimeNG and Chart.js container components.
+- **UI Library:** PrimeNG — Used for complex UI components (data tables, forms, menus, dialogs, calendars). Styled via `tailwindcss-primeui` preset for seamless theme integration with Financial Tracker design tokens. Supports dark/light mode compatibility.
+- **Data Visualization:** Chart.js — Used for dynamic financial charts (Wealth Gap visualization, projections, gauges). Integrated via `ng2-charts` Angular wrapper for Angular Signal reactivity.
+- **Component Documentation:** Storybook — Used for isolated component development, visual regression testing, responsive viewport validation, and component library documentation. Every visual component must have Storybook stories.
+- **UI Integration Strategy:**
+  - PrimeNG covers complex interactive UI components (tables, forms, menus, dialogs).
+  - Chart.js provides dynamic data visualizations (charts, gauges, financial projections).
+  - Tailwind CSS personalizes styles, layouts, structure, and adjusts the visual appearance of both PrimeNG and Chart.js components to maintain the 80/15/5 design system consistency.
+  - `tailwindcss-primeui` bridges PrimeNG theming with Tailwind tokens for unified styling.
 - **Unit Testing:** Angular Testing, @testing-library/angular
 - **Code Coverage:** Angular CLI (ng test --code-coverage)
 - **E2E Testing:** Playwright

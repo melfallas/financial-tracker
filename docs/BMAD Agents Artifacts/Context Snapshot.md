@@ -26,9 +26,9 @@ As the **BMad Orchestrator** (🏗️), I have generated this **Context Snapshot
 ## 3. Design System (The "Sally" Standard)
 
 - **Visual Rule:** **80/15/5** Distribution.
-- **80% (Trust/Base):** Deep Blue (`#1A237E`) & Cloud Gray (`#ECEFF1`).
+- **80% (Trust/Base):** Deep Blue (`#1A3C6E`) & Cloud Gray (`#ECEFF1`).
 - **15% (Action/Success):** Emerald Green (`#00C853`).
-- **5% (Conversion/CTA):** CTA Orange (`#F57C00`) — _Strictly for Lead Gen triggers._
+- **5% (Conversion/CTA):** Emerald Green (`#00C853`) — _Strictly for all conversion actions and CTAs._
 
 - **UX Principle:** Mobile-First, thumb-driven interaction, and "Radical Clarity" in financial data visualization.
 

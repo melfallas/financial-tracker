@@ -53,7 +53,7 @@ Sally has defined the following tokens to be implemented in the `src/styles.css`
 ```css
 @theme {
   /* Brand Colors */
-  --color-primary-navy: #1a237e;
+  --color-primary-navy: #1A3C6E;
   --color-primary-light: #eceff1;
   --color-success-green: #00c853;
   --color-cta-orange: #f57c00;
@@ -356,7 +356,7 @@ export class ChartVisualizerComponent {
           {
             label: 'Real Purchasing Power',
             data: data.map((d) => d.realValue),
-            borderColor: '#1a237e',
+            borderColor: '#1A3C6E',
             borderDash: [5, 5],
             tension: 0.4,
           },
@@ -652,7 +652,7 @@ Tailwind CSS v4 allows us to define our design system entirely within the CSS la
 
 @theme {
   /* 80% Foundation (Trust) */
-  --color-primary-navy: #1a237e;
+  --color-primary-navy: #1A3C6E;
   --color-primary-light: #eceff1;
   --color-text-main: #374151;
 

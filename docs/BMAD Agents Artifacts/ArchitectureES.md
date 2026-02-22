@@ -14,9 +14,9 @@ Este documento sirve como la **Única Fuente de Verdad (SSOT)** para la implemen
 
 - **Mobile-First:** Diseño responsivo estricto. Layouts `flex-col` por defecto, escalando a `md:flex-row`.
 - **Color Palette (80/15/5):**
-- **80% (Base):** `Deep Blue (#1A237E)`, `Cloud Gray (#ECEFF1)`, `Charcoal (#37474F)`.
+- **80% (Base):** `Deep Blue (#1A3C6E)`, `Cloud Gray (#ECEFF1)`, `Charcoal (#37474F)`.
 - **15% (Success/Feedback):** `Emerald Green (#00C853)`, `Teal Bright (#009688)`.
-- **5% (Action):** `CTA Orange (#F57C00)`, `Golden Amber (#FFB300)`.
+- **5% (Action):** `Emerald Green (#00C853)` (CTA), `Golden Amber (#FFB300)` (Warnings). Orange (`#F57C00`) for subtle alerts only.
 
 - **Psychology:** Uso de **Skeletons** para reducir la carga cognitiva y **Soft Red** para alertas de inflación crítica.
 

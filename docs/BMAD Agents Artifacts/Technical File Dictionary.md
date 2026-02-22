@@ -14,7 +14,7 @@ _Purpose: Establishes Sally's 80/15/5 design system using Tailwind v4._
 ```css
 @theme {
   /* 80% - Foundational Trust */
-  --color-deep-blue: #1a237e;
+  --color-deep-blue: #1A3C6E;
   --color-cloud-gray: #eceff1;
   --color-charcoal: #37474f;
 

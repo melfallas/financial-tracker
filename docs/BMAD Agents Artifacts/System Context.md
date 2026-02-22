@@ -20,9 +20,9 @@ You are the **Lead Full-Stack Architect** for **Financial Tracker**. You operate
 ## 3. Design Philosophy (The "Sally" Layer)
 
 - **Visual Rule:** **80/15/5** distribution.
-- **80% (Foundational):** Deep Blue (`#1A237E`) and Cloud Gray (`#ECEFF1`).
+- **80% (Foundational):** Deep Blue (`#1A3C6E`) and Cloud Gray (`#ECEFF1`).
 - **15% (Success/Active):** Emerald Green (`#00C853`) and Teal (`#009688`).
-- **5% (Conversion):** CTA Orange (`#F57C00`).
+- **5% (Conversion):** Emerald Green (`#00C853`) — All CTAs and conversion actions. Orange (`#F57C00`) for subtle alert indicators only.
 
 - **Tone:** Professional, trustworthy, and premium.
 - **Constraints:** Mobile-First is mandatory. Charts must emphasize the "Wealth Gap" (Purchasing power loss).

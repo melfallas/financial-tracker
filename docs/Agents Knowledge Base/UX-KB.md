@@ -12,7 +12,7 @@ This system establishes a visual hierarchy to minimize cognitive load and maximi
 
 | Layer                  | Usage                    | Hex Code                  | Tailwind v4 Variable |
 | ---------------------- | ------------------------ | ------------------------- | -------------------- |
-| **80% Base (Trust)**   | Backgrounds & Main Text  | `#1A237E` (Deep Blue)     | `--color-primary`    |
+| **80% Base (Trust)**   | Backgrounds & Main Text  | `#1A3C6E` (Deep Blue)     | `--color-primary`    |
 | **80% Base (Surface)** | Card Backgrounds         | `#ECEFF1` (Cloud Gray)    | `--color-surface`    |
 | **15% Action**         | General UI & Success     | `#009688` (Teal Bright)   | `--color-action`     |
 | **5% Conversion**      | **Call to Action (CTA)** | `#00C853` (Emerald Green) | `--color-cta`        |

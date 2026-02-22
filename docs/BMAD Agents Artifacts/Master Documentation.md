@@ -20,9 +20,9 @@ The interface follows the **80/15/5 Rule** to project institutional trust with m
 
 | Layer             | Usage                                      | Hex Code                                      |
 | ----------------- | ------------------------------------------ | --------------------------------------------- |
-| **80% Base**      | Backgrounds, Primary Text, Headers         | `#1A237E` (Deep Blue), `#ECEFF1` (Cloud Gray) |
+| **80% Base**      | Backgrounds, Primary Text, Headers         | `#1A3C6E` (Deep Blue), `#ECEFF1` (Cloud Gray) |
 | **15% Action**    | Success indicators, growth charts, sliders | `#00C853` (Emerald), `#009688` (Teal)         |
-| **5% Conversion** | **Call to Action (CTA)**, PDF Buttons      | `#F57C00` (Orange)                            |
+| **5% Conversion** | **Call to Action (CTA)**, PDF Buttons      | `#00C853` (Emerald Green)                     |
 
 ### UX Principles:
 

@@ -4,7 +4,7 @@
 | --------- | -------- | --------------------------------- | -------------------------------------------------------------------------------------------- | -------- | ---------- |
 | **FR-01** | Core     | **Compound Interest Engine**      | Calculate monthly compounding growth based on initial capital and monthly contributions.     | P0       | `Data`     |
 | **FR-02** | Core     | **Wealth Gap Logic**              | Calculate purchasing power loss by discounting nominal growth against local inflation rates. | P0       | `Data`     |
-| **FR-03** | UI/UX    | **80/15/5 Visual Implementation** | Apply Deep Blue (80%), Emerald (15%), and CTA Orange (5%) throughout the UI.                 | P0       | `Base`     |
+| **FR-03** | UI/UX    | **80/15/5 Visual Implementation** | Apply Deep Blue (80%), Teal/Charcoal (15%), and Emerald Green CTA (5%) throughout the UI.    | P0       | `Base`     |
 | **FR-04** | UI/UX    | **Real-time Charting**            | Dynamic line chart showing the visual "gap" between Nominal and Real value.                  | P1       | `Base`     |
 | **FR-05** | Lead Gen | **Lead Capture Modal**            | Modal form to collect Name and Email before PDF generation.                                  | P0       | `Modals`   |
 | **FR-06** | Lead Gen | **PDF Generation**                | Export a branded "Financial Tracker Report" as a downloadable PDF.                           | P1       | `Assets`   |

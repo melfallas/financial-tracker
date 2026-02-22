@@ -20,10 +20,10 @@ The interface follows the **80/15/5 Rule** to project institutional trust with m
 
 | Layer             | Usage                      | Hex Code  | CSS Variable      |
 | ----------------- | -------------------------- | --------- | ----------------- |
-| **80% Base**      | Backgrounds & Primary Text | `#1A237E` | `--color-primary` |
+| **80% Base**      | Backgrounds & Primary Text | `#1A3C6E` | `--color-primary` |
 | **80% Surface**   | Layout Surfaces            | `#ECEFF1` | `--color-surface` |
 | **15% Action**    | Growth charts, Sliders     | `#00C853` | `--color-action`  |
-| **5% Conversion** | **Call to Action (CTA)**   | `#F57C00` | `--color-cta`     |
+| **5% Conversion** | **Call to Action (CTA)**   | `#00C853` | `--color-cta`     |
 
 ### UX Principles:
 

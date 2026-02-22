@@ -17,7 +17,7 @@
 
 - **Branding:** Strictly **Financial Tracker**.
 - **80/15/5 Rule:**
-- **Deep Blue (#1A237E):** Stability and Trust (80%).
+- **Deep Blue (#1A3C6E):** Stability and Trust (80%).
 - **Teal Bright (#009688):** Interaction (15%).
 - **Emerald Green (#00C853):** Conversion Focus (5%).
 

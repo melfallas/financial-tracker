@@ -155,13 +155,8 @@ GLOBAL SCOPE (src/app/shared/) - Disponible en toda la app:
 - utils/       → Funciones de utilidad (formatPrice, etc.)
 - constants/   → Constantes de negocio
 - components/  → Componentes UI genéricos (Button, Modal, Skeleton)
-- hooks/       → Custom hooks reutilizables
 
-LOCAL SCOPE (src/app/features/) - Específico de cada funcionalidad:
-- product-catalog/
-  - components/   → ProductCard, ProductCatalog
-- shopping-cart/
-  - components/   → CartItem, CartSummary, ShoppingCart
+LOCAL SCOPE (src/app/features/) - Específico de cada funcionalidad
 
 INFRAESTRUCTURA:
 - src/app/infrastructure/  → Servicios externos (Sentry, API clients)
@@ -180,26 +175,12 @@ src/app/
 │   ├── utils/
 │   │   └── index.ts          # formatPrice, calculateSubtotal
 │   ├── constants/
-│   │   └── businessRules.ts  # Reglas de negocio
+│   │   └── business-rules.ts  # Reglas de negocio
 │   ├── components/
 │   │   └── index.ts          # Button, Skeleton, Toast
-│   └── hooks/
-│       └── index.ts          # useLocalStorage, etc.
-│
-├── features/                  # 📦 LOCAL SCOPE
-│   ├── product-catalog/
-│   │   ├── components/
-│   │   │   ├── ProductCard.ts
-│   │   └── ProductCatalog.ts
-│   │
-│   └── shopping-cart/
-│       ├── components/
-│       │   ├── CartItem.ts
-│       │   └── CartSummary.ts
-│       └── ShoppingCart.ts
 │
 ├── infrastructure/            # 🔧 SERVICIOS EXTERNOS
-│   └── sentry.ts
+│   └── infra.ts
 │
 └── test/                      # 🧪 CONFIG DE TESTS
     └── setup.ts

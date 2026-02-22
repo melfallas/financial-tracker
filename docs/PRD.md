@@ -54,6 +54,7 @@ Financial illiteracy regarding inflation is a global phenomenon. While compound 
 - **FR16: Navbar** — Logo ("Financial Tracker" in Deep Blue + Emerald Green), i18n toggle (ES/EN), currency selector (Auto-detect/Manual), and "Schedule a Call" button in Deep Blue.
 - **FR17: Footer** — Legal links (Privacy Policy, Terms of Service), brand logo, and social media links in Cool Gray (`#ECEFF1`) background with Charcoal (`#37474F`) text.
 - **FR18: Email Automation** — Automated email delivery for: (a) PDF Lead Magnet upon form submission; (b) Booking confirmation upon appointment scheduling; (c) Reminder emails before scheduled consultations. Integration via Resend or SendGrid Edge Functions.
+- **FR19: Interaction Analytics & Engagement Tracking** — Capture and persist user interaction metrics (widget engagement times, slider interactions, session durations) to measure KPIs like Wealth Gap Engagement. Uses an `IInteractionRepository` interface following the same Repository Pattern used for leads, enabling local-first storage (LocalStorage/IndexedDB) in Phase 1 and migration to Supabase `interaction_logs` table in Phase 2. Data includes: `session_id`, `widget_id`, `interaction_type`, `duration_ms`, `timestamp`. When a user converts to a Lead, their accumulated engagement stats are anchored to their lead record via an `engagement_stats` JSONB field. A debounce buffer strategy prevents network saturation — events are batched and flushed on idle (5s inactivity), section change, or CTA click. _Priority: Low — last implementation priority; the product can launch without this._
 
 ### 2.2 Non-Functional Requirements
 
@@ -182,7 +183,8 @@ Single Angular project repository hosted on GitHub. All frontend code, design to
 
 - All internal math computed in USD; converted to local currency for display only.
 - Angular `@angular/localize` for i18n with `CurrencyPipe` adapting to detected locale.
-- Repository Pattern (`ILeadRepository` interface) abstracts storage: Phase 1 uses LocalStorage/IndexedDB + JSON files for read-only data; Phase 2 switches to Supabase via Dependency Injection swap in `app.config.ts`.
+- **Persistence Strategy (Repository Pattern):** All data persistence is abstracted via interfaces (`ILeadRepository`, `IInteractionRepository`) that decouple feature logic from storage technology. Phase 1 uses local browser storage (LocalStorage or IndexedDB — _to be determined during Architecture phase via pattern/use-case discovery_) + JSON files for read-only mock data. Phase 2 switches to Supabase via a simple Dependency Injection provider swap in `app.config.ts`. No feature code modification is needed when switching storage backends.
+- **LocalStorage vs. IndexedDB Decision:** Deferred to the Architecture phase. The Architect must evaluate the trade-offs (data size limits, query capabilities, structured data needs, async vs sync API) for each repository's use cases (leads, interactions, user preferences) and recommend the appropriate technology per repository — potentially a hybrid approach where simpler key-value data uses LocalStorage and structured/larger datasets use IndexedDB.
 - PrimeNG theme customization via `tailwindcss-primeui` preset to ensure all PrimeNG components inherit the Financial Tracker design tokens (Deep Blue, Emerald Green, etc.).
 - Chart.js instances updated via Signal `effect()` with `update('quiet')` mode for 60FPS slider reactivity.
 - `jspdf` and `html2canvas` lazy-loaded via Angular `@defer` blocks to avoid impacting initial bundle size.
@@ -540,6 +542,22 @@ so that the site loads fast and ranks well in search engines.
 4. SEO metadata service implemented with dynamic titles and descriptions.
 5. GitHub Actions pipeline verified: build → test → deploy to `gh-pages`.
 
+#### Story 6.5: Interaction Analytics & Engagement Tracking _(Lowest Priority)_
+
+As a **product owner**,
+I want to capture and store user interaction metrics (time spent on calculators, slider usage, session patterns),
+so that I can measure KPIs like Wealth Gap Engagement and provide advisors with lead quality context.
+
+**Acceptance Criteria:**
+1. **TDD:** Tests for analytics capture, debounce buffer, and repository persistence.
+2. `IInteractionRepository` interface defined in `core/interfaces/` with `logInteraction()` and `getSessionMetrics()` methods.
+3. `InteractionEvent` type defined in `shared/types/`: `session_id`, `widget_id`, `interaction_type`, `value`, `duration_ms`, `timestamp`.
+4. Local implementation (`LocalInteractionRepository`) in `infrastructure/` using the storage technology chosen during Architecture phase (LocalStorage or IndexedDB).
+5. Debounce analytics buffer: events buffered in memory, flushed on 5s idle, section change, CTA click, or `visibilitychange` event.
+6. When a user converts to Lead (FR04/FR05), accumulated session engagement stats are attached to the lead record via an `engagement_stats` field.
+7. **Phase 2 (Future):** `SupabaseInteractionRepository` with `interaction_logs` table (`session_id`, `widget_id`, `interaction_type`, `value`, `duration_ms`, `timestamp`).
+8. **Coverage:** ≥ 80% for analytics service and repository.
+
 ---
 
 ## 7. Risks and Mitigations
@@ -562,7 +580,7 @@ so that the site loads fast and ranks well in search engines.
 | -------------------------------------- | ------------------------- | ---------------------------------------------------------- |
 | **PDF Download Conversion Rate**       | ≥ 15%                     | Users who download PDF / Total unique visitors             |
 | **Booking Conversion Rate**            | ≥ 5%                      | Users who schedule consultation / Total unique visitors    |
-| **Wealth Gap Engagement**              | > 45 seconds average      | Time spent interacting with calculator sliders             |
+| **Wealth Gap Engagement**              | > 45 seconds average      | FR19: Interaction logs via `IInteractionRepository`. Average `duration_ms` for `widget_id='compound_calc'` across all sessions. |
 | **Email Delivery Rate**                | ≥ 95%                     | Successfully delivered / Total emails sent                 |
 | **Performance (LCP)**                  | < 2.5 seconds             | Lighthouse audit                                           |
 | **Code Coverage**                      | ≥ 80%                     | Angular CLI `ng test --code-coverage`                      |

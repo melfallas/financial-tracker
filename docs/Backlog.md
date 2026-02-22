@@ -57,9 +57,9 @@
 5. **US1.5: Repository Pattern & Local Persistence**
    - **As a developer,** I want an abstracted persistence layer using the Repository Pattern.
    - **Acceptance Criteria:**
-     - `ILeadRepository` interface in `core/interfaces/`.
-     - `Lead` interface in `shared/types/` with `firstName`, `lastName`, `email`, `createdAt`, `source`.
-     - `LocalStorageLeadRepository` in `infrastructure/`.
+     - `ILeadRepository` interface in `core/interfaces/` with `saveLead()` and `getLeads()`.
+     - `Lead` interface in `shared/types/` with `id`, `firstName`, `lastName`, `email`, `createdAt`, `source`, `engagement_stats`.
+     - `LocalLeadRepository` in `infrastructure/` using the storage technology determined during Architecture phase (LocalStorage or IndexedDB — see Architecture §7.2).
      - DI provider configured in `app.config.ts` for easy Supabase swap.
      - **TDD:** Tests for save and retrieve operations.
 

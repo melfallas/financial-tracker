@@ -112,11 +112,12 @@ src/
 │   │   │   ├── i18n.service.ts        # Language management via Signals
 │   │   │   └── seo.service.ts         # Dynamic meta tags for SEO
 │   │   └── interfaces/
-│   │       └── i-lead-repository.ts   # Repository Pattern contract
+│   │       ├── i-lead-repository.ts        # Lead persistence contract
+│   │       └── i-interaction-repository.ts # Analytics persistence contract (FR19)
 │   │
 │   ├── shared/                        # 🌍 GLOBAL REUSABLE SCOPE
 │   │   ├── types/
-│   │   │   └── index.ts              # Lead, MarketData, ProjectionEntry
+│   │   │   └── index.ts              # Lead, InteractionEvent, MarketData, ProjectionEntry
 │   │   ├── utils/
 │   │   │   └── finance-math.ts       # Wealth Gap engine (pure functions)
 │   │   ├── constants/
@@ -143,13 +144,16 @@ src/
 │   │   ├── floating-cta/
 │   │   ├── lead-magnet-banner/
 │   │   ├── wishlist-board/
+│   │   ├── interaction-analytics/     # FR19: Engagement tracking (lowest priority)
 │   │   ├── navbar/
 │   │   └── footer/
 │   │
 │   ├── infrastructure/                # 🔧 PERSISTENCE (SWITCHABLE)
-│   │   ├── local-storage.service.ts  # Phase 1: LocalStorage
-│   │   ├── supabase.service.ts       # Phase 2: Supabase (ready)
-│   │   └── infra.ts                  # Main export & DI providers
+│   │   ├── local-lead.repository.ts       # Phase 1: Lead storage (LocalStorage/IndexedDB — TBD)
+│   │   ├── local-interaction.repository.ts # Phase 1: Analytics storage (LocalStorage/IndexedDB — TBD)
+│   │   ├── supabase-lead.repository.ts    # Phase 2: Supabase (ready)
+│   │   ├── supabase-interaction.repository.ts # Phase 2: Supabase (ready)
+│   │   └── infra.ts                       # Main export & DI providers
 │   │
 │   ├── app.routes.ts                  # Route definitions with lazy loading
 │   └── app.config.ts                  # App providers & DI configuration
@@ -198,13 +202,74 @@ All calculations performed in USD internally; converted to local currency for di
 
 ## 7. 🔧 Data & Persistence Layer
 
-- **Repository Pattern:** `ILeadRepository` abstracts storage.
-  - **Phase 1:** `LocalStorageLeadRepository` (MVP) + JSON files for read-only mock data.
-  - **Phase 2:** `SupabaseLeadRepository` with Row Level Security (RLS).
-- **DI Swap:** Change the provider in `app.config.ts` to switch implementations. No feature code modification needed.
-- **Data Model:**
-  - `leads` table: `id`, `first_name`, `last_name`, `email`, `created_at`, `source` (landing-page | booking).
-  - `appointments` table: `id`, `lead_id`, `appointment_date`, `status`.
+### 7.1 Persistence Strategy (Repository Pattern)
+
+All data persistence is abstracted via interfaces that decouple feature logic from storage technology. This enables a **local-first MVP** that can seamlessly migrate to Supabase without modifying any feature code.
+
+- **Phase 1 (MVP):** Local browser storage (LocalStorage or IndexedDB — see §7.2) + JSON files for read-only mock data.
+- **Phase 2 (Cloud):** Supabase (PostgreSQL + RLS) via a simple DI provider swap in `app.config.ts`.
+
+### Repository Interfaces:
+
+| Interface                 | Purpose                            | Phase 1 Implementation          | Phase 2 Implementation          |
+| ------------------------- | ---------------------------------- | ------------------------------- | ------------------------------- |
+| `ILeadRepository`         | Lead data (forms, bookings)        | `LocalLeadRepository`           | `SupabaseLeadRepository`        |
+| `IInteractionRepository`  | Analytics & engagement metrics     | `LocalInteractionRepository`    | `SupabaseInteractionRepository` |
+
+### 7.2 Architectural Decision: LocalStorage vs. IndexedDB
+
+**Status:** _Deferred to Architecture Phase — Discovery Required._
+
+The Architect must evaluate the following trade-offs per repository use case and recommend the appropriate technology:
+
+| Criteria               | LocalStorage                  | IndexedDB                             |
+| ---------------------- | ----------------------------- | ------------------------------------- |
+| **API**                | Synchronous, blocking         | Asynchronous, non-blocking            |
+| **Data Size**          | ~5-10MB limit                 | Virtually unlimited (browser-managed) |
+| **Data Structure**     | Key-value strings only        | Structured objects, indexes, cursors  |
+| **Query Capability**   | None (manual JSON parse)      | Index-based queries, ranges           |
+| **Best For**           | Simple preferences, small data | Large datasets, structured logs       |
+
+**Recommendation Paths (to be finalized by Architect):**
+- **Leads Repository:** LocalStorage may suffice for MVP (small dataset, simple CRUD).
+- **Interaction Repository:** IndexedDB likely preferred (high-volume event logs, structured queries for aggregation).
+- **User Preferences:** LocalStorage (language, currency — simple key-value).
+- **Hybrid Approach:** Use both technologies with the appropriate one per repository. The Repository Pattern interface ensures consumers are unaware of the underlying implementation.
+
+### 7.3 Data Model
+
+**`leads` table (Supabase Phase 2 / Local Phase 1):**
+
+| Field              | Type      | Description                                    |
+| ------------------ | --------- | ---------------------------------------------- |
+| `id`               | UUID      | Primary key                                    |
+| `first_name`       | string    | Lead first name                                |
+| `last_name`        | string    | Lead last name                                 |
+| `email`            | string    | Lead email address                             |
+| `created_at`       | timestamp | Record creation time                           |
+| `source`           | enum      | `'landing-page'` \| `'booking'`                |
+| `engagement_stats` | JSONB     | Accumulated interaction metrics from FR19      |
+
+**`appointments` table (Supabase Phase 2 / Local Phase 1):**
+
+| Field               | Type      | Description                                   |
+| -------------------- | --------- | --------------------------------------------- |
+| `id`                | UUID      | Primary key                                    |
+| `lead_id`           | UUID      | FK to leads table                              |
+| `appointment_date`  | timestamp | Scheduled consultation date/time               |
+| `status`            | enum      | `'pending'` \| `'confirmed'` \| `'completed'` |
+
+**`interaction_logs` table (Supabase Phase 2 / Local Phase 1):**
+
+| Field               | Type      | Description                                   |
+| -------------------- | --------- | --------------------------------------------- |
+| `id`                | UUID      | Primary key                                    |
+| `session_id`        | string    | Browser session identifier                     |
+| `widget_id`         | string    | Feature identifier (e.g., `'compound_calc'`)   |
+| `interaction_type`  | string    | Event type (e.g., `'slider_move'`, `'focus'`)  |
+| `value`             | number    | Optional: the value the user set               |
+| `duration_ms`       | number    | Time spent in this interaction                 |
+| `timestamp`         | timestamp | Event time                                     |
 
 ---
 

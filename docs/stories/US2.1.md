@@ -4,24 +4,38 @@
 **Priority:** P0 (MVP)
 
 ## Description
-**As a stakeholder,** I want to capture First Name, Last Name, and Email through a professional form.
+**As a stakeholder,** I want to capture user data (First Name, Last Name, Email) through a professional transition-based form that triggers the "Value Exchange" (Lead Magnet).
 
 ## Acceptance Criteria
-- [ ] **TDD Mandatory:** Tests for form validation (required fields, email format) written first before implementing.
-- [ ] UI Component setup: PrimeNG `InputText` and `Button` components correctly styled via Tailwind CSS overrides (`tailwindcss-primeui`).
-- [ ] Real-time Validation styling:
-    - Error state: Soft Red (`#D32F2F`) boundaries.
-    - Valid state: Teal Bright (`#009688`)
-- [ ] Privacy consent checkbox is visible and functioning (GDPR compliance).
-- [ ] Submission Button rendered in specific Emerald Green (`#00C853`) utilizing a loading spinner.
-- [ ] Full coverage Storybook stories demonstrating states:
-    - Default
-    - Validation errors triggered
-    - Loading
-    - Success
+- [ ] **TDD Mandatory:** Reactive form validation tests (required, email format, GDPR consent) written FIRST.
+- [ ] Component uses PrimeNG `InputText` and `Button` styled via `tailwindcss-primeui`.
+- [ ] Implement **Interaction Physics**:
+    - **Capture State:** Title, Document Icon, 3 text fields, GDPR checkbox, Emerald CTA.
+    - **Submitting State:** Button disabled, content opacity 0.8, text changes to "Generando PDF...", spinner active.
+    - **Success State:** Fade-out Step 1, expand card (200ms transition), show Animated Checkmark, success message, and Upsell CTA.
+- [ ] In-place "Soft Focus Trick": Apply `backdrop-filter: blur(4px)` to the background upon success to focus eyes on the Booking CTA.
+- [ ] Persistence: Save to `ILeadRepository` (LocalStorage) with `source: 'landing-page'`.
+- [ ] Storybook stories for all 4 states (`idle`, `submitting`, `success`, `error`).
 
-## UX / UI Design Notes
-Form input validation errors must provide clear messaging avoiding frustrating users during this crucial conversion flow. Use `Organisms-Lead-Capture-Flow.md`.
+## Technical Details
 
-## Architecture Hook
-Component must use the `ILeadRepository` to safely persist this data via IndexedDB for the MVP.
+### Component Location
+`src/app/features/lead-form/lead-form.ts`
+
+### UI/UX Rules fromSally's Spec:
+- **Error Handling:** `M1 Shake` animation on 4xx/validation errors. Soft Red messages.
+- **Conversion Color:** CTA strictly Emerald Green `#00C853`.
+- **Zoneless Signals:** Use `signal()` for `firstName`, `lastName`, `email`, and `currentState`.
+
+### Steps to Complete:
+1. Create `lead-form.ts`, `.html`, `.css`, and `.spec.ts`.
+2. Implement logic using Angular `ReactiveFormsModule`.
+3. Create CSS transitions for the "In-Place Expansion".
+4. Integrate with `LeadRepository` (US1.5).
+5. Add `backdrop-filter` logic tied to the `success` state Signal.
+6. Verify accessibility (A11y) Tab order and ARIA labels.
+
+## Non-Functional Requirements
+- **Performance:** Form interactions must be instantaneous.
+- **Privacy:** GDPR consent mandatory before submission.
+- **Security:** CSRF/XSS protection via Angular defaults.

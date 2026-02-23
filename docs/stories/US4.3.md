@@ -4,15 +4,44 @@
 **Priority:** P0 (MVP)
 
 ## Description
-**As a user,** I want to see local currency performance and market sentiment.
+**As a user,** I want to see real-time market data (Currency devaluation, Fear & Greed indices, and Asset prices) to understand my current financial context and build credibility for the platform.
 
 ## Acceptance Criteria
-- [ ] Implement Chart.js line chart showing a local currency vs USD history using `ExchangeRate-API`.
-- [ ] Incorporate 1-hour cache logic for rate fetching.
-- [ ] Render the "Fear & Greed Index" utilizing PrimeNG `Knob` or a simple gauge displaying ranges starting at Soft Red up to Amber then Emerald Green.
-- [ ] Display Market data cards via PrimeNG `Card` holding S&P 500 and Bitcoin valuation indices with up/down arrows colored conditionally.
-- [ ] If network connection fails, display "Offline Data" warnings.
-- [ ] Provide full Storybook stories representing active and fallback offline states.
+- [ ] Implement the **Market Dashboard Band** (§Organisms-Market-Intelligence-Widgets):
+    - Background: Deep Blue (#1A3C6E).
+    - Sub-section 1: **Currency Devaluation Chart** (Chart.js + ExchangeRate-API).
+    - Sub-section 2: **Fear & Greed Gauges** (Stock Market Sentiment & Crypto Sentiment).
+    - Sub-section 3: **Market Data Cards** (S&P 500, Nasdaq, Gold, Bitcoin).
+- [ ] **Interaction Physics:**
+    - **Shock Number:** Count-up animation (2rem, Soft Red) for devaluation % loss.
+    - **Gauge Sweep:** 1.2s needle sweep on first render with Pulse effect for extreme states.
+    - **KPI Cards:** Glass morphism cards with hover lift interaction.
+- [ ] **Data Management:**
+    - 1-hour client-side cache for currency and sentiment.
+    - 15-minute cache for market prices.
+    - Offline fallback: Display "[ CACHED DATA ]" badge or offline state indicators.
+- [ ] Storybook stories for `loading`, `error`, `offline`, and `Extreme Fear` CTA states.
 
-## Context
-Refers to `Organisms-Market-Intelligence-Widgets.md`. Serves an emotional purpose - highlighting market realities via up-to-date data APIs and establishing authority.
+## Technical Details
+
+### Component Location
+`src/app/features/market-dashboard/`.
+
+### APIs
+- **Currency:** `ExchangeRate-API`.
+- **Crypto Sentiment:** `Alternative.me` (Free API).
+- **Market Prices:** `Finnhub` or `CoinGecko` for Bitcoin.
+- **Stock Sentiment:** Proxy or mock if CNN FGI API is unavailable (refer to Winston's note in §12 Architecture).
+
+### Steps to Complete:
+1. Create `MarketDashboard` container and sub-components.
+2. Develop `MarketDataService` with caching logic.
+3. Integrate `Chart.js` for the Devaluation chart (Soft Red line vs. Teal dashed USD baseline).
+4. Build the custom Gauge component (semicircular SVG/Canvas with needle logic).
+5. Create the horizontal scrollable card row for mobile.
+6. Trigger the "Extreme Fear" CTA based on the Stock Sentiment signal (< 25).
+
+## Non-Functional Requirements
+- **LCP-Safe:** Use `@defer (on viewport)` to prevent the dashboard from blocking the critical Hero render.
+- **Performance:** Gauge and chart animations must be hardware-accelerated.
+- **Reliability:** Handle API rate limits gracefully with fallback mock data.

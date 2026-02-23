@@ -409,32 +409,36 @@ Used for ALL data-fetching widgets. Must mirror the exact shape of the final con
 ---
 
 ## M1. `FormField` Molecule (Label + Input + Helper)
-
 **Storybook Story:** `Molecules/Forms/FormField`
 **Composed of:** A5 (Input) + A6 (Checkbox optional) + Typography (A2)
 
-The standard wrapper for any form input. Used in Lead Capture and Booking forms.
+**Visual Spec:**
+- **Layout:** Flex column with 6px gap.
+- **Label:** Small bold text in charcoal.
+- **Required mark:** Asterisk in soft red.
+- **Error state:** Hidden by default, displayed as block in soft red when invalid.
 
-```html
-<!-- Template structure -->
-<div class="form-field">
-  <label for="email" class="form-label">
-    Correo Electrónico <span aria-label="required" class="form-required">*</span>
-  </label>
-  <input pInputText id="email" ... />
-  <small id="email-error" class="form-error" role="alert">
-    Por favor ingresa un correo válido.
-  </small>
-</div>
+### 📐 Blueprint (Wireframe)
+```text
+┌───────────────────────────────────────────────────────────┐
+│ Correo Electrónico *                                      │
+│ ┌───────────────────────────────────────────────────────┐ │
+│ │ user@example.com                                      │ │
+│ └───────────────────────────────────────────────────────┘ │
+│ [Helper Text: Error state shown below]                    │
+└───────────────────────────────────────────────────────────┘
 ```
 
-```css
-.form-field     { display: flex; flex-direction: column; gap: 6px; width: 100%; }
-.form-label     { font-size: 0.875rem; font-weight: 600; color: var(--color-charcoal); }
-.form-required  { color: var(--color-soft-red); margin-left: 3px; }
-.form-error     { font-size: 0.8rem; color: var(--color-soft-red); display: none; }
-.form-error.visible { display: block; }
-```
+### ✨ Figma Visual Spec
+*   **Gap:** `8px` between Label and Input.
+*   **Label:** `font-weight: 600`, `font-size: 0.875rem`, `color: var(--color-charcoal)`.
+*   **Input (A5):** Inherits all A5 specs.
+*   **Error Label:** `color: var(--color-soft-red)`, `font-size: 0.75rem`, `margin-top: 4px`.
+
+### 🕹️ Behavior & Micro-interactions
+*   **Focus State:** Border transitions to `Teal Bright` with a `3px` glow.
+*   **Validation:** Error message fades in using `opacity` and a `translateY(-5px to 0)` transition when the field is `:invalid` and `:dirty`.
+*   **Shake:** Input field performs a subtle horizontal shake on the first validation failure.
 
 **Angular Contract:**
 ```typescript
@@ -450,7 +454,12 @@ required    = input<boolean>(false);
 **Storybook Story:** `Molecules/Calculators/SliderControl`
 **Composed of:** A2 (Typography label) + PrimeNG Slider + A7 (Badge for live value)
 
-The core interactive unit for ALL financial calculators (Wealth Gap, Retirement).
+**Visual Spec:**
+- **Track (unfilled):** `background: rgba(0, 150, 136, 0.20)`, height `6px`, `border-radius: 9999px`.
+- **Track (filled):** `background: var(--color-teal-bright)` (`#009688`).
+- **Thumb/Handle:** `24px × 24px`, `background: #FFFFFF`, `border: 3px solid var(--color-teal-bright)`, `box-shadow: var(--shadow-premium)`.
+- **Thumb min touch target:** `44px × 44px` (invisible padding for mobile).
+- **Live Value Badge:** Uses `A7 .badge-metric--neutral` positioned `top-right` of label row.
 
 ### 📐 Blueprint (Wireframe)
 ```text
@@ -502,6 +511,15 @@ dangerThreshold = input<number | null>(8); // defaults to 8 for inflation
 **Storybook Story:** `Molecules/Cards/KpiCard`  —  `States: default | loading | offline-error`
 **Composed of:** A2 (Typography) + A7 (Metric Badge) + A8 (Skeleton)
 
+**Visual Spec:**
+- **Card background:** `var(--color-cloud-gray)` `#ECEFF1`.
+- **Border-radius:** `var(--radius-card)` `1.5rem`.
+- **Box-shadow:** `var(--shadow-premium)`.
+- **Padding:** `1.5rem`.
+- **Trend arrow up:** `color: var(--color-emerald-green)`, `▲` character or SVG.
+- **Trend arrow down:** `color: var(--color-soft-red)`, `▼` character or SVG.
+- **Offline state:** Replace value with `--` in charcoal. Show `[OFFLINE DATA]` badge in warm-orange. Uses A8 skeleton layout to indicate loading.
+
 ### 📐 Blueprint (Wireframe - Multi-state)
 ```text
 ┌──────────────────────────────┐   ┌──────────────────────────────┐
@@ -545,15 +563,8 @@ icon      = input<string>('bar-chart'); // icon name
 ---
 
 ## M4. Currency Selector Molecule
-
 **Storybook Story:** `Molecules/Controls/CurrencySelector`
 **Composed of:** Icon (A4) + PrimeNG Dropdown
-
-Appears in the Navbar. Allows the user to switch between USD, EUR, ARS, MXN, CRC.
-
-```
-[🌎] USD ▾
-```
 
 **Visual Spec:**
 - **Trigger:** Ghost-style, minimal border. Globe icon in `--color-teal-bright`. Font in `--color-charcoal`.
@@ -562,16 +573,34 @@ Appears in the Navbar. Allows the user to switch between USD, EUR, ARS, MXN, CRC
 - **Active option:** `background: rgba(0, 150, 136, 0.08)`, text in `--color-deep-blue`.
 - **Min width:** `160px`.
 
+### 📐 Blueprint (Wireframe)
+```text
+┌──────────────────────┐
+│ [Icon] USD [Arrow]   │
+└──────────────────────┘
+```
+
+### ✨ Figma Visual Spec
+*   **Trigger:**
+    *   Padding: `8px 12px`.
+    *   Background: `transparent` (Desktop) or `rgba(255,255,255,0.1)` (Mobile Hero).
+    *   Icon: `globe` in `Teal Bright`.
+*   **Dropdown Panel:**
+    *   Shadow: `shadow-premium`.
+    *   Border: `1px solid rgba(0,0,0,0.05)`.
+    *   Item Hover: `background: rgba(0, 150, 136, 0.08)`.
+
+**Angular Contract:**
+```typescript
+selectedCurrency = model<string>('USD');
+options = [{ label: 'USD', value: 'USD', flag: '🇺🇸' }, ...];
+```
+
 ---
 
 ## M5. Language Toggle Molecule (`ES | EN`)
-
 **Storybook Story:** `Molecules/Controls/LanguageToggle`
-**Composed of:** Two text options acting as a pill toggle
-
-```
-[ ES | EN ]  ← pill style
-```
+**Composed of:** Typography (A2)
 
 **Visual Spec:**
 - **Active language:** Bold, `color: var(--color-deep-blue)`, with a subtle `background: rgba(26,60,110,0.08)` pill highlight.
@@ -580,13 +609,33 @@ Appears in the Navbar. Allows the user to switch between USD, EUR, ARS, MXN, CRC
 - **Transition:** `150ms ease` on background and color.
 - **On dark (sticky Navbar):** Active language is white bold; inactive is `rgba(255,255,255,0.5)`.
 
-**Accessibility:** `role="radiogroup"`, each option is `role="radio"` with `aria-checked`.
+### 📐 Blueprint (Wireframe)
+```text
+[ **ES** | EN ]
+```
+
+### ✨ Figma Visual Spec
+*   **Container:** Pill shape background on active hover.
+*   **Active State:** `font-weight: 700`, `color: var(--color-deep-blue)`.
+*   **Inactive State:** `opacity: 0.5`, `color: var(--color-charcoal)`.
+*   **Divider:** `1.5px` vertical line in `#CBD5E0`.
+
+**Angular Contract:**
+```typescript
+selectedLanguage = model<'ES' | 'EN'>('ES');
+```
 
 ---
 
 ## M6. Wealth Gap Chart Summary Molecule
 **Storybook Story:** `Molecules/Charts/WealthGapSummary`  —  `States: empty | projected | max-inflation`
 **Composed of:** Two A7 Badges (Nominal vs Real) + A2 body text
+
+**Visual Spec:**
+- **Nominal value badge:** `.badge-metric--growth` (Emerald tint).
+- **Real value badge:** `.badge-metric--loss` (Red tint).
+- **Erosion highlight:** Inline `<span>` with `color: var(--color-soft-red)`, `font-weight: 700`.
+- The percentage (50%) animates as a fast count-up when the slider moves (`requestAnimationFrame`).
 
 ### 📐 Blueprint (Wireframe)
 ```text
@@ -648,24 +697,74 @@ Layout: One `skeleton--text` (40% width) for label row, one `skeleton--title` (7
 ---
 
 ## M8. Success Feedback Molecule
-
 **Storybook Story:** `Molecules/Feedback/SuccessMessage`
 **Composed of:** SVG checkmark icon (animated) + A2 Typography
 
-Shown after PDF generation or form submission success.
-
-```
-       ✅
-   ¡PDF Enviado!
-  Revisa tu bandeja de
-  entrada (y spam 😉)
-```
-
-**Animation Spec:**
+**Visual Spec:**
 - **Checkmark circle:** SVG path with `stroke-dasharray` animated from `0` to `100%` in `600ms ease-out`.
 - **Circle color:** `var(--color-emerald-green)`.
 - **Card transition:** Parent card fades from white to a very light Teal tint (`rgba(0, 150, 136, 0.06)`) over `400ms`.
 - **Text fade-in:** Appears with `opacity: 0 → 1` and `translateY(8px → 0)` over `400ms`, delayed `300ms`.
+
+### 📐 Blueprint (Wireframe)
+```text
+       ┌───────┐
+       │   ✅   │  <-- Animated SVG
+       └───────┐
+     ¡PDF Enviado!
+```
+
+### ✨ Figma Visual Spec
+*   **Checkmark Color:** `var(--color-emerald-green)`.
+*   **Title:** `h3` weight, `Deep Blue`.
+*   **Container Background:** Fades to `rgba(0, 200, 83, 0.05)` (Emerald faint tint).
+
+### 🕹️ Behavior & Micro-interactions
+*   **Entrance:** Checkmark circle draws itself in `600ms`.
+*   **Text Fade:** Message slides up from `y=10` with `opacity: 0 to 1`.
+
+---
+
+## M9. Navigation Bar Organism
+**Storybook Story:** `Organisms/Global/Navbar`
+**Composed of:** Logo + NavLinks + M4 + M5 + A3.2
+
+### 📐 Blueprint (Wireframe)
+```text
+┌──────────────────────────────────────────────────────────┐
+│ [Logo]       Calculadoras  Mercados      [ES|EN] [USD] [CTA] │
+└──────────────────────────────────────────────────────────┘
+```
+
+### ✨ Figma Visual Spec
+*   **Height:** `80px`.
+*   **Background:** `transparent` until scroll > 50px, then `var(--color-white)` with `border-bottom: 1px solid #E2E8F0`.
+*   **Z-Index:** `1000`.
+
+---
+
+## M10. Lead Capture Card Organism
+**Storybook Story:** `Organisms/Features/LeadCapture`
+**Composed of:** M1 fields + A6 Checkbox + A3.1 Button
+
+### 📐 Blueprint (Wireframe)
+```text
+┌──────────────────────────────────────────────────────────┐
+│ [Title] Obtén tu reporte gratis                          │
+│                                                          │
+│ [M1: Nombre]      [M1: Apellido]                         │
+│ [M1: Correo Electrónico]                                 │
+│                                                          │
+│ [A6: Consentimiento GDPR]                                │
+│                                                          │
+│ [A3.1: Enviar Reporte]                                    │
+└──────────────────────────────────────────────────────────┘
+```
+
+### ✨ Figma Visual Spec
+*   **Card Background:** `white`.
+*   **Elevation:** `shadow-premium`.
+*   **Grid:** `grid-cols-1 md:grid-cols-2` for name inputs.
 
 ---
 

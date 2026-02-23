@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.8.0](https://github.com/melfallas/financial-tracker/compare/v0.7.0...v0.8.0) (2026-02-23)
+
+
+### Features
+
+* add financial math utilities for wealth gap and retirement projections with corresponding types and tests. ([91a9c16](https://github.com/melfallas/financial-tracker/commit/91a9c165713be9fb0f4336b789ac92a601a3665a))
+* add Vitest configuration and update package version ([c208f72](https://github.com/melfallas/financial-tracker/commit/c208f7207a0aec700c91101ce83ebc6a5f189d55))
+* Implement Vitest testing, introduce a shared button component, configure Storybook, and define financial projection interfaces. ([a4c076c](https://github.com/melfallas/financial-tracker/commit/a4c076c27b21f6a8929d4e25af33c26d2a7b0a08))
+* Introduce GitHub Actions CI workflow and bump package version. ([3d38d14](https://github.com/melfallas/financial-tracker/commit/3d38d14382d4ac69e28d160beaf99273eac8e175))
+* US1.1 Integrate Storybook for UI component development, documentation, and asset management, alongside new UI dependencies. ([406823f](https://github.com/melfallas/financial-tracker/commit/406823f09b2b53d9810055f0d819ea54a42e22f0))
+* US1.5 Add core data types, repository interfaces, and local storage implementations for leads and interaction logs, including financial projection models. ([856ee8a](https://github.com/melfallas/financial-tracker/commit/856ee8ae9597f3f9d5fdba4b18fb553339fcdf58))
+
 ## [0.7.0](https://github.com/melfallas/financial-tracker/compare/v0.6.0...v0.7.0) (2026-02-23)
 
 

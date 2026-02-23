@@ -447,29 +447,43 @@ required    = input<boolean>(false);
 ---
 
 ## M2. Slider Control Molecule
-
 **Storybook Story:** `Molecules/Calculators/SliderControl`
 **Composed of:** A2 (Typography label) + PrimeNG Slider + A7 (Badge for live value)
 
 The core interactive unit for ALL financial calculators (Wealth Gap, Retirement).
 
-```
-┌─────────────────────────────────────────────┐
-│  Inflación Anual (%)                [6.5%]  │  ← label + live badge
-│  ──────●────────────────────────────────── │  ← slider track
-│  0%                                      15%│  ← range labels
-└─────────────────────────────────────────────┘
+### 📐 Blueprint (Wireframe)
+```text
+┌───────────────────────────────────────────────────────────┐
+│ [Label: Left]                            [Badge: Right]   │
+│ Inflación Anual (%)                            [ 12.5% ]  │
+│                                                           │
+│ [Slider Track: Full Width]                                │
+│ ───────────●────────────────────────────────────────────  │
+│                                                           │
+│ [Min: Left]                                   [Max: Right]│
+│ 0%                                                     15%│
+└───────────────────────────────────────────────────────────┘
 ```
 
-**Visual Spec:**
-- **Track (unfilled):** `background: rgba(0, 150, 136, 0.20)`, height `6px`, `border-radius: 9999px`.
-- **Track (filled):** `background: var(--color-teal-bright)` (`#009688`).
-- **Thumb/Handle:** `24px × 24px`, `background: #FFFFFF`, `border: 3px solid var(--color-teal-bright)`, `box-shadow: var(--shadow-premium)`.
-- **Thumb min touch target:** `44px × 44px` (invisible padding for mobile).
-- **Live Value Badge:** Uses `A7 .badge-metric--neutral` positioned `top-right` of label row.
+### ✨ Figma Visual Spec
+*   **Container:** `display: flex`, `flex-direction: column`, `gap: 12px`.
+*   **Label Row:** `display: flex`, `justify-content: space-between`, `align-items: center`.
+*   **Label Style:** `font-weight: 600`, `color: var(--color-deep-blue)`.
+*   **Badge (A7):**
+    *   Default: `.badge-metric--neutral`.
+    *   **Alert State (> 8%):** `.badge-metric--loss` (Red background, white text).
+*   **PrimeNG Slider CSS Overrides:**
+    *   `track-height`: `6px`.
+    *   `handle-size`: `24px × 24px`.
+    *   `handle-border`: `3px solid var(--color-teal-bright)`.
+    *   `handle-shadow`: `0 4px 8px rgba(0, 150, 136, 0.25)`.
+    *   `filled-range-bg`: `var(--color-emerald-green)` (when positive) or `var(--color-soft-red)` (when negative/risk).
 
-**Special States:**
-- **Inflation slider > 8%:** Badge transitions to `.badge-metric--loss` with a subtle shake animation to signal danger.
+### 🕹️ Behavior & Micro-interactions
+*   **Real-time Feedback:** The Badge (A7) value updates instantly as the handle moves.
+*   **Threshold Trigger:** When the value crosses `8%`, the badge transitions from Blue to Red with a `150ms` fade.
+*   **Step Interaction:** Slider snaps to defined increments (e.g., `0.1%`) to prevent "jittery" data.
 
 **Angular Contract:**
 ```typescript
@@ -479,34 +493,44 @@ max        = input<number>(100);
 step       = input<number>(1);
 unit       = input<'%' | '$' | 'yrs'>('%');
 value      = model<number>(0);             // two-way binding
-dangerThreshold = input<number | null>(null); // triggers red badge
+dangerThreshold = input<number | null>(8); // defaults to 8 for inflation
 ```
 
 ---
 
 ## M3. KPI Summary Card Molecule
-
 **Storybook Story:** `Molecules/Cards/KpiCard`  —  `States: default | loading | offline-error`
 **Composed of:** A2 (Typography) + A7 (Metric Badge) + A8 (Skeleton)
 
-Displays a single market metric (S&P 500, Bitcoin price, Inflation Rate).
-
+### 📐 Blueprint (Wireframe - Multi-state)
+```text
+┌──────────────────────────────┐   ┌──────────────────────────────┐
+│ [Icon]  S&P 500              │   │ [Icon]  S&P 500              │
+│                              │   │                              │
+│ $5,842.50                    │   │ [  Skeleton Block (70%)  ]   │
+│                              │   │                              │
+│ [Trend: UP] +1.24%  [Badge]  │   │ [  Skeleton Block (30%)  ]   │
+└─────────── ACTIVE ───────────┘   └────────── LOADING ───────────┘
 ```
-┌──────────────────────────────┐
-│  📈  S&P 500                 │  ← icon (A4) + label (A2 h4)
-│  $5,842.50                   │  ← primary value (A2 h2, deep-blue)
-│  ▲ +1.24% hoy  [GROWTH]      │  ← trend arrow + badge (A7)
-└──────────────────────────────┘
-```
 
-**Visual Spec:**
-- **Card background:** `var(--color-cloud-gray)` `#ECEFF1`.
-- **Border-radius:** `var(--radius-card)` `1.5rem`.
-- **Box-shadow:** `var(--shadow-premium)`.
-- **Padding:** `1.5rem`.
-- **Trend arrow up:** `color: var(--color-emerald-green)`, `▲` character or SVG.
-- **Trend arrow down:** `color: var(--color-soft-red)`, `▼` character or SVG.
-- **Offline state:** Replace value with `--` in charcoal. Show `[OFFLINE DATA]` badge in warm-orange. Uses A8 skeleton layout to indicate loading.
+### ✨ Figma Visual Spec
+*   **Card Body:**
+    *   Background: `var(--color-cloud-gray)` (`#ECEFF1`).
+    *   Radius: `1.5rem`.
+    *   Shadow: `var(--shadow-premium)`.
+    *   Transition: `transform 250ms cubic-bezier(0.175, 0.885, 0.32, 1.275)`.
+*   **Typography:**
+    *   Price: `font-size: 2rem`, `font-weight: 700`, `color: var(--color-deep-blue)`.
+    *   Label: `font-size: 0.9rem`, `color: var(--color-charcoal)`, `opacity: 0.8`.
+*   **Offline State:**
+    *   Background: `rgba(236, 239, 241, 0.5)`.
+    *   Value: `opacity: 0.3`.
+    *   Badge: `.badge-metric--warning` with text "[ DATOS OFFLINE ]".
+
+### 🕹️ Behavior & Micro-interactions
+*   **Hover Lift:** Elevation slightly increases on hover to indicate interactability.
+*   **Skeleton Switch:** Content fades in using a `300ms` opacity transition once data is ready.
+*   **Value Counting:** Large currency values count up from 0 on the first mount.
 
 **Angular Contract:**
 ```typescript
@@ -561,27 +585,45 @@ Appears in the Navbar. Allows the user to switch between USD, EUR, ARS, MXN, CRC
 ---
 
 ## M6. Wealth Gap Chart Summary Molecule
-
 **Storybook Story:** `Molecules/Charts/WealthGapSummary`  —  `States: empty | projected | max-inflation`
 **Composed of:** Two A7 Badges (Nominal vs Real) + A2 body text
 
-This is the textual companion always shown below the Wealth Gap Chart.
-
+### 📐 Blueprint (Wireframe)
+```text
+┌───────────────────────────────────────────────────────────┐
+│ [Label: Deep Blue Bold]                                   │
+│ Tu dinero en 20 años:                                     │
+│                                                           │
+│ [Badge: Emerald Tint]             [Badge: Soft Red Tint]  │
+│ $284,500 NOMINAL                 $142,000 REAL           │
+│                                                           │
+│ [Paragraph: Charcoal]                                     │
+│ La inflación erosionará $142,500 de tu poder adquisitivo. │
+│ Eso es el 50% de tu crecimiento total.                    │
+└───────────────────────────────────────────────────────────┘
 ```
-┌─────────────────────────────────────────────────────────┐
-│  Tu dinero en 20 años:                                  │
-│  $284,500  [NOMINAL]          $142,000  [REAL]          │
-│                                                         │
-│  La inflación erosionará  [$142,500]  de tu poder       │
-│  adquisitivo. Eso es el 50% de tu crecimiento total.    │
-└─────────────────────────────────────────────────────────┘
-```
 
-**Visual Spec:**
-- **Nominal value badge:** `.badge-metric--growth` (Emerald tint).
-- **Real value badge:** `.badge-metric--loss` (Red tint).
-- **Erosion highlight:** Inline `<span>` with `color: var(--color-soft-red)`, `font-weight: 700`.
-- The percentage (50%) animates as a fast count-up when the slider moves (`requestAnimationFrame`).
+### ✨ Figma Visual Spec
+*   **Container:** `max-width: 600px`, `padding: 1.5rem`, `background: transparent`.
+*   **Heading:** `h3` size, `margin-bottom: 1rem`.
+*   **Badge Row:** `display: flex`, `gap: 16px`, `margin-bottom: 1.5rem`.
+*   **Narrative Text:**
+    *   Font size: `1.125rem` (18px).
+    *   Inflation amount: `font-weight: 700`, `color: var(--color-soft-red)`.
+    *   Percentage highlight: `font-weight: 700`, `color: var(--color-charcoal)`.
+
+### 🕹️ Behavior & Micro-interactions
+*   **Narrative Impact:** As inflation sliders increase, the "Real" badge value drops and its color saturation increases.
+*   **Dynamic erosion:** The dollar amount of erosion counts up rapidly matching chart movement.
+*   **Urgency State:** If erosion > 60%, the percentage text turns `Soft Red`.
+
+**Angular Contract:**
+```typescript
+nominalValue = input<number>(0);
+realValue    = input<number>(0);
+erosionAmount = computed(() => this.nominalValue() - this.realValue());
+erosionPct    = computed(() => (this.erosionAmount() / this.nominalValue()) * 100);
+```
 
 ---
 

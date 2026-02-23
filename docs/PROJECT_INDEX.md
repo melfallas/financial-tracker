@@ -17,6 +17,7 @@
 *Technical standards, structure, and data persistence strategies.*
 
 - **[Architecture.md](./Architecture.md)**: Technical architecture, directory structure (Core/Shared/Features), and standards.
+- **[Architecture-Data-Schema.md](./Architecture-Data-Schema.md)**: **Technical Spec** for Interaction Logging (US1.5) — IndexedDB schema, Full State Snapshots, and Silent Sync strategy.
 - **[AGENTS.md](../AGENTS.md)**: Rules, roles (Winston, Sally, Angi), and coding standards source of truth.
 - **[PROJECT_CONTEXT.md](./BMAD%20Agents%20Artifacts/PROJECT_CONTEXT.md)**: Continuity Mega-Prompt with the project's essence for fast agent onboarding.
 

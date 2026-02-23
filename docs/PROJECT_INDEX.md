@@ -38,6 +38,7 @@
 - **[Organisms-PDF-Report.md](./Product%20Design/Organisms-PDF-Report.md)**: **High-Fidelity Spec** for the Lead Magnet deliverable (US2.4) — Layout, Chart.js Base64 export, and the Page 2 QR code conversion anchor.
 - **[Organisms-Footer.md](./Product%20Design/Organisms-Footer.md)**: **High-Fidelity Spec** for the Global Footer — Emerald pre-footer CTA, Deep Blue 'Vault' design, Trust Badges, and explicit legal disclaimers.
 - **[Organisms-I18n-Currency-Fit.md](./Product%20Design/Organisms-I18n-Currency-Fit.md)**: **Logic & UX Spec** for global currency switching, rounding rules (CRC decimals), and PDF multi-currency integration.
+- **[Organisms-Wishlist-Board.md](./Product%20Design/Organisms-Wishlist-Board.md)**: **Gamification Spec** for the emotional goal playground. Emoji-based cards, isolated savings math, and IndexedDB persistence.
 
 ---
 

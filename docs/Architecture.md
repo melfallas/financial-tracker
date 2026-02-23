@@ -1,6 +1,6 @@
 # 📘 Technical Architecture: Financial Tracker
 
-> **Version:** 2.0.0 · **Architect:** Winston · **Last Updated:** 2026-02-22
+> **Version:** 2.1.0 · **Architect:** Winston · **Last Updated:** 2026-02-22
 > **Stack:** Angular 21+ · Tailwind CSS v4 · PrimeNG · Chart.js · Supabase
 
 ---
@@ -218,9 +218,9 @@ All data persistence is abstracted via interfaces that decouple feature logic fr
 
 ### 7.2 Architectural Decision: LocalStorage vs. IndexedDB
 
-**Status:** _Deferred to Architecture Phase — Discovery Required._
+**Status:** ✅ **RESOLVED — Hybrid Approach Confirmed.**
 
-The Architect must evaluate the following trade-offs per repository use case and recommend the appropriate technology:
+After evaluating the data volume, query complexity, and performance characteristics of each repository use case, the team has decided on a **Hybrid Approach**: use both LocalStorage and IndexedDB, selecting the best-fit technology per repository.
 
 | Criteria               | LocalStorage                  | IndexedDB                             |
 | ---------------------- | ----------------------------- | ------------------------------------- |
@@ -230,11 +230,18 @@ The Architect must evaluate the following trade-offs per repository use case and
 | **Query Capability**   | None (manual JSON parse)      | Index-based queries, ranges           |
 | **Best For**           | Simple preferences, small data | Large datasets, structured logs       |
 
-**Recommendation Paths (to be finalized by Architect):**
-- **Leads Repository:** LocalStorage may suffice for MVP (small dataset, simple CRUD).
-- **Interaction Repository:** IndexedDB likely preferred (high-volume event logs, structured queries for aggregation).
-- **User Preferences:** LocalStorage (language, currency — simple key-value).
-- **Hybrid Approach:** Use both technologies with the appropriate one per repository. The Repository Pattern interface ensures consumers are unaware of the underlying implementation.
+**Final Decision per Repository:**
+
+| Repository | Technology | Rationale |
+|:-----------|:-----------|:----------|
+| **`ILeadRepository`** | **LocalStorage** | Few records (tens, not thousands). Simple CRUD. JSON stringify/parse is acceptable for this volume. |
+| **`IInteractionRepository`** | **IndexedDB** | High-volume event logs (hundreds per session). Requires structured queries for aggregation (`duration_ms` sums, `widget_id` filters). Async API prevents UI thread blocking during batch writes. |
+| **User Preferences** (language, currency) | **LocalStorage** | Simple key-value pairs. Synchronous read is desirable for instant UI hydration on page load. |
+| **API Cache** (exchange rates, market data) | **LocalStorage** | Cached JSON responses with TTL timestamps. Small payloads (~2-5KB). Synchronous read avoids async overhead for cache-hit checks. |
+
+**Implementation Notes:**
+- IndexedDB access should be wrapped via a lightweight abstraction (e.g., `idb` library or native `IDBDatabase` wrapper) to simplify the async API.
+- The Repository Pattern interface ensures all consumers remain agnostic of the underlying storage technology. Swapping to Supabase in Phase 2 requires only a provider change in `app.config.ts`.
 
 ### 7.3 Data Model
 
@@ -310,3 +317,278 @@ The Architect must evaluate the following trade-offs per repository use case and
 6. **CTA Color:** All CTAs use **Emerald Green `#00C853`** exclusively. Orange is for subtle alert indicators only.
 7. **Reactivity:** Signals only for local state; RxJS reserved for HTTP/async streams.
 8. **PrimeNG Theming:** All PrimeNG components must be styled through `tailwindcss-primeui` and Financial Tracker design tokens — never via custom SCSS overrides.
+
+---
+
+## 11. 🧠 Shared Signal Architecture (Cross-Organism State)
+
+The UX specification defines several interactive values that are **shared across multiple organisms** on the same page. These are managed as **page-level Signals** owned by the parent `home-page.ts` component and passed down to child organisms via `input()` bindings.
+
+### Signal Ownership Map
+
+```text
+home-page.ts (Page-Level Signal Owner)
+├── initialCapital: WritableSignal<number>       → Wealth Gap Calculator, Cost of Waiting Banner
+├── monthlyContribution: WritableSignal<number>  → Wealth Gap Calculator, Retirement Simulator
+├── expectedReturn: WritableSignal<number>       → Wealth Gap Calculator, Retirement Simulator
+├── inflationRate: WritableSignal<number>        → Wealth Gap Calculator, Retirement Simulator, Cost of Waiting Banner
+├── timeHorizon: WritableSignal<number>          → Wealth Gap Calculator
+└── selectedCurrency: WritableSignal<string>     → Market Dashboard, Currency Devaluation, all CurrencyPipe instances
+```
+
+### Rules:
+1. **Single Source of Truth:** Each shared value has exactly ONE `WritableSignal` owner (always `home-page.ts`).
+2. **Child Access:** Child organisms receive shared signals via `input.required<WritableSignal<T>>()`. They can read AND write to these signals.
+3. **Bidirectional Sync:** When the Retirement Simulator changes `inflationRate`, the Wealth Gap Chart updates automatically (and vice versa), because both point to the same Signal reference.
+4. **Unlinked Organisms:** Organisms that do NOT share state (e.g., Fear & Greed Index, Booking Modal) manage their own local signals internally.
+5. **No RxJS for Shared UI State:** Shared state must use Signals exclusively. RxJS is reserved for HTTP streams and async operations.
+
+### Example Wiring (home-page.ts):
+
+```typescript
+// src/app/features/home/home-page/home-page.ts
+
+// Page-level shared signals
+inflationRate       = signal<number>(6.5);
+initialCapital      = signal<number>(10000);
+monthlyContribution = signal<number>(500);
+expectedReturn      = signal<number>(7.0);
+selectedCurrency    = signal<string>('CRC');
+```
+
+```html
+<!-- home-page.html -->
+<app-wealth-gap-chart
+  [inflationRate]="inflationRate"
+  [initialCapital]="initialCapital"
+  [expectedReturn]="expectedReturn" />
+
+<app-cost-of-waiting-banner
+  [currentSavings]="initialCapital"
+  [inflationRate]="inflationRate" />
+
+<app-retirement-simulator
+  [inflationRate]="inflationRate"
+  [expectedReturn]="expectedReturn" />
+```
+
+---
+
+## 12. 🌐 External API Integration Layer
+
+All external API calls are managed through Angular services in `core/services/`. Each service implements client-side caching, offline fallback, and domain-restricted API key injection.
+
+### API Registry (Free Tier — All Confirmed)
+
+| API | Provider | Free Tier Limits | CORS | Auth | Service |
+|:----|:---------|:-----------------|:-----|:-----|:--------|
+| **Currency Exchange** | [ExchangeRate-API](https://www.exchangerate-api.com/) | 1,500 req/month | ✅ | API Key (URL param) | `currency.service.ts` |
+| **Crypto Fear & Greed** | [Alternative.me](https://alternative.me/crypto/fear-and-greed-index/#api) | Unlimited (free forever) | ✅ | None | `market-sentiment.service.ts` |
+| **Stock Fear & Greed** | [RapidAPI — CNN FGI](https://rapidapi.com/) | 500 req/month (free) | ✅ (via RapidAPI proxy) | API Key (header) | `market-sentiment.service.ts` |
+| **Bitcoin Price** | [CoinGecko](https://www.coingecko.com/en/api) | 10-30 req/min | ✅ | None (demo) | `market-data.service.ts` |
+| **S&P 500, RSP, Nasdaq** | [Finnhub](https://finnhub.io/) | 60 req/min | ✅ | API Key (URL param) | `market-data.service.ts` |
+| **Gold Price** | [FreeGoldAPI](https://freegoldapi.com/) | Unlimited | ✅ | None | `market-data.service.ts` |
+
+### Caching Strategy
+
+```typescript
+// Generic cache pattern used by all API services
+interface CachedResponse<T> {
+  data: T;
+  timestamp: number;  // Date.now() at fetch time
+  ttlMs: number;      // Time-to-live in milliseconds
+}
+```
+
+| Data Source | Cache TTL | Storage | Rationale |
+|:------------|:----------|:--------|:----------|
+| Currency Exchange Rates | **1 hour** | LocalStorage | PRD requirement. Rates change slowly. |
+| Fear & Greed Index | **1 hour** | LocalStorage | Index updates once daily. |
+| Stock/Crypto Prices | **15 minutes** | LocalStorage | Balance between freshness and rate limits. |
+| Gold Price | **1 hour** | LocalStorage | Updates daily. |
+
+### Offline Fallback Protocol
+
+1. On API call failure (network error, 4xx/5xx), check LocalStorage for cached data.
+2. If cached data exists (regardless of TTL expiry), display it with a visible `[CACHED DATA]` warning badge (A7 variant `--warning`).
+3. If no cached data exists, display the `M3 KpiCard` in offline state: value replaced with `--`, badge shows `[OFFLINE]`.
+4. Retry on next user interaction or after 60 seconds (whichever comes first).
+
+### API Key Injection
+
+- All API keys are stored in `environment.prod.ts`, injected at build-time via GitHub Actions Secrets.
+- In development (`environment.ts`), keys are empty strings or point to mock JSON files in `shared/assets/`.
+- ExchangeRate-API is additionally protected via HTTP Referrer domain whitelisting (`*.github.io`).
+
+> ⚠️ **Risk (RapidAPI for CNN FGI):** The RapidAPI free tier for CNN Fear & Greed is limited to 500 req/month. If the product exceeds this, consider downgrading to a single gauge (Crypto only via Alternative.me, which is unlimited) or implementing a Supabase Edge Function as a caching proxy in Phase 2.
+
+---
+
+## 13. ⚙️ Application Configuration Tokens (DI)
+
+Business-configurable values that may change without code modifications are injected via Angular Dependency Injection tokens.
+
+```typescript
+// src/app/core/tokens/app-config.token.ts
+import { InjectionToken } from '@angular/core';
+
+export interface AppUiConfig {
+  /** Default savings amount for Cost of Waiting Banner when no user input exists */
+  defaultSavingsAmount: number;
+
+  /** Calendly scheduling URL */
+  calendlyBaseUrl: string;
+
+  /** Default currency code when auto-detection fails */
+  defaultCurrencyCode: string;
+
+  /** Default inflation rate for calculators */
+  defaultInflationRate: number;
+
+  /** Default expected return rate for calculators */
+  defaultExpectedReturn: number;
+
+  /** S&P 500 historical average annual return (for Cost of Waiting calculations) */
+  sp500HistoricalReturn: number;
+
+  /** Cache TTL overrides (in milliseconds) */
+  cacheTtl: {
+    currencyExchange: number;
+    fearGreedIndex: number;
+    marketPrices: number;
+  };
+}
+
+export const APP_UI_CONFIG = new InjectionToken<AppUiConfig>('APP_UI_CONFIG');
+```
+
+```typescript
+// src/app/app.config.ts (Provider Registration)
+import { APP_UI_CONFIG, AppUiConfig } from '@core/tokens/app-config.token';
+
+const uiConfig: AppUiConfig = {
+  defaultSavingsAmount: 10_000,
+  calendlyBaseUrl: 'https://calendly.com/YOUR_ACCOUNT/30min',
+  defaultCurrencyCode: 'CRC',
+  defaultInflationRate: 6.5,
+  defaultExpectedReturn: 7.0,
+  sp500HistoricalReturn: 10.5,
+  cacheTtl: {
+    currencyExchange: 3_600_000,  // 1 hour
+    fearGreedIndex: 3_600_000,    // 1 hour
+    marketPrices: 900_000,        // 15 minutes
+  },
+};
+
+export const appConfig: ApplicationConfig = {
+  providers: [
+    // ... other providers
+    { provide: APP_UI_CONFIG, useValue: uiConfig },
+  ],
+};
+```
+
+---
+
+## 14. 🗺️ Routing & Lazy Loading Map
+
+Financial Tracker is a **single-page scroll application** (Narrative Scroll). All primary content lives on the Home route. The Booking screen is a modal overlay, not a separate route.
+
+### Route Definitions
+
+```typescript
+// src/app/app.routes.ts
+export const routes: Routes = [
+  {
+    path: '',
+    loadComponent: () => import('./features/home/home-page/home-page').then(m => m.HomePage),
+    title: 'Financial Tracker — Discover Your Wealth Gap',
+  },
+  {
+    path: 'privacy',
+    loadComponent: () => import('./features/legal/privacy-policy').then(m => m.PrivacyPolicy),
+    title: 'Privacy Policy — Financial Tracker',
+  },
+  {
+    path: 'terms',
+    loadComponent: () => import('./features/legal/terms-of-service').then(m => m.TermsOfService),
+    title: 'Terms of Service — Financial Tracker',
+  },
+  {
+    path: '**',
+    redirectTo: '',
+  },
+];
+```
+
+### Deferred Loading Strategy (`@defer`)
+
+Heavy libraries and below-the-fold organisms are deferred to protect the initial bundle size (target: < 150KB gzipped).
+
+| Component / Library | Load Strategy | Trigger |
+|:--------------------|:-------------|:--------|
+| Hero Section + Navbar | **Eager** (above the fold) | Immediate |
+| Market Dashboard Band | `@defer (on viewport)` | When section scrolls into view |
+| Wealth Gap Calculator | `@defer (on viewport)` | When section scrolls into view |
+| Cost of Waiting Banner | `@defer (on viewport)` | When section scrolls into view |
+| Retirement Simulator | `@defer (on viewport)` | When section scrolls into view |
+| Lead Capture Form | `@defer (on viewport)` | When section scrolls into view |
+| CDP vs. Market Comparator | `@defer (on viewport)` | When section scrolls into view |
+| Wishlist Board | `@defer (on viewport)` | When section scrolls into view |
+| Footer | `@defer (on viewport)` | When section scrolls into view |
+| Booking Modal | `@defer (on interaction)` | When Floating CTA or Booking link is clicked |
+| `jspdf` + `jspdf-autotable` | `@defer (on interaction)` | When PDF generation is triggered |
+| `canvas-confetti` | `@defer (on interaction)` | When Retirement Simulator results render |
+| Floating CTA Button | **Eager** (always visible) | Immediate |
+
+---
+
+## 15. 📅 Third-Party Embed Strategy (Calendly)
+
+The Booking Screen (US5.2) uses a **Calendly Inline Embed** displayed inside a PrimeNG `Dialog` modal overlay.
+
+### Integration Architecture
+
+```text
+┌─ Angular App ───────────────────────────────────────────┐
+│                                                         │
+│  BookingModal Component                                 │
+│  ├── PrimeNG Dialog (p-dialog)                          │
+│  │   ├── Pre-fill Header (Lead name/email from repo)    │
+│  │   ├── Calendly iframe (Inline Embed)                 │
+│  │   │   ├── URL params: primary_color, text_color      │
+│  │   │   ├── URL params: name, email (pre-fill)         │
+│  │   │   └── URL param: locale (es/en)                  │
+│  │   └── Success "Homework" Screen (post-booking)       │
+│  │                                                      │
+│  └── Event Listener: window.addEventListener(           │
+│        'message', calendlyEventHandler)                  │
+│        → Listens for 'calendly.event_scheduled'         │
+│        → Triggers state transition to Homework screen   │
+└─────────────────────────────────────────────────────────┘
+```
+
+### Calendly URL Construction
+
+```typescript
+// Built by the BookingModal component using APP_UI_CONFIG
+const calendlyUrl = `${config.calendlyBaseUrl}
+  ?primary_color=009688
+  &text_color=37474F
+  &background_color=ffffff
+  &locale=${currentLocale}
+  &name=${encodeURIComponent(lead.firstName + ' ' + lead.lastName)}
+  &email=${encodeURIComponent(lead.email)}`;
+```
+
+### Security Considerations
+- The iframe `src` must be sanitized via Angular's `DomSanitizer.bypassSecurityTrustResourceUrl()`.
+- CSP in `index.html` must whitelist `https://calendly.com` in `frame-src` directive.
+- The `postMessage` event handler must validate `event.origin === 'https://calendly.com'` before processing any messages.
+
+### Pre-fill Behavior
+- Pre-fill parameters are **display-only** in Calendly's confirmation step. The user sees their data already populated but must manually click Calendly's "Confirm" button to complete the booking. No auto-submission occurs.
+
+---
+
+*— Winston, Architect · Financial Tracker · BMAD v4 · v2.1.0 · 2026-02-22*

@@ -29,6 +29,8 @@
 - **[Atoms-and-Molecules.md](./Product%20Design/Atoms-and-Molecules.md)**: **Master Design Spec**. Color tokens, typography, and reusable UI building blocks.
 - **[Organisms-Wealth-Gap-Chart.md](./Product%20Design/Organisms-Wealth-Gap-Chart.md)**: **High-Fidelity Spec** for the emotional core (interactivity, chart physics, and tooltips).
 - **[Organisms-Lead-Capture-Flow.md](./Product%20Design/Organisms-Lead-Capture-Flow.md)**: **High-Fidelity Spec** for the conversion flow (In-place transformation and success states).
+- **[Organisms-Market-Intelligence-Widgets.md](./Product%20Design/Organisms-Market-Intelligence-Widgets.md)**: **High-Fidelity Spec** for the Market Dashboard Band (Currency Devaluation, Fear & Greed Index, Market Data Cards).
+- **[Organisms-Retirement-Simulator.md](./Product%20Design/Organisms-Retirement-Simulator.md)**: **High-Fidelity Spec** for the Retirement Simulator — 3-state persistent stepper, Threat/Hope narrative, Nest Egg chart, and Freedom Date animation.
 
 ---
 

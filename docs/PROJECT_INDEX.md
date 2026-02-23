@@ -9,6 +9,7 @@
 
 - **[PRD.md](./PRD.md)**: Product Requirements Document. Goals, user personas, and core features.
 - **[Backlog.md](./Backlog.md)**: User stories, epics, and TDD acceptance criteria.
+- **[Dependency-Analysis.md](./Dependency-Analysis.md)**: **Strategic Roadmap** — Mermaid tree, Golden Path sequence, and execution constraints.
 - **[PO_Checklist.md](./PO_Checklist.md)**: Quality gate checklist for Product Owner validation.
 
 ---

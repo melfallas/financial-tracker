@@ -31,6 +31,8 @@
 - **[Organisms-Lead-Capture-Flow.md](./Product%20Design/Organisms-Lead-Capture-Flow.md)**: **High-Fidelity Spec** for the conversion flow (In-place transformation and success states).
 - **[Organisms-Market-Intelligence-Widgets.md](./Product%20Design/Organisms-Market-Intelligence-Widgets.md)**: **High-Fidelity Spec** for the Market Dashboard Band (Currency Devaluation, Fear & Greed Index, Market Data Cards).
 - **[Organisms-Retirement-Simulator.md](./Product%20Design/Organisms-Retirement-Simulator.md)**: **High-Fidelity Spec** for the Retirement Simulator — 3-state persistent stepper, Threat/Hope narrative, Nest Egg chart, and Freedom Date animation.
+- **[Organisms-Booking-Screen.md](./Product%20Design/Organisms-Booking-Screen.md)**: **High-Fidelity Spec** for the Final Conversion Step — Modal overlay, Calendly integration with Magic Pre-fill, and Homework Success state.
+- **[Organisms-Cost-Of-Waiting-Banner.md](./Product%20Design/Organisms-Cost-Of-Waiting-Banner.md)**: **High-Fidelity Spec** for the urgency-building micro-hook, with scroll-reveal animations and Signal synchronization.
 
 ---
 

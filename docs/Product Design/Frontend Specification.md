@@ -87,8 +87,13 @@ Exactly which PrimeNG component powers each area, styled via `tailwindcss-primeu
 
 ### 7.1 Hero Section & Navigation
 - **Navbar:** Sticky behavior. Deep Blue background (`#1A3C6E`) on scroll, transparent on Hero top.
+  - **i18n Toggle UX:** A clean `ES | EN` text toggle. The active state is bold Deep Blue (`#1A3C6E`) or White depending on scroll, inactive is muted Charcoal (`#37474F`). Changing language replaces data without a page reload (via `@angular/localize` or Signals).
 - **Hero Title:** H1 in Deep Blue. Key phrases in Emerald Green (`#00C853`).
 - **Main CTA:** Emerald Green button with "Schedule a Call" text. High elevation shadow.
+- **Floating CTA Button (US5.1):** 
+  - **Location:** Fixed bottom-right corner.
+  - **Visuals:** Pill-shaped Emerald Green (`#00C853`) button with a calendar icon and the text "Schedule a Call". It carries a heavy drop-shadow (`shadow-2xl`) to hover over all content.
+  - **Behavior:** Hidden on the Hero section (to avoid competing with the main CTA), appears smoothly once the user scrolls past the first fold.
 
 ### 7.2 Contact Forms (Lead Gen & Booking)
 - **Lead Capture Card (PDF):** A prominent card within the Narrative Scroll. 
@@ -109,29 +114,75 @@ Exactly which PrimeNG component powers each area, styled via `tailwindcss-primeu
 - **Retirement Simulator:**
   - Additional Inputs: "Target Retirement Age," "Desired Monthly Income in Today's Dollars."
   - Output: A Golden Amber (`#FFC107`) marker on the chart when "Real Value" meets "Desired Income."
+- **CDP vs. Market Comparator:**
+  - **Visuals:** PrimeNG `DataTable` stripped of heavy borders.
+  - **Headers:** Deep Blue (`#1A3C6E`) with white text.
+  - **Data Display:** Clear comparison rows showing Local Bank CDPs (Certificates of Deposit) vs S&P 500 average returns.
+  - **Micro-interaction:** The "Net Difference" column dynamically highlights the opportunity cost in **Emerald Green** (if investing in S&P) or **Soft Red** (if staying in CDP).
 
-### 7.4 Interactive Tools
+### 7.4 Interactive Tools & Widgets
 - **Cost of Waiting Banner:** 
-  - A horizontal ticker or banner.
-  - "Every second you wait, you lose [Animated Counter in Soft Red] dollars."
-  - "Since you opened this page, the market grew [Percentage in Emerald Green]."
-- **Currency Comparison Card:** 
-  - Flag icons (PrimeIcons/PrimeUI). 
-  - Big number display of local currency vs USD exchange rate.
-  - Subtle trend line (mini-chart) showing devaluation over 1 year.
+  - **Location & Behavior:** A persistent horizontal narrow banner (ticker style) or a dedicated standout card inside the narrative scroll.
+  - **Visuals:** Dark background (Deep Blue `#1A3C6E`) to grab attention. 
+  - **Micro-interaction:** "Every second you wait, inflation erodes your wealth." A fast-spinning animated counter displaying the loss in **Soft Red (`#D32F2F`)** dollars.
+  - **Positive reinforcement:** Next to it, an **Emerald Green (`#00C853`)** counter showing "What you could have earned if invested in S&P 500."
+- **Financial Freedom Countdown:**
+  - **Visuals:** PrimeNG circular progress or large stylized typography (Inter Heavy).
+  - **Data Display:** Shows years/months of "financial life" remaining based on current savings vs projected expenses adjusted for inflation. 
+  - **States:** If the number is < 10 years, turn the text **Golden Amber (`#FFC107`)** to indicate urgency.
+- **Fear & Greed Index:**
+  - **Component:** PrimeNG `Knob` adapted into a semicircle gauge.
+  - **Color Mapping:** 
+    - 0-30 (Extreme Fear): **Soft Red (`#D32F2F`)**.
+    - 31-70 (Neutral): **Golden Amber (`#FFC107`)**.
+    - 71-100 (Greed/Extreme Greed): **Emerald Green (`#00C853`)**.
+  - **UX Detail:** An animated needle pointing to the current market sentiment, emphasizing that "Fearful markets are buying opportunities."
+- **Feature Wishlist Board (Retention):**
+  - **Layout:** PrimeNG `DataView` displaying a masonry or CSS-grid of 'Feature Cards'.
+  - **Component UI:** Cloud Gray (`#ECEFF1`) card background.
+  - **Interactions:** "Upvote" button on each card. When clicked, the arrow turns **Teal Bright (`#009688`)**, the number increments via a slight 'pop' CSS transform scale animation, and a local storage flag prevents double-voting.
 
-### 7.5 PDF Generation & Email Design
-- **PDF Layout:**
-  - Institutional Header: "Financial Tracker - Personalized Projection."
-  - Branding: Deep Blue accents. 
-  - Content: High-resolution image of the user's customized Wealth Gap chart.
-  - Logic Table: Clean PrimeNG-styled table showing year-by-year nominal vs real values.
-- **Email Template:**
-  - Responsive HTML (Table-based for compatibility).
-  - Header: Logo in Deep Blue.
-  - Body: "Hello [Name], here is your Financial Protection Plan."
-  - Button: "Download PDF" in Emerald Green.
-  - Subtext: "Didn't receive it? Check your spam folder or reply to this email."
+### 7.5 PDF Generation & Email Design Specifications
+
+#### A. PDF: "Investment Terms" (El Lead Magnet Principal)
+- **Purpose:** Provide an executive summary of the Wealth Gap and basic investment concepts to capture the lead.
+- **Format:** A4 standard, generated via `jspdf` + `jspdf-autotable`.
+- **Header:** Full-width Deep Blue (`#1A3C6E`) banner with the white Financial Tracker logo and the generation date.
+- **Personalization:** "Prepared exclusively for [First Name] [Last Name]."
+- **Visual Core:** High-resolution `html2canvas` snapshot of their customized Wealth Gap chart imported directly into the PDF.
+- **Data Table:** PrimeNG-styled striped table (Cloud Gray alternate rows) detailing Year 1, 5, 10, 20 Nominal vs Real values.
+- **Typography:** Inter (or similar cleanly embedded sans-serif). Primary headers in Deep Blue.
+
+#### B. PDF: "Investment Profile" (Para Leads Calificados / Asesorías)
+- **Purpose:** A deeper, more complex report sent to users who schedule an advisory call.
+- **Header:** Similar to the Investment Terms, but adding an **Emerald Green** accent line to denote premium status.
+- **Content Sections:**
+  - **Risk Tolerance Summary:** Based on inputs.
+  - **Current vs Recommended Target Allocation:** Visualized using a PrimeNG Pie/Doughnut Chart snapshot (e.g., 80% Equities / 20% Fixed Income).
+  - **Action Plan:** Bulleted list with Charcoal (`#37474F`) text.
+- **Footer:** Advisor contact info, legal disclaimers, and next steps for the scheduled meeting.
+
+#### C. Automated Emails (Templates)
+All emails use a responsive, centralized HTML structure to ensure maximum deliverability and visual consistency across clients (Gmail, Outlook, Apple Mail).
+
+1. **Lead Magnet Delivery Email (Send PDF):**
+   - **Subject:** Your Custom Wealth Protection Plan inside 📊
+   - **Header:** Deep Blue background, Financial Tracker Logo in center.
+   - **Body:** Clean, white background. Charcoal text. "Hi [First Name], based on your simulation, waiting 10 years could cost you $X. Here is your detailed analysis."
+   - **CTA Button:** Large, rounded button in **Emerald Green (`#00C853`)** with the text: "Download PDF Report."
+   - **Subtext:** "Didn't receive the attachment? Check your spam folder or click the button."
+2. **Booking Confirmation Email:**
+   - **Subject:** Confirmed: Your Financial Strategy Session 🗓️
+   - **Body:** "Hi [Name], your session is locked in for [Date/Time]."
+   - **Visual Element:** A calendar icon in **Teal Bright (`#009688`)**.
+   - **Actionable Links:** "Add to Google Calendar", "Add to Outlook".
+3. **Booking Reminder Email (24h Before):**
+   - **Subject:** Reminder: Tomorrow's Financial Session
+   - **Body:** "Make sure to review your Investment Profile PDF before our call to maximize our time."
+   - **Tone:** Professional, creating slight urgency. 
+4. **Advisor Notification Email (Internal):**
+   - **Subject:** NEW LEAD: [First Name] [Last Name] scheduled a call
+   - **Body:** Plain text/minimalist format containing the Lead's engagement stats (time spent on sliders, simulation inputs), allowing the advisor to prepare a customized pitch.
 
 ---
 
@@ -203,3 +254,12 @@ Before integrating into the main app pages, the following isolated stories MUST 
 - **Lead Capture Card:** Fresh state, validation errors triggered, disabled loading state (Generating PDF), Success state.
 - **Booking Flow Modal:** Container for external calendar + Step 1 inputs.
 - **Email Preview:** Responsive layout shell for confirmation emails.
+
+---
+
+## 14. Assumptions and Risks
+- **Assumption:** Users understand what "Inflation" means contextually when they see the red "loss" line on the chart.
+- **Risk:** Angular Signals changing state so fast that the Chart.js instance freezes on low-end mobile devices during rapid slider tracking.
+  - **Mitigation:** We assume Winston will implement a `requestAnimationFrame` or rate-limiting pattern inside the Signal `effect` specifically for Chart.js rendering (while keeping HTML numbers instant).
+- **Risk:** Email deliverability delays causing user frustration at the "Success Screen."
+  - **Mitigation:** The Success Screen UX explicitly provides a direct fallback "Download Now" link if the email doesn't arrive instantly.

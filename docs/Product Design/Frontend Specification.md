@@ -157,6 +157,11 @@ Exactly which PrimeNG component powers each area, styled via `tailwindcss-primeu
   - All labels, headers, and conceptual descriptions (e.g., "What is Inflation?", "The Wealth Gap") translate 1:1 with the web UI using the same dictionary keys.
   - Numbers and dates formatted via the user's selected locale standard.
   - For future languages, the layout is designed with generous spacing to accommodate character expansions (e.g., German/Spanish text length expansion).
+- **Responsive Layout for PDF:**
+  - **A4 Single-Column:** Designed primarily for vertical reading on mobile devices (PDF viewers).
+  - **Fluid Charts:** The `html2canvas` snapshot will capture the chart at a high resolution (2x scale) to ensure crispness when zooming in on small screens.
+  - **Typography:** Minimum font size of 10pt for body and 12pt for headers to guarantee legibility on smartphone screens without horizontal scrolling.
+  - **Table Adaptation:** Tables use a maximum of 4-5 columns (Year, Nominal, Real, Gap) to fit the A4 width comfortably.
 
 #### B. PDF: "Investment Profile" (Para Leads Calificados / Asesorías)
 - **Purpose:** A deeper, more complex report sent to users who schedule an advisory call.
@@ -192,6 +197,13 @@ All emails use a responsive, centralized HTML structure to ensure maximum delive
 - **Dynamic Templating:** The email service will use this `locale` to select the corresponding HTML template (e.g., `lead-magnet-es.html` vs `lead-magnet-en.html`).
 - **Currency Adaptation:** PDF attachments inside the email will use the currency snapshot captured at the moment of lead submission.
 - **Fallback Logic:** If a specific locale template is missing, the system will default to **Spanish (ES)**, as it is the project's primary target market.
+
+#### E. Responsive Email Engineering
+- **Single-Column "Mobile-First":** All templates are built using a 600px wide single-column layout to ensure consistent rendering across Gmail, Outlook, and mobile mail clients.
+- **Fluid images:** Logos and icons are set to `max-width: 100%` with `height: auto` to prevent horizontal overflow.
+- **Touch-Friendly CTAs:** The "Download PDF" and "Add to Calendar" buttons will have a minimum height of **48px** and full-width behavior on screens `< 480px`.
+- **Typography:** Base font size of **16px** for body text to ensure readability on small screens without zooming.
+- **Table-less Layout:** Use of `div` and `span` with inline CSS where possible, or classic nested tables with `width="100%"` for maximum email client compatibility.
 
 ---
 

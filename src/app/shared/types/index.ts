@@ -37,3 +37,23 @@ export interface RetirementProjectionEntry {
     realValue: number;
     isRetired: boolean;
 }
+
+export interface Lead {
+    id: string;
+    firstName: string;
+    lastName: string;
+    email: string;
+    createdAt: string;
+    source: 'landing-page' | 'booking';
+    engagementStats?: any;
+}
+
+export interface InteractionLog {
+    id: string;
+    session_id: string;
+    widget_id: string;
+    interaction_type: string;
+    value?: number;
+    duration_ms: number;
+    timestamp: string;
+}

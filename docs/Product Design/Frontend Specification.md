@@ -152,6 +152,11 @@ Exactly which PrimeNG component powers each area, styled via `tailwindcss-primeu
 - **Visual Core:** High-resolution `html2canvas` snapshot of their customized Wealth Gap chart imported directly into the PDF.
 - **Data Table:** PrimeNG-styled striped table (Cloud Gray alternate rows) detailing Year 1, 5, 10, 20 Nominal vs Real values.
 - **Typography:** Inter (or similar cleanly embedded sans-serif). Primary headers in Deep Blue.
+- **i18n Support:** 
+  - The PDF generation service will ingest the current active `locale` signal.
+  - All labels, headers, and conceptual descriptions (e.g., "What is Inflation?", "The Wealth Gap") translate 1:1 with the web UI using the same dictionary keys.
+  - Numbers and dates formatted via the user's selected locale standard.
+  - For future languages, the layout is designed with generous spacing to accommodate character expansions (e.g., German/Spanish text length expansion).
 
 #### B. PDF: "Investment Profile" (Para Leads Calificados / Asesorías)
 - **Purpose:** A deeper, more complex report sent to users who schedule an advisory call.
@@ -180,9 +185,13 @@ All emails use a responsive, centralized HTML structure to ensure maximum delive
    - **Subject:** Reminder: Tomorrow's Financial Session
    - **Body:** "Make sure to review your Investment Profile PDF before our call to maximize our time."
    - **Tone:** Professional, creating slight urgency. 
-4. **Advisor Notification Email (Internal):**
-   - **Subject:** NEW LEAD: [First Name] [Last Name] scheduled a call
-   - **Body:** Plain text/minimalist format containing the Lead's engagement stats (time spent on sliders, simulation inputs), allowing the advisor to prepare a customized pitch.
+- **Body:** Plain text/minimalist format containing the Lead's engagement stats (time spent on sliders, simulation inputs), allowing the advisor to prepare a customized pitch.
+
+#### D. i18n Email Integration Strategy
+- **Language Detection:** The `Lead` payload sent to the backend (Supabase Edge Function) MUST include a `locale` field.
+- **Dynamic Templating:** The email service will use this `locale` to select the corresponding HTML template (e.g., `lead-magnet-es.html` vs `lead-magnet-en.html`).
+- **Currency Adaptation:** PDF attachments inside the email will use the currency snapshot captured at the moment of lead submission.
+- **Fallback Logic:** If a specific locale template is missing, the system will default to **Spanish (ES)**, as it is the project's primary target market.
 
 ---
 

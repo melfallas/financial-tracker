@@ -1,0 +1,7 @@
+<button [type]="type()" [disabled]="disabled() || loading()" [class]="'btn-' + variant()" (click)="onButtonClick()"
+  [attr.aria-busy]="loading()" [attr.aria-label]="label()">
+  @if (loading()) {
+  <span class="mr-2 animate-spin">🌀</span>
+  }
+  {{ label() }}
+</button>

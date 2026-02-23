@@ -61,3 +61,6 @@ Thumbs.db
 
 # Ïngnore zsrc folder recursively
 /zsrc/*
+
+*storybook.log
+storybook-static

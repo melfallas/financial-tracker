@@ -7,7 +7,7 @@ on:
     branches:
       - main
       - develop
-      - feature/TS-03_Initial_Tech_Stack_Tools_Config
+      - feature/US1.1_Project_Initialization
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:

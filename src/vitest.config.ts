@@ -3,8 +3,7 @@ import angular from '@analogjs/vite-plugin-angular';
 
 export default defineConfig({
   plugins: [
-    // angular(),
-    // ...angular(),
+    ...angular(),
   ],
   test: {
     globals: true,

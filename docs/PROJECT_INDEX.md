@@ -18,6 +18,7 @@
 
 - **[Architecture.md](./Architecture.md)**: Technical architecture, directory structure (Core/Shared/Features), and standards.
 - **[Architecture-Data-Schema.md](./Architecture-Data-Schema.md)**: **Technical Spec** for Interaction Logging (US1.5) — IndexedDB schema, Full State Snapshots, and Silent Sync strategy.
+- **[Architecture-Signal-Flow.md](./Architecture-Signal-Flow.md)**: **Technical Spec** for Signal Architecture & Math Engine (US1.1/1.4) — Single source of truth, computed signal caching, and framework-independent math.
 - **[AGENTS.md](../AGENTS.md)**: Rules, roles (Winston, Sally, Angi), and coding standards source of truth.
 - **[PROJECT_CONTEXT.md](./BMAD%20Agents%20Artifacts/PROJECT_CONTEXT.md)**: Continuity Mega-Prompt with the project's essence for fast agent onboarding.
 

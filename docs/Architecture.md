@@ -448,6 +448,12 @@ export interface AppUiConfig {
   /** Default expected return rate for calculators */
   defaultExpectedReturn: number;
 
+  /** Default Bank CDP rate for the CDP vs Market Comparator (US3.3) */
+  defaultCdpRate: number;
+
+  /** Default Time Horizon in years for comparisons when no user age is provided */
+  defaultTimeHorizon: number;
+
   /** S&P 500 historical average annual return (for Cost of Waiting calculations) */
   sp500HistoricalReturn: number;
 
@@ -472,6 +478,8 @@ const uiConfig: AppUiConfig = {
   defaultCurrencyCode: 'CRC',
   defaultInflationRate: 6.5,
   defaultExpectedReturn: 7.0,
+  defaultCdpRate: 5.0,
+  defaultTimeHorizon: 20,
   sp500HistoricalReturn: 10.5,
   cacheTtl: {
     currencyExchange: 3_600_000,  // 1 hour

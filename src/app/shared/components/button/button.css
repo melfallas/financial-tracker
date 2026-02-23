@@ -1,0 +1,35 @@
+:host {
+  display: inline-block;
+}
+
+button {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  border: none;
+  font-family: inherit;
+}
+
+button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+/* Extension of global classes if needed or specific ghost button */
+.btn-ghost {
+  background: transparent;
+  color: var(--color-deep-blue);
+  border: 2px solid var(--color-deep-blue);
+  padding: 8px 16px;
+  border-radius: 0.5rem;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.btn-ghost:hover:not(:disabled) {
+  background: var(--color-deep-blue);
+  color: white;
+}

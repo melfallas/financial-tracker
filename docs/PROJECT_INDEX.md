@@ -27,6 +27,7 @@
 
 - **[Frontend Specification.md](./Product%20Design/Frontend%20Specification.md)**: Narrative scroll definition, 80/15/5 rule theory, and component mapping.
 - **[Atoms-and-Molecules.md](./Product%20Design/Atoms-and-Molecules.md)**: **Master Design Spec**. Color tokens, typography, and reusable UI building blocks.
+- **[Organisms-Hero-And-Navbar.md](./Product%20Design/Organisms-Hero-And-Navbar.md)**: **High-Fidelity Spec** for the First Impression — Clean & Split layout, Headroom scroll navbar, and performance-optimized entry animations.
 - **[Organisms-Wealth-Gap-Chart.md](./Product%20Design/Organisms-Wealth-Gap-Chart.md)**: **High-Fidelity Spec** for the emotional core (interactivity, chart physics, and tooltips).
 - **[Organisms-Lead-Capture-Flow.md](./Product%20Design/Organisms-Lead-Capture-Flow.md)**: **High-Fidelity Spec** for the conversion flow (In-place transformation and success states).
 - **[Organisms-Market-Intelligence-Widgets.md](./Product%20Design/Organisms-Market-Intelligence-Widgets.md)**: **High-Fidelity Spec** for the Market Dashboard Band (Currency Devaluation, Fear & Greed Index, Market Data Cards).

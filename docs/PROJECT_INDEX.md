@@ -37,6 +37,7 @@
 - **[Organisms-CDP-Comparator.md](./Product%20Design/Organisms-CDP-Comparator.md)**: **High-Fidelity Spec** for the logical proof (US3.3), side-by-side KPI comparison of bank rates vs market returns, and institutional shaming logic.
 - **[Organisms-PDF-Report.md](./Product%20Design/Organisms-PDF-Report.md)**: **High-Fidelity Spec** for the Lead Magnet deliverable (US2.4) — Layout, Chart.js Base64 export, and the Page 2 QR code conversion anchor.
 - **[Organisms-Footer.md](./Product%20Design/Organisms-Footer.md)**: **High-Fidelity Spec** for the Global Footer — Emerald pre-footer CTA, Deep Blue 'Vault' design, Trust Badges, and explicit legal disclaimers.
+- **[Organisms-I18n-Currency-Fit.md](./Product%20Design/Organisms-I18n-Currency-Fit.md)**: **Logic & UX Spec** for global currency switching, rounding rules (CRC decimals), and PDF multi-currency integration.
 
 ---
 

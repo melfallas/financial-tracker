@@ -28,6 +28,7 @@
 - **Naming Convention:** **Flat & Clean**. Suffixes like `.component.ts` are strictly forbidden.
   - _Example:_ `hero-realtime.ts`, `hero-realtime.html`, `hero-realtime.spec.ts`, `hero-realtime.stories.ts`.
 - **Dependency Injection:** Modern `inject()` usage for all services.
+- **Currency & i18n Logic:** Global reactivity for currency switching via `CurrencyService`. High-scale currencies (e.g., CRC) automatically trigger **zero-decimal rounding** and dual-pricing (USD + Local) for market assets.
 - **Standalone Components:** All components are standalone. No NgModules. `standalone: true` is the default in Angular 21+ — do NOT set it explicitly.
 
 ---

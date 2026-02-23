@@ -35,11 +35,14 @@
     "mergeB": "git checkout develop && git merge @{-1} --no-edit && git push --",
     "mergeb": "node -e \"const b=process.argv[1]; require('child_process').execSync(`git checkout ${b} && git merge @{-1} --no-edit && git push -- `, {stdio:'inherit'})\"",
     "mergedel": "git checkout develop && git merge @{-1} --no-edit && git push && git branch -d @{-1} && git push origin --delete @{-1}",
+    "mergefet": "git checkout feature/US1.1_Project_Initialization && git merge @{-1} --no-edit",
     "commit": "pnpm run patch && aic2 -t conventional",
     "commit-all": "pnpm run patch && aic2 -a -t conventional",
     "push": "pnpm run patch && aic2 -t conventional && git push",
     "push-all": "pnpm run patch && aic2 -a -t conventional && git push",
-    "reset": "git fetch origin && git reset --hard @{u}"
+    "reset": "git fetch origin && git reset --hard @{u}",
+    "storybook": "ng run financial-tracker:storybook",
+    "build-storybook": "ng run financial-tracker:build-storybook"
   },
   "prettier": {
     "printWidth": 100,
@@ -61,7 +64,16 @@
     "@angular/core": "^21.1.0",
     "@angular/forms": "^21.1.0",
     "@angular/router": "^21.1.0",
+    "@primeng/themes": "^21.0.4",
+    "@tailwindcss/postcss": "^4.2.1",
+    "autoprefixer": "^10.4.24",
+    "chart.js": "^4.5.1",
+    "ng2-charts": "^8.0.0",
+    "postcss": "^8.5.6",
+    "primeng": "^21.1.1",
     "rxjs": "~7.8.0",
+    "tailwindcss": "^4.2.1",
+    "tailwindcss-primeui": "^0.6.1",
     "tslib": "^2.3.0"
   },
   "devDependencies": {
@@ -78,6 +90,16 @@
     "commit-and-tag-version": "12.6.1",
     "jsdom": "^27.1.0",
     "typescript": "~5.9.2",
-    "vitest": "^4.0.8"
+    "vitest": "^4.0.8",
+    "storybook": "^10.2.10",
+    "@storybook/angular": "^10.2.10",
+    "@storybook/addon-a11y": "^10.2.10",
+    "@storybook/addon-docs": "^10.2.10",
+    "@storybook/addon-onboarding": "^10.2.10",
+    "@angular-devkit/build-angular": "^21.1.0",
+    "@angular-devkit/architect": "^0.2101.0",
+    "@angular-devkit/core": "^21.1.0",
+    "@angular/platform-browser-dynamic": "^21.1.0",
+    "@compodoc/compodoc": "^1.2.1"
   }
 }

@@ -1,5 +1,4 @@
 import 'fake-indexeddb/auto';
-import { describe, it, expect, beforeEach, vi } from 'vitest';
 import { LocalInteractionRepository } from './local-interaction-repository';
 import { InteractionLog } from '../shared/types';
 import { firstValueFrom } from 'rxjs';
@@ -26,7 +25,7 @@ describe('LocalInteractionRepository', () => {
         await firstValueFrom(repository.log(mockLog));
         const logs = await firstValueFrom(repository.getAll());
 
-        expect(logs).toHaveLength(1);
+        expect(logs.length).toBe(1);
         expect(logs[0].id).toBe(mockLog.id);
     });
 
@@ -35,7 +34,7 @@ describe('LocalInteractionRepository', () => {
         await firstValueFrom(repository.log({ ...mockLog, id: '2', widget_id: 'other-calc' }));
 
         const logs = await firstValueFrom(repository.getByWidgetId('calc-1'));
-        expect(logs).toHaveLength(1);
+        expect(logs).toHaveSize(1);
         expect(logs[0].widget_id).toBe('calc-1');
     });
 
@@ -44,6 +43,6 @@ describe('LocalInteractionRepository', () => {
         await firstValueFrom(repository.clearLogs());
         const logs = await firstValueFrom(repository.getAll());
 
-        expect(logs).toHaveLength(0);
+        expect(logs.length).toBe(0);
     });
 });

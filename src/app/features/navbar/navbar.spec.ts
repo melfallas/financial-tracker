@@ -7,17 +7,6 @@ describe('NavbarComponent', () => {
     let component: Navbar;
     let fixture: ComponentFixture<Navbar>;
 
-    beforeAll(() => {
-        try {
-            TestBed.initTestEnvironment(
-                BrowserTestingModule,
-                platformBrowserTesting()
-            );
-        } catch {
-            // already initialized
-        }
-    });
-
     beforeEach(async () => {
         await TestBed.configureTestingModule({
             imports: [Navbar],

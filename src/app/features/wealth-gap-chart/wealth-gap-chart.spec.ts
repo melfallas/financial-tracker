@@ -1,5 +1,4 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { vi } from 'vitest';
 import { WealthGapChart } from './wealth-gap-chart';
 import { WealthGapService } from './wealth-gap.service';
 
@@ -64,7 +63,7 @@ describe('WealthGapChart', () => {
 
   describe('updateSlider', () => {
     it('should call service.updateInput when a slider changes', () => {
-      const spy = vi.spyOn(service, 'updateInput');
+      const spy = spyOn(service, 'updateInput');
       component.updateSlider('initialCapital', 8000);
       expect(spy).toHaveBeenCalledWith('initialCapital', 8000);
     });

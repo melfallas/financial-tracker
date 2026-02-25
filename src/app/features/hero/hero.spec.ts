@@ -7,17 +7,6 @@ describe('HeroComponent', () => {
     let component: Hero;
     let fixture: ComponentFixture<Hero>;
 
-    beforeAll(() => {
-        try {
-            TestBed.initTestEnvironment(
-                BrowserTestingModule,
-                platformBrowserTesting()
-            );
-        } catch {
-            // already initialized
-        }
-    });
-
     beforeEach(async () => {
         await TestBed.configureTestingModule({
             imports: [Hero],
@@ -38,7 +27,7 @@ describe('HeroComponent', () => {
     });
 
     it('should call scrollToDiagnostic when CTA button is clicked', () => {
-        const spy = vi.spyOn(component, 'scrollToDiagnostic');
+        const spy = spyOn(component, 'scrollToDiagnostic');
         const button = fixture.debugElement.query(By.css('app-button'));
         button.triggerEventHandler('clicked', null);
         expect(spy).toHaveBeenCalled();

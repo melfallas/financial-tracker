@@ -30,6 +30,8 @@ Any modifications to files matching `src/**/*.ts`, `src/**/*.html`, or `src/**/*
 - **Testing:** Apply TDD (Test-Driven Development) principles on new features, requirements, user stories or when requested by the user.
 - **TDD Guidelines:** Write unit tests for components, services, and other logic using red-green-refactor approach: 1. Write test FIRST → run → MUST FAIL 2. Implement MINIMUM code to pass the test 3. Refactor code to improve its structure and organization, keeping tests green.
 - **Code Coverage:** Ensure at least 80% code coverage for components, services, and other logic.
+- **⚠️ Testing Framework — STRATEGIC DECISION:** `ng test` (Karma/Jasmine) is the **ONLY** authorized unit test runner. `vitest` / `pnpm vitest` is **STRICTLY FORBIDDEN** until a formal migration is approved. Full rules in `.agent/rules/testing-framework-strategy.md`. You MUST read that file before writing any `.spec.ts` file.
+- **Testing Library First:** Prefer `@testing-library/angular` (`render`, `screen`, `userEvent`) over raw `TestBed`/`ComponentFixture` to ensure future Vitest compatibility. Do NOT import any API from the `vitest` package in any `.spec.ts` file.
 
 ## Agent Identity
 
@@ -52,8 +54,9 @@ Any modifications to files matching `src/**/*.ts`, `src/**/*.html`, or `src/**/*
   - Chart.js provides dynamic data visualizations (charts, gauges, financial projections).
   - Tailwind CSS personalizes styles, layouts, structure, and adjusts the visual appearance of both PrimeNG and Chart.js components to maintain the 80/15/5 design system consistency.
   - `tailwindcss-primeui` bridges PrimeNG theming with Tailwind tokens for unified styling.
-- **Unit Testing:** Angular Testing, @testing-library/angular
-- **Code Coverage:** Angular CLI (ng test --code-coverage)
+- **Unit Testing:** `ng test` (Karma/Jasmine) + `@testing-library/angular` — **Vitest is FORBIDDEN as a unit test runner**
+- **Code Coverage:** Angular CLI (`ng test --code-coverage`) — minimum 80%
+- **Testing Strategy ADR:** See `.agent/rules/testing-framework-strategy.md` — Must be read before writing any spec file
 - **E2E Testing:** Playwright
 - **Package Manager:** pnpm
 - **Version Control:** Git

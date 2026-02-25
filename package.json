@@ -1,6 +1,6 @@
 {
   "name": "financial-tracker",
-  "version": "0.8.20",
+  "version": "0.8.21",
   "scripts": {
     "ng": "ng",
     "start": "pnpm run patch && ng serve",
@@ -9,8 +9,6 @@
     "watch": "pnpm run patch && ng build --watch --configuration development",
     "test": "ng test",
     "test:run": "pnpm run test",
-    "testv": "pnpm vitest --globals",
-    "test:watch": "pnpm vitest --globals --watch",
     "release": "pnpm run releasem",
     "releasep": "commit-and-tag-version --skip.tag",
     "releasem": "commit-and-tag-version --skip.tag --release-as minor",
@@ -95,6 +93,7 @@
     "@storybook/angular": "^10.2.10",
     "@testing-library/angular": "^19.1.0",
     "@testing-library/dom": "^10.4.1",
+    "@types/jasmine": "^6.0.0",
     "@vitest/coverage-v8": "^4.0.18",
     "commit-and-tag-version": "12.6.1",
     "fake-indexeddb": "^6.2.5",

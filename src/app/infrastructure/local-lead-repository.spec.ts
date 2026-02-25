@@ -1,4 +1,3 @@
-import { describe, it, expect, beforeEach, vi } from 'vitest';
 import { LocalLeadRepository } from './local-lead-repository';
 import { Lead } from '../shared/types';
 import { firstValueFrom } from 'rxjs';
@@ -25,7 +24,7 @@ describe('LocalLeadRepository', () => {
         await firstValueFrom(repository.save(mockLead));
         const leads = await firstValueFrom(repository.getAll());
 
-        expect(leads).toHaveLength(1);
+        expect(leads.length).toBe(1);
         expect(leads[0]).toEqual(mockLead);
     });
 
@@ -46,6 +45,6 @@ describe('LocalLeadRepository', () => {
         await firstValueFrom(repository.delete('1'));
         const leads = await firstValueFrom(repository.getAll());
 
-        expect(leads).toHaveLength(0);
+        expect(leads.length).toBe(0);
     });
 });

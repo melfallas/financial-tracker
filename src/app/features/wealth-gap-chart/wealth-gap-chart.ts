@@ -48,23 +48,23 @@ export class WealthGapChart implements OnInit, OnDestroy {
         label: 'Valor Nominal (Crecimiento)',
         data: this.wealthGapService.nominalDataset(),
         borderColor: '#00C853',
-        backgroundColor: 'rgba(0, 200, 83, 0.12)',
-        fill: true,
+        backgroundColor: 'transparent',
+        fill: false,
         tension: 0.4,
-        pointRadius: 3,
+        pointRadius: 0,
         pointHoverRadius: 6,
-        borderWidth: 2.5,
+        borderWidth: 3,
         pointBackgroundColor: '#00C853',
       },
       {
         label: 'Poder Adquisitivo Real',
         data: this.wealthGapService.realDataset(),
         borderColor: '#1A3C6E',
-        backgroundColor: 'rgba(26, 60, 110, 0.05)',
-        fill: false,
+        backgroundColor: 'rgba(211, 47, 47, 0.15)', // Shaded area for the "Gap"
+        fill: 0, // Fill to the first dataset (Nominal)
         tension: 0.4,
         borderDash: [6, 4],
-        pointRadius: 3,
+        pointRadius: 0,
         pointHoverRadius: 6,
         borderWidth: 2.5,
         pointBackgroundColor: '#1A3C6E',
@@ -95,25 +95,25 @@ export class WealthGapChart implements OnInit, OnDestroy {
         },
       },
       tooltip: {
+        mode: 'index',
+        intersect: false,
         callbacks: {
-          afterBody: (items) => {
-            if (items.length < 2) return [];
+          title: () => '', // Suppress title as per "Only display Erosion"
+          label: () => '', // Suppress individual dataset labels
+          footer: (items) => {
+            if (items.length < 2) return '';
             const nominal = items[0].raw as number;
             const real = items[1].raw as number;
             const erosion = nominal - real;
-            return [`Erosión: -$${erosion.toLocaleString('es-CR', { maximumFractionDigits: 0 })}`];
-          },
-          label: (ctx) => {
-            const value = ctx.raw as number;
-            return `  ${ctx.dataset.label}: $${value.toLocaleString('es-CR', { maximumFractionDigits: 0 })}`;
+            return `Pérdida (Erosión): -$${erosion.toLocaleString('es-CR', { maximumFractionDigits: 0 })}`;
           },
         },
-        backgroundColor: '#1A3C6E',
-        titleColor: '#fff',
-        bodyColor: '#E5E7EB',
-        padding: 14,
-        cornerRadius: 10,
-        displayColors: true,
+        backgroundColor: 'rgba(26, 60, 110, 0.95)',
+        footerColor: '#FDA4AF',
+        footerFont: { size: 14, weight: 'bold', family: 'Outfit, sans-serif' },
+        padding: 12,
+        cornerRadius: 12,
+        displayColors: false, // Clean look, no icons
       },
     },
     scales: {
@@ -168,6 +168,19 @@ export class WealthGapChart implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.initIntersectionObserver();
+    // Use a small timeout to ensure DOM is ready for slider initialization
+    setTimeout(() => this.initializeSliderStyles(), 100);
+  }
+
+  private initializeSliderStyles(): void {
+    const sliders = document.querySelectorAll('.slider') as NodeListOf<HTMLInputElement>;
+    sliders.forEach((input) => {
+      const min = +input.min || 0;
+      const max = +input.max || 100;
+      const value = +input.value;
+      const pct = ((value - min) / (max - min)) * 100;
+      input.style.setProperty('--slider-pct', `${pct}%`);
+    });
   }
 
   ngOnDestroy(): void {
@@ -175,8 +188,18 @@ export class WealthGapChart implements OnInit, OnDestroy {
     if (this.countUpInterval) clearInterval(this.countUpInterval);
   }
 
-  updateSlider(key: keyof WealthGapInput, value: number): void {
+  updateSlider(key: keyof WealthGapInput, event: Event): void {
+    const input = event.target as HTMLInputElement;
+    const value = +input.value;
+    
+    // Update service
     this.wealthGapService.updateInput(key, value);
+    
+    // Update CSS variable for the gradient effect
+    const min = +input.min || 0;
+    const max = +input.max || 100;
+    const pct = ((value - min) / (max - min)) * 100;
+    input.style.setProperty('--slider-pct', `${pct}%`);
   }
 
   private initIntersectionObserver(): void {

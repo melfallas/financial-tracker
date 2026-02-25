@@ -15,7 +15,11 @@ describe('WealthGapChart', () => {
     fixture = TestBed.createComponent(WealthGapChart);
     component = fixture.componentInstance;
     service = TestBed.inject(WealthGapService);
+    
+    // Explicitly make chart visible for DOM tests
+    component.chartVisible.set(true);
     fixture.detectChanges();
+    await fixture.whenStable();
   });
 
   it('should create', () => {
@@ -64,7 +68,16 @@ describe('WealthGapChart', () => {
   describe('updateSlider', () => {
     it('should call service.updateInput when a slider changes', () => {
       const spy = spyOn(service, 'updateInput');
-      component.updateSlider('initialCapital', 8000);
+      const mockEvent = {
+        target: {
+          value: '8000',
+          min: '0',
+          max: '100000',
+          style: { setProperty: jasmine.createSpy('setProperty') }
+        }
+      } as unknown as Event;
+
+      component.updateSlider('initialCapital', mockEvent);
       expect(spy).toHaveBeenCalledWith('initialCapital', 8000);
     });
   });

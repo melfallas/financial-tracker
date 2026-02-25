@@ -3,7 +3,7 @@ import { NgOptimizedImage } from '@angular/common';
 import { Button } from '../../shared/components/button/button';
 
 @Component({
-    selector: 'app-hero',
+    selector: 'ft-hero',
     imports: [Button, NgOptimizedImage],
     templateUrl: './hero.html',
     styleUrl: './hero.css',

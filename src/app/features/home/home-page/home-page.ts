@@ -3,8 +3,7 @@ import { Navbar } from '../../navbar/navbar';
 import { Hero } from '../../hero/hero';
 
 @Component({
-  selector: 'app-home-page',
-  standalone: true,
+  selector: 'ft-home-page',
   imports: [Navbar, Hero],
   templateUrl: './home-page.html',
   changeDetection: ChangeDetectionStrategy.OnPush,

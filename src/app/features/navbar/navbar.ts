@@ -2,7 +2,7 @@ import { Component, signal, ChangeDetectionStrategy } from '@angular/core';
 import { Button } from '../../shared/components/button/button';
 
 @Component({
-    selector: 'app-navbar',
+    selector: 'ft-navbar',
     imports: [Button],
     templateUrl: './navbar.html',
     styleUrl: './navbar.css',

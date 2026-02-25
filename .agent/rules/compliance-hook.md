@@ -19,6 +19,7 @@ Before concluding the task, the agent must update or generate a file at `.agent/
 4. **Architecture Alignment:** Does the file location match the Core/Shared/Feature layer definition? (Yes/No)
 5. **Template Separation — BLOCKER:** Do ALL components (without exception) use `templateUrl` and `styleUrl` referencing external `.html` and `.css` files? (Yes/No) — **Any "No" here is a BLOCKER that must be resolved before the task is considered complete.**
 6. **Zero Inline Templates/Styles — BLOCKER:** Are there zero occurrences of `template:` or `styles:` inline properties inside any `@Component` decorator across the entire `src/app/` directory? (Yes/No) — **Any "No" is a BLOCKER. Scan with: `grep -rn "template:\|styles:" src/app --include="*.ts"`**
+7. **Selector Prefix `ft-` — BLOCKER:** Do ALL component selectors use the `ft-` prefix? (Yes/No) — **Any `app-` or missing prefix is a BLOCKER. Scan with: `grep -rn "selector: 'app-" src/app --include="*.ts"`**
 
 ### Report Template
 

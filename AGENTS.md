@@ -26,6 +26,7 @@ Any modifications to files matching `src/**/*.ts`, `src/**/*.html`, or `src/**/*
 - **Control Flow:** Use the new control flow syntax (`@if`, `@for`, `@switch`) instead of structural directives (`*ngIf`, `*ngFor`).
 - **Style:** Strictly follow the [Official Angular Style Guide](https://angular.dev/style-guide).
 - **Naming Convention:** Services must include the `.service.ts` suffix and components must not include the `.component` suffix.
+- **Selector Prefix:** All component selectors MUST use the `ft-` prefix (e.g., `ft-home-page`). The `app-` prefix is **strictly forbidden**.
 - **Testing:** Apply TDD (Test-Driven Development) principles on new features, requirements, user stories or when requested by the user.
 - **TDD Guidelines:** Write unit tests for components, services, and other logic using red-green-refactor approach: 1. Write test FIRST → run → MUST FAIL 2. Implement MINIMUM code to pass the test 3. Refactor code to improve its structure and organization, keeping tests green.
 - **Code Coverage:** Ensure at least 80% code coverage for components, services, and other logic.
@@ -103,8 +104,9 @@ The agent must strictly follow and enforce this directory structure:
   - A dedicated `.css` file referenced via `styleUrl: './component-name.css'`
     Any violation of this rule is a **blocker** and must be refactored immediately before any other work proceeds.
 - **Metadata:** Every component must explicitly define:
-  - `selector`: Custom dash-case name (e.g., `app-ship-card`).
+  - `selector`: MUST use the `ft-` prefix in dash-case (e.g., `ft-home-page`, `ft-button`, `ft-navbar`). **The `app-` prefix is forbidden.**
   - `imports`: Explicitly list dependencies (CommonModule, Signals, etc.).
+- **🚫 Selector Prefix — STRICTLY ENFORCED:** All component selectors MUST start with `ft-`. Using `app-` or any other prefix is a **blocker violation** that must be corrected immediately.
 - **Class Logic:** Use the component class for UI logic and state; delegate business logic to Services.
 - **Change Detection:** Use `ChangeDetectionStrategy.OnPush` by default.
 

@@ -97,8 +97,11 @@ The agent must strictly follow and enforce this directory structure:
 - Do NOT use `ngClass`, use `class` bindings instead
 - Do NOT use `ngStyle`, use `style` bindings instead
 - When using external templates/styles, use paths relative to the component TS file.
-- **Template & Styles:** Use and always prefer `templateUrl` and `styleUrl` over inline templates to separate concerns.
-- **Inline Templates:** Permitted only for minimal wrappers (< 10 lines). Use template and style urls always.
+- **Template & Styles — MANDATORY:** ALWAYS use `templateUrl` and `styleUrl`. This is a non-negotiable architectural constraint that applies to every component without exception.
+- **🚫 Inline Templates/Styles — STRICTLY PROHIBITED:** The use of `template:` or `styles:` (inline) inside `@Component` is **categorically forbidden** across the entire project — shared, core, and feature layers included. No exceptions, not even for small wrappers. Every component MUST have:
+  - A dedicated `.html` file referenced via `templateUrl: './component-name.html'`
+  - A dedicated `.css` file referenced via `styleUrl: './component-name.css'`
+    Any violation of this rule is a **blocker** and must be refactored immediately before any other work proceeds.
 - **Metadata:** Every component must explicitly define:
   - `selector`: Custom dash-case name (e.g., `app-ship-card`).
   - `imports`: Explicitly list dependencies (CommonModule, Signals, etc.).
@@ -225,7 +228,10 @@ feature-name/
 ## 5. Prohibitions
 
 - **No Generic Folders:** Never create folders named `pages/`, `components/`, `services/`, or `interfaces/` inside a feature directory.
-- **No Inline Styles/Templates:** Keep HTML and CSS in their separate files within the component folder to ensure scannability.
+- **🚫 No Inline Styles/Templates — ZERO TOLERANCE:** The use of `template:` or `styles:` inside the `@Component` decorator is **categorically forbidden** for every component in this project, including shared, core, and feature components. Every component file (`.ts`) MUST reference external files using:
+  - `templateUrl: './component-name.html'`
+  - `styleUrl: './component-name.css'`
+    Failing to comply is a blocker. The agent must refuse to generate or accept code with inline templates or styles.
 - **Flat Feature Folders:** Do not nest features more than 2-3 levels deep. If a feature becomes too complex, split it into a new top-level feature area.
 
 ---

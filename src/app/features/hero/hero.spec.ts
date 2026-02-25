@@ -28,7 +28,7 @@ describe('HeroComponent', () => {
 
     it('should call scrollToDiagnostic when CTA button is clicked', () => {
         const spy = spyOn(component, 'scrollToDiagnostic');
-        const button = fixture.debugElement.query(By.css('app-button'));
+        const button = fixture.debugElement.query(By.css('ft-button'));
         button.triggerEventHandler('clicked', null);
         expect(spy).toHaveBeenCalled();
     });

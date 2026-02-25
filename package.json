@@ -1,6 +1,6 @@
 {
   "name": "financial-tracker",
-  "version": "0.8.18",
+  "version": "0.8.20",
   "scripts": {
     "ng": "ng",
     "start": "pnpm run patch && ng serve",
@@ -101,6 +101,7 @@
     "jsdom": "^27.1.0",
     "storybook": "^10.2.10",
     "typescript": "~5.9.2",
+    "vite-tsconfig-paths": "^6.1.1",
     "vitest": "^4.0.8"
   }
 }

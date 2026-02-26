@@ -1,6 +1,6 @@
 {
   "name": "financial-tracker",
-  "version": "0.8.34",
+  "version": "0.8.36",
   "scripts": {
     "ng": "ng",
     "start": "pnpm run patch && ng serve",
@@ -93,8 +93,10 @@
     "@storybook/angular": "^10.2.10",
     "@testing-library/angular": "^19.1.0",
     "@testing-library/dom": "^10.4.1",
+    "@types/canvas-confetti": "^1.9.0",
     "@types/jasmine": "^6.0.0",
     "@vitest/coverage-v8": "^4.0.18",
+    "canvas-confetti": "^1.9.4",
     "commit-and-tag-version": "12.6.1",
     "fake-indexeddb": "^6.2.5",
     "jsdom": "^27.1.0",

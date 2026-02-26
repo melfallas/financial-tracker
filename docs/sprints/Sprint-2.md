@@ -10,7 +10,7 @@ Transform the technical foundations into a compelling visual experience. This sp
 | :-------- | :-------------------------------------------- | :------- | :----- | :--------- | :------ |
 | **US4.1** | [Hero Section & Navbar](../stories/US4.1.md)  | P0       | Medium | Angi (Dev) | 🟢 DONE |
 | **US3.1** | [Wealth Gap Chart](../stories/US3.1.md)       | P0       | Medium | Angi (Dev) | 🟢 DONE |
-| **US3.2** | [Retirement Simulator](../stories/US3.2.md)   | P0       | Medium | Angi (Dev) | 📂 TODO |
+| **US3.2** | [Retirement Simulator](../stories/US3.2.md)   | P0       | Medium | Angi (Dev) | 🟢 DONE |
 | **US4.3** | [Market Status Widgets](../stories/US4.3.md)  | P1       | Small  | Angi (Dev) | 📂 TODO |
 | **US4.2** | [Cost of Waiting Banner](../stories/US4.2.md) | P1       | Medium | Angi (Dev) | 🟢 DONE |
 

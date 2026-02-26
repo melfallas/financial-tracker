@@ -2,6 +2,28 @@
 
 ---
 
+**DateTime:** 2026-02-26T11:20:00
+**Task:** Update US4.2 Cost of Waiting Banner (English Docs, Triple Inputs, Accessibility)
+**Status:** PASSED ✅
+**Violations:** None
+**Files Detected:**
+- `src/app/features/cost-of-waiting/cost-of-waiting.ts`
+- `src/app/features/cost-of-waiting/cost-of-waiting.html`
+- `src/app/features/cost-of-waiting/cost-of-waiting.css`
+- `docs/stories/US4.2.md`
+**Refactor Suggestions:** None
+
+### Checkpoints (Angular 21 Standard Compliance)
+1. **Standalone Validation:** Yes (Component remains standalone)
+2. **Signal Adoption:** Yes (Using Signals for local state and synchronization)
+3. **Control Flow:** Yes (Using `@if` for dynamic legend)
+4. **Architecture Alignment:** Yes (Feature folder: `src/app/features/cost-of-waiting`)
+5. **Template Separation — BLOCKER:** Yes ✅ (External `.html` and `.css` files used)
+6. **Zero Inline Templates/Styles — BLOCKER:** Yes ✅ (No `template:` or `styles:` found)
+7. **Selector Prefix `ft-` — BLOCKER:** Yes ✅ (`ft-cost-of-waiting` used)
+8. **Language Standards — BLOCKER:** Yes ✅ (Documentation and code in English; UI text in Spanish)
+
+---
 **DateTime:** 2026-02-24T21:00:00
 **Task:** Architectural Enforcement — Migrate All Component Selectors from `app-` to `ft-` Prefix
 **Status:** PASSED ✅ (All violations detected and corrected)

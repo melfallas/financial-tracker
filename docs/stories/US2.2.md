@@ -15,6 +15,7 @@
     - Page 2: Conversion Anchor with a dynamic QR Code pointing to the Booking URL (pre-filled with the user's email).
 - [ ] Multi-language support: Content must switch between EN/ES based on the active session locale.
 - [ ] Unit tests for the generation service ensuring all data fields are mapped correctly.
+- [ ] **QA Verification Hook:** Expose a global `window.ftDownloadReport()` function in non-production environments to allow testers to download the PDF manually from the console without needing to submit the lead capture form.
 
 ## Technical Details
 
@@ -40,3 +41,4 @@
 - **Performance:** Generation must be non-blocking where possible.
 - **Consistency:** PDF must match brand colors (Deep Blue, Emerald Green, Soft Red) exactly.
 - **Privacy:** Document generated locally; data remains in browser memory until saved.
+- **Testability:** Technical testing of the PDF layout must be possible via the console (`window.ftDownloadReport()`) to bypass the conversion funnel UI flow during QA.

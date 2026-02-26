@@ -1,0 +1,134 @@
+<div class="lead-form-container relative w-full overflow-hidden bg-white/5 backdrop-blur-3xl shadow-[0_8px_40px_rgba(0,0,0,0.12)] border border-white/20 rounded-[2.5rem] p-8 md:p-12 transition-all duration-300 mx-auto"
+    [ngClass]="{'ring-4 ring-red-500/20 shadow-red-500/10': isError()}">
+
+    <!-- Backdrop Blur for Soft Focus trick -->
+    @if (isSuccess()) {
+    <div
+        class="absolute inset-0 bg-white/80 backdrop-blur-[6px] transition-all duration-700 z-10 flex flex-col items-center justify-center p-8 text-center">
+        <div
+            class="bg-emerald-500 w-24 h-24 rounded-full flex items-center justify-center text-white text-5xl mb-6 shadow-2xl scale-in pointer-events-none">
+            ✓</div>
+        <h3 class="text-3xl font-black text-deep-blue mb-4">¡Plan Generado!</h3>
+        <p class="text-gray-600 mb-8 max-w-sm">Hemos creado tu PDF personalizado. Descárgalo para ver tu estrategia
+            completa.</p>
+
+        <!-- Upsell CTA: This will be connected to the PDF download in US2.2 -->
+        <button
+            class="bg-emerald-500 hover:bg-emerald-600 text-white font-bold py-4 px-10 rounded-2xl shadow-xl shadow-emerald-500/20 transition-all flex items-center gap-3 animate-bounce-subtle">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+            </svg>
+            Descargar mi PDF Ahora
+        </button>
+    </div>
+    }
+
+    <div class="transition-opacity duration-300"
+        [ngClass]="{'opacity-50 pointer-events-none blur-sm': isSubmitting(), 'opacity-0 pointer-events-none': isSuccess()}">
+
+        <div class="flex items-center gap-4 mb-8">
+            <div class="bg-blue-50 text-deep-blue p-4 rounded-2xl shadow-inner">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24"
+                    stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                </svg>
+            </div>
+            <div>
+                <h2 class="text-2xl font-black text-deep-blue">Guarda tu Plan Estratégico</h2>
+                <p class="text-gray-500 text-sm">Obtén tu análisis en un reporte PDF premium gratuito.</p>
+            </div>
+        </div>
+
+        @if (isError() && errorMessage()) {
+        <div class="bg-red-50 text-red-600 p-4 rounded-xl mb-6 text-sm flex items-center gap-3 border border-red-100">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd"
+                    d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z"
+                    clip-rule="evenodd" />
+            </svg>
+            {{ errorMessage() }}
+        </div>
+        }
+
+        <form [formGroup]="form" (ngSubmit)="onSubmit()" class="flex flex-col gap-6" novalidate>
+
+            <!-- Name Row -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="flex flex-col gap-2">
+                    <label for="firstName" class="text-sm font-bold text-gray-700 ml-1">Nombre</label>
+                    <input type="text" id="firstName" formControlName="firstName" placeholder="Ej. Juan"
+                        class="ft-input bg-gray-50/50 border border-gray-200 rounded-2xl p-4 text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition-all"
+                        [ngClass]="{'border-red-400 focus:ring-red-500 bg-red-50/50': hasError('firstName')}" />
+                </div>
+
+                <div class="flex flex-col gap-2">
+                    <label for="lastName" class="text-sm font-bold text-gray-700 ml-1">Apellidos</label>
+                    <input type="text" id="lastName" formControlName="lastName" placeholder="Ej. Pérez"
+                        class="ft-input bg-gray-50/50 border border-gray-200 rounded-2xl p-4 text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition-all"
+                        [ngClass]="{'border-red-400 focus:ring-red-500 bg-red-50/50': hasError('lastName')}" />
+                </div>
+            </div>
+
+            <!-- Email Row -->
+            <div class="flex flex-col gap-2">
+                <label for="email" class="text-sm font-bold text-gray-700 ml-1">Correo Electrónico</label>
+                <input type="email" id="email" formControlName="email" placeholder="juan.perez@correo.com"
+                    class="ft-input bg-gray-50/50 border border-gray-200 rounded-2xl p-4 text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition-all"
+                    [ngClass]="{'border-red-400 focus:ring-red-500 bg-red-50/50': hasError('email')}" />
+            </div>
+
+            <!-- Consent Row -->
+            <div class="flex flex-col gap-2 mt-2">
+                <label class="flex items-start gap-4 cursor-pointer group">
+                    <div class="relative flex items-center justify-center mt-1">
+                        <input type="checkbox" formControlName="gdprConsent"
+                            class="appearance-none w-6 h-6 border-2 border-gray-300 rounded-lg checked:bg-emerald-500 checked:border-emerald-500 transition-colors focus:ring-2 focus:ring-emerald-500 focus:ring-offset-1 cursor-pointer"
+                            [ngClass]="{'border-red-400': hasError('gdprConsent')}" />
+                        <svg class="absolute w-4 h-4 text-white pointer-events-none opacity-0 check-icon transition-opacity"
+                            xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd"
+                                d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                                clip-rule="evenodd" />
+                        </svg>
+                    </div>
+                    <span
+                        class="text-sm text-gray-500 leading-relaxed max-w-sm group-hover:text-gray-700 transition-colors">
+                        Acepto que Financial Tracker procese mis datos para enviarme reportes y comunicaciones
+                        estratégicas según la <a href="#" class="text-blue-600 hover:underline">Política de
+                            Privacidad</a>.
+                    </span>
+                </label>
+            </div>
+
+            <!-- Submit CTA -->
+            <button type="submit" [disabled]="isSubmitting()"
+                class="mt-6 bg-[#00C853] hover:bg-emerald-600 disabled:bg-gray-400 disabled:cursor-not-allowed text-white font-black text-lg py-5 rounded-2xl shadow-[0_10px_20px_rgba(0,200,83,0.3)] hover:shadow-[0_15px_30px_rgba(0,200,83,0.4)] hover:-translate-y-1 transition-all flex justify-center items-center gap-3">
+                @if (isSubmitting()) {
+                <svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none"
+                    viewBox="0 0 24 24">
+                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                    <path class="opacity-75" fill="currentColor"
+                        d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z">
+                    </path>
+                </svg>
+                Generando Plan...
+                } @else {
+                Sí, Quiero mi Plan Gratuito
+                }
+            </button>
+
+            <!-- Trust Badges -->
+            <div class="flex justify-center items-center gap-4 mt-2 opacity-60">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd"
+                        d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z"
+                        clip-rule="evenodd" />
+                </svg>
+                <span class="text-xs font-medium uppercase tracking-widest">Cifrado de Extremo a Extremo SSL</span>
+            </div>
+        </form>
+    </div>
+</div>

@@ -5,14 +5,15 @@ import { BaseChartDirective } from 'ng2-charts';
 import { ChartConfiguration, ChartData, Chart, Filler } from 'chart.js';
 import { WealthGapService } from '../wealth-gap-chart/wealth-gap.service';
 import { calculateRetirement } from '@shared/utils';
-import { RetirementInput, RetirementResult } from '@shared/types';
+import { RetirementInput, RetirementResult, Lead } from '@shared/types';
+import { LeadForm } from '../lead-form/lead-form';
 
 // Register Chart.js Filler plugin
 Chart.register(Filler);
 
 @Component({
     selector: 'ft-retirement-simulator',
-    imports: [CommonModule, FormsModule, ReactiveFormsModule, CurrencyPipe, DecimalPipe, BaseChartDirective],
+    imports: [CommonModule, FormsModule, ReactiveFormsModule, BaseChartDirective, LeadForm],
     templateUrl: './retirement-simulator.html',
     styleUrl: './retirement-simulator.css',
     changeDetection: ChangeDetectionStrategy.OnPush,
@@ -109,6 +110,10 @@ export class RetirementSimulator {
     animatedFreedomAge = signal<number | null>(null);
     animatedRunOutAge = signal<number | null>(null);
 
+    // Lead Capture state
+    showCaptureForm = signal<boolean>(false);
+    isPlanDownloaded = signal<boolean>(false);
+
     isUnreachable = computed(() => {
         const inputs = this.wealthGapService.inputs();
         return inputs.annualInflationRate >= inputs.annualReturnRate;
@@ -202,5 +207,22 @@ export class RetirementSimulator {
         } catch (e) {
             console.warn('Confetti could not be loaded', e);
         }
+    }
+
+    // Capture Interaction
+    initiateDownload() {
+        if (!this.isPlanDownloaded()) {
+            this.showCaptureForm.set(true);
+        } else {
+            // Future US2.2 trigger
+            console.log('Triggering PDF Download directly');
+        }
+    }
+
+    onLeadCaptured(lead: Lead) {
+        // Here we trigger the PDF download (US2.2) and move to next state
+        this.isPlanDownloaded.set(true);
+        this.showCaptureForm.set(false);
+        console.log('Lead captured, generating PDF plan...', lead);
     }
 }

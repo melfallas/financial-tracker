@@ -8,7 +8,7 @@ Implement the lead capture funnel, generate personalized PDF reports as lead mag
 
 | ID        | Story                                              | Priority | Size   | Owner      | Status  |
 | :-------- | :------------------------------------------------- | :------- | :----- | :--------- | :------ |
-| **US2.1** | [Lead Capture Form](../stories/US2.1.md)           | P0       | Medium | Angi (Dev) | 📂 TODO |
+| **US2.1** | [Lead Capture Form](../stories/US2.1.md)           | P0       | Medium | Angi (Dev) | 🟢 DONE |
 | **US2.2** | [PDF Report Generation](../stories/US2.2.md)       | P0       | Large  | Angi (Dev) | 📂 TODO |
 | **US2.3** | [Email Delivery](../stories/US2.3.md)              | P1       | Small  | Angi (Dev) | 📂 TODO |
 | **US5.1** | [Floating CTA](../stories/US5.1.md)                | P0       | Small  | Angi (Dev) | 📂 TODO |

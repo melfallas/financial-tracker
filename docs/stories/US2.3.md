@@ -7,7 +7,7 @@
 **As a user,** I want to receive the personalized financial PDF in my email with clear next steps and an immediate option to book a consultation.
 
 ## Acceptance Criteria
-- [ ] Automated HTML email dispatched upon lead capture using an external API (Resend, SendGrid, or Supabase Edge Functions).
+- [ ] Automated HTML email dispatched upon lead capture. The implementation must be decoupled via a shared interface to allow transparent portability between Resend and SendGrid APIs. Initial implementation will use Resend.
 - [ ] Email follows physical layout (§Organisms-Email-Confirmation):
     - Table-based HTML (Email-client compatible).
     - Deep Blue Header (#1A3C6E).
@@ -20,7 +20,8 @@
 ## Technical Details
 
 ### Email Infrastructure
-- **Service:** Resend (recommended for developer experience) or SendGrid.
+- **Architecture Pattern:** Abstract Interface (`IEmailProvider`) to allow portable switching between services.
+- **Initial Service Provider:** Resend. The components must be prepared to swap to a SendGrid adapter seamlessly in the future.
 - **Workflow:**
     1. Lead submits form (US2.1).
     2. App generates PDF Base64 (US2.2).
@@ -36,8 +37,8 @@
 ### Steps to Complete:
 1. Setup a free account on Resend/SendGrid and get an API Key.
 2. Create an Email Template (HTML Table) in `src/app/core/templates/email-confirmation.html`.
-3. Create `EmailService` in `src/app/core/services/`.
-4. Implement `sendLeadEmail(lead: Lead, pdfBase64: string): Promise<void>`.
+3. Create `IEmailProvider` interface and `ResendEmailAdapter` in `src/app/core/services/email/`.
+4. Implement `sendLeadEmail(lead: Lead, pdfBase64: string): Promise<void>` inside the adapter.
 5. Integrate with `LeadForm` submission logic.
 6. Configure error handling and retry logic.
 

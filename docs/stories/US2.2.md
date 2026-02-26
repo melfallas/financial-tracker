@@ -13,7 +13,7 @@
     - Capture Chart.js instances via `ViewChild` and convert to Base64 using `toBase64Image()`.
     - Page 1: Deep Blue Header (#1A3C6E), Lead Name, Date, Wealth Gap Chart, Retirement Chart, Summary Tables.
     - Page 2: Conversion Anchor with a dynamic QR Code pointing to the Booking URL (pre-filled with the user's email).
-- [ ] Multi-language support: Content must switch between EN/ES based on the active session locale.
+- [ ] Multi-language support: Content must switch between EN/ES based on the language selector of the Navbar.
 - [ ] Unit tests for the generation service ensuring all data fields are mapped correctly.
 - [ ] **QA Verification Hook:** Expose a global `window.ftDownloadReport()` function in non-production environments to allow testers to download the PDF manually from the console without needing to submit the lead capture form.
 

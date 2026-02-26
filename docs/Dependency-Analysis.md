@@ -65,7 +65,7 @@ This is the recommended order of implementation to ensure zero-blockers for deve
 4.  **US1.5: IndexedDB Repository**: The persistence layer.
 
 ### **Phase 2: The Heart (Visual Models)**
-5.  **US3.1: Wealth Gap Chart**: First visual reactive component using the Math Engine (+ US4.3 Market Widgets).
+5.  **US3.1: Wealth Gap Chart**: First visual reactive component using the Math Engine.
 6.  **US3.2: Retirement Simulator**: Secondary model sharing the calculation signals.
 7.  **US4.2: Cost of Waiting Banner**: Derived from US3.1/3.2 logic.
 
@@ -78,7 +78,8 @@ This is the recommended order of implementation to ensure zero-blockers for deve
 ### **Phase 4: Optimization (Retention & Polish)**
 12. **US6.1: Wishlist Board**: Emotional gamification.
 13. **US6.2: i18n & Currency Fit**: Localization logic.
-14. **US6.3/6.4: Audit & Performance**: Final production polishing.
+14. **US4.3: Market Status Widgets**: Currency Comparison & Market Status.
+15. **US6.3/6.4: Audit & Performance**: Final production polishing.
 
 ---
 

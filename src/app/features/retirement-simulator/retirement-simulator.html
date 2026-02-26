@@ -92,15 +92,6 @@
 
                 <div class="space-y-8">
                     <div class="flex flex-col gap-2 p-6 bg-gray-50 rounded-2xl hover:shadow-md transition-shadow">
-                        <label for="retirement-age" class="text-sm font-bold uppercase tracking-wider opacity-60">Edad
-                            de Jubilación</label>
-                        <input type="number" id="retirement-age" [ngModel]="retirementAge()"
-                            (ngModelChange)="retirementAge.set($event)"
-                            class="bg-transparent border-0 border-b-2 border-emerald-200 text-3xl font-black text-deep-blue focus:ring-0 focus:border-emerald-500 transition-colors" />
-                        <p class="text-xs opacity-50">A qué edad planeas dejar de trabajar comercialmente.</p>
-                    </div>
-
-                    <div class="flex flex-col gap-2 p-6 bg-gray-50 rounded-2xl hover:shadow-md transition-shadow">
                         <label for="expense" class="text-sm font-bold uppercase tracking-wider opacity-60">Gastos
                             Mensuales Proyectados</label>
                         <div class="relative">
@@ -111,21 +102,6 @@
                                 class="bg-transparent border-0 border-b-2 border-emerald-200 text-3xl font-black text-deep-blue pl-6 w-full focus:ring-0 focus:border-emerald-500 transition-colors" />
                         </div>
                         <p class="text-xs opacity-50">Costo de vida deseado para tu libertad financiera.</p>
-                    </div>
-                </div>
-
-                <div class="space-y-8">
-                    <div class="flex flex-col gap-2 p-6 bg-gray-50 rounded-2xl hover:shadow-md transition-shadow">
-                        <label for="expected-return"
-                            class="text-sm font-bold uppercase tracking-wider opacity-60">Retorno Anual Esperado</label>
-                        <div class="relative">
-                            <input type="number" id="expected-return" [ngModel]="globalInputs.annualReturnRate"
-                                (ngModelChange)="updateGlobalInput('annualReturnRate', $event)"
-                                class="bg-transparent border-0 border-b-2 border-emerald-200 text-3xl font-black text-deep-blue pr-10 focus:ring-0 focus:border-emerald-500 transition-colors" />
-                            <span
-                                class="absolute right-0 top-1/2 -translate-y-1/2 text-deep-blue text-2xl font-black opacity-30">%</span>
-                        </div>
-                        <p class="text-xs opacity-50">Expectativa de retorno de tus inversiones.</p>
                     </div>
 
                     <div class="flex flex-col gap-2 p-6 bg-gray-50 rounded-2xl hover:shadow-md transition-shadow">
@@ -140,6 +116,31 @@
                         </div>
                         <p class="text-xs opacity-50">Sincronizado globalmente para cálculos reales de poder
                             adquisitivo.</p>
+                    </div>
+                </div>
+
+                <div class="space-y-8">
+                    <div class="flex flex-col gap-2 p-6 bg-gray-50 rounded-2xl hover:shadow-md transition-shadow">
+                        <label for="retirement-age" class="text-sm font-bold uppercase tracking-wider opacity-60">Edad
+                            de Jubilación</label>
+                        <input type="number" id="retirement-age" [ngModel]="retirementAge()"
+                            (ngModelChange)="retirementAge.set($event)"
+                            class="bg-transparent border-0 border-b-2 border-emerald-200 text-3xl font-black text-deep-blue focus:ring-0 focus:border-emerald-500 transition-colors" />
+                        <p class="text-xs opacity-50">A qué edad planeas dejar de trabajar comercialmente.</p>
+                    </div>
+
+                    <div class="flex flex-col gap-2 p-6 bg-gray-50 rounded-2xl hover:shadow-md transition-shadow">
+                        <label for="expected-return"
+                            class="text-sm font-bold uppercase tracking-wider opacity-60">Retorno Anual Esperado</label>
+                        <div class="relative">
+                            <input type="number" id="expected-return" [ngModel]="globalInputs.annualReturnRate"
+                                (ngModelChange)="updateGlobalInput('annualReturnRate', $event)"
+                                class="bg-transparent border-0 border-b-2 border-emerald-200 text-3xl font-black text-deep-blue pr-10 focus:ring-0 focus:border-emerald-500 transition-colors" />
+                            <span
+                                class="absolute right-0 top-1/2 -translate-y-1/2 text-deep-blue text-2xl font-black opacity-30">%</span>
+                        </div>
+                        <p class="text-xs opacity-50">Expectativa de retorno de tus inversiones.</p>
+
                     </div>
                 </div>
 

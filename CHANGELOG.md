@@ -2,6 +2,27 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.9.0](https://github.com/melfallas/financial-tracker/compare/v0.8.0...v0.9.0) (2026-02-26)
+
+
+### Features
+
+* Establish project-wide language standards and integrate them into agent rules and compliance checks. ([402a2fc](https://github.com/melfallas/financial-tracker/commit/402a2fc1440779f0d499bd202d04f5c85a219f86))
+* Implement WealthGapChart UI and add unit tests for Hero and WealthGapChart components with Vitest setup. ([06d3956](https://github.com/melfallas/financial-tracker/commit/06d3956a67cd505b9dbd425ad8659ad3158e4912))
+* migrate component selectors to define `ft-` selector prefix rule. ([d1e62d9](https://github.com/melfallas/financial-tracker/commit/d1e62d94342c314686b49a22858ab641c39e6479))
+* US3.1 Implement the wealth gap chart feature with reactive calculations and integrate it into the home page. ([88c8018](https://github.com/melfallas/financial-tracker/commit/88c8018f80d1b4b1eead911bb8d4f390cde2b9bc))
+* US3.1 Implement wealth-gap-chart feature, with visual refresh and dynamic styling, including component, styles, tests, and Angular testing environment configuration. ([a123941](https://github.com/melfallas/financial-tracker/commit/a123941092e502348cfd3f51c366a52d9d5c5640))
+* US3.2 Implement retirement simulator with interactive steps and integrate it into the home page. ([a4f846a](https://github.com/melfallas/financial-tracker/commit/a4f846aa05f893f95c3b5e70eb4906690723d89b))
+* US3.2 Introduce retirement simulator with doc files chantes to close Sprint 2. ([750816d](https://github.com/melfallas/financial-tracker/commit/750816d04777f5e1e82b0f98caa9aad06837db67))
+* US4.1 Add initial Navbar and Hero components, integrate into home page, and include tests and Storybook stories. ([3470d03](https://github.com/melfallas/financial-tracker/commit/3470d03db82831ff98d87685bf7925ec73d8a07a))
+* US4.2 Implement Cost of Waiting banner with interactive inputs and accessibility improvements. ([fab919a](https://github.com/melfallas/financial-tracker/commit/fab919a97168740df1c5c46013397096b97dacc3))
+
+
+### Bug Fixes
+
+* US3.1 Standardize unit tests on Angular CLI / Karma, adding unit tests for infrastructure, utilities, and features, and formalize the testing framework strategy to use Karma/Jasmine with Testing Library. ([39bbd7d](https://github.com/melfallas/financial-tracker/commit/39bbd7de9ba787583ca1ee2cdb803d7eb84a6a4e))
+* US4.1 Fixing set up of Tailwind CSS with PostCSS, migrate project styling to CSS, and configure Vitest. ([9cb9a27](https://github.com/melfallas/financial-tracker/commit/9cb9a27bc8c0524f8424193ff8a83dfba1bb8e41))
+
 ## [0.8.0](https://github.com/melfallas/financial-tracker/compare/v0.7.0...v0.8.0) (2026-02-23)
 
 

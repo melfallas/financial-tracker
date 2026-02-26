@@ -28,6 +28,11 @@ Chart.register(Filler);
 })
 export class WealthGapChart implements OnInit, OnDestroy {
   private readonly wealthGapService = inject(WealthGapService);
+  private readonly chartDirective = viewChild(BaseChartDirective);
+
+  getChartImage(): string {
+    return this.chartDirective()?.chart?.toBase64Image() || '';
+  }
 
   // Expose service signals/computed to the template
   readonly inputs = this.wealthGapService.inputs;
@@ -147,12 +152,12 @@ export class WealthGapChart implements OnInit, OnDestroy {
     prefix?: string;
     suffix?: string;
   }> = [
-    { key: 'initialCapital', label: 'Capital Inicial', min: 0, max: 100000, step: 500, prefix: '$' },
-    { key: 'monthlyContribution', label: 'Aporte Mensual', min: 0, max: 5000, step: 50, prefix: '$' },
-    { key: 'annualReturnRate', label: 'Retorno Anual', min: 1, max: 25, step: 0.5, suffix: '%' },
-    { key: 'annualInflationRate', label: 'Inflación Anual', min: 1, max: 20, step: 0.5, suffix: '%' },
-    { key: 'years', label: 'Años', min: 5, max: 40, step: 1, suffix: ' años' },
-  ];
+      { key: 'initialCapital', label: 'Capital Inicial', min: 0, max: 100000, step: 500, prefix: '$' },
+      { key: 'monthlyContribution', label: 'Aporte Mensual', min: 0, max: 5000, step: 50, prefix: '$' },
+      { key: 'annualReturnRate', label: 'Retorno Anual', min: 1, max: 25, step: 0.5, suffix: '%' },
+      { key: 'annualInflationRate', label: 'Inflación Anual', min: 1, max: 20, step: 0.5, suffix: '%' },
+      { key: 'years', label: 'Años', min: 5, max: 40, step: 1, suffix: ' años' },
+    ];
 
   private intersectionObserver?: IntersectionObserver;
   private countUpInterval?: ReturnType<typeof setInterval>;
@@ -191,10 +196,10 @@ export class WealthGapChart implements OnInit, OnDestroy {
   updateSlider(key: keyof WealthGapInput, event: Event): void {
     const input = event.target as HTMLInputElement;
     const value = +input.value;
-    
+
     // Update service
     this.wealthGapService.updateInput(key, value);
-    
+
     // Update CSS variable for the gradient effect
     const min = +input.min || 0;
     const max = +input.max || 100;

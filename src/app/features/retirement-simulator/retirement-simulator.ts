@@ -1,4 +1,4 @@
-import { Component, ChangeDetectionStrategy, signal, computed, inject, effect, untracked } from '@angular/core';
+import { Component, ChangeDetectionStrategy, signal, computed, inject, effect, untracked, viewChild, output } from '@angular/core';
 import { CommonModule, CurrencyPipe, DecimalPipe } from '@angular/common';
 import { FormsModule, ReactiveFormsModule, FormBuilder, Validators } from '@angular/forms';
 import { BaseChartDirective } from 'ng2-charts';
@@ -21,6 +21,13 @@ Chart.register(Filler);
 export class RetirementSimulator {
     private wealthGapService = inject(WealthGapService);
     private fb = inject(FormBuilder);
+    private readonly chartDirective = viewChild(BaseChartDirective);
+
+    onPlanRequested = output<{ lead: Lead }>();
+
+    getChartImage(): string {
+        return this.chartDirective()?.chart?.toBase64Image() || '';
+    }
 
     // Stepper state
     currentStep = signal<'step1' | 'step2' | 'results'>('step1');
@@ -223,6 +230,6 @@ export class RetirementSimulator {
         // Here we trigger the PDF download (US2.2) and move to next state
         this.isPlanDownloaded.set(true);
         this.showCaptureForm.set(false);
-        console.log('Lead captured, generating PDF plan...', lead);
+        this.onPlanRequested.emit({ lead });
     }
 }

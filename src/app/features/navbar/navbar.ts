@@ -1,5 +1,6 @@
-import { Component, signal, ChangeDetectionStrategy } from '@angular/core';
+import { Component, signal, ChangeDetectionStrategy, inject } from '@angular/core';
 import { Button } from '../../shared/components/button/button';
+import { LanguageService, Language } from '../../core/services/language.service';
 
 @Component({
     selector: 'ft-navbar',
@@ -12,9 +13,15 @@ import { Button } from '../../shared/components/button/button';
     },
 })
 export class Navbar {
+    langService = inject(LanguageService);
     lastScrollTop = signal<number>(0);
     isNavbarVisible = signal<boolean>(true);
     isNavbarSticky = signal<boolean>(false);
+
+    onLanguageChange(event: Event) {
+        const select = event.target as HTMLSelectElement;
+        this.langService.setLanguage(select.value as Language);
+    }
 
     onScroll() {
         const currentScroll = window.scrollY;

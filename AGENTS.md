@@ -31,6 +31,7 @@ Any modifications to files matching `src/**/*.ts`, `src/**/*.html`, or `src/**/*
 - **TDD Guidelines:** Write unit tests for components, services, and other logic using red-green-refactor approach: 1. Write test FIRST → run → MUST FAIL 2. Implement MINIMUM code to pass the test 3. Refactor code to improve its structure and organization, keeping tests green.
 - **Code Coverage:** Ensure at least 80% code coverage for components, services, and other logic.
 - **⚠️ Testing Framework — STRATEGIC DECISION:** `ng test` (Karma/Jasmine) is the **ONLY** authorized unit test runner. `vitest` / `pnpm vitest` is **STRICTLY FORBIDDEN** until a formal migration is approved. Full rules in `.agent/rules/testing-framework-strategy.md`. You MUST read that file before writing any `.spec.ts` file.
+- **⚠️ Language Standard — STRICTLY ENFORCED:** All documentation (Markdown files), source code (variable names, functions, classes), and code comments MUST be written in **English**. The only exception is the text content within HTML templates (UI strings), which should remain in **Spanish** for the current development phase. See `.agent/rules/language-standards.md` for details.
 - **Testing Library First:** Prefer `@testing-library/angular` (`render`, `screen`, `userEvent`) over raw `TestBed`/`ComponentFixture` to ensure future Vitest compatibility. Do NOT import any API from the `vitest` package in any `.spec.ts` file.
 
 ## Agent Identity

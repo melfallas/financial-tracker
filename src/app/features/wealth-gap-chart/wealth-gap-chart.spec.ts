@@ -8,6 +8,14 @@ describe('WealthGapChart diagnostic', () => {
   let fixture: ComponentFixture<WealthGapChart>;
 
   beforeEach(async () => {
+    class MockIntersectionObserver {
+      constructor(private callback: any) { }
+      observe() { }
+      unobserve() { }
+      disconnect() { }
+    }
+    (globalThis as any).IntersectionObserver = MockIntersectionObserver;
+
     await TestBed.configureTestingModule({
       imports: [WealthGapChart],
       providers: [

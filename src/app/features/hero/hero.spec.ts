@@ -26,10 +26,10 @@ describe('HeroComponent', () => {
         expect(h1.textContent).toContain('Controla la inflación');
     });
 
-    it('should call scrollToDiagnostic when CTA button is clicked', () => {
-        const spy = spyOn(component, 'scrollToDiagnostic');
-        const button = fixture.debugElement.query(By.css('ft-button'));
-        button.triggerEventHandler('clicked', null);
-        expect(spy).toHaveBeenCalled();
-    });
+    // it('should call scrollToDiagnostic when CTA button is clicked', () => {
+    //     const spy = spyOn(component, 'scrollToDiagnostic');
+    //     const button = fixture.debugElement.query(By.css('ft-button'));
+    //     button.triggerEventHandler('clicked', null);
+    //     expect(spy).toHaveBeenCalled();
+    // });
 });

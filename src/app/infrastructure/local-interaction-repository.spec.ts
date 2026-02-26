@@ -34,7 +34,7 @@ describe('LocalInteractionRepository', () => {
         await firstValueFrom(repository.log({ ...mockLog, id: '2', widget_id: 'other-calc' }));
 
         const logs = await firstValueFrom(repository.getByWidgetId('calc-1'));
-        expect(logs).toHaveSize(1);
+        expect(logs.length).toBe(1);
         expect(logs[0].widget_id).toBe('calc-1');
     });
 

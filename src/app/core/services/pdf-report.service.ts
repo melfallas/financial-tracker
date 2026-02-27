@@ -83,42 +83,67 @@ export class PdfReportService {
         doc.text(`${this.getLocalizedString(lang, 'preparedFor')} ${lead.firstName} ${lead.lastName} | ${this.getLocalizedString(lang, 'date')} ${currentDate}`, 20, 32);
 
         // 2. Section 1 (Problem)
+        const problemY = 50;
+        doc.setFillColor('#FEE2E2'); // Very soft red background
+        doc.rect(20, problemY, pageWidth - 40, 8, 'F');
+
         doc.setTextColor(softRed);
+        doc.setFont('helvetica', 'bold');
         doc.setFontSize(14);
-        doc.text(this.getLocalizedString(lang, 'problemSection'), 20, 55);
+        doc.text(this.getLocalizedString(lang, 'problemSection'), 25, problemY + 6);
 
         // Wealth Gap Chart
         if (wealthChartBase64) {
-            doc.addImage(wealthChartBase64, 'PNG', 20, 60, pageWidth - 40, 60);
+            doc.addImage(wealthChartBase64, 'PNG', 20, problemY + 12, pageWidth - 40, 55);
         }
 
         // 3. Section 2 (Hope)
-        const hopeOffset = 135;
+        const hopeOffset = 130;
+        doc.setFillColor('#DCFCE7'); // Very soft emerald background
+        doc.rect(20, hopeOffset, pageWidth - 40, 8, 'F');
+
         doc.setTextColor(emerald);
+        doc.setFont('helvetica', 'bold');
         doc.setFontSize(14);
-        doc.text(this.getLocalizedString(lang, 'hopeSection'), 20, hopeOffset);
+        doc.text(this.getLocalizedString(lang, 'hopeSection'), 25, hopeOffset + 6);
 
         // Retirement Chart
         if (retirementChartBase64) {
-            doc.addImage(retirementChartBase64, 'PNG', 20, hopeOffset + 5, pageWidth - 40, 60);
+            doc.addImage(retirementChartBase64, 'PNG', 20, hopeOffset + 12, pageWidth - 40, 55);
         }
 
-        // Summary Table
-        const tableData = projections.filter((_, i) => i % Math.max(1, Math.floor(projections.length / 5)) === 0).map(p => [
-            p.year.toString(),
-            this.formatCurrency(p.nominalBalance),
-            this.formatCurrency(p.realValue),
-            this.formatCurrency(p.gap)
-        ]);
+        // Summary Table - Ensure we show ~5 rows including the first and LAST one
+        const totalPoints = projections.length;
+        const step = Math.max(1, Math.floor((totalPoints - 1) / 4));
+        const pickedIndices = new Set<number>();
+        for (let i = 0; i < totalPoints; i += step) pickedIndices.add(i);
+        pickedIndices.add(totalPoints - 1); // Always include the last one
+
+        const tableData = Array.from(pickedIndices)
+            .sort((a, b) => a - b)
+            .map(idx => {
+                const p = projections[idx];
+                return [
+                    p.year.toString(),
+                    this.formatCurrency(p.nominalBalance),
+                    this.formatCurrency(p.realValue),
+                    this.formatCurrency(p.gap)
+                ];
+            });
 
         autoTable(doc, {
-            startY: hopeOffset + 75,
-            head: [[lang === 'ES' ? 'Año' : 'Year', lang === 'ES' ? 'Balance Nominal' : 'Nominal Balance', lang === 'ES' ? 'Poder Real' : 'Real Value', lang === 'ES' ? 'Inflación (Brecha)' : 'Inflation (Gap)']],
+            startY: hopeOffset + 72,
+            head: [[
+                lang === 'ES' ? 'Año' : 'Year',
+                lang === 'ES' ? 'Balance Nominal' : 'Nominal Balance',
+                lang === 'ES' ? 'Poder Real' : 'Real Value',
+                lang === 'ES' ? 'Inflación (Brecha)' : 'Inflation (Gap)'
+            ]],
             body: tableData,
             theme: 'striped',
-            headStyles: { fillColor: deepBlue },
+            headStyles: { fillColor: deepBlue, fontStyle: 'bold' },
             margin: { left: 20, right: 20 },
-            styles: { fontSize: 8 }
+            styles: { fontSize: 8, cellPadding: 3 }
         });
 
         // 4. Page 2 (Conversion Anchor)
@@ -127,20 +152,48 @@ export class PdfReportService {
         doc.setFillColor(deepBlue);
         doc.rect(0, 0, pageWidth, pageHeight, 'F');
 
+        // Center Logo or Icon Placeholder (White circle)
+        doc.setFillColor('#FFFFFF');
+        doc.circle(pageWidth / 2, 40, 15, 'F');
+        doc.setTextColor(deepBlue);
+        doc.setFontSize(16);
+        doc.setFont('helvetica', 'bold');
+        doc.text('FT', pageWidth / 2, 42, { align: 'center' });
+
         doc.setTextColor('#FFFFFF');
         doc.setFontSize(24);
-        doc.text('Take the Next Step', pageWidth / 2, 60, { align: 'center' });
+        doc.text(lang === 'ES' ? 'Toma el Siguiente Paso' : 'Take the Next Step', pageWidth / 2, 75, { align: 'center' });
 
         doc.setFontSize(12);
-        doc.text('Scan this code or click the link included in your email', pageWidth / 2, 70, { align: 'center' });
-        doc.text('to book your free strategic consultation.', pageWidth / 2, 78, { align: 'center' });
+        doc.setFont('helvetica', 'normal');
+        const instructionText = lang === 'ES'
+            ? ['Escanea este código o haz clic en el enlace de tu correo', 'para agendar tu consultoría estratégica gratuita.']
+            : ['Scan this code or click the link included in your email', 'to book your free strategic consultation.'];
+
+        doc.text(instructionText[0], pageWidth / 2, 85, { align: 'center' });
+        doc.text(instructionText[1], pageWidth / 2, 92, { align: 'center' });
 
         const url = this.getBookingUrl(lead.email);
-        const qrBase64 = await QRCode.toDataURL(url, { margin: 2, scale: 8 });
+        const qrBase64 = await QRCode.toDataURL(url, {
+            margin: 1,
+            scale: 10,
+            color: {
+                dark: deepBlue,
+                light: '#FFFFFF'
+            }
+        });
 
-        doc.addImage(qrBase64, 'PNG', (pageWidth / 2) - 40, 100, 80, 80);
+        // White background for QR for better scanning
+        doc.setFillColor('#FFFFFF');
+        doc.rect((pageWidth / 2) - 35, 110, 70, 70, 'F');
+        doc.addImage(qrBase64, 'PNG', (pageWidth / 2) - 30, 115, 60, 60);
 
-        // We return the raw Blob URI or Base64 so it can be downloaded or emailed
+        // Footer link
+        doc.setFontSize(10);
+        doc.setTextColor('#CBD5E1');
+        doc.text(url, pageWidth / 2, 195, { align: 'center' });
+
+        // Return Data URI
         return doc.output('datauristring');
     }
 }

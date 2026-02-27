@@ -284,7 +284,8 @@ After evaluating the data volume, query complexity, and performance characterist
 ## 8. 🔒 Security Architecture
 
 - **Frontend:** Angular native XSS sanitization via `DomSanitizer`. Strict CSP in `index.html`.
-- **API Keys:** Injected at build-time via GitHub Secrets into `environment.prod.ts`. Never stored in source code.
+- **API Keys & Secrets:** Managed via `.env` file + `@ngx-env/builder`. Variables prefixed with `NG_APP_` are automatically injected at build-time and accessed in TypeScript via `import.meta.env.NG_APP_VARIABLE_NAME`. The `.env` file is git-ignored; production values are injected via GitHub Secrets.
+- **Type Safety:** A dedicated `src/environments/env.d.ts` augments the `ImportMeta` interface to provide full TypeScript IntelliSense for all `NG_APP_*` variables.
 - **Domain Whitelisting:** ExchangeRate-API restricted to `*.github.io` via HTTP Referrer.
 - **Database (Supabase):** Row Level Security (RLS) on all tables. `INSERT`-only for public forms. `SELECT` restricted to admin.
 - **CORS:** Supabase configured to accept only production domain and localhost for development.
@@ -295,16 +296,39 @@ After evaluating the data volume, query complexity, and performance characterist
 ## 9. 🚀 Deployment & CI/CD
 
 - **Hosting:** GitHub Pages (static hosting).
+- **Build System:** `@ngx-env/builder` (replaces the default `@angular/build:application` builder) to enable `.env` file support and `import.meta.env` injection.
 - **Build Strategy:** Static Site Generation (SSG / Prerendering) via Angular build.
 - **CI/CD Pipeline:** GitHub Actions workflow:
   1. Checkout code.
   2. Install dependencies (`pnpm install`).
-  3. Inject API keys from GitHub Secrets.
+  3. Write `NG_APP_*` secrets from GitHub Repository Secrets into a `.env` file at build time.
   4. Run tests (`ng test --watch=false --browsers=ChromeHeadless`).
-  5. Build production bundle with SSG (`ng build`).
+  5. Build production bundle (`ng build`).
   6. Deploy to `gh-pages` branch.
 - **Routing:** `404.html` redirects to `index.html` for Angular SPA client-side routing.
 - **SEO:** Dynamic metadata via `SeoService` using Angular `Title` and `Meta` services.
+
+### Environment Variables (`@ngx-env/builder`)
+
+All runtime configuration is managed through environment variables. The `.env` file must be created locally and is **never committed to git**.
+
+```bash
+# .env (local only — git-ignored)
+NG_APP_EMAIL_SENDING_KEY=re_xxxxxxxxxxxxxxxxxxxxx
+NG_APP_EMAIL_SENDING_DOMAIN=onboarding@resend.dev
+NG_APP_CALENDLY_BASE_URL=https://calendly.com/your-account/30min
+NG_APP_STAGE=development
+```
+
+**Access pattern in Angular services/components:**
+```typescript
+// Fully type-safe via src/environments/env.d.ts
+const apiKey = import.meta.env.NG_APP_EMAIL_SENDING_KEY;
+const senderDomain = import.meta.env.NG_APP_EMAIL_SENDING_DOMAIN;
+const calendlyUrl = import.meta.env.NG_APP_CALENDLY_BASE_URL;
+```
+
+**Type definitions** live in `src/environments/env.d.ts` (augments the global `ImportMeta` interface).
 
 ---
 
@@ -417,9 +441,10 @@ interface CachedResponse<T> {
 
 ### API Key Injection
 
-- All API keys are stored in `environment.prod.ts`, injected at build-time via GitHub Actions Secrets.
-- In development (`environment.ts`), keys are empty strings or point to mock JSON files in `shared/assets/`.
+- All API keys and secrets use the `@ngx-env/builder` pattern: variables defined in `.env` (git-ignored), accessed via `import.meta.env.NG_APP_*`, and injected by the builder at compile time.
+- In CI/CD, GitHub Actions writes secrets from Repository Secrets into a `.env` file before the build step.
 - ExchangeRate-API is additionally protected via HTTP Referrer domain whitelisting (`*.github.io`).
+- `environment.ts` / `environment.prod.ts` files are **deprecated** in favor of the `.env` + `@ngx-env/builder` pattern and are git-ignored.
 
 > ⚠️ **Risk (RapidAPI for CNN FGI):** The RapidAPI free tier for CNN Fear & Greed is limited to 500 req/month. If the product exceeds this, consider downgrading to a single gauge (Crypto only via Alternative.me, which is unlimited) or implementing a Supabase Edge Function as a caching proxy in Phase 2.
 
@@ -600,4 +625,55 @@ const calendlyUrl = `${config.calendlyBaseUrl}
 
 ---
 
-*— Winston, Architect · Financial Tracker · BMAD v4 · v2.1.0 · 2026-02-22*
+## 16. 📧 Email Service Architecture (US2.3)
+
+The email delivery system uses a **Provider Adapter Pattern** to enable transparent switching between email service providers.
+
+### Interfaces
+
+```typescript
+// src/app/core/interfaces/i-email-provider.ts
+export interface EmailPayload {
+  to: string;
+  leadName: string;
+  pdfBase64: string;
+  pdfFilename: string;
+  bookingUrl: string;
+  lang: 'ES' | 'EN';
+}
+
+export abstract class IEmailProvider {
+  abstract send(payload: EmailPayload): Promise<void>;
+}
+```
+
+### Provider Implementations
+
+| Class | Provider | Status |
+|:------|:---------|:-------|
+| `ResendEmailAdapter` | [Resend](https://resend.com) | ✅ Phase 1 (Active) |
+| `SendGridEmailAdapter` | SendGrid | 🔲 Phase 2 (Stub ready) |
+
+### Environment Variables Required
+
+| Variable | Purpose |
+|:---------|:--------|
+| `NG_APP_EMAIL_SENDING_KEY` | Resend API Key |
+| `NG_APP_EMAIL_SENDING_DOMAIN` | Verified sender email address |
+| `NG_APP_CALENDLY_BASE_URL` | Calendly pre-fill booking URL |
+
+### PDF Delivery Strategy
+
+- The PDF is generated client-side as a Base64 string (from `PdfReportService`).
+- The Base64 string is passed as an **email attachment** via the Resend API `attachments` field.
+- This avoids the need for server-side storage (Supabase Storage / Edge Functions) in Phase 1.
+- The email is dispatched **asynchronously** — the success screen is shown immediately without waiting for the server response.
+
+### Fallback Strategy
+
+- If the API call fails (network error, 4xx/5xx), the UI shows a "Download Locally" button after a 5-second timeout.
+- The PDF Base64 link is still available for direct download regardless of email success.
+
+---
+
+*— Winston, Architect · Financial Tracker · BMAD v4 · v2.2.0 · 2026-02-27 (Updated: @ngx-env/builder, Email Service Architecture)*

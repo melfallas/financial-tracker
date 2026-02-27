@@ -221,14 +221,15 @@
                     </button>
                     <button (click)="initiateDownload()"
                         class="bg-deep-blue text-white px-10 py-5 rounded-3xl font-black text-xl shadow-2xl hover:scale-105 transition-all w-full sm:w-auto">
-                        Guardar mi Plan PDF ↓
+                        Obtener mi Plan
                     </button>
                 </div>
             </div>
 
             @if (showCaptureForm()) {
             <div class="mt-8 fade-in">
-                <ft-lead-form (onSuccess)="onLeadCaptured($event)"></ft-lead-form>
+                <ft-lead-form (onSuccess)="onLeadCaptured($event)"
+                    (onDownloadClick)="initiateDownload()"></ft-lead-form>
             </div>
             }
 

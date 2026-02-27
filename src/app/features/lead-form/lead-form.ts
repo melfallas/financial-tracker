@@ -22,6 +22,7 @@ export class LeadForm {
 
     // Expose an event when successfully submitted for parent components to react (e.g., closing a modal or triggering US2.2 PDF)
     onSuccess = output<Lead>();
+    onDownloadClick = output<void>();
 
     currentState = signal<LeadFormState>('idle');
     errorMessage = signal<string | null>(null);

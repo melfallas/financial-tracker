@@ -120,6 +120,7 @@ export class RetirementSimulator {
     // Lead Capture state
     showCaptureForm = signal<boolean>(false);
     isPlanDownloaded = signal<boolean>(false);
+    capturedLead = signal<Lead | null>(null);
 
     isUnreachable = computed(() => {
         const inputs = this.wealthGapService.inputs();
@@ -218,16 +219,19 @@ export class RetirementSimulator {
 
     // Capture Interaction
     initiateDownload() {
-        if (!this.isPlanDownloaded()) {
-            this.showCaptureForm.set(true);
+        const lead = this.capturedLead();
+        if (lead) {
+            // Already have the lead, just emit the event to trigger PDF/Email
+            this.onPlanRequested.emit({ lead });
         } else {
-            // Future US2.2 trigger
-            console.log('Triggering PDF Download directly');
+            // First time, show the form
+            this.showCaptureForm.set(true);
         }
     }
 
     onLeadCaptured(lead: Lead) {
         // Here we trigger the PDF download (US2.2) and move to next state
+        this.capturedLead.set(lead);
         this.isPlanDownloaded.set(true);
         this.showCaptureForm.set(false);
         this.onPlanRequested.emit({ lead });

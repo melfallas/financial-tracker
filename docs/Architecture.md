@@ -635,15 +635,17 @@ The email delivery system uses a **Provider Adapter Pattern** to enable transpar
 // src/app/core/interfaces/i-email-provider.ts
 export interface EmailPayload {
   to: string;
-  leadName: string;
+  leadFirstName: string;
+  leadFullName: string;
   pdfBase64: string;
   pdfFilename: string;
   bookingUrl: string;
   lang: 'ES' | 'EN';
+  htmlBody: string; // Pre-built HTML from EmailService
 }
 
 export abstract class IEmailProvider {
-  abstract send(payload: EmailPayload): Promise<void>;
+  abstract send(payload: EmailPayload): Promise<EmailResult>;
 }
 ```
 
@@ -656,6 +658,8 @@ export abstract class IEmailProvider {
 
 ### Environment Variables Required
 
+Managed via `@ngx-env/builder` to inject `.env` variables into `import.meta.env`.
+
 | Variable | Purpose |
 |:---------|:--------|
 | `NG_APP_EMAIL_SENDING_KEY` | Resend API Key |
@@ -666,14 +670,21 @@ export abstract class IEmailProvider {
 
 - The PDF is generated client-side as a Base64 string (from `PdfReportService`).
 - The Base64 string is passed as an **email attachment** via the Resend API `attachments` field.
-- This avoids the need for server-side storage (Supabase Storage / Edge Functions) in Phase 1.
-- The email is dispatched **asynchronously** — the success screen is shown immediately without waiting for the server response.
-
-### Fallback Strategy
-
-- If the API call fails (network error, 4xx/5xx), the UI shows a "Download Locally" button after a 5-second timeout.
-- The PDF Base64 link is still available for direct download regardless of email success.
+- The email is dispatched **asynchronously** — the success screen is shown immediately after triggering the download locally.
+- Dispatch status is tracked via internal component signals (`emailStatus`) to provide UI feedback.
 
 ---
 
-*— Winston, Architect · Financial Tracker · BMAD v4 · v2.2.0 · 2026-02-27 (Updated: @ngx-env/builder, Email Service Architecture)*
+## 17. 🛡️ Environment & Security (ngx-env)
+
+To comply with BMAD security standards and avoid leaking repo-specific secrets, we use `@ngx-env/builder`.
+
+### Configuration
+- **Loader:** Variables are extracted from `.env` (gitignored) and `.env.example`.
+- **Prefix:** All variables must start with `NG_APP_` to be detected by the builder.
+- **Access:** Typescript uses `import.meta.env.NG_APP_VARIABLE_NAME`.
+- **Typing:** Global types are defined in `src/environments/env.definition.ts`.
+
+---
+
+*— Winston, Architect · Financial Tracker · BMAD v4 · v2.3.0 · 2026-02-27 (Updated: ngx-env integration, verified Email Architecture)*

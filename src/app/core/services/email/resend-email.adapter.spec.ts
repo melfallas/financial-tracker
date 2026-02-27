@@ -1,10 +1,10 @@
+import { vi, describe, it, expect, beforeEach } from 'vitest';
 import { TestBed } from '@angular/core/testing';
 import { ResendEmailAdapter } from './resend-email.adapter';
 import { EmailPayload } from '@core/interfaces/i-email-provider';
 
 describe('ResendEmailAdapter', () => {
     let adapter: ResendEmailAdapter;
-    let originalEnv: any;
 
     beforeEach(() => {
         TestBed.configureTestingModule({
@@ -12,20 +12,11 @@ describe('ResendEmailAdapter', () => {
         });
         adapter = TestBed.inject(ResendEmailAdapter);
 
-        // // Mock fetch for tests
-        // spyOn(window, 'fetch').and.resolveTo(new Response(JSON.stringify({ id: 'res_123' }), {
-        //     status: 200,
-        //     statusText: 'OK'
-        // }));
-
-        // Save original env
-        originalEnv = (import.meta as any).env;
-        // We cannot easily overwrite import.meta.env in standard Jasmine,
-        // but we can test the behavior based on the current parsed state.
-    });
-
-    afterEach(() => {
-        // Restore if we modified it
+        // Mock fetch for tests
+        vi.stubGlobal('fetch', vi.fn().mockResolvedValue(new Response(JSON.stringify({ id: 'res_123' }), {
+            status: 200,
+            statusText: 'OK'
+        })));
     });
 
     it('should be created', () => {
@@ -43,71 +34,50 @@ describe('ResendEmailAdapter', () => {
         htmlBody: '<p>Test</p>',
     };
 
-    // it('should send an email and strip data URI prefix from base64 string', async () => {
-    //     // Note: If import.meta.env is undefined or missing the keys, the adapter will fail early.
-    //     // To ensure the test runs, let's mock the properties directly if possible, or assume 
-    //     // we bypass the check. Since it's read strictly, let's spy on console.error.
-    //     spyOn(console, 'error');
+    it('should send an email and strip data URI prefix from base64 string', async () => {
+        // // Enforce mock env for test stability if not present
+        // if (!import.meta.env.NG_APP_EMAIL_SENDING_KEY) {
+        //     (import.meta as any).env = {
+        //         NG_APP_EMAIL_SENDING_KEY: 're_test_key',
+        //         NG_APP_EMAIL_SENDING_DOMAIN: 'test@example.com'
+        //     };
+        // }
 
-    //     // We will bypass the env variable check for the sake of unit testing the fetch logic
-    //     // by manually setting the env if it's undefined
-    //     if (!(import.meta as any).env) {
-    //         (import.meta as any).env = {
-    //             NG_APP_EMAIL_SENDING_KEY: 'test-key',
-    //             NG_APP_EMAIL_SENDING_DOMAIN: 'test.com'
-    //         }
-    //     }
+        const result = await adapter.send(payload);
 
-    //     const result = await adapter.send(payload);
+        expect(fetch).toHaveBeenCalled();
+        const fetchArgs = (fetch as any).mock.calls[0];
+        expect(fetchArgs[0]).toBe('https://api.resend.com/emails');
 
-    //     // If env is missing and wasn't mockable
-    //     if (!import.meta.env.NG_APP_EMAIL_SENDING_KEY) {
-    //         expect(result.success).toBeFalse();
-    //         expect(result.errorMessage).toContain('Missing API key');
-    //         return;
-    //     }
+        const bodyText = fetchArgs[1]?.body as string;
+        const bodyObj = JSON.parse(bodyText);
 
-    //     expect(window.fetch).toHaveBeenCalled();
-    //     const fetchArgs = (window.fetch as jasmine.Spy).calls.mostRecent().args;
-    //     expect(fetchArgs[0]).toBe('https://api.resend.com/emails');
-    //     expect(fetchArgs[1]?.method).toBe('POST');
+        // Assert Base64 stripping
+        expect(bodyObj.attachments[0].content).toBe('JVBERi...');
+        expect(result.success).toBe(true);
+    });
 
-    //     // Check that base64 was stripped
-    //     const bodyText = fetchArgs[1]?.body as string;
-    //     const bodyObj = JSON.parse(bodyText);
-    //     expect(bodyObj.attachments[0].content).toBe('JVBERi...');
-    //     expect(result.success).toBeTrue();
-    // });
+    it('should return success false when fetch fails (e.g. 500 error)', async () => {
+        (fetch as any).mockResolvedValue(new Response(JSON.stringify({ message: 'Internal Server Error' }), {
+            status: 500,
+            statusText: 'Server Error'
+        }));
 
-    // it('should return success false when fetch fails (e.g. 500 error)', async () => {
-    //     if (!import.meta.env.NG_APP_EMAIL_SENDING_KEY) {
-    //         return;
-    //     }
+        vi.spyOn(console, 'error').mockImplementation(() => { });
 
-    //     (window.fetch as jasmine.Spy).and.resolveTo(new Response(JSON.stringify({ message: 'Internal Server Error' }), {
-    //         status: 500,
-    //         statusText: 'Server Error'
-    //     }));
+        const result = await adapter.send(payload);
 
-    //     spyOn(console, 'error'); // Ignore the error log in console
+        expect(result.success).toBe(false);
+        expect(result.errorMessage).toContain('Resend API error: 500');
+    });
 
-    //     const result = await adapter.send(payload);
+    it('should return success false on network exception', async () => {
+        (fetch as any).mockRejectedValue(new Error('Network failure'));
+        vi.spyOn(console, 'error').mockImplementation(() => { });
 
-    //     expect(result.success).toBeFalse();
-    //     expect(result.errorMessage).toContain('Resend API error: 500');
-    // });
+        const result = await adapter.send(payload);
 
-    // it('should return success false on network exception', async () => {
-    //     if (!import.meta.env.NG_APP_EMAIL_SENDING_KEY) {
-    //         return;
-    //     }
-
-    //     (window.fetch as jasmine.Spy).and.rejectWith(new Error('Network failure'));
-    //     spyOn(console, 'error');
-
-    //     const result = await adapter.send(payload);
-
-    //     expect(result.success).toBeFalse();
-    //     expect(result.errorMessage).toBe('Network failure');
-    // });
+        expect(result.success).toBe(false);
+        expect(result.errorMessage).toBe('Network failure');
+    });
 });

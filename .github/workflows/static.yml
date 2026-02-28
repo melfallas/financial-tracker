@@ -7,7 +7,7 @@ on:
     branches:
       - main
       - develop
-      - feature/US1.1_Project_Initialization
+      - feature/US2.3_PDF_Email_Delivery
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -45,6 +45,13 @@ jobs:
 
       - name: Install dependencies
         run: pnpm install
+
+      - name: Create .env file
+        run: |
+          echo "NG_APP_EMAIL_SENDING_KEY=${{ secrets.NG_APP_EMAIL_SENDING_KEY }}" >> .env
+          echo "NG_APP_EMAIL_SENDING_DOMAIN=${{ secrets.NG_APP_EMAIL_SENDING_DOMAIN }}" >> .env
+          echo "NG_APP_CALENDLY_BASE_URL=${{ secrets.NG_APP_CALENDLY_BASE_URL }}" >> .env
+          echo "NG_APP_STAGE=${{ secrets.NG_APP_STAGE }}" >> .env
 
       - name: Build Angular App for Production
         # run: pnpm run build:prod

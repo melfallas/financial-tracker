@@ -52,9 +52,25 @@ export class HomePage {
   }
 
   async handlePlanRequested({ lead }: { lead: Lead }): Promise<void> {
-    const wealthImage = this.wealthGapComp()?.getChartImage() ?? '';
-    const retirementImage = this.retirementComp()?.getChartImage() ?? '';
+    let wealthImage = this.wealthGapComp()?.getChartImage() ?? '';
+    let retirementImage = this.retirementComp()?.getChartImage() ?? '';
     const lang = this.langService.currentLanguage();
+
+    console.log('wealthImage: ', wealthImage);
+    console.log('retirementImage: ', retirementImage);
+    console.log('lang: ', lang);
+
+    if (!wealthImage) {
+      wealthImage = this.generateMockChartImage('#4e73df', 'Wealth Gap Chart Placeholder');
+    }
+
+    if (!retirementImage) {
+      retirementImage = this.generateMockChartImage('#17a2b8', 'Retirement Chart Placeholder');
+    }
+
+    console.log('wealthImage: ', wealthImage);
+    console.log('retirementImage: ', retirementImage);
+    console.log('lang: ', lang);
 
     try {
       const pdfDataUri = await this.pdfService.generateReport(
@@ -80,6 +96,27 @@ export class HomePage {
     } catch (err) {
       console.error('[HomePage] Error generating PDF:', err);
     }
+  }
+
+  private generateMockChartImage(color: string, label: string): string {
+    const canvas = document.createElement('canvas');
+    canvas.width = 400;
+    canvas.height = 200;
+    const ctx = canvas.getContext('2d');
+
+    if (ctx) {
+      // Fondo
+      ctx.fillStyle = color;
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+      // Texto genérico para identificar la gráfica en el PDF
+      ctx.fillStyle = '#FFFFFF';
+      ctx.font = '20px Arial';
+      ctx.fillText(label, 50, 100);
+
+      return canvas.toDataURL('image/png');
+    }
+    return '';
   }
 
   /**

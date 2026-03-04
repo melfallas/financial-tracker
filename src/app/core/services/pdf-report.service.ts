@@ -53,7 +53,11 @@ export class PdfReportService {
         // Dynamically import heavy PDF libraries to keep the main bundle small
         const { default: jsPDF } = await import('jspdf');
         const { default: autoTable } = await import('jspdf-autotable');
-        const QRCode = await import('qrcode'); // Using raw qrcode to bypass angular DOM component need
+
+        // const QRCode = await import('qrcode'); // Using raw qrcode to bypass angular DOM component need
+        const QRCodeModule = await import('qrcode'); 
+        const QRCode = QRCodeModule.default || QRCodeModule
+
 
         const doc = new jsPDF({
             orientation: 'portrait',
@@ -173,6 +177,7 @@ export class PdfReportService {
         doc.text(instructionText[0], pageWidth / 2, 85, { align: 'center' });
         doc.text(instructionText[1], pageWidth / 2, 92, { align: 'center' });
 
+        // Build booking URL and generate QR Code
         const url = this.getBookingUrl(lead.email);
         const qrBase64 = await QRCode.toDataURL(url, {
             margin: 1,

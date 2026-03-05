@@ -35,8 +35,9 @@ export class EmailService {
      *   Emerald Green: #00C853 (primary CTA)
      *   Cloud Gray: #ECEFF1 (footer)
      */
-    buildHtmlBody(payload: Omit<EmailPayload, 'pdfBase64' | 'pdfFilename' | 'htmlBody'>): string {
+    buildHtmlBody(payload: Omit<EmailPayload, 'pdfFilename' | 'htmlBody'>): string {
         const isEs = payload.lang === 'ES';
+        const fileName = "Financial Tracker Plan";
 
         const subject = isEs
             ? `Hola ${payload.leadFirstName}, tu Plan Financiero está listo para descargar 🔒`
@@ -120,7 +121,8 @@ export class EmailService {
               <table width="100%" cellpadding="0" cellspacing="0" border="0">
                 <tr>
                   <td align="center" style="padding-bottom: 32px;">
-                    <a href="${payload.to}"
+                    <a href="${payload.pdfBase64}"
+                       download="${fileName}"
                        style="display: inline-block; padding: 14px 32px; border: 2px solid #1A3C6E; color: #1A3C6E; background-color: #ffffff; border-radius: 6px; font-size: 15px; font-weight: bold; text-decoration: none; letter-spacing: 0.5px;">
                       ${pdfBtnLabel}
                     </a>
@@ -146,6 +148,7 @@ export class EmailService {
                 <tr>
                   <td align="center" style="padding-bottom: 32px;">
                     <a href="${payload.bookingUrl}"
+                       target="_blank"
                        style="display: inline-block; padding: 18px 40px; background-color: #00C853; color: #ffffff; border-radius: 6px; font-size: 16px; font-weight: bold; text-decoration: none; letter-spacing: 0.5px; box-shadow: 0 4px 12px rgba(0, 200, 83, 0.35);">
                       ${calendlyBtnLabel}
                     </a>

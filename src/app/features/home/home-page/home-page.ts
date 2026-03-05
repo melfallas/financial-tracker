@@ -60,17 +60,17 @@ export class HomePage {
     console.log('retirementImage: ', retirementImage);
     console.log('lang: ', lang);
 
-    if (!wealthImage) {
-      wealthImage = this.generateMockChartImage('#4e73df', 'Wealth Gap Chart Placeholder');
-    }
+    // if (!wealthImage) {
+    //   wealthImage = this.generateMockChartImage('#4e73df', 'Wealth Gap Chart Placeholder');
+    // }
 
-    if (!retirementImage) {
-      retirementImage = this.generateMockChartImage('#17a2b8', 'Retirement Chart Placeholder');
-    }
+    // if (!retirementImage) {
+    //   retirementImage = this.generateMockChartImage('#17a2b8', 'Retirement Chart Placeholder');
+    // }
 
-    console.log('wealthImage: ', wealthImage);
-    console.log('retirementImage: ', retirementImage);
-    console.log('lang: ', lang);
+    // console.log('wealthImage: ', wealthImage);
+    // console.log('retirementImage: ', retirementImage);
+    // console.log('lang: ', lang);
 
     try {
       const pdfDataUri = await this.pdfService.generateReport(
@@ -80,16 +80,21 @@ export class HomePage {
         retirementImage,
         lang
       );
+      
+      // // Trigger immediate browser download (does not block)
+      // const filename = `Plan_Financiero_${lead.firstName}_${lead.lastName}.pdf`;
+      // const link = document.createElement('a');
+      // link.href = pdfDataUri;
+      // link.download = filename;
+      // link.click();
+      // const bookingUri = this.emailService.buildCalendlyUrl(lead.firstName, lead.email);
 
-      // 1. Trigger immediate browser download (does not block)
-      const filename = `Plan_Financiero_${lead.firstName}_${lead.lastName}.pdf`;
-      const link = document.createElement('a');
-      link.href = pdfDataUri;
-      link.download = filename;
-      link.click();
+      const bookingUri = "https://calendly.com/mfallaspsna/30min";
+      // console.log('bookingUri: ', bookingUri);
+      // console.log('pdfDataUri: ', pdfDataUri);
 
-      // 2. Dispatch email asynchronously — fire-and-forget; success UI is not blocked
-      this.dispatchEmail(lead, pdfDataUri, filename, lang).catch((err) => {
+      // Dispatch email asynchronously — fire-and-forget; success UI is not blocked
+      this.dispatchEmail(lead, pdfDataUri, bookingUri, lang).catch((err) => {
         console.error('[HomePage] Email dispatch failed:', err);
       });
 
@@ -130,21 +135,25 @@ export class HomePage {
   private async dispatchEmail(
     lead: Lead,
     pdfDataUri: string,
-    filename: string,
+    bookingUrl: string,
     lang: 'ES' | 'EN'
   ): Promise<void> {
     this.emailStatus.set('sending');
 
     const leadFullName = `${lead.firstName} ${lead.lastName}`;
-    const bookingUrl = this.emailService.buildCalendlyUrl(leadFullName, lead.email);
+    // const bookingUrl = this.emailService.buildCalendlyUrl(leadFullName, lead.email);
 
     const htmlBody = this.emailService.buildHtmlBody({
       to: lead.email,
       leadFirstName: lead.firstName,
       leadFullName,
+      pdfBase64: pdfDataUri,
       bookingUrl,
       lang,
     });
+
+    // console.log('htmlBody: ');
+    // console.log(htmlBody);
     
     // Set a 5-second fallback timeout per US2.3 Non-Functional Requirements
     const timeoutId = setTimeout(() => {
@@ -152,6 +161,8 @@ export class HomePage {
         this.emailStatus.set('failed');
       }
     }, 5000);
+
+    const filename = `Plan_Financiero_${lead.firstName}_${lead.lastName}.pdf`;
     
     let emailPayload = {
       to: lead.email,

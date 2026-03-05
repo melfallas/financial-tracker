@@ -145,25 +145,27 @@ export class HomePage {
       bookingUrl,
       lang,
     });
-
+    
     // Set a 5-second fallback timeout per US2.3 Non-Functional Requirements
     const timeoutId = setTimeout(() => {
       if (this.emailStatus() === 'sending') {
         this.emailStatus.set('failed');
       }
     }, 5000);
+    
+    let emailPayload = {
+      to: lead.email,
+      leadFirstName: lead.firstName,
+      leadFullName,
+      pdfBase64: pdfDataUri,
+      pdfFilename: filename,
+      bookingUrl,
+      lang,
+      htmlBody,
+    };
 
     try {
-      const result = await this.emailProvider.send({
-        to: lead.email,
-        leadFirstName: lead.firstName,
-        leadFullName,
-        pdfBase64: pdfDataUri,
-        pdfFilename: filename,
-        bookingUrl,
-        lang,
-        htmlBody,
-      });
+      const result = await this.emailProvider.send(emailPayload);
 
       clearTimeout(timeoutId);
       this.emailStatus.set(result.success ? 'sent' : 'failed');

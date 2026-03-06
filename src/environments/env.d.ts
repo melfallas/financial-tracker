@@ -10,11 +10,11 @@ interface ImportMeta {
 }
 
 interface ImportMetaEnv {
-    /** Resend API Key for transactional email delivery (US2.3) */
-    readonly NG_APP_EMAIL_SENDING_KEY: string;
+    /** Supabase Edge Function URL for sending emails */
+    readonly NG_APP_EMAIL_SENDING_FUNCTION_URL: string;
 
-    /** Verified sender email domain for Resend (e.g. onboarding@resend.dev) */
-    readonly NG_APP_EMAIL_SENDING_DOMAIN: string;
+    /** Supabase Edge Function Auth Key */
+    readonly NG_APP_EMAIL_SENDING_FUNCTION_KEY: string;
 
     /** Calendly base URL for booking pre-fill integration */
     readonly NG_APP_CALENDLY_BASE_URL: string;

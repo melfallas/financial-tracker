@@ -40,15 +40,15 @@ export class EmailService {
         const fileName = "Financial Tracker Plan";
 
         const subject = isEs
-            ? `Hola ${payload.leadFirstName}, tu Plan Financiero está listo para descargar 🔒`
-            : `Hi ${payload.leadFirstName}, your Financial Blueprint is ready to download 🔒`;
+            ? `Descarga tu Plan Financiero 🔒`
+            : `Download your Financial Blueprint 🔒`;
 
         const greeting = isEs
             ? `Hola <strong>${payload.leadFirstName}</strong>,`
             : `Hi <strong>${payload.leadFirstName}</strong>,`;
 
         const bodyIntro = isEs
-            ? `Las matemáticas son claras. Has dado el primer paso hacia detener que la inflación erosione tu patrimonio.`
+            ? `Las matemáticas son claras. Has dado el primer paso para detener la erosión de tu patrimonio.`
             : `The math is clear. You have taken the first step toward stopping inflation from eroding your wealth.`;
 
         const bodyDetail = isEs
@@ -56,22 +56,22 @@ export class EmailService {
             : `As promised, our system has finalized your custom projection based on the data you provided. Your file is secured and ready.`;
 
         const pdfBtnLabel = isEs
-            ? `📄 Ver y descargar tu Plan Financiero`
-            : `📄 View & Download your Financial Blueprint`;
+            ? `📄 Descarga tu Plan Financiero`
+            : `📄 Download your Financial Blueprint`;
 
         const sectionTitle = isEs
             ? `EL SIGUIENTE PASO: UNA ESTRATEGIA OFENSIVA`
             : `THE NEXT STEP: AN OFFENSIVE STRATEGY`;
 
         const sectionBody = isEs
-            ? `Los números solos no arreglarán la brecha. Necesitamos definir tu línea de tiempo de ejecución y revisar tu asignación de activos actual. No tienes que resolverlo solo. Dediquemos 15 minutos a definir tu salida del ciclo de bajo crecimiento.`
-            : `Numbers alone won't fix the gap. We need to define your execution timeline and review your current asset allocation. You don't have to figure it out alone. Let's spend 15 minutes mapping you out of the slow-growth cycle.`;
+            ? `Los números solos no arreglarán la brecha. Necesitas definir tu línea de tiempo de ejecución y revisar tu asignación de activos actual. No tienes que resolverlo solo. Dedica 15 minutos a mejorar tu estabilidad financiera.`
+            : `Numbers alone won't fix the gap. You need to define your execution timeline and review your current asset allocation. You don't have to figure it out alone. Let's spend 15 minutes mapping you out of the slow-growth cycle.`;
 
         const calendlyBtnLabel = isEs
             ? `📅 AGENDA TU LLAMADA ESTRATÉGICA AHORA`
             : `📅 BOOK YOUR STRATEGY CALL NOW`;
 
-        const signOff = isEs ? `Hasta pronto,<br>Mark` : `Talk soon,<br>Mark`;
+        const signOff = isEs ? `Hasta pronto.<br>Saludos.` : `Talk soon.<br>Regards.`;
 
         const footerText = isEs
             ? `© 2026 Financial Tracker. La información proporcionada es solo con fines educativos y no constituye asesoramiento financiero.`
@@ -121,8 +121,7 @@ export class EmailService {
               <table width="100%" cellpadding="0" cellspacing="0" border="0">
                 <tr>
                   <td align="center" style="padding-bottom: 32px;">
-                    <a href="${payload.pdfBase64}"
-                       download="${fileName}"
+                    <a href="#"
                        style="display: inline-block; padding: 14px 32px; border: 2px solid #1A3C6E; color: #1A3C6E; background-color: #ffffff; border-radius: 6px; font-size: 15px; font-weight: bold; text-decoration: none; letter-spacing: 0.5px;">
                       ${pdfBtnLabel}
                     </a>

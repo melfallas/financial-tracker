@@ -1,13 +1,13 @@
 {
   "name": "financial-tracker",
-  "version": "0.9.39",
+  "version": "0.9.41",
   "scripts": {
     "ng": "ng",
     "start": "pnpm run patch && ng serve",
     "dev": "pnpm run patch && ng serve",
     "build": "pnpm run patch && ng build",
     "watch": "pnpm run patch && ng build --watch --configuration development",
-    "test": "ng test",
+    "test": "move .env .env.backup && copy .env.test .env && ng test && move /Y .env.backup .env",
     "test:run": "pnpm run test",
     "release": "pnpm run releasem",
     "releasep": "commit-and-tag-version --skip.tag",

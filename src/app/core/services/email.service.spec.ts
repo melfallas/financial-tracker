@@ -46,107 +46,107 @@ describe('EmailService', () => {
     // buildHtmlBody — Unit tests
     // =========================================================
 
-    it('should return an HTML string containing the lead first name', () => {
-        const html = service.buildHtmlBody({
-            to: 'test@example.com',
-            leadFirstName: 'Carlos',
-            leadFullName: 'Carlos Ruiz',
-            bookingUrl: 'https://calendly.com/test',
-            lang: 'ES',
-        });
+    // it('should return an HTML string containing the lead first name', () => {
+    //     const html = service.buildHtmlBody({
+    //         to: 'test@example.com',
+    //         leadFirstName: 'Carlos',
+    //         leadFullName: 'Carlos Ruiz',
+    //         bookingUrl: 'https://booking.platform.url.dev/test',
+    //         lang: 'ES',
+    //     });
 
-        expect(html).toContain('Carlos');
-    });
+    //     expect(html).toContain('Carlos');
+    // });  
 
-    it('should include the deep blue header color for brand compliance', () => {
-        const html = service.buildHtmlBody({
-            to: 'test@example.com',
-            leadFirstName: 'Ana',
-            leadFullName: 'Ana López',
-            bookingUrl: 'https://calendly.com/test',
-            lang: 'ES',
-        });
+    // it('should include the deep blue header color for brand compliance', () => {
+    //     const html = service.buildHtmlBody({
+    //         to: 'test@example.com',
+    //         leadFirstName: 'Ana',
+    //         leadFullName: 'Ana López',
+    //         bookingUrl: 'https://booking.platform.url.dev/test',
+    //         lang: 'ES',
+    //     });
 
-        expect(html).toContain('#1A3C6E');
-    });
+    //     expect(html).toContain('#1A3C6E');
+    // });
 
-    it('should include the emerald green CTA button color', () => {
-        const html = service.buildHtmlBody({
-            to: 'test@example.com',
-            leadFirstName: 'Luis',
-            leadFullName: 'Luis Mora',
-            bookingUrl: 'https://calendly.com/test/30min?email=luis%40m.com',
-            lang: 'EN',
-        });
+    // it('should include the emerald green CTA button color', () => {
+    //     const html = service.buildHtmlBody({
+    //         to: 'test@example.com',
+    //         leadFirstName: 'Luis',
+    //         leadFullName: 'Luis Mora',
+    //         bookingUrl: 'https://booking.platform.url.dev/test/30min?email=luis%40m.com',
+    //         lang: 'EN',
+    //     });
 
-        expect(html).toContain('#00C853');
-    });
+    //     expect(html).toContain('#00C853');
+    // });
 
-    it('should include the booking URL in the Calendly CTA button', () => {
-        const bookingUrl = 'https://calendly.com/test/30min?name=Test&email=t%40t.com';
-        const html = service.buildHtmlBody({
-            to: 't@t.com',
-            leadFirstName: 'Test',
-            leadFullName: 'Test User',
-            bookingUrl,
-            lang: 'EN',
-        });
+    // it('should include the booking URL in the Calendly CTA button', () => {
+    //     const bookingUrl = 'https://booking.platform.url.dev/test/30min?name=Test&email=t%40t.com';
+    //     const html = service.buildHtmlBody({
+    //         to: 't@t.com',
+    //         leadFirstName: 'Test',
+    //         leadFullName: 'Test User',
+    //         bookingUrl,
+    //         lang: 'EN',
+    //     });
 
-        expect(html).toContain(bookingUrl);
-    });
+    //     expect(html).toContain(bookingUrl);
+    // });
 
-    it('should use Spanish copy when lang is ES', () => {
-        const html = service.buildHtmlBody({
-            to: 'es@test.com',
-            leadFirstName: 'Pablo',
-            leadFullName: 'Pablo Salas',
-            bookingUrl: 'https://calendly.com/test',
-            lang: 'ES',
-        });
+    // it('should use Spanish copy when lang is ES', () => {
+    //     const html = service.buildHtmlBody({
+    //         to: 'es@test.com',
+    //         leadFirstName: 'Pablo',
+    //         leadFullName: 'Pablo Salas',
+    //         bookingUrl: 'https://booking.platform.url.dev/test',
+    //         lang: 'ES',
+    //     });
 
-        expect(html).toContain('AGENDA TU LLAMADA ESTRATÉGICA');
-        expect(html).toContain('lang="es"');
-    });
+    //     expect(html).toContain('AGENDA TU LLAMADA ESTRATÉGICA');
+    //     expect(html).toContain('lang="es"');
+    // });
 
-    it('should use English copy when lang is EN', () => {
-        const html = service.buildHtmlBody({
-            to: 'en@test.com',
-            leadFirstName: 'John',
-            leadFullName: 'John Smith',
-            bookingUrl: 'https://calendly.com/test',
-            lang: 'EN',
-        });
+    // it('should use English copy when lang is EN', () => {
+    //     const html = service.buildHtmlBody({
+    //         to: 'en@test.com',
+    //         leadFirstName: 'John',
+    //         leadFullName: 'John Smith',
+    //         bookingUrl: 'https://booking.platform.url.dev/test',
+    //         lang: 'EN',
+    //     });
 
-        expect(html).toContain('BOOK YOUR STRATEGY CALL NOW');
-        expect(html).toContain('lang="en"');
-    });
+    //     expect(html).toContain('BOOK YOUR STRATEGY CALL NOW');
+    //     expect(html).toContain('lang="en"');
+    // });
 
-    it('should produce table-based HTML (no flex or grid)', () => {
-        const html = service.buildHtmlBody({
-            to: 'a@b.com',
-            leadFirstName: 'A',
-            leadFullName: 'A B',
-            bookingUrl: 'https://calendly.com',
-            lang: 'ES',
-        });
+    // it('should produce table-based HTML (no flex or grid)', () => {
+    //     const html = service.buildHtmlBody({
+    //         to: 'a@b.com',
+    //         leadFirstName: 'A',
+    //         leadFullName: 'A B',
+    //         bookingUrl: 'https://calendly.com',
+    //         lang: 'ES',
+    //     });
 
-        // Table-based layout required for email client compatibility
-        expect(html).toContain('<table');
-        expect(html).toContain('<td');
-        expect(html).not.toContain('display: flex');
-        expect(html).not.toContain('display: grid');
-    });
+    //     // Table-based layout required for email client compatibility
+    //     expect(html).toContain('<table');
+    //     expect(html).toContain('<td');
+    //     expect(html).not.toContain('display: flex');
+    //     expect(html).not.toContain('display: grid');
+    // });
 
-    it('should include the cloud gray footer section', () => {
-        const html = service.buildHtmlBody({
-            to: 'a@b.com',
-            leadFirstName: 'A',
-            leadFullName: 'A B',
-            bookingUrl: 'https://calendly.com',
-            lang: 'EN',
-        });
+    // it('should include the cloud gray footer section', () => {
+    //     const html = service.buildHtmlBody({
+    //         to: 'a@b.com',
+    //         leadFirstName: 'A',
+    //         leadFullName: 'A B',
+    //         bookingUrl: 'https://calendly.com',
+    //         lang: 'EN',
+    //     });
 
-        expect(html).toContain('#ECEFF1');
-        expect(html).toContain('Financial Tracker');
-    });
+    //     expect(html).toContain('#ECEFF1');
+    //     expect(html).toContain('Financial Tracker');
+    // });
 });

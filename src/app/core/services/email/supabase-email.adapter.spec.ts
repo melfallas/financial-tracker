@@ -1,22 +1,31 @@
 import { vi, describe, it, expect, beforeEach } from 'vitest';
 import { TestBed } from '@angular/core/testing';
-import { ResendEmailAdapter } from './resend-email.adapter';
+import { SupabaseEmailAdapter } from './supabase-email.adapter';
 import { EmailPayload } from '@core/interfaces/i-email-provider';
 
-describe('ResendEmailAdapter', () => {
-    let adapter: ResendEmailAdapter;
+describe('SupabaseEmailAdapter', () => {
+    let adapter: SupabaseEmailAdapter;
 
     beforeEach(() => {
         TestBed.configureTestingModule({
-            providers: [ResendEmailAdapter],
+            providers: [SupabaseEmailAdapter],
         });
-        adapter = TestBed.inject(ResendEmailAdapter);
+        adapter = TestBed.inject(SupabaseEmailAdapter);
 
         // Mock fetch for tests
         vi.stubGlobal('fetch', vi.fn().mockResolvedValue(new Response(JSON.stringify({ id: 'res_123' }), {
             status: 200,
             statusText: 'OK'
         })));
+        
+        // // Ensure mock environment variables for test stability
+        // if (!import.meta.env['NG_APP_EMAIL_SENDING_FUNCTION_URL']) {
+        //     (import.meta as any).env = {
+        //         ...import.meta.env,
+        //         NG_APP_EMAIL_SENDING_FUNCTION_URL: 'https://test.dev/functions/v1/send-email',
+        //         NG_APP_EMAIL_SENDING_FUNCTION_KEY: 'test-key'
+        //     };
+        // }
     });
 
     it('should be created', () => {
@@ -29,31 +38,24 @@ describe('ResendEmailAdapter', () => {
         leadFullName: 'Jane Doe',
         pdfBase64: 'data:application/pdf;base64,JVBERi...',
         pdfFilename: 'Test.pdf',
-        bookingUrl: 'https://calendly.com/test',
+        bookingUrl: 'https://booking.platform.url.dev/test',
         lang: 'EN',
         htmlBody: '<p>Test</p>',
     };
 
     it('should send an email and strip data URI prefix from base64 string', async () => {
-        // // Enforce mock env for test stability if not present
-        // if (!import.meta.env.NG_APP_EMAIL_SENDING_KEY) {
-        //     (import.meta as any).env = {
-        //         NG_APP_EMAIL_SENDING_KEY: 're_test_key',
-        //         NG_APP_EMAIL_SENDING_DOMAIN: 'test@example.com'
-        //     };
-        // }
-
         const result = await adapter.send(payload);
 
         expect(fetch).toHaveBeenCalled();
         const fetchArgs = (fetch as any).mock.calls[0];
-        expect(fetchArgs[0]).toBe('https://api.resend.com/emails');
+        expect(fetchArgs[0]).toBe('https://test.dev/functions/v1/send-email');
 
         const bodyText = fetchArgs[1]?.body as string;
         const bodyObj = JSON.parse(bodyText);
 
         // Assert Base64 stripping
-        expect(bodyObj.attachments[0].content).toBe('JVBERi...');
+        expect(bodyObj.pdfBase64).toBe('JVBERi...');
+        expect(bodyObj.to).toBe('test@example.com');
         expect(result.success).toBe(true);
     });
 
@@ -68,7 +70,7 @@ describe('ResendEmailAdapter', () => {
         const result = await adapter.send(payload);
 
         expect(result.success).toBe(false);
-        expect(result.errorMessage).toContain('Resend API error: 500');
+        expect(result.errorMessage).toContain('Supabase Edge Function error: 500');
     });
 
     it('should return success false on network exception', async () => {

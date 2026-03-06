@@ -2,6 +2,58 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.10.0](https://github.com/melfallas/financial-tracker/compare/v0.9.0...v0.10.0) (2026-03-06)
+
+
+### Features
+
+* Add documentation for PDF report generation and email delivery user stories, and update project version. ([f1a7277](https://github.com/melfallas/financial-tracker/commit/f1a7277e22258cff9b42580796929b5d1e62d90e))
+* add user story US2.2 detailing requirements for PDF report generation. ([870d326](https://github.com/melfallas/financial-tracker/commit/870d326cc21c1be09da685d0efa6a9bab82156b3))
+* **email:** US2.3 Delegate email sending to Supabase Edge Function ([00c72b4](https://github.com/melfallas/financial-tracker/commit/00c72b4c0f7fc63aa67b6210886350487755decc))
+* **email:** US2.3 Embed PDF directly in email download link ([cbf5728](https://github.com/melfallas/financial-tracker/commit/cbf572841435255f0aa2f149d3e53d84a97b6f89))
+* **email:** US2.3 Implementing first draft version of email sending edge function ([395b789](https://github.com/melfallas/financial-tracker/commit/395b7894aee0cfe3df8da361cbd882226e079f2e))
+* Implement home page with financial plan generation, email dispatch feedback UI, and version bump. ([555080b](https://github.com/melfallas/financial-tracker/commit/555080b52e40e5e4ed3e7184da9394676c3a951d))
+* update  initial hero section with title, description, CTA button, and graphic. ([c0069f0](https://github.com/melfallas/financial-tracker/commit/c0069f0a8cb8e3a3958d597a1dda615195679b58))
+* update `mergeB` script to merge into `US2.3_PDF_Email_Delivery` branch instead of `develop`. ([aeffc0f](https://github.com/melfallas/financial-tracker/commit/aeffc0ff240cb0714da15afc7dd890c09bfaf137))
+* US.2.2 Implement personalized PDF report generation service, including tests and sprint documentation. ([cc3fa27](https://github.com/melfallas/financial-tracker/commit/cc3fa279baa98a9959a61639e4de0bb7507a7c5e))
+* US2.1 Add lead form and retirement simulator components, along with new documentation and package updates. ([91185b5](https://github.com/melfallas/financial-tracker/commit/91185b5571b4ca8077c596ab4261c2e9ae633935))
+* US2.2 Implement PDF report generation, financial simulation components, and language selection. ([0089b2a](https://github.com/melfallas/financial-tracker/commit/0089b2a219e8c7415a2d691233af57a30d4459a2))
+* US2.3 Add lead form and retirement simulator features with supporting project configuration and documentation. ([893784e](https://github.com/melfallas/financial-tracker/commit/893784ece022b8b14437b16aade00a7f9b6be4a1))
+* US2.3 Add secrets to GitHub Actions workflow to build and deploy the Angular application to GitHub Pages. ([387e6de](https://github.com/melfallas/financial-tracker/commit/387e6de5ac5b3869f2b5aac21e3540dfdb4500e0))
+* US2.3 Implement email dispatch feedback UI on the home page and add documentation for Sprint 3 and user story US2.3. ([729f91d](https://github.com/melfallas/financial-tracker/commit/729f91d375cd76fc3a8f3834b4221d96ef8c86e2))
+* US2.3 Implement email sending functionality with an adapter pattern using Resend, define environment variable types, and add a new home page. ([b552a5e](https://github.com/melfallas/financial-tracker/commit/b552a5edd8486eea5b6e99108bb11c6e5a87c080))
+* US2.3 Implement home page fallback UI error modal for email dispatch failures. ([270e051](https://github.com/melfallas/financial-tracker/commit/270e051aa1fcfb88113eb3f63fc288dc7113a93b))
+
+
+### Bug Fixes
+
+* 2.3 introduce HomePage component to generate financial plan reports and handle email dispatch mockup. ([1a5ad4a](https://github.com/melfallas/financial-tracker/commit/1a5ad4aadcc1fcce4c4512f4814cc0f214e5df96))
+* **ci-workflow:** configure email sending function secrets ([3729b08](https://github.com/melfallas/financial-tracker/commit/3729b08b9c2f20b3f45f336ce6864a60e5ded6be))
+* **github-pages:** link deployment job to github-pages environment ([325875e](https://github.com/melfallas/financial-tracker/commit/325875e650bdf0d3d9d2eeacb9c6de6f665777ac))
+* **pdf-report:** adjust QR code module import handling ([2dab6dd](https://github.com/melfallas/financial-tracker/commit/2dab6ddfb028fb7edde9518be60048b105572d8c))
+* **ui:** use centered modal for email sending status ([e155f89](https://github.com/melfallas/financial-tracker/commit/e155f89d292cab101bd19b70f0dae7faaf70f788))
+
+## [0.9.0](https://github.com/melfallas/financial-tracker/compare/v0.8.0...v0.9.0) (2026-02-26)
+
+
+### Features
+
+* Establish project-wide language standards and integrate them into agent rules and compliance checks. ([402a2fc](https://github.com/melfallas/financial-tracker/commit/402a2fc1440779f0d499bd202d04f5c85a219f86))
+* Implement WealthGapChart UI and add unit tests for Hero and WealthGapChart components with Vitest setup. ([06d3956](https://github.com/melfallas/financial-tracker/commit/06d3956a67cd505b9dbd425ad8659ad3158e4912))
+* migrate component selectors to define `ft-` selector prefix rule. ([d1e62d9](https://github.com/melfallas/financial-tracker/commit/d1e62d94342c314686b49a22858ab641c39e6479))
+* US3.1 Implement the wealth gap chart feature with reactive calculations and integrate it into the home page. ([88c8018](https://github.com/melfallas/financial-tracker/commit/88c8018f80d1b4b1eead911bb8d4f390cde2b9bc))
+* US3.1 Implement wealth-gap-chart feature, with visual refresh and dynamic styling, including component, styles, tests, and Angular testing environment configuration. ([a123941](https://github.com/melfallas/financial-tracker/commit/a123941092e502348cfd3f51c366a52d9d5c5640))
+* US3.2 Implement retirement simulator with interactive steps and integrate it into the home page. ([a4f846a](https://github.com/melfallas/financial-tracker/commit/a4f846aa05f893f95c3b5e70eb4906690723d89b))
+* US3.2 Introduce retirement simulator with doc files chantes to close Sprint 2. ([750816d](https://github.com/melfallas/financial-tracker/commit/750816d04777f5e1e82b0f98caa9aad06837db67))
+* US4.1 Add initial Navbar and Hero components, integrate into home page, and include tests and Storybook stories. ([3470d03](https://github.com/melfallas/financial-tracker/commit/3470d03db82831ff98d87685bf7925ec73d8a07a))
+* US4.2 Implement Cost of Waiting banner with interactive inputs and accessibility improvements. ([fab919a](https://github.com/melfallas/financial-tracker/commit/fab919a97168740df1c5c46013397096b97dacc3))
+
+
+### Bug Fixes
+
+* US3.1 Standardize unit tests on Angular CLI / Karma, adding unit tests for infrastructure, utilities, and features, and formalize the testing framework strategy to use Karma/Jasmine with Testing Library. ([39bbd7d](https://github.com/melfallas/financial-tracker/commit/39bbd7de9ba787583ca1ee2cdb803d7eb84a6a4e))
+* US4.1 Fixing set up of Tailwind CSS with PostCSS, migrate project styling to CSS, and configure Vitest. ([9cb9a27](https://github.com/melfallas/financial-tracker/commit/9cb9a27bc8c0524f8424193ff8a83dfba1bb8e41))
+
 ## [0.8.0](https://github.com/melfallas/financial-tracker/compare/v0.7.0...v0.8.0) (2026-02-23)
 
 

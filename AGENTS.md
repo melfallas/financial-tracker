@@ -26,9 +26,13 @@ Any modifications to files matching `src/**/*.ts`, `src/**/*.html`, or `src/**/*
 - **Control Flow:** Use the new control flow syntax (`@if`, `@for`, `@switch`) instead of structural directives (`*ngIf`, `*ngFor`).
 - **Style:** Strictly follow the [Official Angular Style Guide](https://angular.dev/style-guide).
 - **Naming Convention:** Services must include the `.service.ts` suffix and components must not include the `.component` suffix.
+- **Selector Prefix:** All component selectors MUST use the `ft-` prefix (e.g., `ft-home-page`). The `app-` prefix is **strictly forbidden**.
 - **Testing:** Apply TDD (Test-Driven Development) principles on new features, requirements, user stories or when requested by the user.
 - **TDD Guidelines:** Write unit tests for components, services, and other logic using red-green-refactor approach: 1. Write test FIRST → run → MUST FAIL 2. Implement MINIMUM code to pass the test 3. Refactor code to improve its structure and organization, keeping tests green.
 - **Code Coverage:** Ensure at least 80% code coverage for components, services, and other logic.
+- **⚠️ Testing Framework — STRATEGIC DECISION:** `ng test` (Karma/Jasmine) is the **ONLY** authorized unit test runner. `vitest` / `pnpm vitest` is **STRICTLY FORBIDDEN** until a formal migration is approved. Full rules in `.agent/rules/testing-framework-strategy.md`. You MUST read that file before writing any `.spec.ts` file.
+- **⚠️ Language Standard — STRICTLY ENFORCED:** All documentation (Markdown files), source code (variable names, functions, classes), and code comments MUST be written in **English**. The only exception is the text content within HTML templates (UI strings), which should remain in **Spanish** for the current development phase. See `.agent/rules/language-standards.md` for details.
+- **Testing Library First:** Prefer `@testing-library/angular` (`render`, `screen`, `userEvent`) over raw `TestBed`/`ComponentFixture` to ensure future Vitest compatibility. Do NOT import any API from the `vitest` package in any `.spec.ts` file.
 
 ## Agent Identity
 
@@ -51,8 +55,9 @@ Any modifications to files matching `src/**/*.ts`, `src/**/*.html`, or `src/**/*
   - Chart.js provides dynamic data visualizations (charts, gauges, financial projections).
   - Tailwind CSS personalizes styles, layouts, structure, and adjusts the visual appearance of both PrimeNG and Chart.js components to maintain the 80/15/5 design system consistency.
   - `tailwindcss-primeui` bridges PrimeNG theming with Tailwind tokens for unified styling.
-- **Unit Testing:** Angular Testing, @testing-library/angular
-- **Code Coverage:** Angular CLI (ng test --code-coverage)
+- **Unit Testing:** `ng test` (Karma/Jasmine) + `@testing-library/angular` — **Vitest is FORBIDDEN as a unit test runner**
+- **Code Coverage:** Angular CLI (`ng test --code-coverage`) — minimum 80%
+- **Testing Strategy ADR:** See `.agent/rules/testing-framework-strategy.md` — Must be read before writing any spec file
 - **E2E Testing:** Playwright
 - **Package Manager:** pnpm
 - **Version Control:** Git
@@ -97,11 +102,15 @@ The agent must strictly follow and enforce this directory structure:
 - Do NOT use `ngClass`, use `class` bindings instead
 - Do NOT use `ngStyle`, use `style` bindings instead
 - When using external templates/styles, use paths relative to the component TS file.
-- **Template & Styles:** Use and always prefer `templateUrl` and `styleUrl` over inline templates to separate concerns.
-- **Inline Templates:** Permitted only for minimal wrappers (< 10 lines). Use template and style urls always.
+- **Template & Styles — MANDATORY:** ALWAYS use `templateUrl` and `styleUrl`. This is a non-negotiable architectural constraint that applies to every component without exception.
+- **🚫 Inline Templates/Styles — STRICTLY PROHIBITED:** The use of `template:` or `styles:` (inline) inside `@Component` is **categorically forbidden** across the entire project — shared, core, and feature layers included. No exceptions, not even for small wrappers. Every component MUST have:
+  - A dedicated `.html` file referenced via `templateUrl: './component-name.html'`
+  - A dedicated `.css` file referenced via `styleUrl: './component-name.css'`
+    Any violation of this rule is a **blocker** and must be refactored immediately before any other work proceeds.
 - **Metadata:** Every component must explicitly define:
-  - `selector`: Custom dash-case name (e.g., `app-ship-card`).
+  - `selector`: MUST use the `ft-` prefix in dash-case (e.g., `ft-home-page`, `ft-button`, `ft-navbar`). **The `app-` prefix is forbidden.**
   - `imports`: Explicitly list dependencies (CommonModule, Signals, etc.).
+- **🚫 Selector Prefix — STRICTLY ENFORCED:** All component selectors MUST start with `ft-`. Using `app-` or any other prefix is a **blocker violation** that must be corrected immediately.
 - **Class Logic:** Use the component class for UI logic and state; delegate business logic to Services.
 - **Change Detection:** Use `ChangeDetectionStrategy.OnPush` by default.
 
@@ -225,7 +234,10 @@ feature-name/
 ## 5. Prohibitions
 
 - **No Generic Folders:** Never create folders named `pages/`, `components/`, `services/`, or `interfaces/` inside a feature directory.
-- **No Inline Styles/Templates:** Keep HTML and CSS in their separate files within the component folder to ensure scannability.
+- **🚫 No Inline Styles/Templates — ZERO TOLERANCE:** The use of `template:` or `styles:` inside the `@Component` decorator is **categorically forbidden** for every component in this project, including shared, core, and feature components. Every component file (`.ts`) MUST reference external files using:
+  - `templateUrl: './component-name.html'`
+  - `styleUrl: './component-name.css'`
+    Failing to comply is a blocker. The agent must refuse to generate or accept code with inline templates or styles.
 - **Flat Feature Folders:** Do not nest features more than 2-3 levels deep. If a feature becomes too complex, split it into a new top-level feature area.
 
 ---

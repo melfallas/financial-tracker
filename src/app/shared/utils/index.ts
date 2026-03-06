@@ -1,1 +1,1 @@
-// formatPrice, calculateSubtotal utils here
+export { calculateWealthGap, calculateRetirement } from './finance-math';

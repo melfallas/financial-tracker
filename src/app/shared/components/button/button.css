@@ -1,5 +1,6 @@
 :host {
   display: inline-block;
+  width: 100%;
 }
 
 button {
@@ -10,23 +11,51 @@ button {
   width: 100%;
   border: none;
   font-family: inherit;
+  padding: 10px 20px;
+  border-radius: 0.5rem;
+  font-weight: 600;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
 }
 
 button:disabled {
   opacity: 0.6;
   cursor: not-allowed;
-  box-shadow: none;
+  box-shadow: none !important;
+  transform: none !important;
 }
 
-/* Extension of global classes if needed or specific ghost button */
+button:active:not(:disabled) {
+  transform: scale(0.98);
+}
+
+.btn-primary {
+  background-color: var(--color-emerald-green);
+  color: white;
+  box-shadow: 0 4px 14px 0 rgba(0, 200, 83, 0.3);
+}
+
+.btn-primary:hover:not(:disabled) {
+  background-color: #00b34a;
+  box-shadow: 0 6px 20px rgba(0, 200, 83, 0.4);
+  transform: translateY(-1px);
+}
+
+.btn-secondary {
+  background-color: var(--color-deep-blue);
+  color: white;
+}
+
+.btn-secondary:hover:not(:disabled) {
+  background-color: #142e56;
+  transform: translateY(-1px);
+}
+
 .btn-ghost {
   background: transparent;
   color: var(--color-deep-blue);
   border: 2px solid var(--color-deep-blue);
-  padding: 8px 16px;
-  border-radius: 0.5rem;
-  font-weight: 500;
-  transition: all 0.2s ease;
 }
 
 .btn-ghost:hover:not(:disabled) {

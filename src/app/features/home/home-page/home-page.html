@@ -1,2 +1,99 @@
-<h1>Financial Tracker</h1>
-<p>Congrats! Your app is running !! 🎉</p>
+<ft-navbar></ft-navbar>
+
+<main>
+    <ft-hero></ft-hero>
+    <ft-wealth-gap-chart></ft-wealth-gap-chart>
+    <ft-cost-of-waiting></ft-cost-of-waiting>
+    <ft-retirement-simulator (onPlanRequested)="handlePlanRequested($event)"></ft-retirement-simulator>
+
+    <!-- Email Dispatch Feedback UI -->
+
+
+    <!-- Centered Modal for Email Sending -->
+    @if (emailStatus() === 'sending') {
+    <div class="fixed inset-0 z-[100] flex items-center justify-center bg-black/50 backdrop-blur-sm p-4 fade-in">
+        <div class="bg-white rounded-3xl shadow-2xl max-w-sm w-full p-8 flex flex-col items-center text-center scale-in ring-4 ring-blue-500/20">
+            <div class="bg-blue-100 text-blue-500 w-20 h-20 rounded-full flex items-center justify-center mb-6 relative">
+                <svg class="animate-spin h-10 w-10 text-blue-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                    <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                </svg>
+            </div>
+            
+            <h3 class="text-2xl font-black text-deep-blue mb-2">Enviando tu Plan...</h3>
+            <p class="text-gray-600 mb-8 max-w-[250px]">
+                Por favor espera un momento mientras preparamos y enviamos tu reporte financiero.
+            </p>
+
+            <div class="flex flex-col gap-3 w-full">
+                <button (click)="closeEmailModal()" class="text-sm font-medium text-gray-400 hover:text-gray-600 transition-colors">
+                    Cerrar
+                </button>
+            </div>
+        </div>
+    </div>
+    }
+
+    <!-- Centered Modal for Email Success -->
+    @if (emailStatus() === 'sent') {
+    <div class="fixed inset-0 z-[100] flex items-center justify-center bg-black/50 backdrop-blur-sm p-4 fade-in">
+        <div class="bg-white rounded-3xl shadow-2xl max-w-sm w-full p-8 flex flex-col items-center text-center scale-in ring-4 ring-emerald-500/20">
+            <div class="bg-emerald-100 text-emerald-500 w-20 h-20 rounded-full flex items-center justify-center mb-6">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                </svg>
+            </div>
+            
+            <h3 class="text-2xl font-black text-deep-blue mb-2">¡Plan enviado!</h3>
+            <p class="text-gray-600 mb-8 max-w-[250px]">
+                Revisa tu bandeja de entrada. Si no lo recibes, revisa también tu bandeja de spam.
+            </p>
+
+            <div class="flex flex-col gap-3 w-full">
+                <button (click)="closeEmailModal()" class="w-full bg-emerald-500 hover:bg-emerald-600 text-white font-bold py-4 px-6 rounded-2xl shadow-xl shadow-emerald-500/20 transition-all flex items-center justify-center gap-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                    </svg>
+                    Entendido
+                </button>
+            </div>
+        </div>
+    </div>
+    }
+
+    <!-- Centered Modal for Email Failure -->
+    @if (emailStatus() === 'failed') {
+    <div class="fixed inset-0 z-[100] flex items-center justify-center bg-black/50 backdrop-blur-sm p-4 fade-in">
+        <div class="bg-white rounded-3xl shadow-2xl max-w-sm w-full p-8 flex flex-col items-center text-center scale-in ring-4 ring-red-500/20">
+            <div class="bg-red-100 text-red-500 w-20 h-20 rounded-full flex items-center justify-center mb-6">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                </svg>
+            </div>
+            
+            <h3 class="text-2xl font-black text-deep-blue mb-2">Problema con el envío</h3>
+            <p class="text-gray-600 mb-8 max-w-[250px]">
+                No pudimos enviar tu plan por correo en este momento. Puedes descargarlo directamente o intentar enviarlo de nuevo.
+            </p>
+
+            <div class="flex flex-col gap-3 w-full">
+                <button (click)="downloadManualPdf()" class="w-full bg-emerald-500 hover:bg-emerald-600 text-white font-bold py-4 px-6 rounded-2xl shadow-xl shadow-emerald-500/20 transition-all flex items-center justify-center gap-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                    </svg>
+                    Descargar Plan
+                </button>
+                <button (click)="retryEmail()" class="w-full bg-gray-50 hover:bg-gray-100 border border-gray-200 text-gray-700 font-bold py-4 px-6 rounded-2xl transition-all flex items-center justify-center gap-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+                    </svg>
+                    Reintentar Envío
+                </button>
+                <button (click)="closeEmailModal()" class="text-sm font-medium text-gray-400 hover:text-gray-600 mt-2 transition-colors">
+                    Cerrar
+                </button>
+            </div>
+        </div>
+    </div>
+    }
+</main>

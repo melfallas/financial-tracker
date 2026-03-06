@@ -7,14 +7,15 @@
 **As a user,** I want to download a personalized, premium PDF summary of my financial projection that serves as a tangible roadmap for my investment journey.
 
 ## Acceptance Criteria
-- [ ] **TDD Mandatory:** Logic tests for PDF content assembly (assembling strings, detecting high-scale currency rounding) written first.
-- [ ] Uses `jspdf` and `jspdf-autotable` loaded via **Angular `@defer` block** to minimize initial bundle size.
-- [ ] **Implementation Physics:**
+- [x] **TDD Mandatory:** Logic tests for PDF content assembly (assembling strings, detecting high-scale currency rounding) written first.
+- [x] Uses `jspdf` and `jspdf-autotable` loaded via **Angular `@defer` block** (implemented via dynamic `import()` for service optimization).
+- [x] **Implementation Physics:**
     - Capture Chart.js instances via `ViewChild` and convert to Base64 using `toBase64Image()`.
     - Page 1: Deep Blue Header (#1A3C6E), Lead Name, Date, Wealth Gap Chart, Retirement Chart, Summary Tables.
     - Page 2: Conversion Anchor with a dynamic QR Code pointing to the Booking URL (pre-filled with the user's email).
-- [ ] Multi-language support: Content must switch between EN/ES based on the active session locale.
-- [ ] Unit tests for the generation service ensuring all data fields are mapped correctly.
+- [x] Multi-language support: Content must switch between EN/ES based on the language selector of the Navbar.
+- [x] Unit tests for the generation service ensuring all data fields are mapped correctly.
+- [x] **QA Verification Hook:** Expose a global `window.ftDownloadReport()` function in non-production environments to allow testers to download the PDF manually from the console without needing to submit the lead capture form.
 
 ## Technical Details
 
@@ -40,3 +41,4 @@
 - **Performance:** Generation must be non-blocking where possible.
 - **Consistency:** PDF must match brand colors (Deep Blue, Emerald Green, Soft Red) exactly.
 - **Privacy:** Document generated locally; data remains in browser memory until saved.
+- **Testability:** Technical testing of the PDF layout must be possible via the console (`window.ftDownloadReport()`) to bypass the conversion funnel UI flow during QA.

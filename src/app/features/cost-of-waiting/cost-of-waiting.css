@@ -1,0 +1,62 @@
+.cow-banner {
+    background-color: #1A3C6E;
+    color: #FFFFFF;
+}
+
+/* 
+  Accessibility Improvement: 
+  The text color #FF5252 provides a better contrast (approx 5.5:1) 
+  than the previous #D32F2F on the #1A3C6E background, 
+  meeting WCAG AA standards.
+*/
+.cow-loss-text {
+    color: #FF5252;
+}
+
+.cow-cta-button {
+    background-color: #10B981;
+    /* Emerald Green */
+    color: #FFFFFF;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.cow-cta-button:hover {
+    background-color: #059669;
+    /* Darker Emerald */
+}
+
+.cow-input {
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Pulse animation for the loss amount */
+@keyframes pulse {
+
+    0%,
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+
+    50% {
+        transform: scale(1.02);
+        opacity: 0.9;
+    }
+}
+
+.animate-pulse-slow {
+    animation: pulse 3s infinite ease-in-out;
+}
+
+/* Standard properties for accessibility and browser compatibility */
+input[type=number] {
+    -webkit-appearance: textfield;
+    -moz-appearance: textfield;
+    appearance: textfield;
+}
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}

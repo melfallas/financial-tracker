@@ -1,0 +1,242 @@
+<section class="retirement-simulator py-16 px-6 max-w-7xl mx-auto">
+    <div class="flex flex-col md:flex-row items-center justify-between mb-12">
+        <div>
+            <h2 class="text-3xl md:text-5xl font-black text-deep-blue mb-4">Simulador de Libertad Financiera</h2>
+            <p class="text-lg opacity-80">Descubre cuándo podrás dejar de preocuparte por el dinero.</p>
+        </div>
+
+        <!-- In-place Stepper Indicator -->
+        <div class="flex items-center gap-4 mt-6 md:mt-0">
+            <div class="flex flex-col items-center">
+                <button (click)="goToStep('step1')"
+                    class="w-10 h-10 rounded-full flex items-center justify-center font-bold transition-all"
+                    [ngClass]="currentStep() === 'step1' ? 'bg-emerald-500 text-white shadow-lg scale-110' : 'bg-gray-200 text-gray-500 hover:bg-emerald-100 hover:text-emerald-600'">1</button>
+                <span class="text-xs font-bold mt-1 uppercase opacity-50">Situación</span>
+            </div>
+            <div class="w-12 h-0.5 bg-gray-200 mb-4"></div>
+            <div class="flex flex-col items-center">
+                <button (click)="goToStep('step2')"
+                    class="w-10 h-10 rounded-full flex items-center justify-center font-bold transition-all"
+                    [ngClass]="currentStep() === 'step2' ? 'bg-emerald-500 text-white shadow-lg scale-110' : 'bg-gray-200 text-gray-500 hover:bg-emerald-100 hover:text-emerald-600'">2</button>
+                <span class="text-xs font-bold mt-1 uppercase opacity-50">Metas</span>
+            </div>
+            <div class="w-12 h-0.5 bg-gray-200 mb-4"></div>
+            <div class="flex flex-col items-center">
+                <button (click)="goToStep('results')"
+                    class="w-10 h-10 rounded-full flex items-center justify-center font-bold transition-all"
+                    [ngClass]="currentStep() === 'results' ? 'bg-emerald-500 text-white shadow-lg scale-110' : 'bg-gray-200 text-gray-500 hover:bg-emerald-100 hover:text-emerald-600'">3</button>
+                <span class="text-xs font-bold mt-1 uppercase opacity-50">Resultados</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="bg-white rounded-3xl shadow-2xl p-8 md:p-12 relative overflow-hidden border border-gray-100">
+
+        <!-- STEP 1: CURRENT SITUATION -->
+        @if (currentStep() === 'step1') {
+        <div class="fade-in space-y-12">
+            <h3 class="text-2xl font-bold border-l-4 border-emerald-500 pl-4 mb-8">Cuéntanos sobre tu situación actual
+            </h3>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="flex flex-col gap-2 p-6 bg-gray-50 rounded-2xl hover:shadow-md transition-shadow">
+                    <label for="current-age" class="text-sm font-bold uppercase tracking-wider opacity-60">Tu Edad
+                        Actual</label>
+                    <input type="number" id="current-age" [ngModel]="currentAge()"
+                        (ngModelChange)="currentAge.set($event)"
+                        class="bg-transparent border-0 border-b-2 border-emerald-200 text-3xl font-black text-deep-blue focus:ring-0 focus:border-emerald-500 transition-colors" />
+                    <p class="text-xs opacity-50">Ingresa tu edad en años.</p>
+                </div>
+
+                <div class="flex flex-col gap-2 p-6 bg-gray-50 rounded-2xl hover:shadow-md transition-shadow">
+                    <label for="savings" class="text-sm font-bold uppercase tracking-wider opacity-60">Ahorros
+                        Líquidos</label>
+                    <div class="relative">
+                        <span
+                            class="absolute left-0 top-1/2 -translate-y-1/2 text-deep-blue text-2xl font-black opacity-30">$</span>
+                        <input type="number" id="savings" [ngModel]="globalInputs.initialCapital"
+                            (ngModelChange)="updateGlobalInput('initialCapital', $event)"
+                            class="bg-transparent border-0 border-b-2 border-emerald-200 text-3xl font-black text-deep-blue pl-6 w-full focus:ring-0 focus:border-emerald-500 transition-colors" />
+                    </div>
+                    <p class="text-xs opacity-50">Tu total actual de capital de inversión.</p>
+                </div>
+
+                <div class="flex flex-col gap-2 p-6 bg-gray-50 rounded-2xl hover:shadow-md transition-shadow">
+                    <label for="contribution" class="text-sm font-bold uppercase tracking-wider opacity-60">Aporte
+                        Mensual</label>
+                    <div class="relative">
+                        <span
+                            class="absolute left-0 top-1/2 -translate-y-1/2 text-deep-blue text-2xl font-black opacity-30">$</span>
+                        <input type="number" id="contribution" [ngModel]="globalInputs.monthlyContribution"
+                            (ngModelChange)="updateGlobalInput('monthlyContribution', $event)"
+                            class="bg-transparent border-0 border-b-2 border-emerald-200 text-3xl font-black text-deep-blue pl-6 w-full focus:ring-0 focus:border-emerald-500 transition-colors" />
+                    </div>
+                    <p class="text-xs opacity-50">Cuánto planeas ahorrar cada mes.</p>
+                </div>
+            </div>
+
+            <div class="flex justify-end pt-8">
+                <button (click)="nextStep()"
+                    class="bg-emerald-500 text-white px-10 py-4 rounded-2xl font-bold text-xl shadow-xl shadow-emerald-500/20 hover:scale-105 transition-all">Siguiente
+                    Paso →</button>
+            </div>
+        </div>
+        }
+
+        <!-- STEP 2: GOALS -->
+        @if (currentStep() === 'step2') {
+        <div class="fade-in space-y-12">
+            <h3 class="text-2xl font-bold border-l-4 border-emerald-500 pl-4 mb-8">Tus Objetivos y Proyecciones</h3>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+
+                <div class="space-y-8">
+                    <div class="flex flex-col gap-2 p-6 bg-gray-50 rounded-2xl hover:shadow-md transition-shadow">
+                        <label for="expense" class="text-sm font-bold uppercase tracking-wider opacity-60">Gastos
+                            Mensuales Proyectados</label>
+                        <div class="relative">
+                            <span
+                                class="absolute left-0 top-1/2 -translate-y-1/2 text-deep-blue text-2xl font-black opacity-30">$</span>
+                            <input type="number" id="expense" [ngModel]="targetMonthlyExpense()"
+                                (ngModelChange)="targetMonthlyExpense.set($event)"
+                                class="bg-transparent border-0 border-b-2 border-emerald-200 text-3xl font-black text-deep-blue pl-6 w-full focus:ring-0 focus:border-emerald-500 transition-colors" />
+                        </div>
+                        <p class="text-xs opacity-50">Costo de vida deseado para tu libertad financiera.</p>
+                    </div>
+
+                    <div class="flex flex-col gap-2 p-6 bg-gray-50 rounded-2xl hover:shadow-md transition-shadow">
+                        <label for="inflation" class="text-sm font-bold uppercase tracking-wider opacity-60">Inflación
+                            Estimada</label>
+                        <div class="relative">
+                            <input type="number" id="inflation" [ngModel]="globalInputs.annualInflationRate"
+                                (ngModelChange)="updateGlobalInput('annualInflationRate', $event)"
+                                class="bg-transparent border-0 border-b-2 border-emerald-200 text-3xl font-black text-deep-blue pr-10 focus:ring-0 focus:border-emerald-500 transition-colors" />
+                            <span
+                                class="absolute right-0 top-1/2 -translate-y-1/2 text-deep-blue text-2xl font-black opacity-30">%</span>
+                        </div>
+                        <p class="text-xs opacity-50">Sincronizado globalmente para cálculos reales de poder
+                            adquisitivo.</p>
+                    </div>
+                </div>
+
+                <div class="space-y-8">
+                    <div class="flex flex-col gap-2 p-6 bg-gray-50 rounded-2xl hover:shadow-md transition-shadow">
+                        <label for="retirement-age" class="text-sm font-bold uppercase tracking-wider opacity-60">Edad
+                            de Jubilación</label>
+                        <input type="number" id="retirement-age" [ngModel]="retirementAge()"
+                            (ngModelChange)="retirementAge.set($event)"
+                            class="bg-transparent border-0 border-b-2 border-emerald-200 text-3xl font-black text-deep-blue focus:ring-0 focus:border-emerald-500 transition-colors" />
+                        <p class="text-xs opacity-50">A qué edad planeas dejar de trabajar comercialmente.</p>
+                    </div>
+
+                    <div class="flex flex-col gap-2 p-6 bg-gray-50 rounded-2xl hover:shadow-md transition-shadow">
+                        <label for="expected-return"
+                            class="text-sm font-bold uppercase tracking-wider opacity-60">Retorno Anual Esperado</label>
+                        <div class="relative">
+                            <input type="number" id="expected-return" [ngModel]="globalInputs.annualReturnRate"
+                                (ngModelChange)="updateGlobalInput('annualReturnRate', $event)"
+                                class="bg-transparent border-0 border-b-2 border-emerald-200 text-3xl font-black text-deep-blue pr-10 focus:ring-0 focus:border-emerald-500 transition-colors" />
+                            <span
+                                class="absolute right-0 top-1/2 -translate-y-1/2 text-deep-blue text-2xl font-black opacity-30">%</span>
+                        </div>
+                        <p class="text-xs opacity-50">Expectativa de retorno de tus inversiones.</p>
+
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="flex justify-between pt-8">
+                <button (click)="prevStep()"
+                    class="bg-gray-200 text-deep-blue px-10 py-4 rounded-2xl font-bold text-xl hover:bg-gray-300 transition-all">←
+                    Volver</button>
+                <button (click)="nextStep()"
+                    class="bg-emerald-500 text-white px-10 py-4 rounded-2xl font-bold text-xl shadow-xl shadow-emerald-500/20 hover:scale-105 transition-all">Calcular
+                    Libertad →</button>
+            </div>
+        </div>
+        }
+
+        <!-- STEP 3: RESULTS -->
+        @if (currentStep() === 'results') {
+        <div class="fade-in space-y-12">
+            <h3 class="text-2xl font-bold border-l-4 border-emerald-500 pl-4 mb-8">Tu Camino hacia la Libertad</h3>
+
+            @if (isUnreachable()) {
+            <div
+                class="bg-red-50 border-2 border-red-200 p-8 rounded-3xl flex items-center gap-6 shadow-xl animate-shake">
+                <div
+                    class="bg-red-500 text-white w-20 h-20 rounded-2xl flex items-center justify-center text-4xl shadow-lg">
+                    ⚠️</div>
+                <div>
+                    <h4 class="text-2xl font-black text-red-700">Libertad e Independencia Inalcanzable</h4>
+                    <p class="text-red-900 opacity-80 mt-2">Tu tasa de inflación estimada es igual o superior a tu
+                        retorno de inversión. Bajo estas condiciones, tu dinero perderá valor adquisitivo más rápido de
+                        lo que crece. Necesitas ajustar tu estrategia de inversión o tus expectativas.</p>
+                </div>
+            </div>
+            } @else {
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+
+                <!-- THREAT / RUN OUT AGE -->
+                <div
+                    class="bg-red-50 p-10 rounded-3xl border border-red-100 flex flex-col items-center justify-center text-center space-y-4">
+                    <span class="text-sm font-bold uppercase tracking-widest text-red-700 opacity-60">Tu Capital Se
+                        Agota a los:</span>
+                    <div class="text-8xl font-black text-red-500 drop-shadow-md">
+                        {{ animatedRunOutAge() ?? '∞' }}
+                    </div>
+                    <p class="text-sm font-medium text-red-800">Con el nivel de gastos deseado ajustado por inflación.
+                    </p>
+                </div>
+
+                <!-- HOPE / FREEDOM DATE -->
+                <div
+                    class="bg-emerald-50 p-10 rounded-3xl border border-emerald-100 flex flex-col items-center justify-center text-center space-y-4 shadow-xl ring-4 ring-white">
+                    <span class="text-sm font-bold uppercase tracking-widest text-emerald-700 opacity-60">Libertad
+                        Financiera Alcanzada a los:</span>
+                    <div class="text-9xl font-black text-emerald-500 drop-shadow-md">
+                        {{ animatedFreedomAge() ?? '--' }}
+                    </div>
+                    <p class="text-base font-bold text-emerald-800">Has logrado mantener tu capital real mientras cubres
+                        tus gastos mensuales.</p>
+                </div>
+
+            </div>
+
+            <!-- CHART VISUALIZATION -->
+            <div class="bg-gray-50 rounded-3xl p-8 border border-gray-100 text-center space-y-6">
+                <h4 class="text-xl font-bold opacity-60 uppercase tracking-widest">Evolución Proyectada de tu Nest Egg
+                    (Valor Real)</h4>
+                <div class="h-80 w-full bg-white relative rounded-xl border border-gray-100 shadow-inner p-4">
+                    <canvas baseChart [data]="chartData()" [options]="chartOptions" [type]="'line'">
+                    </canvas>
+                </div>
+
+                <div class="flex flex-col sm:flex-row items-center justify-center gap-6 pt-6">
+                    <button (click)="goToStep('step1')"
+                        class="bg-white border-2 border-gray-200 text-deep-blue px-8 py-3 rounded-2xl font-bold hover:bg-gray-50 transition-all flex items-center gap-2">
+                        <span class="opacity-50">✎</span> Editar Datos
+                    </button>
+                    <button (click)="initiateDownload()"
+                        class="bg-deep-blue text-white px-10 py-5 rounded-3xl font-black text-xl shadow-2xl hover:scale-105 transition-all w-full sm:w-auto">
+                        Obtener mi Plan
+                    </button>
+                </div>
+            </div>
+
+            @if (showCaptureForm()) {
+            <div class="mt-8 fade-in">
+                <ft-lead-form (onSuccess)="onLeadCaptured($event)"
+                    (onDownloadClick)="initiateDownload()"></ft-lead-form>
+            </div>
+            }
+
+            }
+
+        </div>
+        }
+
+    </div>
+</section>

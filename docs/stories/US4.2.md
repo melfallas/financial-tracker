@@ -4,18 +4,26 @@
 **Priority:** P0 (MVP)
 
 ## Description
-**As a user,** I want to see the immediate impact of inflation on my current savings to build the necessary urgency to take action on my financial strategy.
+**As a user,** I want to see the immediate impact of inflation on my current savings over a customizable period to build the necessary urgency to take action on my financial strategy.
 
 ## Acceptance Criteria
-- [ ] Implement the **Cost of Waiting Banner** (§Organisms-Cost-Of-Waiting-Banner):
+- [ ] **Banner Visuals:**
     - Background: High-contrast Deep Blue (#1A3C6E).
-    - Inline Input: Simplistic transparent input for "Current Savings" (Synced with `initialCapital` Signal).
-    - **Loss Visualization:** Dramatic Count-Up animation (1.2s) showing the Soft Red (#D32F2F) dollar amount lost to inflation over 12 months.
+    - **Loss Visualization:** Dramatic Count-Up animation (1.2s).
+    - **Accessibility Fix:** Use a high-contrast Red (e.g., #FF5252 or lighter) for the loss amount to ensure WCAG AA compliance against the Deep Blue background.
+- [ ] **Interactive Inputs (In Order):**
+    1. **Current Savings:** Numeric input (Synced with `initialCapital` Signal).
+    2. **Time Horizon (Years):** Numeric input (Synced with `years` Signal).
+    3. **Inflation Rate (%):** Numeric input (Synced with `annualInflationRate` Signal).
+- [ ] **Logic & Sync:**
+    - The **Inflation Rate** input must auto-fill from the `WealthGapService` value (or its default).
+    - **Dynamic Legend:**
+        - If years = 1: Display "en 12 meses".
+        - If years > 1: Display "en [X] años".
 - [ ] **Interaction Physics:**
-    - Real-time recalculation when typing a new savings amount (600ms count-up transition).
-    - **Smooth Anchor CTA:** Emerald Green button ("Stop the Loss ↓") scrolls directly to the Lead Capture Form.
-- [ ] **Shared State:** Link the input to the same Signal used by the Wealth Gap Calculator. Fallback to `config.defaultSavingsAmount` if empty.
-- [ ] **Accessibility:** White-on-DeepBlue contrast (Passes WCAG AA).
+    - Real-time recalculation when typing (600ms count-up transition).
+    - **Smooth Anchor CTA:** Emerald Green button ("Detén la Pérdida ↓") scrolls directly to the Lead Capture Form.
+- [ ] **Language:** UI text in the HTML template must be in **Spanish**. Documentation and code must be in **English**.
 
 ## Technical Details
 
@@ -23,18 +31,18 @@
 `src/app/features/cost-of-waiting/cost-of-waiting.ts`
 
 ### Business Logic
-- `estimatedLoss = savings * (inflationRate / 100)`.
-- Use the `displaySavings` signal to allow local overrides while syncing back to the global state via `effect`.
+- `estimatedLoss = savings * (Math.pow(1 + (inflationRate / 100), years) - 1)`.
+- Use the `displaySavings`, `displayYears`, and `displayInflation` signals to allow local overrides while syncing back to the global state.
 
 ### Steps to Complete:
-1. Create the full-width banner component.
-2. Bind the input field with `ngModel` (signals-based) and currency mask.
-3. Hook into the `initialCapital` and `inflationRate` signals from the parent page.
-4. Implement the Count-Up animation using GSAP or a simple Angular `interval` loop.
-5. Create the IntersectionObserver trigger for the initial scroll reveal.
-6. Verify mobile stacked layout vs desktop single-row layout.
+1. Update the component template with the three inputs in the specified order.
+2. Implement the compound inflation loss formula.
+3. Add the conditional logic for the "12 meses" vs "X años" legend.
+4. Improve color contrast for the red text to meet WCAG AA standards.
+5. Ensure all UI strings are in Spanish.
+6. Verify synchronization with `WealthGapService` signals.
 
 ## Non-Functional Requirements
-- **Impact:** This is the primary emotional "speed bump" before conversion. It must be impossible to ignore.
-- **Performance:** Animation must be smooth and not block the UI thread.
-- **SEO:** Metadata for the page should include keywords related to the "Cost of Inaction."
+- **Impact:** Primary emotional trigger for conversion.
+- **Performance:** Smooth animations (GSAP or RequestAnimationFrame).
+- **Accessibility:** Minimum contrast ratio of 4.5:1 for all text.

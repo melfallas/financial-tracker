@@ -55,6 +55,8 @@ jobs:
 
       - name: Create .env file
         run: |
+          echo "NG_APP_EMAIL_SENDING_FUNCTION_URL=${{ secrets.NG_APP_EMAIL_SENDING_FUNCTION_URL }}" >> .env
+          echo "NG_APP_EMAIL_SENDING_FUNCTION_KEY=${{ secrets.NG_APP_EMAIL_SENDING_FUNCTION_KEY }}" >> .env
           echo "NG_APP_EMAIL_SENDING_KEY=${{ secrets.NG_APP_EMAIL_SENDING_KEY }}" >> .env
           echo "NG_APP_EMAIL_SENDING_DOMAIN=${{ secrets.NG_APP_EMAIL_SENDING_DOMAIN }}" >> .env
           echo "NG_APP_CALENDLY_BASE_URL=${{ secrets.NG_APP_CALENDLY_BASE_URL }}" >> .env

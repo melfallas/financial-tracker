@@ -32,6 +32,9 @@ export class HomePage {
 
   /** Drives the email dispatch feedback UI */
   readonly emailStatus = signal<EmailDispatchStatus>('idle');
+  readonly generatedPdfUri = signal<string | null>(null);
+  readonly createdLead = signal<Lead | null>(null);
+  readonly bookingUrlStr = signal<string | null>(null);
 
   constructor() {
     // QA Hook as per US2.2 Acceptance Criteria
@@ -80,18 +83,12 @@ export class HomePage {
         retirementImage,
         lang
       );
-      
-      // // Trigger immediate browser download (does not block)
-      // const filename = `Plan_Financiero_${lead.firstName}_${lead.lastName}.pdf`;
-      // const link = document.createElement('a');
-      // link.href = pdfDataUri;
-      // link.download = filename;
-      // link.click();
-      // const bookingUri = this.emailService.buildCalendlyUrl(lead.firstName, lead.email);
 
       const bookingUri = "https://calendly.com/mfallaspsna/30min";
-      // console.log('bookingUri: ', bookingUri);
-      // console.log('pdfDataUri: ', pdfDataUri);
+      
+      this.createdLead.set(lead);
+      this.generatedPdfUri.set(pdfDataUri);
+      this.bookingUrlStr.set(bookingUri);
 
       // Dispatch email asynchronously — fire-and-forget; success UI is not blocked
       this.dispatchEmail(lead, pdfDataUri, bookingUri, lang).catch((err) => {
@@ -100,6 +97,31 @@ export class HomePage {
 
     } catch (err) {
       console.error('[HomePage] Error generating PDF:', err);
+    }
+  }
+
+  downloadManualPdf(): void {
+    const uri = this.generatedPdfUri();
+    const lead = this.createdLead();
+    if (uri && lead) {
+      const filename = `Plan_Financiero_${lead.firstName}_${lead.lastName}.pdf`;
+      const link = document.createElement('a');
+      link.href = uri;
+      link.download = filename;
+      link.click();
+    }
+  }
+
+  retryEmail(): void {
+    const lead = this.createdLead();
+    const uri = this.generatedPdfUri();
+    const booking = this.bookingUrlStr();
+    const lang = this.langService.currentLanguage();
+
+    if (lead && uri && booking) {
+      this.dispatchEmail(lead, uri, booking, lang).catch((err) => {
+        console.error('[HomePage] Retry Email dispatch failed:', err);
+      });
     }
   }
 

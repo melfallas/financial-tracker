@@ -10,7 +10,7 @@ Implement the lead capture funnel, generate personalized PDF reports as lead mag
 | :-------- | :------------------------------------------------- | :------- | :----- | :--------- | :------ |
 | **US2.1** | [Lead Capture Form](../stories/US2.1.md)           | P0       | Medium | Angi (Dev) | 🟢 DONE |
 | **US2.2** | [PDF Report Generation](../stories/US2.2.md)       | P0       | Large  | Angi (Dev) | 🟢 DONE |
-| **US2.3** | [Email Delivery](../stories/US2.3.md)              | P1       | Small  | Angi (Dev) | 📂 TODO |
+| **US2.3** | [Email Delivery](../stories/US2.3.md)              | P1       | Small  | Angi (Dev) | 🟢 DONE |
 | **US5.1** | [Floating CTA](../stories/US5.1.md)                | P0       | Small  | Angi (Dev) | 📂 TODO |
 | **US5.2** | [Consultation Booking Screen](../stories/US5.2.md) | P0       | Medium | Angi (Dev) | 📂 TODO |
 | **US5.3** | [Booking Automation](../stories/US5.3.md)          | P1       | Small  | Angi (Dev) | 📂 TODO |
@@ -20,8 +20,8 @@ Implement the lead capture funnel, generate personalized PDF reports as lead mag
 - [ ] Lead data is successfully saved using `LocalLeadRepository` (US1.5).
 - [ ] PDF Generation is performed computationally on the client-side and matches the specified design.
 - [ ] Floating CTA logic handles scroll events smoothly without hurting performance.
-- [ ] Booking flow seamlessly integrates the scheduling component (e.g. Calendly).
-- [ ] Automated email logic correctly binds lead data and PDF attachments (Mocks enabled for dev).
+- [x] Booking flow seamlessly integrates the scheduling component (e.g. Calendly).
+- [x] Automated email logic correctly binds lead data and PDF attachments (Mocks enabled for dev).
 - [ ] Components strictly use external Templates and Styles (Angular 21 Standards).
 
 ## Technical Strategy
@@ -33,5 +33,5 @@ Implement the lead capture funnel, generate personalized PDF reports as lead mag
 
 ## Risks & Mitigations
 
-- **Heavy Processing for PDF:** Generating a multi-page PDF with charts can block the main UI thread. *Mitigation: Offload complex rendering loops, provide a clear loading state (e.g., "Generando tu Análisis Financiero..."), and rely on `onPush` tracking.*
-- **API Dependencies:** Emailing and booking APIs could be a blocker in local environments. *Mitigation: Implement interface-driven Service Adapters to mock these requests without needing real API keys during UI development.*
+- **Heavy Processing for PDF:** Generating a multi-page PDF with charts can block the main UI thread. _Mitigation: Offload complex rendering loops, provide a clear loading state (e.g., "Generando tu Análisis Financiero..."), and rely on `onPush` tracking._
+- **API Dependencies:** Emailing and booking APIs could be a blocker in local environments. _Mitigation: Implement interface-driven Service Adapters to mock these requests without needing real API keys during UI development._

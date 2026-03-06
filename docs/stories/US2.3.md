@@ -9,15 +9,15 @@
 
 ## Acceptance Criteria
 
-- [ ] Automated HTML email dispatched upon lead capture. The implementation must be decoupled via a shared interface to allow transparent portability between providers. Current implementation uses a Supabase Edge Function to handle email delivery via Resend.
-- [ ] Email follows physical layout (§Organisms-Email-Confirmation):
+- [x] Automated HTML email dispatched upon lead capture. The implementation must be decoupled via a shared interface to allow transparent portability between providers. Current implementation uses a Supabase Edge Function to handle email delivery via Resend.
+- [x] Email follows physical layout (§Organisms-Email-Confirmation):
   - Table-based HTML (Email-client compatible).
   - Deep Blue Header (#1A3C6E).
   - Personalized greeting with the lead's name.
   - **Secure PDF Link** (pointing to a signed URL or local download route).
   - **Primary CTA:** Emerald Green button (#00C853) for Calendly booking.
-- [ ] Tracking: Append UTM parameters to the booking link.
-- [ ] Support fallback: If automated dispatch fails, the UI must provide a "Download Locally" button after a timeout.
+- [x] Tracking: Append UTM parameters to the booking link.
+- [x] Support fallback: If automated dispatch fails, the UI must provide a "Download Locally" button after a timeout.
 
 ## Technical Details
 

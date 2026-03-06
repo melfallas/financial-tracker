@@ -111,12 +111,12 @@ export class HomePage {
       link.click();
       
       // Close the modal upon successful download initiation
-      this.closeErrorModal();
+      this.closeEmailModal();
     }
   }
 
-  closeErrorModal(): void {
-    if (this.emailStatus() === 'failed') {
+  closeEmailModal(): void {
+    if (this.emailStatus() === 'failed' || this.emailStatus() === 'sent') {
       this.emailStatus.set('idle');
     }
   }

@@ -109,6 +109,15 @@ export class HomePage {
       link.href = uri;
       link.download = filename;
       link.click();
+      
+      // Close the modal upon successful download initiation
+      this.closeErrorModal();
+    }
+  }
+
+  closeErrorModal(): void {
+    if (this.emailStatus() === 'failed') {
+      this.emailStatus.set('idle');
     }
   }
 

@@ -17,7 +17,7 @@
   - **Secure PDF Link** (pointing to a signed URL or local download route).
   - **Primary CTA:** Emerald Green button (#00C853) for Calendly booking.
 - [x] Tracking: Append UTM parameters to the booking link.
-- [x] Support fallback: If automated dispatch fails, the UI must provide a "Download Locally" button after a timeout.
+- [x] Support fallback: If automated dispatch fails, the UI must provide a centered modal with a "Download Locally" button after a timeout. Clicking "Download Locally" must automatically close the modal.
 
 ## Technical Details
 

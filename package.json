@@ -1,6 +1,6 @@
 {
   "name": "financial-tracker",
-  "version": "0.10.0",
+  "version": "0.10.1",
   "scripts": {
     "ng": "ng",
     "start": "pnpm run patch && ng serve",
@@ -30,6 +30,7 @@
     "branchN": "node -e \"const b=process.argv[1]; require('child_process').execSync(`git checkout -b ${b} && git branch --set-upstream-to=origin/${b} && git push -u origin ${b} -- `, {stdio:'inherit'})\"",
     "delete": "git checkout develop && git branch -D @{-1} && git push",
     "merge": "git checkout develop && git merge @{-1} --no-edit && git push",
+    "mergep": "git checkout main && git merge @{-1} --no-edit && git push",
     "mergeB": "git checkout US2.3_PDF_Email_Delivery && git merge @{-1} --no-edit && git push --",
     "mergeb": "node -e \"const b=process.argv[1]; require('child_process').execSync(`git checkout ${b} && git merge @{-1} --no-edit && git push -- `, {stdio:'inherit'})\"",
     "mergedel": "git checkout develop && git merge @{-1} --no-edit && git push && git branch -d @{-1} && git push origin --delete @{-1}",

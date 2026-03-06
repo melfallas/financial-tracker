@@ -17,7 +17,7 @@
   - **Secure PDF Link** (pointing to a signed URL or local download route).
   - **Primary CTA:** Emerald Green button (#00C853) for Calendly booking.
 - [x] Tracking: Append UTM parameters to the booking link.
-- [x] UI Feedback: Both the automated dispatch success message ("¡Plan enviado!") and the fallback error UI must be presented to the user as centered modals with an explicit close action. Clicking "Download Locally" on the error fallback must automatically close its modal.
+- [x] UI Feedback: The automated dispatch process ("Enviando tu Plan..."), the success message ("¡Plan enviado!"), and the fallback error UI must be presented to the user as centered modals with an explicit close action. Clicking "Download Locally" on the error fallback must automatically close its modal.
 
 ## Technical Details
 

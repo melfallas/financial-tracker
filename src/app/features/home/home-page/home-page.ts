@@ -116,7 +116,7 @@ export class HomePage {
   }
 
   closeEmailModal(): void {
-    if (this.emailStatus() === 'failed' || this.emailStatus() === 'sent') {
+    if (this.emailStatus() === 'failed' || this.emailStatus() === 'sent' || this.emailStatus() === 'sending') {
       this.emailStatus.set('idle');
     }
   }

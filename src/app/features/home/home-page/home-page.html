@@ -7,20 +7,32 @@
     <ft-retirement-simulator (onPlanRequested)="handlePlanRequested($event)"></ft-retirement-simulator>
 
     <!-- Email Dispatch Feedback UI -->
-    <div class="fixed bottom-6 right-6 z-50 flex flex-col gap-2 max-w-sm transition-all duration-300">
-        @if (emailStatus() === 'sending') {
-            <div class="bg-blue-600 text-white p-4 rounded-2xl shadow-2xl flex items-center gap-3 animate-pulse">
-                <svg class="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+
+
+    <!-- Centered Modal for Email Sending -->
+    @if (emailStatus() === 'sending') {
+    <div class="fixed inset-0 z-[100] flex items-center justify-center bg-black/50 backdrop-blur-sm p-4 fade-in">
+        <div class="bg-white rounded-3xl shadow-2xl max-w-sm w-full p-8 flex flex-col items-center text-center scale-in ring-4 ring-blue-500/20">
+            <div class="bg-blue-100 text-blue-500 w-20 h-20 rounded-full flex items-center justify-center mb-6 relative">
+                <svg class="animate-spin h-10 w-10 text-blue-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                     <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
                     <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                 </svg>
-                <div class="flex flex-col">
-                    <span class="font-bold">Enviando tu Plan...</span>
-                    <span class="text-xs opacity-80">Por favor espera un momento</span>
-                </div>
             </div>
-        }
+            
+            <h3 class="text-2xl font-black text-deep-blue mb-2">Enviando tu Plan...</h3>
+            <p class="text-gray-600 mb-8 max-w-[250px]">
+                Por favor espera un momento mientras preparamos y enviamos tu reporte financiero.
+            </p>
+
+            <div class="flex flex-col gap-3 w-full">
+                <button (click)="closeEmailModal()" class="text-sm font-medium text-gray-400 hover:text-gray-600 transition-colors">
+                    Cerrar
+                </button>
+            </div>
+        </div>
     </div>
+    }
 
     <!-- Centered Modal for Email Success -->
     @if (emailStatus() === 'sent') {

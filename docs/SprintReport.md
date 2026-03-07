@@ -96,7 +96,7 @@
 | US-MVP1.9 (sub1)     | Button Style Fix ("Comenzar mi Diagnóstico")     | P1       | 📂 TODO |
 | US-MVP1.1            | "Asesoría Gratuita" CTA Button                   | P0       | 📂 TODO |
 | US-MVP1.2            | WGC "Descubre como Evitarlo ↓" Button            | P0       | 📂 TODO |
-| US-MVP1.4            | Footer Component                                 | P0       | 📂 TODO |
+| US-MVP1.4            | Footer Component                                 | P0       | ✅ DONE |
 | US-MVP1.3            | Review Call Section "Agenda tu Llamada"          | P0       | ✅ DONE |
 | US-MVP1.5            | Navbar Section Navigation                        | P0       | 📂 TODO |
 
@@ -142,9 +142,9 @@
 | Sprint 1            | 5                 | 0                | Foundation — all done              |
 | Sprint 2            | 4                 | 0                | Visual hook — all done             |
 | Sprint 3            | 4                 | 3 (US5.x)        | US5.x deferred by product decision |
-| Sprint 4            | 1 (TODO)          | —                | Active now                         |
+| Sprint 4            | 2 (TODO)          | —                | Active now                         |
 | Sprint 5            | 0 (Frozen)        | —                | Post-MVP#1                         |
-| **Total Completed** | **14/22**         | —                | **64% of original backlog done**   |
+| **Total Completed** | **15/22**         | —                | **68% of original backlog done**   |
 
 ---
 

@@ -5,6 +5,7 @@ import { WealthGapChart } from '../../wealth-gap-chart/wealth-gap-chart';
 import { CostOfWaiting } from '../../cost-of-waiting/cost-of-waiting';
 import { RetirementSimulator } from '../../retirement-simulator/retirement-simulator';
 import { ReviewCallSection } from '../../review-call/review-call-section';
+import { Footer } from '../../footer/footer';
 import { PdfReportService } from '../../../core/services/pdf-report.service';
 import { EmailService } from '../../../core/services/email.service';
 import { IEmailProvider } from '../../../core/interfaces/i-email-provider';
@@ -17,7 +18,7 @@ export type EmailDispatchStatus = 'idle' | 'sending' | 'sent' | 'failed';
 
 @Component({
   selector: 'ft-home-page',
-  imports: [Navbar, Hero, WealthGapChart, CostOfWaiting, RetirementSimulator, ReviewCallSection],
+  imports: [Navbar, Hero, WealthGapChart, CostOfWaiting, RetirementSimulator, ReviewCallSection, Footer],
   templateUrl: './home-page.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

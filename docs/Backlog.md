@@ -91,7 +91,7 @@ _All items required to close the first deployable MVP._
 - [US-MVP1.1: "Asesoría Gratuita" CTA Button](./stories/US-MVP1.1.md) 📂 TODO
 - [US-MVP1.2: WGC "Descubre como Evitarlo ↓" Button](./stories/US-MVP1.2.md) 📂 TODO
 - [US-MVP1.3: Nueva Sección "Agenda tu Llamada de Revisión"](./stories/US-MVP1.3.md) ✅ DONE
-- [US-MVP1.4: Footer Component](./stories/US-MVP1.4.md) 📂 TODO
+- [US-MVP1.4: Footer Component](./stories/US-MVP1.4.md) ✅ DONE
 - [US-MVP1.5: Navbar Section Navigation](./stories/US-MVP1.5.md) 📂 TODO
 
 ### Fixes (P1 — Medium Priority)

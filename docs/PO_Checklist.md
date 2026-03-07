@@ -35,44 +35,44 @@ This checklist serves as the final validation gate for the Product Owner to ensu
 
 ### Sprints 1–3 (Completed/Partial)
 
-| Story ID  | Description            | Status     | Readiness (RfD) |
-| :-------- | :--------------------- | :--------- | :-------------- |
-| **US1.1** | Project Initialization | 🟢 Done    | **Done**        |
-| **US1.2** | Global Design System   | 🟢 Done    | **Done**        |
-| **US1.3** | Storybook Setup        | 🟢 Done    | **Done**        |
-| **US1.4** | Wealth Gap Engine      | 🟢 Done    | **Done**        |
-| **US1.5** | Repository Pattern     | 🟢 Done    | **Done**        |
-| **US2.1** | Lead Capture Form      | 🟢 Done    | **Done**        |
-| **US2.2** | PDF Report Gen         | 🟢 Done    | **Done**        |
-| **US2.3** | PDF Email Delivery     | 🟢 Done    | **Done**        |
-| **US2.4** | Success Screen         | 🟢 Done    | **Done**        |
-| **US3.1** | Wealth Gap Chart       | 🟢 Done    | **Done**        |
-| **US3.2** | Retirement Simulator   | 🟢 Done    | **Done**        |
-| **US3.3** | CDP vs Market          | ❄️ MVP#2  | **Frozen**      |
-| **US4.1** | Hero & Navbar          | 🟢 Done    | **Done**        |
-| **US4.2** | Cost of Waiting        | 🟢 Done    | **Done**        |
-| **US4.3** | Market Widgets         | ❄️ MVP#2  | **Frozen**      |
-| **US5.1** | Floating CTA           | ❄️ MVP#2  | **Frozen**      |
-| **US5.2** | Booking & Calendar     | ❄️ MVP#2  | **Frozen**      |
-| **US5.3** | Booking Email          | ❄️ MVP#2  | **Frozen**      |
-| **US6.1** | Wishlist Board         | ❄️ MVP#2  | **Frozen**      |
-| **US6.2** | i18n Polish            | ❄️ MVP#2  | **Frozen**      |
-| **US6.3** | A11y & Storybook       | ❄️ MVP#2  | **Frozen**      |
-| **US6.4** | Perf & Production      | ❄️ MVP#2  | **Frozen**      |
+| Story ID  | Description            | Status   | Readiness (RfD) |
+| :-------- | :--------------------- | :------- | :-------------- |
+| **US1.1** | Project Initialization | 🟢 Done  | **Done**        |
+| **US1.2** | Global Design System   | 🟢 Done  | **Done**        |
+| **US1.3** | Storybook Setup        | 🟢 Done  | **Done**        |
+| **US1.4** | Wealth Gap Engine      | 🟢 Done  | **Done**        |
+| **US1.5** | Repository Pattern     | 🟢 Done  | **Done**        |
+| **US2.1** | Lead Capture Form      | 🟢 Done  | **Done**        |
+| **US2.2** | PDF Report Gen         | 🟢 Done  | **Done**        |
+| **US2.3** | PDF Email Delivery     | 🟢 Done  | **Done**        |
+| **US2.4** | Success Screen         | 🟢 Done  | **Done**        |
+| **US3.1** | Wealth Gap Chart       | 🟢 Done  | **Done**        |
+| **US3.2** | Retirement Simulator   | 🟢 Done  | **Done**        |
+| **US3.3** | CDP vs Market          | ❄️ MVP#2 | **Frozen**      |
+| **US4.1** | Hero & Navbar          | 🟢 Done  | **Done**        |
+| **US4.2** | Cost of Waiting        | 🟢 Done  | **Done**        |
+| **US4.3** | Market Widgets         | ❄️ MVP#2 | **Frozen**      |
+| **US5.1** | Floating CTA           | ❄️ MVP#2 | **Frozen**      |
+| **US5.2** | Booking & Calendar     | ❄️ MVP#2 | **Frozen**      |
+| **US5.3** | Booking Email          | ❄️ MVP#2 | **Frozen**      |
+| **US6.1** | Wishlist Board         | ❄️ MVP#2 | **Frozen**      |
+| **US6.2** | i18n Polish            | ❄️ MVP#2 | **Frozen**      |
+| **US6.3** | A11y & Storybook       | ❄️ MVP#2 | **Frozen**      |
+| **US6.4** | Perf & Production      | ❄️ MVP#2 | **Frozen**      |
 
 ### Sprint 4 — MVP#1 New Stories (Active)
 
-| Story ID       | Description                          | Status     | Readiness (RfD) |
-| :------------- | :----------------------------------- | :--------- | :-------------- |
-| **US-MVP1.1** | "Asesoría Gratuita" CTA Button       | 📂 TODO    | **Ready**       |
-| **US-MVP1.2** | WGC "Descubre como Evitarlo" Button  | 📂 TODO    | **Ready**       |
-| **US-MVP1.3** | Review Call Section                  | 📂 TODO    | **Ready**       |
-| **US-MVP1.4** | Footer Component                     | 📂 TODO    | **Ready**       |
-| **US-MVP1.5** | Navbar Section Navigation            | 📂 TODO    | **Ready**       |
-| **US-MVP1.6** | Retirement Simulator Fixes           | 📂 TODO    | **Ready**       |
-| **US-MVP1.7** | Wealth Gap Chart Fixes               | 📂 TODO    | **Ready**       |
-| **US-MVP1.8** | Cost of Waiting Banner Fixes         | 📂 TODO    | **Ready**       |
-| **US-MVP1.9** | Cross-Cutting Fixes                  | 📂 TODO    | **Ready**       |
+| Story ID      | Description                         | Status  | Readiness (RfD) |
+| :------------ | :---------------------------------- | :------ | :-------------- |
+| **US-MVP1.1** | "Asesoría Gratuita" CTA Button      | 📂 TODO | **Ready**       |
+| **US-MVP1.2** | WGC "Descubre como Evitarlo" Button | 📂 TODO | **Ready**       |
+| **US-MVP1.3** | Review Call Section                 | 🟢 Done | **Done**        |
+| **US-MVP1.4** | Footer Component                    | 🟢 Done | **Done**        |
+| **US-MVP1.5** | Navbar Section Navigation           | 📂 TODO | **Ready**       |
+| **US-MVP1.6** | Retirement Simulator Fixes          | 📂 TODO | **Ready**       |
+| **US-MVP1.7** | Wealth Gap Chart Fixes              | 📂 TODO | **Ready**       |
+| **US-MVP1.8** | Cost of Waiting Banner Fixes        | 📂 TODO | **Ready**       |
+| **US-MVP1.9** | Cross-Cutting Fixes                 | 📂 TODO | **Ready**       |
 
 ---
 

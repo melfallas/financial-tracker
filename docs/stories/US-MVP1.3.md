@@ -62,14 +62,14 @@ Refer to the PDF email template for the following sections as design reference:
 
 ## Definition of Done
 
-- [ ] Component created with correct file structure.
-- [ ] Section ID `agenda-llamada` present.
-- [ ] H2, body text, and CTA button render correctly.
-- [ ] Calendly link opens in new tab.
-- [ ] Premium visual design matching email inspiration.
-- [ ] Responsive verified (mobile/tablet/desktop).
-- [ ] Accessibility verified (semantic tags, ARIA, contrast).
-- [ ] Compliance report updated.
+- [x] Component created with correct file structure.
+- [x] Section ID `agenda-llamada` present.
+- [x] H2, body text, and CTA button render correctly.
+- [x] Calendly link opens in new tab.
+- [x] Premium visual design matching email inspiration.
+- [x] Responsive verified (mobile/tablet/desktop).
+- [x] Accessibility verified (semantic tags, ARIA, contrast).
+- [x] Compliance report updated.
 
 ---
 

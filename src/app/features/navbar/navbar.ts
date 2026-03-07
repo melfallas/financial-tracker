@@ -13,6 +13,7 @@ import { LanguageService, Language } from '../../core/services/language.service'
     },
 })
 export class Navbar {
+    var1 = import.meta.env.NG_APP_VAR1;
     langService = inject(LanguageService);
     lastScrollTop = signal<number>(0);
     isNavbarVisible = signal<boolean>(true);

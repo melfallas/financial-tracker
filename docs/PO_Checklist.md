@@ -65,7 +65,7 @@ This checklist serves as the final validation gate for the Product Owner to ensu
 | Story ID      | Description                         | Status  | Readiness (RfD) |
 | :------------ | :---------------------------------- | :------ | :-------------- |
 | **US-MVP1.1** | "Asesoría Gratuita" CTA Button      | 🟢 Done | **Done**        |
-| **US-MVP1.2** | WGC "Descubre como Evitarlo" Button | 📂 TODO | **Ready**       |
+| **US-MVP1.2** | WGC "Descubre como Evitarlo" Button | 🟢 Done | **Done**        |
 | **US-MVP1.3** | Review Call Section                 | 🟢 Done | **Done**        |
 | **US-MVP1.4** | Footer Component                    | 🟢 Done | **Done**        |
 | **US-MVP1.5** | Navbar Section Navigation           | 🟢 Done | **Done**        |

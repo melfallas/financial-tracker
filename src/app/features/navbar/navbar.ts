@@ -53,13 +53,15 @@ export class Navbar implements OnInit, OnDestroy {
       threshold: 0
     };
 
-    this.observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          this.activeSection.set(entry.target.id);
-        }
-      });
-    }, options);
+    if (typeof IntersectionObserver !== 'undefined') {
+      this.observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            this.activeSection.set(entry.target.id);
+          }
+        });
+      }, options);
+    }
 
     this.navItems.forEach(item => {
       const element = document.getElementById(item.id);

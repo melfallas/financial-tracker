@@ -180,3 +180,20 @@
 3. **Link Source:** Centralized via `booking.ts` constant. **Yes**
 4. **ARIA Update:** `aria-label="Agenda una Asesoría Gratuita"`. **Yes**
 5. **Responsiveness:** Validated on desktop and mobile dropdown. **Yes**
+
+---
+
+**DateTime:** 2026-03-07T04:00:00
+**Task:** US-MVP1.2 Wealth Gap "Descubre como Evitarlo ↓" Button
+**Status:** PASSED
+**Violations:** None
+**Files Detected:** None
+**Refactor Suggestions:** None
+
+### Checkpoints Verification:
+
+1. **Button Style:** Identical to emerald CTA via shared class. **Yes**
+2. **Scroll Logic:** Uses ScrollService to #cost-of-waiting. **Yes**
+3. **Accessibility:** aria-label correctly implemented. **Yes**
+4. **Width (AC3):** 80% grid width on MD+, 100% on SM. **Yes**
+5. **Global CSS:** Refactored `.cow-cta-button` to `styles.css` for reuse. **Yes**

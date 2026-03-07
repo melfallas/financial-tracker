@@ -15,6 +15,7 @@ import { BaseChartDirective } from 'ng2-charts';
 import { ChartConfiguration, ChartData, Chart, Filler } from 'chart.js';
 import { WealthGapService } from './wealth-gap.service';
 import { WealthGapInput } from '@shared/types';
+import { ScrollService } from '../../core/services/scroll.service';
 
 // Register Chart.js Filler plugin for fill between datasets
 Chart.register(Filler);
@@ -29,6 +30,7 @@ Chart.register(Filler);
 export class WealthGapChart implements OnInit, OnDestroy {
   private readonly wealthGapService = inject(WealthGapService);
   private readonly chartDirective = viewChild(BaseChartDirective);
+  readonly scrollService = inject(ScrollService);
 
   getChartImage(): string {
     return this.chartDirective()?.chart?.toBase64Image() || '';

@@ -5,7 +5,7 @@
 > **Priority:** P0 (Feature — High)
 > **Size:** S
 > **Owner:** Angi (Dev)
-> **Status:** 📂 TODO
+> **Status:** ✅ DONE
 
 ---
 
@@ -25,14 +25,14 @@ After the user sees the visual impact of the Wealth Gap, a clear CTA button help
 
 ## Acceptance Criteria
 
-| # | Criterion | Priority |
-|---|-----------|----------|
-| AC1 | New button with text **"Descubre como Evitarlo ↓"** placed **below the chart area** in the Wealth Gap section. | Must |
-| AC2 | Visual design **identical** to "Detén la Pérdida" button: Emerald Green (`#00C853`), same border-radius, font-weight, box-shadow, and hover/focus transition effects. | Must |
-| AC3 | Button width: **80% of the main chart grid width**, centered horizontally with respect to the chart column. On mobile (< 768px): can be 100% width. | Must |
-| AC4 | On click: viewport **smooth-scrolls and centers** on the Cost of Waiting Banner section (`#cost-of-waiting`). Uses `scrollIntoView({ behavior: 'smooth', block: 'center' })`. | Must |
-| AC5 | `aria-label="Descubre cómo evitar la brecha de riqueza"` for screen reader accessibility. | Must |
-| AC6 | Fully responsive: correct layout on mobile (< 768px), tablet, desktop. | Must |
+| #   | Criterion                                                                                                                                                                     | Priority |
+| --- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------- |
+| AC1 | New button with text **"Descubre como Evitarlo ↓"** placed **below the chart area** in the Wealth Gap section.                                                                | Must     |
+| AC2 | Visual design **identical** to "Detén la Pérdida" button: Emerald Green (`#00C853`), same border-radius, font-weight, box-shadow, and hover/focus transition effects.         | Must     |
+| AC3 | Button width: **80% of the main chart grid width**, centered horizontally with respect to the chart column. On mobile (< 768px): can be 100% width.                           | Must     |
+| AC4 | On click: viewport **smooth-scrolls and centers** on the Cost of Waiting Banner section (`#cost-of-waiting`). Uses `scrollIntoView({ behavior: 'smooth', block: 'center' })`. | Must     |
+| AC5 | `aria-label="Descubre cómo evitar la brecha de riqueza"` for screen reader accessibility.                                                                                     | Must     |
+| AC6 | Fully responsive: correct layout on mobile (< 768px), tablet, desktop.                                                                                                        | Must     |
 
 ---
 
@@ -47,12 +47,13 @@ After the user sees the visual impact of the Wealth Gap, a clear CTA button help
 
 ## Definition of Done
 
-- [ ] Button visible below chart with correct style.
-- [ ] 80% width of chart grid, centered.
-- [ ] Smooth scroll to Cost of Waiting section on click.
-- [ ] Accessible (aria-label, keyboard navigable).
-- [ ] Responsive verified (mobile/tablet/desktop).
-- [ ] Compliance report updated.
+- [x] Button visible below chart with correct style.
+- [x] 80% width of chart grid, centered.
+- [x] Smooth scroll to Cost of Waiting section on click.
+- [x] Accessible (aria-label, keyboard navigable).
+- [x] Responsive verified (mobile/tablet/desktop).
+- [x] Compliance report updated.
 
 ---
-*— BMAD Master Orchestrator · 2026-03-06*
+
+_— BMAD Master Orchestrator · 2026-03-06_

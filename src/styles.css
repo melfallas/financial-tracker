@@ -37,4 +37,17 @@
   .card-fintech {
     @apply bg-white rounded-lg shadow-sm border border-gray-100 p-6;
   }
+  .cow-cta-button {
+    background-color: #10B981;
+    /* Emerald Green */
+    color: #FFFFFF;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    @apply shadow-2xl transform flex items-center justify-center gap-3;
+  }
+
+  .cow-cta-button:hover {
+    background-color: #059669;
+    /* Darker Emerald */
+    @apply -translate-y-2 scale-105 shadow-emerald-500/30;
+  }
 }

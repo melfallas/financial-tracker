@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.11.0](https://github.com/melfallas/financial-tracker/compare/v0.10.0...v0.11.0) (2026-03-07)
+
+
+### Features
+
+* introduce Cost of Waiting feature to calculate and display inflation's impact on savings. ([dccdb7a](https://github.com/melfallas/financial-tracker/commit/dccdb7ab5a1b8a507f4a27023d437d799e91672d))
+
+
+### Bug Fixes
+
+* **cost-of-waiting:** add capital erosion display ([c7f0b7d](https://github.com/melfallas/financial-tracker/commit/c7f0b7de608dd3b179a443cd98f866eaea36096f))
+
 ## [0.10.0](https://github.com/melfallas/financial-tracker/compare/v0.9.0...v0.10.0) (2026-03-06)
 
 

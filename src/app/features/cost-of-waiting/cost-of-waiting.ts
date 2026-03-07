@@ -47,6 +47,7 @@ export class CostOfWaiting implements AfterViewInit, OnDestroy {
     });
 
     animatedLoss = signal<number>(0);
+    animatedRemaining = computed(() => this.displaySavings() - this.animatedLoss());
     private animationFrameId?: number;
     private observer?: IntersectionObserver;
 

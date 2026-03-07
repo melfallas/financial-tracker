@@ -97,7 +97,7 @@ _All items required to close the first deployable MVP._
 ### Fixes (P1 — Medium Priority)
 
 - [US-MVP1.6: Retirement Simulator Fixes (4 sub-issues)](./stories/US-MVP1.6.md) 📂 TODO
-- [US-MVP1.7: Wealth Gap Chart Fixes (5 sub-issues)](./stories/US-MVP1.7.md) 📂 TODO
+- [US-MVP1.7: Wealth Gap Chart Fixes (6 sub-issues)](./stories/US-MVP1.7.md) 📂 TODO
 - [US-MVP1.8: Cost of Waiting Banner Fixes (2 sub-issues)](./stories/US-MVP1.8.md) 📂 TODO
 - [US-MVP1.9: Cross-Cutting Fixes (button style, Chart.js, GitHub Pages)](./stories/US-MVP1.9.md) 📂 TODO
 

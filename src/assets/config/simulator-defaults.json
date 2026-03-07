@@ -1,0 +1,23 @@
+{
+  "version": "1.0.0",
+  "general": {
+    "initial_capital": 1000,
+    "monthly_contributions": 0,
+    "annual_return": 15,
+    "annual_inflation": 6,
+    "term_in_years": 20
+  },
+  "wealth_gap_chart": {
+    "critical_inflation": 11
+  },
+  "cost_of_waiting": {
+    "low_loss_rate": 25,
+    "moderate_loss_rate": 50,
+    "critical_loss_rate": 75
+  },
+  "retirement_simulator": {
+    "monthly_expenses": null,
+    "current_age": null,
+    "retirement_age": 65
+  }
+}

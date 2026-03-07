@@ -1,16 +1,23 @@
-import { Injectable, computed, signal } from '@angular/core';
+import { Injectable, computed, inject } from '@angular/core';
 import { WealthGapInput, ProjectionEntry } from '@shared/types';
 import { calculateWealthGap } from '@shared/utils';
+import { SimulatorConfigService } from '../../core/services/simulator-config.service';
+import { SimulatorsStateService } from '../../core/services/simulators-state.service';
 
 @Injectable({ providedIn: 'root' })
 export class WealthGapService {
-  readonly inputs = signal<WealthGapInput>({
-    initialCapital: 5000,
-    monthlyContribution: 200,
-    annualReturnRate: 10,
-    annualInflationRate: 6,
-    years: 20,
-  });
+  private configService = inject(SimulatorConfigService);
+  private stateService = inject(SimulatorsStateService);
+  private defaults = this.configService.config();
+
+  // Combine state from shared service into the format needed by calculateWealthGap
+  readonly inputs = computed<WealthGapInput>(() => ({
+    initialCapital: this.stateService.initialCapital(),
+    monthlyContribution: this.stateService.monthlyContribution(),
+    annualReturnRate: this.stateService.annualReturn(),
+    annualInflationRate: this.stateService.annualInflation(),
+    years: this.stateService.years(),
+  }));
 
   readonly projections = computed<ProjectionEntry[]>(() =>
     calculateWealthGap(this.inputs())
@@ -22,7 +29,11 @@ export class WealthGapService {
   });
 
   readonly isHighInflation = computed<boolean>(
-    () => this.inputs().annualInflationRate > 8
+    () => this.inputs().annualInflationRate > (this.defaults?.wealth_gap_chart.critical_inflation ?? 8)
+  );
+
+  readonly criticalInflationRate = computed<number>(
+    () => this.defaults?.wealth_gap_chart.critical_inflation ?? 8
   );
 
   readonly chartLabels = computed<string[]>(() =>
@@ -38,6 +49,12 @@ export class WealthGapService {
   );
 
   updateInput<K extends keyof WealthGapInput>(key: K, value: WealthGapInput[K]): void {
-    this.inputs.update((current) => ({ ...current, [key]: value }));
+    switch (key) {
+      case 'initialCapital': this.stateService.updateInitialCapital(value); break;
+      case 'monthlyContribution': this.stateService.updateMonthlyContribution(value); break;
+      case 'annualReturnRate': this.stateService.updateAnnualReturn(value); break;
+      case 'annualInflationRate': this.stateService.updateAnnualInflation(value); break;
+      case 'years': this.stateService.updateYears(value); break;
+    }
   }
 }

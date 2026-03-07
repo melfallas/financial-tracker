@@ -5,7 +5,7 @@
 > **Priority:** P1 (Fix — Medium)
 > **Size:** L
 > **Owner:** Angi (Dev) + Architecture guidance (Winston) for defaults service
-> **Status:** 📂 TODO
+> **Status:** ✅ DONE
 
 ---
 
@@ -54,16 +54,27 @@ Each slider must be re-configured to the following specs:
 **Interface (core/interfaces/simulator-config.interface.ts):**
 
 ```typescript
-export interface WealthGapDefaults {
-  capitalInicial: number;
-  aportesMensuales: number;
-  retornoAnual: number;
-  inflacionAnual: number;
-  anos: number;
-}
 export interface SimulatorDefaults {
-  wealthGapChart: WealthGapDefaults;
-  // extensible for other simulators
+  general: {
+    initial_capital: number;
+    monthly_contributions: number;
+    annual_return: number;
+    annual_inflation: number;
+    term_in_years: number;
+  };
+  wealth_gap_chart: {
+    critical_inflation: number;
+  };
+  cost_of_waiting: {
+    low_loss_rate: number;
+    moderate_loss_rate: number;
+    critical_loss_rate: number;
+  };
+  retirement_simulator: {
+    monthly_expenses: number | null;
+    current_age: number | null;
+    retirement_age: number;
+  };
 }
 export interface ISimulatorConfigRepository {
   loadDefaults(): Observable<SimulatorDefaults>;
@@ -75,28 +86,39 @@ export interface ISimulatorConfigRepository {
 ```json
 {
   "version": "1.0.0",
-  "wealth_gap_chart": {
-    "capital_inicial": 1000,
-    "aportes_mensuales": 0,
-    "retorno_anual": 15,
-    "inflacion_anual": 6,
-    "anos": 20
+  "general": {
+    "initial_capital": 1000,
+    "monthly_contributions": 0,
+    "annual_return": 15,
+    "annual_inflation": 6,
+    "term_in_years": 20
   },
-  "retirement_simulator": {
-    "edad_actual": null,
-    "edad_retiro": 65,
-    "ahorros_liquidos": null,
-    "aporte_mensual": 0,
-    "retorno_anual": 10,
-    "inflacion_anual": 6
+  "wealth_gap_chart": {
+    "critical_inflation": 11
   },
   "cost_of_waiting": {
-    "si_tienes": 1000,
-    "plazo_anos": 10,
-    "inflacion_anual": 6
+    "low_loss_rate": 25,
+    "moderate_loss_rate": 50,
+    "critical_loss_rate": 75
+  },
+  "retirement_simulator": {
+    "monthly_expenses": null,
+    "current_age": null,
+    "retirement_age": 65
   }
 }
 ```
+
+### Sub-Issue 6: Input Validation & Shared Mapping
+
+| #     | Criterion                                                                                                                                                                                                                 |
+| ----- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| AC6.1 | **Shared Mapping:** `general.initial_capital` maps to "Capital Inicial" (Wealth Gap), "Si tienes" (Cost of Waiting), and "Ahorros Líquidos" (Retirement Simulator).                                                       |
+| AC6.2 | **Shared Mapping:** `general.monthly_contributions`, `general.term_in_years`, `general.annual_return`, and `general.annual_inflation` map to their respective fields across **all** sections.                             |
+| AC6.3 | **Validation Rules:** If any input is **empty, null, or 0** (except "Aporte Mensual", which can be 0), an error message must be displayed, and progress/calculation must be blocked.                                      |
+| AC6.4 | **Retirement Specific:** "Edad Actual" and "Gastos Mensuales" may be `null` initially. If any button (Siguiente Paso or Calcular Libertad) is clicked while these are empty/null/0, show error and block.                 |
+| AC6.5 | **Critical Inflation:** The high inflation warning must use `wealth_gap_chart.critical_inflation` from the JSON. The warning text must dynamically show "Inflación crítica (+[X]%)" where [X] is the value from the JSON. |
+| AC6.6 | **Sync Behavior:** Values are loaded **only** on app initialization. Subsequent changes by the user sync across signals, but do not re-read from the JSON.                                                                |
 
 **Service (core/services/simulator-config.service.ts):**
 
@@ -145,13 +167,16 @@ export interface ISimulatorConfigRepository {
 
 ## Definition of Done
 
-- [ ] Wealth Gap section fits on 1024px height without scroll.
-- [ ] All sliders have correct min/max/step values.
-- [ ] `simulator-defaults.json` created and service reads from it.
-- [ ] Slider track fill works on load and on programmatic changes.
-- [ ] Chart.js error resolved; charts render.
-- [ ] Unit tests for defaults service.
-- [ ] Compliance report updated.
+- [x] Wealth Gap section fits on 1024px height without scroll.
+- [x] All sliders have correct min/max/step values.
+- [x] `simulator-defaults.json` created in English snake_case and service reads from it.
+- [x] Shared `general` variables map correctly across all sections.
+- [x] Validation rules for empty/0 inputs implemented (except monthly contributions).
+- [x] Critical inflation is parameterized and dynamic in HTML/TS.
+- [x] Slider track fill works on load and on programmatic changes.
+- [x] Chart.js error resolved; charts render.
+- [x] Unit tests for defaults service.
+- [x] Compliance report updated.
 
 ---
 

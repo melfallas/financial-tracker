@@ -87,13 +87,12 @@
 
 | Story                | Description                                      | Priority | Status  |
 | -------------------- | ------------------------------------------------ | -------- | ------- |
-| US-MVP1.9 (sub2+3)   | GitHub Pages 404 Fix + Chart.js Registration Fix | P0       | 📂 TODO |
-| US-MVP1.7 (sub3+5)   | WGC Defaults Service + Chart Fix                 | P0       | 📂 TODO |
-| US-MVP1.6 (sub2)     | Retirement Sim Savings Sync Bug                  | P0       | 📂 TODO |
-| US-MVP1.8            | Cost of Waiting Banner Fixes                     | P0       | 📂 TODO |
-| US-MVP1.7 (sub1+2+4) | WGC Compact Layout + Sliders + Track Fill        | P0       | 📂 TODO |
-| US-MVP1.6 (sub1+3+4) | Retirement Sim Age Validation + Scroll           | P0       | 📂 TODO |
-| US-MVP1.9 (sub1)     | Button Style Fix ("Comenzar mi Diagnóstico")     | P1       | 📂 TODO |
+| US-MVP1.9 (sub2+3)   | GitHub Pages 404 Fix + Chart.js Registration Fix | P0       | ✅ DONE |
+| US-MVP1.7 (sub1-6)   | WGC Redesign + Defaults + Shared Mapping + Fixes | P0       | ✅ DONE |
+| US-MVP1.6 (sub2)     | Retirement Sim Savings Sync Bug                  | P0       | ✅ DONE |
+| US-MVP1.8            | Cost of Waiting Banner Fixes                     | P0       | ✅ DONE |
+| US-MVP1.6 (sub1+3+4) | Retirement Sim Age Validation + Scroll           | P0       | ✅ DONE |
+| US-MVP1.9 (sub1)     | Button Style Fix ("Comenzar mi Diagnóstico")     | P1       | ✅ DONE |
 | US-MVP1.1            | "Asesoría Gratuita" CTA Button                   | P0       | ✅ DONE |
 | US-MVP1.2            | WGC "Descubre como Evitarlo ↓" Button            | P0       | ✅ DONE |
 | US-MVP1.4            | Footer Component                                 | P0       | ✅ DONE |

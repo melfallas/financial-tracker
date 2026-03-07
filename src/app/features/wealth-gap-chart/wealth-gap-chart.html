@@ -37,7 +37,7 @@
             @if (isHighInflation()) {
               <div class="absolute top-3 right-3 flex items-center gap-2 bg-red-50 border border-red-200 text-[#D32F2F] text-xs font-semibold px-3 py-1.5 rounded-full z-10">
                 <span class="w-2 h-2 bg-[#D32F2F] rounded-full animate-ping"></span>
-                Inflación crítica (+8%)
+                Inflación crítica (+{{criticalInflationRate()}}%)
               </div>
             }
           </div>

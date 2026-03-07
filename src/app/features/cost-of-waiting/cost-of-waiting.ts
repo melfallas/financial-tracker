@@ -7,13 +7,12 @@ import {
     ElementRef,
     ViewChild,
     AfterViewInit,
-    untracked,
     OnDestroy,
     computed
 } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { CurrencyPipe, DecimalPipe } from '@angular/common';
-import { WealthGapService } from '../wealth-gap-chart/wealth-gap.service';
+import { CurrencyPipe } from '@angular/common';
+import { SimulatorsStateService } from '../../core/services/simulators-state.service';
 import { ScrollService } from '../../core/services/scroll.service';
 
 @Component({
@@ -24,79 +23,51 @@ import { ScrollService } from '../../core/services/scroll.service';
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CostOfWaiting implements AfterViewInit, OnDestroy {
-    private wealthGapService = inject(WealthGapService);
+    private stateService = inject(SimulatorsStateService);
     protected scrollService = inject(ScrollService);
 
-    // Input signals tied to the WealthGapService
-    displaySavings = signal<number>(this.wealthGapService.inputs().initialCapital);
-    displayYears = signal<number>(this.wealthGapService.inputs().years);
-    displayInflation = signal<number>(this.wealthGapService.inputs().annualInflationRate);
+    // Bind to shared state
+    get displaySavings() { return this.stateService.initialCapital(); }
+    get displayYears() { return this.stateService.years(); }
+    get displayInflation() { return this.stateService.annualInflation(); }
 
     // Business Logic: Compound inflation loss
-    // Principal loss = Principal * ( (1 + annualInflation/100/12)^(years * 12) - 1 )
     estimatedLoss = computed(() => {
-        const savings = this.displaySavings();
-        const annualRate = this.displayInflation();
+        const savings = this.stateService.initialCapital();
+        const annualRate = this.stateService.annualInflation();
+        const years = this.stateService.years();
         const monthlyRate = annualRate / 100 / 12;
-        const totalMonths = this.displayYears() * 12;
+        const totalMonths = years * 12;
 
-        // We calculate the difference between nominal value and real value (erosion)
-        // Nominal value doesn't change if keeping in 'standard account' (0% return)
-        // Real Value = Savings / (1 + monthlyInflation)^totalMonths
-        // Loss = Savings - Real Value
         const realValue = savings / Math.pow(1 + monthlyRate, totalMonths);
         return savings - realValue;
     });
 
     animatedLoss = signal<number>(0);
-    animatedRemaining = computed(() => this.displaySavings() - this.animatedLoss());
+    animatedRemaining = computed(() => this.stateService.initialCapital() - this.animatedLoss());
     private animationFrameId?: number;
     private observer?: IntersectionObserver;
 
     @ViewChild('bannerSection') bannerSection?: ElementRef<HTMLElement>;
 
     constructor() {
-        // Effect to sync and animate whenever the estimated loss changes
-        effect(
-            () => {
-                const targetLoss = this.estimatedLoss();
-                this.animateValue(this.animatedLoss(), targetLoss, 600);
+        // Effect to trigger animation whenever the estimated loss changes
+        effect(() => {
+            const targetLoss = this.estimatedLoss();
+            this.animateValue(this.animatedLoss(), targetLoss, 1200);
+        });
+    }
 
-                // Update global service values if changed locally
-                untracked(() => {
-                    const currentInputs = this.wealthGapService.inputs();
-                    if (this.displaySavings() !== currentInputs.initialCapital) {
-                        this.wealthGapService.updateInput('initialCapital', this.displaySavings());
-                    }
-                    if (this.displayYears() !== currentInputs.years) {
-                        this.wealthGapService.updateInput('years', this.displayYears());
-                    }
-                    if (this.displayInflation() !== currentInputs.annualInflationRate) {
-                        this.wealthGapService.updateInput('annualInflationRate', this.displayInflation());
-                    }
-                });
-            },
-            { allowSignalWrites: true }
-        );
+    updateSavings(val: number | string) {
+        this.stateService.updateInitialCapital(+val);
+    }
 
-        // Sync from global service back to local signals
-        effect(
-            () => {
-                const globalInputs = this.wealthGapService.inputs();
-                untracked(() => {
-                    if (globalInputs.initialCapital !== this.displaySavings()) {
-                        this.displaySavings.set(globalInputs.initialCapital);
-                    }
-                    if (globalInputs.years !== this.displayYears()) {
-                        this.displayYears.set(globalInputs.years);
-                    }
-                    if (globalInputs.annualInflationRate !== this.displayInflation()) {
-                        this.displayInflation.set(globalInputs.annualInflationRate);
-                    }
-                });
-            },
-            { allowSignalWrites: true }
-        );
+    updateYears(val: number | string) {
+        this.stateService.updateYears(+val);
+    }
+
+    updateInflation(val: number | string) {
+        this.stateService.updateAnnualInflation(+val);
     }
 
     ngAfterViewInit() {

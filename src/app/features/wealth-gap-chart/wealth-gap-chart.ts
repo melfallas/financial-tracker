@@ -8,6 +8,7 @@ import {
   ElementRef,
   viewChild,
   OnInit,
+  untracked,
   OnDestroy,
 } from '@angular/core';
 import { DecimalPipe } from '@angular/common';
@@ -40,6 +41,7 @@ export class WealthGapChart implements OnInit, OnDestroy {
   readonly inputs = this.wealthGapService.inputs;
   readonly totalErosion = this.wealthGapService.totalErosion;
   readonly isHighInflation = this.wealthGapService.isHighInflation;
+  readonly criticalInflationRate = this.wealthGapService.criticalInflationRate;
 
   // Count-up animation for total erosion
   readonly displayedErosion = signal<number>(0);
@@ -154,10 +156,10 @@ export class WealthGapChart implements OnInit, OnDestroy {
     prefix?: string;
     suffix?: string;
   }> = [
-      { key: 'initialCapital', label: 'Capital Inicial', min: 0, max: 100000, step: 500, prefix: '$' },
-      { key: 'monthlyContribution', label: 'Aporte Mensual', min: 0, max: 5000, step: 50, prefix: '$' },
-      { key: 'annualReturnRate', label: 'Retorno Anual', min: 1, max: 25, step: 0.5, suffix: '%' },
-      { key: 'annualInflationRate', label: 'Inflación Anual', min: 1, max: 20, step: 0.5, suffix: '%' },
+      { key: 'initialCapital', label: 'Capital Inicial', min: 500, max: 20000, step: 500, prefix: '$' },
+      { key: 'monthlyContribution', label: 'Aporte Mensual', min: 0, max: 3000, step: 100, prefix: '$' },
+      { key: 'annualReturnRate', label: 'Retorno Anual', min: 1, max: 20, step: 1, suffix: '%' },
+      { key: 'annualInflationRate', label: 'Inflación Anual', min: 1, max: 15, step: 1, suffix: '%' },
       { key: 'years', label: 'Años', min: 5, max: 40, step: 1, suffix: ' años' },
     ];
 
@@ -170,6 +172,14 @@ export class WealthGapChart implements OnInit, OnDestroy {
     effect(() => {
       const target = this.totalErosion();
       this.runCountUp(target);
+    });
+
+    // Sync slider track fill when values change (internal or external)
+    effect(() => {
+      this.inputs();
+      untracked(() => {
+        setTimeout(() => this.initializeSliderStyles(), 0);
+      });
     });
   }
 

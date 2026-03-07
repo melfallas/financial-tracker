@@ -7,7 +7,8 @@
 ---
 
 ## 🏗️ 1. Core Foundations & Technical Scaffold ✅ DONE
-*Sprint 1 — All stories complete.*
+
+_Sprint 1 — All stories complete._
 
 - **Full Epic Detail:** [Epic 1: Foundations](./epics/Epic-1.md)
 - **Sharded Stories:**
@@ -20,7 +21,8 @@
 ---
 
 ## 📈 2. Lead Capture, PDF & Email Delivery ✅ DONE
-*Sprint 3 — All stories complete.*
+
+_Sprint 3 — All stories complete._
 
 - **Full Epic Detail:** [Epic 2: Funnel](./epics/Epic-2.md)
 - **Sharded Stories:**
@@ -32,7 +34,8 @@
 ---
 
 ## 🧮 3. Financial Simulators & Interactive Tools ✅ DONE
-*Sprint 2 — Core simulators complete. US3.3 moved to MVP#2.*
+
+_Sprint 2 — Core simulators complete. US3.3 moved to MVP#2._
 
 - **Full Epic Detail:** [Epic 3: Simulators](./epics/Epic-3.md)
 - **Sharded Stories:**
@@ -43,7 +46,8 @@
 ---
 
 ## 🌐 4. Market Intelligence & Awareness Widgets — PARTIAL
-*Sprint 2 — US4.1 & US4.2 complete. US4.3 moved to MVP#2.*
+
+_Sprint 2 — US4.1 & US4.2 complete. US4.3 moved to MVP#2._
 
 - **Full Epic Detail:** [Epic 4: Widgets](./epics/Epic-4.md)
 - **Sharded Stories:**
@@ -54,7 +58,8 @@
 ---
 
 ## 📅 5. Consultation Booking & Scheduling ❄️ MVP#2
-*Sprint 3 — Deferred. US-MVP1.3 covers MVP#1 booking CTA via direct Calendly link.*
+
+_Sprint 3 — Deferred. US-MVP1.3 covers MVP#1 booking CTA via direct Calendly link._
 
 - **Full Epic Detail:** [Epic 5: Booking](./epics/Epic-5.md)
 - **Sharded Stories:**
@@ -76,28 +81,33 @@
 ---
 
 ## 🚀 7. MVP#1 — Features & Fixes (Sprint 4) 🆕 ACTIVE
-*All items required to close the first deployable MVP.*
+
+_All items required to close the first deployable MVP._
 
 - **Full Epic Detail:** [Epic 7: MVP1 Closure](./epics/epic-7.md)
 
 ### Features (P0 — High Priority)
-  - [US-MVP1.1: "Asesoría Gratuita" CTA Button](./stories/US-MVP1.1.md) 📂 TODO
-  - [US-MVP1.2: WGC "Descubre como Evitarlo ↓" Button](./stories/US-MVP1.2.md) 📂 TODO
-  - [US-MVP1.3: Nueva Sección "Agenda tu Llamada de Revisión"](./stories/US-MVP1.3.md) 📂 TODO
-  - [US-MVP1.4: Footer Component](./stories/US-MVP1.4.md) 📂 TODO
-  - [US-MVP1.5: Navbar Section Navigation](./stories/US-MVP1.5.md) 📂 TODO
+
+- [US-MVP1.1: "Asesoría Gratuita" CTA Button](./stories/US-MVP1.1.md) 📂 TODO
+- [US-MVP1.2: WGC "Descubre como Evitarlo ↓" Button](./stories/US-MVP1.2.md) 📂 TODO
+- [US-MVP1.3: Nueva Sección "Agenda tu Llamada de Revisión"](./stories/US-MVP1.3.md) ✅ DONE
+- [US-MVP1.4: Footer Component](./stories/US-MVP1.4.md) 📂 TODO
+- [US-MVP1.5: Navbar Section Navigation](./stories/US-MVP1.5.md) 📂 TODO
 
 ### Fixes (P1 — Medium Priority)
-  - [US-MVP1.6: Retirement Simulator Fixes (4 sub-issues)](./stories/US-MVP1.6.md) 📂 TODO
-  - [US-MVP1.7: Wealth Gap Chart Fixes (5 sub-issues)](./stories/US-MVP1.7.md) 📂 TODO
-  - [US-MVP1.8: Cost of Waiting Banner Fixes (2 sub-issues)](./stories/US-MVP1.8.md) 📂 TODO
-  - [US-MVP1.9: Cross-Cutting Fixes (button style, Chart.js, GitHub Pages)](./stories/US-MVP1.9.md) 📂 TODO
+
+- [US-MVP1.6: Retirement Simulator Fixes (4 sub-issues)](./stories/US-MVP1.6.md) 📂 TODO
+- [US-MVP1.7: Wealth Gap Chart Fixes (5 sub-issues)](./stories/US-MVP1.7.md) 📂 TODO
+- [US-MVP1.8: Cost of Waiting Banner Fixes (2 sub-issues)](./stories/US-MVP1.8.md) 📂 TODO
+- [US-MVP1.9: Cross-Cutting Fixes (button style, Chart.js, GitHub Pages)](./stories/US-MVP1.9.md) 📂 TODO
 
 ---
 
 ## 🚦 Roadmap & Dependencies
+
 For the exact execution sequence and dependency graph, please refer to:
 👉 **[Dependency-Analysis.md](./Dependency-Analysis.md)**
 
 ---
-*— Scrum Master (SM) · Financial Tracker · BMAD v4 · 2026-03-06*
+
+_— Scrum Master (SM) · Financial Tracker · BMAD v4 · 2026-03-06_

@@ -1,0 +1,129 @@
+:host {
+  display: block;
+  margin: 3rem auto;
+  max-width: 1200px;
+  padding: 0 1.5rem;
+}
+
+.review-call-container {
+  background: linear-gradient(135deg, var(--color-deep-blue) 0%, #2c5282 100%);
+  border-radius: 2rem; /* Premium rounded corners --radius-card equivalent */
+  padding: 4rem 2rem;
+  box-shadow: var(--shadow-premium);
+  color: white;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Optional subtle background pattern or glow */
+.review-call-container::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  right: -20%;
+  width: 300px;
+  height: 300px;
+  background: radial-gradient(circle, rgba(0, 200, 83, 0.15) 0%, transparent 70%);
+  z-index: 1;
+}
+
+.review-call-content {
+  position: relative;
+  z-index: 2;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.header-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.icon-wrapper {
+  background: rgba(255, 255, 255, 0.1);
+  width: 64px;
+  height: 64px;
+  border-radius: 1.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-emerald-green);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.review-call-title {
+  font-size: 2.5rem;
+  font-weight: 800;
+  margin: 0;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+}
+
+.review-call-body {
+  font-size: 1.125rem;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.9);
+  margin-bottom: 3rem;
+}
+
+.action-wrapper {
+  display: flex;
+  justify-content: center;
+}
+
+.review-call-cta {
+  background-color: var(--color-emerald-green);
+  color: white;
+  padding: 1.25rem 3rem;
+  font-size: 1.25rem;
+  font-weight: 700;
+  border: none;
+  border-radius: 1rem;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  box-shadow: 0 10px 20px rgba(0, 200, 83, 0.3);
+  width: 100%;
+  max-width: 400px;
+}
+
+.review-call-cta:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 15px 30px rgba(0, 200, 83, 0.45);
+  background-color: #00e676; /* Brighter emerald on hover */
+}
+
+.review-call-cta:active {
+  transform: translateY(0);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .review-call-container {
+    border-radius: 1.5rem;
+    padding: 3rem 1.5rem;
+  }
+
+  .review-call-title {
+    font-size: 2rem;
+  }
+
+  .review-call-body {
+    font-size: 1rem;
+    margin-bottom: 2.5rem;
+  }
+
+  .review-call-cta {
+    padding: 1.125rem 2rem;
+    font-size: 1.125rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .review-call-cta {
+    width: 100%;
+  }
+}

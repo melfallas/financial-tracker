@@ -14,6 +14,7 @@ import {
 import { FormsModule } from '@angular/forms';
 import { CurrencyPipe, DecimalPipe } from '@angular/common';
 import { WealthGapService } from '../wealth-gap-chart/wealth-gap.service';
+import { ScrollService } from '../../core/services/scroll.service';
 
 @Component({
     selector: 'ft-cost-of-waiting',
@@ -24,6 +25,7 @@ import { WealthGapService } from '../wealth-gap-chart/wealth-gap.service';
 })
 export class CostOfWaiting implements AfterViewInit, OnDestroy {
     private wealthGapService = inject(WealthGapService);
+    protected scrollService = inject(ScrollService);
 
     // Input signals tied to the WealthGapService
     displaySavings = signal<number>(this.wealthGapService.inputs().initialCapital);
@@ -141,12 +143,7 @@ export class CostOfWaiting implements AfterViewInit, OnDestroy {
         this.animationFrameId = requestAnimationFrame(step);
     }
 
-    scrollToCapture() {
-        const el = document.getElementById('lead-capture-form');
-        if (el) {
-            el.scrollIntoView({ behavior: 'smooth' });
-        } else {
-            window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
-        }
+    scrollToSimulator() {
+        this.scrollService.scrollToSection('retirement-simulator');
     }
 }

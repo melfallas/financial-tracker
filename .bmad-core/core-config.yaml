@@ -16,10 +16,18 @@ customTechnicalDocuments: null
 devLoadAlwaysFiles:
   - docs/PROJECT_INDEX.md
   - AGENTS.md
+  - docs/Backlog.md
+  - docs/PO_Checklist.md
+  - docs/SprintReport.md
+  - docs/Dependency-Analysis.md
   - .agent/rules/angular-testing-hook.md
   - docs/architecture/coding-standards.md
   - docs/architecture/tech-stack.md
   - docs/architecture/source-tree.md
+architecturalRules:
+  jsonFormatting: 'All API or Mock JSON definitions must strictly follow snake_case.'
+  planningConsultation: 'Consult Backlog.md, PO_Checklist.md, SprintReport.md, Dependency-Analysis.md, and PROJECT_INDEX.md during the planning phase of any feature.'
+  documentationUpdate: 'Any change requiring an update to project management artifacts or PROJECT_INDEX.md must be processed accordingly.'
 devDebugLog: .ai/debug-log.md
 devStoryLocation: docs/stories
 slashPrefix: BMad

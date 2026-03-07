@@ -68,7 +68,7 @@ This checklist serves as the final validation gate for the Product Owner to ensu
 | **US-MVP1.2** | WGC "Descubre como Evitarlo" Button | 📂 TODO | **Ready**       |
 | **US-MVP1.3** | Review Call Section                 | 🟢 Done | **Done**        |
 | **US-MVP1.4** | Footer Component                    | 🟢 Done | **Done**        |
-| **US-MVP1.5** | Navbar Section Navigation           | 📂 TODO | **Ready**       |
+| **US-MVP1.5** | Navbar Section Navigation           | 🟢 Done | **Done**        |
 | **US-MVP1.6** | Retirement Simulator Fixes          | 📂 TODO | **Ready**       |
 | **US-MVP1.7** | Wealth Gap Chart Fixes              | 📂 TODO | **Ready**       |
 | **US-MVP1.8** | Cost of Waiting Banner Fixes        | 📂 TODO | **Ready**       |

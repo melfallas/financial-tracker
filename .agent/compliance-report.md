@@ -146,3 +146,20 @@
 3. **Left Section:** Logo + Disclaimer. **Yes**
 4. **Right Section:** "Agenda tu Cita" CTA. **Yes**
 5. **Bottom Center:** Copyright + Rights Reserved + Legal links. **Yes**
+
+---
+
+**DateTime:** 2026-03-07T02:50:00
+**Task:** US-MVP1.5 Navbar Section Navigation
+**Status:** PASSED
+**Violations:** None
+**Files Detected:** None
+**Refactor Suggestions:** None
+
+### Checkpoints Verification:
+
+1. **Section Navigation:** Added Diagnóstico, Brecha, Impacto, Retiro, Asesoría. **Yes**
+2. **Smooth Scroll:** Logic implemented via ScrollService. **Yes**
+3. **Active State:** IntersectionObserver highlighting implemented. **Yes**
+4. **Mobile Menu:** Hamburger menu using Signals. **Yes**
+5. **IDs Sync:** Homeland ids in English (hero, wealth-gap, cost-of-waiting, retirement-simulator, review-call). **Yes**

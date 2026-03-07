@@ -74,6 +74,8 @@
   font-size: 1.125rem;
   font-weight: 800;
   margin: 0;
+  text-align: center;
+  width: 100%;
 }
 
 .cta-button {

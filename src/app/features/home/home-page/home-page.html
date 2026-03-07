@@ -1,11 +1,11 @@
 <ft-navbar></ft-navbar>
 
 <main>
-    <ft-hero></ft-hero>
-    <ft-wealth-gap-chart></ft-wealth-gap-chart>
-    <ft-cost-of-waiting></ft-cost-of-waiting>
-    <ft-retirement-simulator (onPlanRequested)="handlePlanRequested($event)"></ft-retirement-simulator>
-    <ft-review-call-section></ft-review-call-section>
+    <section id="hero"><ft-hero></ft-hero></section>
+    <section id="wealth-gap"><ft-wealth-gap-chart></ft-wealth-gap-chart></section>
+    <section id="cost-of-waiting"><ft-cost-of-waiting></ft-cost-of-waiting></section>
+    <section id="retirement-simulator"><ft-retirement-simulator (onPlanRequested)="handlePlanRequested($event)"></ft-retirement-simulator></section>
+    <section id="review-call"><ft-review-call-section></ft-review-call-section></section>
     <ft-footer></ft-footer>
 
     <!-- Email Dispatch Feedback UI -->

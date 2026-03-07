@@ -163,3 +163,20 @@
 3. **Active State:** IntersectionObserver highlighting implemented. **Yes**
 4. **Mobile Menu:** Hamburger menu using Signals. **Yes**
 5. **IDs Sync:** Homeland ids in English (hero, wealth-gap, cost-of-waiting, retirement-simulator, review-call). **Yes**
+
+---
+
+**DateTime:** 2026-03-07T03:00:00
+**Task:** US-MVP1.1 "Asesoría Gratuita" CTA Button
+**Status:** PASSED
+**Violations:** None
+**Files Detected:** None
+**Refactor Suggestions:** None
+
+### Checkpoints Verification:
+
+1. **Label Update:** "Agendar" -> "Asesoría Gratuita" in Navbar. **Yes**
+2. **Link Logic:** Opens Calendly in new tab. **Yes**
+3. **Link Source:** Centralized via `booking.ts` constant. **Yes**
+4. **ARIA Update:** `aria-label="Agenda una Asesoría Gratuita"`. **Yes**
+5. **Responsiveness:** Validated on desktop and mobile dropdown. **Yes**

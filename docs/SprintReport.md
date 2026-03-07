@@ -94,7 +94,7 @@
 | US-MVP1.7 (sub1+2+4) | WGC Compact Layout + Sliders + Track Fill        | P0       | 📂 TODO |
 | US-MVP1.6 (sub1+3+4) | Retirement Sim Age Validation + Scroll           | P0       | 📂 TODO |
 | US-MVP1.9 (sub1)     | Button Style Fix ("Comenzar mi Diagnóstico")     | P1       | 📂 TODO |
-| US-MVP1.1            | "Asesoría Gratuita" CTA Button                   | P0       | 📂 TODO |
+| US-MVP1.1            | "Asesoría Gratuita" CTA Button                   | P0       | ✅ DONE |
 | US-MVP1.2            | WGC "Descubre como Evitarlo ↓" Button            | P0       | 📂 TODO |
 | US-MVP1.4            | Footer Component                                 | P0       | ✅ DONE |
 | US-MVP1.3            | Review Call Section "Agenda tu Llamada"          | P0       | ✅ DONE |
@@ -142,9 +142,9 @@
 | Sprint 1            | 5                 | 0                | Foundation — all done              |
 | Sprint 2            | 4                 | 0                | Visual hook — all done             |
 | Sprint 3            | 4                 | 3 (US5.x)        | US5.x deferred by product decision |
-| Sprint 4            | 3                 | —                | Active now                         |
+| Sprint 4            | 4                 | —                | Active now                         |
 | Sprint 5            | 0 (Frozen)        | —                | Post-MVP#1                         |
-| **Total Completed** | **16/22**         | —                | **72% of original backlog done**   |
+| **Total Completed** | **17/22**         | —                | **77% of original backlog done**   |
 
 ---
 

@@ -5,7 +5,7 @@
 > **Priority:** P0 (Feature — High)
 > **Size:** XS
 > **Owner:** Angi (Dev)
-> **Status:** 📂 TODO
+> **Status:** ✅ DONE
 
 ---
 
@@ -25,14 +25,14 @@ The existing Navbar/Hero "Agendar" button needs to be renamed and wired to the s
 
 ## Acceptance Criteria
 
-| # | Criterion | Priority |
-|---|-----------|----------|
-| AC1 | Button text changes from "Agendar" to **"Asesoría Gratuita"** in ALL its occurrences in Navbar and/or Hero. | Must |
-| AC2 | On click, opens the **Calendly booking link** (same URL used in PDF email's "Agendar" button) in a **new tab** (`target="_blank"`, `rel="noopener noreferrer"`). | Must |
-| AC3 | Calendly URL is stored in an environment variable or a central constants service — NOT hardcoded inline. | Must |
-| AC4 | Button dimensions, border-radius, color, and hover/focus effects remain **unchanged**. | Must |
-| AC5 | `aria-label` updated to `"Agenda una Asesoría Gratuita"` for screen reader accessibility. | Must |
-| AC6 | Fully responsive: button works and is visually correct on mobile, tablet, and desktop. | Must |
+| #   | Criterion                                                                                                                                                        | Priority |
+| --- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------- |
+| AC1 | Button text changes from "Agendar" to **"Asesoría Gratuita"** in ALL its occurrences in Navbar and/or Hero.                                                      | Must     |
+| AC2 | On click, opens the **Calendly booking link** (same URL used in PDF email's "Agendar" button) in a **new tab** (`target="_blank"`, `rel="noopener noreferrer"`). | Must     |
+| AC3 | Calendly URL is stored in an environment variable or a central constants service — NOT hardcoded inline.                                                         | Must     |
+| AC4 | Button dimensions, border-radius, color, and hover/focus effects remain **unchanged**.                                                                           | Must     |
+| AC5 | `aria-label` updated to `"Agenda una Asesoría Gratuita"` for screen reader accessibility.                                                                        | Must     |
+| AC6 | Fully responsive: button works and is visually correct on mobile, tablet, and desktop.                                                                           | Must     |
 
 ---
 
@@ -46,12 +46,13 @@ The existing Navbar/Hero "Agendar" button needs to be renamed and wired to the s
 
 ## Definition of Done
 
-- [ ] Button text updated in all locations.
-- [ ] Calendly URL externalized and working.
-- [ ] New tab opens correctly.
-- [ ] Accessibility verified (aria-label, keyboard accessible).
-- [ ] Responsive verified.
-- [ ] Compliance report updated.
+- [x] Button text updated in all locations.
+- [x] Calendly URL externalized and working.
+- [x] New tab opens correctly.
+- [x] Accessibility verified (aria-label, keyboard accessible).
+- [x] Responsive verified.
+- [x] Compliance report updated.
 
 ---
-*— BMAD Master Orchestrator · 2026-03-06*
+
+_— BMAD Master Orchestrator · 2026-03-06_

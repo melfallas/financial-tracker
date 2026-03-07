@@ -38,7 +38,8 @@
       </select>
     </div>
 
-    <ft-button label="Agendar" variant="ghost" class="scale-90 hidden sm:block" (click)="scrollTo('review-call')"></ft-button>
+    <ft-button label="Asesoría Gratuita" variant="ghost" class="scale-90 hidden sm:block" 
+      (click)="openBooking()" aria-label="Agenda una Asesoría Gratuita"></ft-button>
 
     <!-- Hamburger Toggle -->
     <button (click)="toggleMenu()" class="lg:hidden p-2 text-deep-blue focus:outline-none" aria-label="Abrir menú">
@@ -83,6 +84,6 @@
     </div>
   </div>
 
-  <ft-button label="Agendar Cita" variant="primary" class="mt-4" (click)="scrollTo('review-call')"></ft-button>
+  <ft-button label="Asesoría Gratuita" variant="primary" class="mt-4" (click)="openBooking()" aria-label="Agenda una Asesoría Gratuita"></ft-button>
 </div>
 }

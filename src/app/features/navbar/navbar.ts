@@ -2,6 +2,7 @@ import { Component, signal, ChangeDetectionStrategy, inject, OnInit, OnDestroy }
 import { Button } from '../../shared/components/button/button';
 import { LanguageService, Language } from '../../core/services/language.service';
 import { ScrollService } from '../../core/services/scroll.service';
+import { BOOKING_URL } from '../../core/constants/booking';
 
 @Component({
   selector: 'ft-navbar',
@@ -16,6 +17,7 @@ import { ScrollService } from '../../core/services/scroll.service';
 export class Navbar implements OnInit, OnDestroy {
   langService = inject(LanguageService);
   scrollService = inject(ScrollService);
+  readonly bookingUrl = BOOKING_URL;
 
   lastScrollTop = signal<number>(0);
   isNavbarVisible = signal<boolean>(true);
@@ -102,5 +104,10 @@ export class Navbar implements OnInit, OnDestroy {
     this.isMenuOpen.set(false);
     // Manually set active section to avoid observer lag
     this.activeSection.set(id);
+  }
+
+  openBooking() {
+    window.open(this.bookingUrl, '_blank', 'noopener,noreferrer');
+    this.isMenuOpen.set(false);
   }
 }

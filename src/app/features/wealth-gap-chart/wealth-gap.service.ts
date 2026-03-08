@@ -12,11 +12,11 @@ export class WealthGapService {
 
   // Combine state from shared service into the format needed by calculateWealthGap
   readonly inputs = computed<WealthGapInput>(() => ({
-    initialCapital: this.stateService.initialCapital(),
-    monthlyContribution: this.stateService.monthlyContribution(),
-    annualReturnRate: this.stateService.annualReturn(),
-    annualInflationRate: this.stateService.annualInflation(),
-    years: this.stateService.years(),
+    initialCapital: this.stateService.initialCapital() ?? 0,
+    monthlyContribution: this.stateService.monthlyContribution() ?? 0,
+    annualReturnRate: this.stateService.annualReturn() ?? 0,
+    annualInflationRate: this.stateService.annualInflation() ?? 0,
+    years: this.stateService.years() ?? 0,
   }));
 
   readonly projections = computed<ProjectionEntry[]>(() =>

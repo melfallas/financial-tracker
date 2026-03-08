@@ -12,6 +12,7 @@ import { IEmailProvider } from '../../../core/interfaces/i-email-provider';
 import { WealthGapService } from '../../wealth-gap-chart/wealth-gap.service';
 import { LanguageService } from '../../../core/services/language.service';
 import { Lead } from '@shared/types';
+import { ScrollService } from '../../../core/services/scroll.service';
 
 /** Tracks the async email dispatch state to drive UI feedback */
 export type EmailDispatchStatus = 'idle' | 'sending' | 'sent' | 'failed';
@@ -28,6 +29,7 @@ export class HomePage {
   private emailProvider = inject(IEmailProvider);
   private wealthGapService = inject(WealthGapService);
   private langService = inject(LanguageService);
+  private scrollService = inject(ScrollService);
 
   private wealthGapComp = viewChild(WealthGapChart);
   private retirementComp = viewChild(RetirementSimulator);
@@ -97,10 +99,24 @@ export class HomePage {
         console.error('[HomePage] Email dispatch failed:', err);
       });
 
+      // // Automatically trigger download for better UX (AC4.1 step)
+      // this.triggerDownload(pdfDataUri, lead);
+
     } catch (err) {
       console.error('[HomePage] Error generating PDF:', err);
     }
   }
+
+  private triggerDownload(uri: string, lead: Lead): void {
+    const filename = `Plan_Financiero_${lead.firstName}_${lead.lastName}.pdf`;
+    const link = document.createElement('a');
+    link.href = uri;
+    link.download = filename;
+    link.click();
+    this.isPlanDownloaded.set(true);
+  }
+
+  readonly isPlanDownloaded = signal<boolean>(false);
 
   downloadManualPdf(): void {
     const uri = this.generatedPdfUri();
@@ -118,8 +134,14 @@ export class HomePage {
   }
 
   closeEmailModal(): void {
-    if (this.emailStatus() === 'failed' || this.emailStatus() === 'sent' || this.emailStatus() === 'sending') {
+    const status = this.emailStatus();
+    if (status === 'failed' || status === 'sent' || status === 'sending') {
       this.emailStatus.set('idle');
+      
+      // AC4.1: If success, scroll to Agenda
+      if (status === 'sent' && this.isPlanDownloaded()) {
+        setTimeout(() => this.scrollService.scrollToSection('agenda-llamada'), 300);
+      }
     }
   }
 

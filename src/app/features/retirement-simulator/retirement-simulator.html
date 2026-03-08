@@ -44,7 +44,7 @@
                     <label for="current-age" class="text-sm font-bold uppercase tracking-wider opacity-60">Tu Edad
                         Actual</label>
                     <input type="number" id="current-age" [ngModel]="currentAge"
-                        (ngModelChange)="updateCurrentAge($event)" placeholder="Ej. 30"
+                        (ngModelChange)="updateCurrentAge($event)" placeholder="Digita tu edad"
                         class="bg-transparent border-0 border-b-2 border-emerald-200 text-3xl font-black text-deep-blue focus:ring-0 focus:border-emerald-500 transition-colors" />
                     @if (errors()['currentAge']) {
                     <p class="text-xs text-red-500 font-bold mt-1">{{errors()['currentAge']}}</p>
@@ -110,7 +110,7 @@
                             <span
                                 class="absolute left-0 top-1/2 -translate-y-1/2 text-deep-blue text-2xl font-black opacity-30">$</span>
                             <input type="number" id="expense" [ngModel]="targetMonthlyExpense"
-                                (ngModelChange)="updateTargetMonthlyExpense($event)" placeholder="Ej. 2000"
+                                (ngModelChange)="updateTargetMonthlyExpense($event)" placeholder="Digita tus gastos"
                                 class="bg-transparent border-0 border-b-2 border-emerald-200 text-3xl font-black text-deep-blue pl-6 w-full focus:ring-0 focus:border-emerald-500 transition-colors" />
                         </div>
                         @if (errors()['targetMonthlyExpense']) {
@@ -190,7 +190,7 @@
 
         <!-- STEP 3: RESULTS -->
         @if (currentStep() === 'results') {
-        <div class="fade-in space-y-12">
+        <div id="retirement-results-anchor" class="fade-in space-y-12">
             <h3 class="text-2xl font-bold border-l-4 border-emerald-500 pl-4 mb-8">Tu Camino hacia la Libertad</h3>
 
             @if (isUnreachable()) {
@@ -270,4 +270,28 @@
         }
 
     </div>
+
+    <!-- AGE ERROR MODAL (AC1.2) -->
+    @if (showAgeErrorModal()) {
+    <div class="fixed inset-0 z-[100] flex items-center justify-center bg-black/50 backdrop-blur-sm p-4 fade-in">
+        <div class="bg-white rounded-3xl shadow-2xl max-w-sm w-full p-8 flex flex-col items-center text-center scale-in ring-4 ring-red-500/20">
+            <div class="bg-red-100 text-red-500 w-20 h-20 rounded-full flex items-center justify-center mb-6">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                </svg>
+            </div>
+            
+            <h3 class="text-2xl font-black text-deep-blue mb-2">Especifica tu Edad</h3>
+            <p class="text-gray-600 mb-8 max-w-[250px]">
+                El simulador necesita tu edad para el cálculo de tu libertad financiera.
+            </p>
+
+            <div class="flex flex-col gap-3 w-full">
+                <button (click)="showAgeErrorModal.set(false)" class="w-full bg-red-500 hover:bg-red-600 text-white font-bold py-4 px-6 rounded-2xl shadow-xl shadow-red-500/20 transition-all flex items-center justify-center gap-2">
+                    Entendido
+                </button>
+            </div>
+        </div>
+    </div>
+    }
 </section>

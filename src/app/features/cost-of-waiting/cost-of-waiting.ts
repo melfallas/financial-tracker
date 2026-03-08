@@ -33,9 +33,9 @@ export class CostOfWaiting implements AfterViewInit, OnDestroy {
 
     // Business Logic: Compound inflation loss
     estimatedLoss = computed(() => {
-        const savings = this.stateService.initialCapital();
-        const annualRate = this.stateService.annualInflation();
-        const years = this.stateService.years();
+        const savings = this.stateService.initialCapital() ?? 0;
+        const annualRate = this.stateService.annualInflation() ?? 0;
+        const years = this.stateService.years() ?? 0;
         const monthlyRate = annualRate / 100 / 12;
         const totalMonths = years * 12;
 
@@ -44,7 +44,7 @@ export class CostOfWaiting implements AfterViewInit, OnDestroy {
     });
 
     animatedLoss = signal<number>(0);
-    animatedRemaining = computed(() => this.stateService.initialCapital() - this.animatedLoss());
+    animatedRemaining = computed(() => (this.stateService.initialCapital() ?? 0) - this.animatedLoss());
     private animationFrameId?: number;
     private observer?: IntersectionObserver;
 
@@ -58,16 +58,16 @@ export class CostOfWaiting implements AfterViewInit, OnDestroy {
         });
     }
 
-    updateSavings(val: number | string) {
-        this.stateService.updateInitialCapital(+val);
+    updateSavings(val: any) {
+        this.stateService.updateInitialCapital(val === '' || val === null ? null : +val);
     }
 
-    updateYears(val: number | string) {
-        this.stateService.updateYears(+val);
+    updateYears(val: any) {
+        this.stateService.updateYears(val === '' || val === null ? null : +val);
     }
 
-    updateInflation(val: number | string) {
-        this.stateService.updateAnnualInflation(+val);
+    updateInflation(val: any) {
+        this.stateService.updateAnnualInflation(val === '' || val === null ? null : +val);
     }
 
     ngAfterViewInit() {

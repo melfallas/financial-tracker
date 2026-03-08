@@ -8,6 +8,7 @@ import { SimulatorsStateService } from '../../core/services/simulators-state.ser
 import { calculateRetirement } from '@shared/utils';
 import { RetirementInput, RetirementResult, Lead } from '@shared/types';
 import { LeadForm } from '../lead-form/lead-form';
+import { ScrollService } from '../../core/services/scroll.service';
 
 // Register Chart.js Filler plugin
 Chart.register(Filler);
@@ -23,6 +24,7 @@ export class RetirementSimulator {
   private stateService = inject(SimulatorsStateService);
   private fb = inject(FormBuilder);
   private readonly chartDirective = viewChild(BaseChartDirective);
+  private readonly scrollService = inject(ScrollService);
 
   onPlanRequested = output<{ lead: Lead }>();
 
@@ -40,11 +42,11 @@ export class RetirementSimulator {
   retirementResults = computed<RetirementResult>(() => {
     const input: RetirementInput = {
       currentAge: this.stateService.currentAge() ?? 0,
-      retirementAge: this.stateService.retirementAge(),
-      currentSavings: this.stateService.initialCapital(),
-      monthlyContribution: this.stateService.monthlyContribution(),
-      expectedReturn: this.stateService.annualReturn(),
-      inflationRate: this.stateService.annualInflation(),
+      retirementAge: this.stateService.retirementAge() ?? 0,
+      currentSavings: this.stateService.initialCapital() ?? 0,
+      monthlyContribution: this.stateService.monthlyContribution() ?? 0,
+      expectedReturn: this.stateService.annualReturn() ?? 0,
+      inflationRate: this.stateService.annualInflation() ?? 0,
       targetMonthlyExpense: this.stateService.targetMonthlyExpense() ?? 0
     };
     return calculateRetirement(input);
@@ -119,9 +121,12 @@ export class RetirementSimulator {
   showCaptureForm = signal<boolean>(false);
   isPlanDownloaded = signal<boolean>(false);
   capturedLead = signal<Lead | null>(null);
+  showAgeErrorModal = signal<boolean>(false);
 
   isUnreachable = computed(() => {
-    return this.stateService.annualInflation() >= this.stateService.annualReturn();
+    const inflation = this.stateService.annualInflation() ?? 0;
+    const returnRate = this.stateService.annualReturn() ?? 0;
+    return inflation >= returnRate;
   });
 
   constructor() {
@@ -161,43 +166,51 @@ export class RetirementSimulator {
   get annualInflation() { return this.stateService.annualInflation(); }
 
   // Update methods
-  updateCurrentAge(val: number | string | null) {
+  updateCurrentAge(val: any) {
     this.stateService.updateCurrentAge(val === '' || val === null ? null : +val);
     if (this.errors()['currentAge']) this.validateStep1();
   }
-  updateInitialCapital(val: number | string) {
-    this.stateService.updateInitialCapital(+val);
+  updateInitialCapital(val: any) {
+    this.stateService.updateInitialCapital(val === '' || val === null ? null : +val);
     if (this.errors()['initialCapital']) this.validateStep1();
   }
-  updateMonthlyContribution(val: number | string) {
-    this.stateService.updateMonthlyContribution(+val);
+  updateMonthlyContribution(val: any) {
+    this.stateService.updateMonthlyContribution(val === '' || val === null ? null : +val);
   }
-  updateTargetMonthlyExpense(val: number | string | null) {
+  updateTargetMonthlyExpense(val: any) {
     this.stateService.updateTargetMonthlyExpense(val === '' || val === null ? null : +val);
     if (this.errors()['targetMonthlyExpense']) this.validateStep2();
   }
-  updateAnnualInflation(val: number | string) {
-    this.stateService.updateAnnualInflation(+val);
+  updateAnnualInflation(val: any) {
+    this.stateService.updateAnnualInflation(val === '' || val === null ? null : +val);
     if (this.errors()['annualInflation']) this.validateStep2();
   }
-  updateRetirementAge(val: number | string) {
-    this.stateService.updateRetirementAge(+val);
+  updateRetirementAge(val: any) {
+    this.stateService.updateRetirementAge(val === '' || val === null ? null : +val);
     if (this.errors()['retirementAge']) this.validateStep2();
   }
-  updateAnnualReturn(val: number | string) {
-    this.stateService.updateAnnualReturn(+val);
+  updateAnnualReturn(val: any) {
+    this.stateService.updateAnnualReturn(val === '' || val === null ? null : +val);
     if (this.errors()['annualReturn']) this.validateStep2();
   }
 
   // UI Navigation
   nextStep() {
     if (this.currentStep() === 'step1') {
+      const age = this.stateService.currentAge();
+      if (!age) {
+        // this.showAgeErrorModal.set(true);
+        // return;
+      }
       if (this.validateStep1()) {
         this.currentStep.set('step2');
+        this.scrollService.scrollToSection('retirement-simulator');
       }
     } else if (this.currentStep() === 'step2') {
       if (this.validateStep2()) {
         this.currentStep.set('results');
+        // AC3.1: Scroll to results area
+        setTimeout(() => this.scrollService.scrollToSection('retirement-results-anchor'), 100);
       }
     }
   }
@@ -206,11 +219,16 @@ export class RetirementSimulator {
     const newErrors: Record<string, string> = {};
     const age = this.stateService.currentAge();
     const capital = this.stateService.initialCapital();
+    const minAge = 5;
+    const maxAge = 100;
 
-    if (age === null || age === 0) newErrors['currentAge'] = 'Por favor ingresa tu edad actual.';
-    else if (age < 18 || age > 100) newErrors['currentAge'] = 'Edad no válida.';
+    // if (age === null || age === 0) newErrors['currentAge'] = 'Por favor ingresa tu edad actual.';
+    if (age === null) newErrors['currentAge'] = 'Por favor ingresa tu edad actual';
+    // else if (age < minAge || age > maxAge) newErrors['currentAge'] = 'Edad no válida.';
+    else if (age < minAge) newErrors['currentAge'] = `La edad mínima es ${minAge} años`;
+    else if (age > maxAge) newErrors['currentAge'] = `La edad máxima es ${maxAge} años`;
 
-    if (capital === null || capital <= 0) newErrors['initialCapital'] = 'El capital inicial debe ser mayor a 0.';
+    if (capital === null || capital <= 0) newErrors['initialCapital'] = 'El capital inicial debe ser mayor a 0';
 
     this.errors.update(prev => ({ ...prev, ...newErrors }));
     // Remove fixed errors
@@ -228,11 +246,11 @@ export class RetirementSimulator {
     const returnRate = this.stateService.annualReturn();
     const curAge = this.stateService.currentAge() ?? 0;
 
-    if (expense === null || expense <= 0) newErrors['targetMonthlyExpense'] = 'Por favor ingresa tus gastos mensuales deseados.';
-    if (inflation === null || inflation <= 0) newErrors['annualInflation'] = 'La inflación debe ser mayor a 0.';
-    if (returnRate === null || returnRate <= 0) newErrors['annualReturn'] = 'El retorno debe ser mayor a 0.';
-    if (retAge === null || retAge <= 0) newErrors['retirementAge'] = 'La edad de jubilación debe ser mayor a 0.';
-    else if (retAge <= curAge) newErrors['retirementAge'] = 'La edad de jubilación debe ser mayor a tu edad actual.';
+    if (expense === null || expense <= 0) newErrors['targetMonthlyExpense'] = 'Por favor ingresa tus gastos mensuales';
+    if (inflation === null || inflation <= 0) newErrors['annualInflation'] = 'La inflación debe ser mayor a 0';
+    if (returnRate === null || returnRate <= 0) newErrors['annualReturn'] = 'El retorno debe ser mayor a 0';
+    if (retAge === null || retAge <= 0) newErrors['retirementAge'] = 'La edad de jubilación debe ser mayor a 0';
+    else if (retAge <= curAge) newErrors['retirementAge'] = 'La edad de jubilación debe ser mayor a tu edad actual';
 
     this.errors.update(prev => ({ ...prev, ...newErrors }));
     // Remove fixed errors
@@ -257,12 +275,15 @@ export class RetirementSimulator {
     } else if (this.currentStep() === 'results') {
       this.currentStep.set('step2');
     }
+    this.scrollService.scrollToSection('retirement-simulator');
   }
 
   goToStep(step: 'step1' | 'step2' | 'results') {
     if (step === 'results' && !this.validateStep2()) return;
     if (step === 'step2' && !this.validateStep1()) return;
     this.currentStep.set(step);
+    // Explicitly scroll to the top of the section to avoid "jumping" to the next section or footer
+    this.scrollService.scrollToSection('retirement-simulator');
   }
 
   private animateValue(type: 'freedomAge' | 'runOutAge', end: number, duration: number) {

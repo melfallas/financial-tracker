@@ -4,6 +4,35 @@ import { provideRouter } from '@angular/router';
 
 import { routes } from './app.routes';
 
+// AC3.2: Global Chart.js registration — all required scales and elements
+// Must run before any chart component renders (module-level side-effect)
+import {
+  Chart,
+  CategoryScale,
+  LinearScale,
+  BarElement,
+  LineElement,
+  PointElement,
+  ArcElement,
+  Filler,
+  Tooltip,
+  Legend,
+  Title
+} from 'chart.js';
+
+Chart.register(
+  CategoryScale,
+  LinearScale,
+  BarElement,
+  LineElement,
+  PointElement,
+  ArcElement,
+  Filler,
+  Tooltip,
+  Legend,
+  Title
+);
+
 import { I_LEAD_REPOSITORY } from './core/interfaces/i-lead-repository';
 import { I_INTERACTION_REPOSITORY } from './core/interfaces/i-interaction-repository';
 import { IEmailProvider } from './core/interfaces/i-email-provider';

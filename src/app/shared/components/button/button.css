@@ -11,8 +11,10 @@ button {
   width: 100%;
   border: none;
   font-family: inherit;
-  padding: 10px 20px;
-  border-radius: 0.5rem;
+  /* AC1.4: CSS custom properties allow contextual overrides without ::ng-deep / !important */
+  padding: var(--btn-padding, 10px 20px);
+  border-radius: var(--btn-radius, 0.5rem);
+  font-size: var(--btn-font-size, 1rem);
   font-weight: 600;
   transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
   position: relative;

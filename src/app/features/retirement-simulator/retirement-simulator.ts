@@ -2,7 +2,7 @@ import { Component, ChangeDetectionStrategy, signal, computed, inject, effect, u
 import { CommonModule, CurrencyPipe, DecimalPipe } from '@angular/common';
 import { FormsModule, ReactiveFormsModule, FormBuilder, Validators } from '@angular/forms';
 import { BaseChartDirective } from 'ng2-charts';
-import { ChartConfiguration, ChartData, Chart, Filler } from 'chart.js';
+import { ChartConfiguration, ChartData } from 'chart.js';
 import { WealthGapService } from '../wealth-gap-chart/wealth-gap.service';
 import { SimulatorsStateService } from '../../core/services/simulators-state.service';
 import { calculateRetirement } from '@shared/utils';
@@ -10,8 +10,7 @@ import { RetirementInput, RetirementResult, Lead, EmailStatus } from '@shared/ty
 import { LeadForm } from '../lead-form/lead-form';
 import { ScrollService } from '../../core/services/scroll.service';
 
-// Register Chart.js Filler plugin
-Chart.register(Filler);
+
 
 @Component({
   selector: 'ft-retirement-simulator',

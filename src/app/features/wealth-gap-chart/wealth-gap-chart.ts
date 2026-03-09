@@ -18,8 +18,6 @@ import { WealthGapService } from './wealth-gap.service';
 import { WealthGapInput } from '@shared/types';
 import { ScrollService } from '../../core/services/scroll.service';
 
-// Register Chart.js Filler plugin for fill between datasets
-Chart.register(Filler);
 
 @Component({
   selector: 'ft-wealth-gap-chart',

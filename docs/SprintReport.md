@@ -77,13 +77,13 @@
 
 ---
 
-### Sprint 4 — MVP#1 Features & Fixes 🔄 ACTIVE
+### Sprint 4 — MVP#1 Features & Fixes ✅ COMPLETE
 
-|            |                       |
-| ---------- | --------------------- |
-| **Period** | 2026-03-06 (Start)    |
-| **Status** | 🔄 ACTIVE — 8/9 DONE  |
-| **Epic**   | Epic 7: MVP#1 Closure |
+|            |                         |
+| ---------- | ----------------------- |
+| **Period** | 2026-03-06 → 2026-03-09 |
+| **Status** | ✅ COMPLETE — 9/9 DONE  |
+| **Epic**   | Epic 7: MVP#1 Closure   |
 
 | Story                | Description                                      | Priority | Status  |
 | -------------------- | ------------------------------------------------ | -------- | ------- |
@@ -92,7 +92,7 @@
 | US-MVP1.6 (sub2)     | Retirement Sim Savings Sync Bug                  | P0       | ✅ DONE |
 | US-MVP1.8            | Cost of Waiting Banner Fixes                     | P0       | ✅ DONE |
 | US-MVP1.6 (sub1+3+4) | Retirement Sim Age Validation + Scroll           | P0       | ✅ DONE |
-| US-MVP1.9 (sub1)     | Button Style Fix ("Comenzar mi Diagnóstico")     | P1       | 📂 TODO |
+| US-MVP1.9 (sub1)     | Button Style Fix ("Comenzar mi Diagnóstico")     | P1       | ✅ DONE |
 | US-MVP1.1            | "Asesoría Gratuita" CTA Button                   | P0       | ✅ DONE |
 | US-MVP1.2            | WGC "Descubre como Evitarlo ↓" Button            | P0       | ✅ DONE |
 | US-MVP1.4            | Footer Component                                 | P0       | ✅ DONE |

@@ -68,8 +68,10 @@ jobs:
         run: pnpm ng build --configuration production --base-href /financial-tracker/ --deploy-url /financial-tracker/
 
       # Route file renaming for index.html to 404.html for GitHub Pages routing
-      - name: Rename index for routing
-        run: mv dist/financial-tracker/browser/index.html dist/financial-tracker/browser/404.html
+      - name: Copy 404.html for SPA routing (preserve index.html)
+        run: cp dist/financial-tracker/browser/index.html dist/financial-tracker/browser/404.html
+      # - name: Rename index for routing
+      #   run: mv dist/financial-tracker/browser/index.html dist/financial-tracker/browser/404.html
 
       # Deploy to GitHub Pages
       - name: Deploy to GitHub Pages

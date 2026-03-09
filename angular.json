@@ -37,6 +37,7 @@
           },
           "configurations": {
             "production": {
+              "baseHref": "/financial-tracker/",
               "budgets": [
                 {
                   "type": "initial",

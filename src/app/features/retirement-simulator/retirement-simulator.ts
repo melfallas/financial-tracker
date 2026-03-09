@@ -147,8 +147,8 @@ export class RetirementSimulator {
   private isFirstLoad = signal<boolean>(true);
 
   constructor() {
-    const results = this.retirementResults();
-    console.log("Retirement Results: ", results);
+    // const results = this.retirementResults();
+    // console.log("Retirement Results: ", results);
     // Effect to handle navigation from navbar/other components
     effect(() => {
       const active = this.scrollService.activeSection();

@@ -6,19 +6,18 @@
       class="w-8 h-8 md:w-10 md:h-10 bg-deep-blue rounded-lg flex items-center justify-center text-emerald-green text-xl md:text-2xl font-bold">
       FT
     </div>
-    <span class="text-lg md:text-xl font-extrabold text-deep-blue">Financial<span
+    <span class="text-lg md:text-xl font-extrabold text-deep-blue hidden xl:block">Financial<span
         class="text-emerald-green">Tracker</span></span>
   </div>
 
   <!-- Desktop Links -->
   <div class="hidden lg:flex items-center gap-6 xl:gap-8">
     @for (item of navItems; track item.id) {
-    <a (click)="scrollTo(item.id)"
-      [class.text-emerald-green]="activeSection() === item.id"
+    <a (click)="scrollTo(item.id)" [class.text-emerald-green]="activeSection() === item.id"
       class="text-deep-blue font-bold text-sm uppercase tracking-wider hover:text-emerald-green transition-all cursor-pointer relative py-2">
       {{ item.label }}
       @if (activeSection() === item.id) {
-        <span class="absolute bottom-0 left-0 w-full h-0.5 bg-emerald-green rounded-full animate-scale-x"></span>
+      <span class="absolute bottom-0 left-0 w-full h-0.5 bg-emerald-green rounded-full animate-scale-x"></span>
       }
     </a>
     }
@@ -30,23 +29,25 @@
       <select class="bg-transparent text-charcoal font-medium focus:outline-none cursor-pointer text-sm"
         [value]="langService.currentLanguage()" (change)="onLanguageChange($event)">
         <option value="ES">ES</option>
-        <option value="EN">EN</option>
+        <!-- <option value="EN">EN</option> -->
       </select>
       <select class="bg-transparent text-charcoal font-medium focus:outline-none cursor-pointer text-sm">
-        <option>CRC</option>
+        <!-- <option>CRC</option> -->
         <option>USD</option>
       </select>
     </div>
 
-    <ft-button label="Asesoría Gratuita" variant="ghost" class="scale-90 hidden sm:block" 
-      (click)="openBooking()" aria-label="Agenda una Asesoría Gratuita"></ft-button>
+    <ft-button label="Asesoría Gratuita" variant="ghost" class="scale-90 hidden sm:block" (click)="openBooking()"
+      aria-label="Agenda una Asesoría Gratuita"></ft-button>
 
     <!-- Hamburger Toggle -->
     <button (click)="toggleMenu()" class="lg:hidden p-2 text-deep-blue focus:outline-none" aria-label="Abrir menú">
       <div class="w-6 h-5 relative flex flex-col justify-between">
-        <span class="w-full h-0.5 bg-current transition-all duration-300" [class.rotate-45]="isMenuOpen()" [class.translate-y-[9px]]="isMenuOpen()"></span>
+        <span class="w-full h-0.5 bg-current transition-all duration-300" [class.rotate-45]="isMenuOpen()"
+          [class.translate-y-[9px]]="isMenuOpen()"></span>
         <span class="w-full h-0.5 bg-current transition-opacity duration-300" [class.opacity-0]="isMenuOpen()"></span>
-        <span class="w-full h-0.5 bg-current transition-all duration-300" [class.-rotate-45]="isMenuOpen()" [class.-translate-y-[9px]]="isMenuOpen()"></span>
+        <span class="w-full h-0.5 bg-current transition-all duration-300" [class.-rotate-45]="isMenuOpen()"
+          [class.-translate-y-[9px]]="isMenuOpen()"></span>
       </div>
     </button>
   </div>
@@ -56,16 +57,14 @@
 @if (isMenuOpen()) {
 <div class="fixed inset-0 z-40 lg:hidden pt-20 bg-white/95 backdrop-blur-md flex flex-col p-6 gap-6 animate-fade-in">
   @for (item of navItems; track item.id) {
-  <a (click)="scrollTo(item.id)"
-    [class.text-emerald-green]="activeSection() === item.id"
-    [class.pl-4]="activeSection() === item.id"
-    [class.border-l-4]="activeSection() === item.id"
+  <a (click)="scrollTo(item.id)" [class.text-emerald-green]="activeSection() === item.id"
+    [class.pl-4]="activeSection() === item.id" [class.border-l-4]="activeSection() === item.id"
     [class.border-emerald-green]="activeSection() === item.id"
     class="text-2xl font-black text-deep-blue hover:text-emerald-green transition-all py-2 border-b border-gray-100 uppercase tracking-tighter">
     {{ item.label }}
   </a>
   }
-  
+
   <div class="flex items-center gap-6 mt-4">
     <div class="flex flex-col gap-1">
       <span class="text-xs font-bold text-gray-400 uppercase tracking-widest">Idioma</span>
@@ -84,6 +83,7 @@
     </div>
   </div>
 
-  <ft-button label="Asesoría Gratuita" variant="primary" class="mt-4" (click)="openBooking()" aria-label="Agenda una Asesoría Gratuita"></ft-button>
+  <ft-button label="Asesoría Gratuita" variant="primary" class="mt-4" (click)="openBooking()"
+    aria-label="Agenda una Asesoría Gratuita"></ft-button>
 </div>
 }

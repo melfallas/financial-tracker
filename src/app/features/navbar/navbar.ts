@@ -22,8 +22,9 @@ export class Navbar implements OnInit, OnDestroy {
   lastScrollTop = signal<number>(0);
   isNavbarVisible = signal<boolean>(true);
   isNavbarSticky = signal<boolean>(false);
-  isMenuOpen = signal<boolean>(false);
-  activeSection = signal<string>('hero');
+  
+  get isMenuOpen() { return this.scrollService.isMenuOpen; }
+  get activeSection() { return this.scrollService.activeSection; }
 
   private observer: IntersectionObserver | null = null;
 
@@ -57,7 +58,7 @@ export class Navbar implements OnInit, OnDestroy {
       this.observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
           if (entry.isIntersecting) {
-            this.activeSection.set(entry.target.id);
+            this.scrollService.activeSection.set(entry.target.id);
           }
         });
       }, options);
@@ -80,8 +81,8 @@ export class Navbar implements OnInit, OnDestroy {
     const currentScroll = window.scrollY;
 
     // Close mobile menu on scroll
-    if (this.isMenuOpen()) {
-      this.isMenuOpen.set(false);
+    if (this.scrollService.isMenuOpen()) {
+      this.scrollService.isMenuOpen.set(false);
     }
 
     if (currentScroll > 50) {
@@ -98,18 +99,15 @@ export class Navbar implements OnInit, OnDestroy {
   }
 
   toggleMenu() {
-    this.isMenuOpen.update(v => !v);
+    this.scrollService.isMenuOpen.update(v => !v);
   }
 
   scrollTo(id: string) {
-    this.scrollService.scrollToSection(id);
-    this.isMenuOpen.set(false);
-    // Manually set active section to avoid observer lag
-    this.activeSection.set(id);
+    this.scrollService.scrollToNavbarSection(id);
   }
 
   openBooking() {
     window.open(this.bookingUrl, '_blank', 'noopener,noreferrer');
-    this.isMenuOpen.set(false);
+    this.scrollService.isMenuOpen.set(false);
   }
 }

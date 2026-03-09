@@ -204,13 +204,13 @@ export class RetirementSimulator {
       }
       if (this.validateStep1()) {
         this.currentStep.set('step2');
-        this.scrollService.scrollToSection('retirement-simulator');
+        this.scrollService.scrollToNavbarSection('retirement-simulator');
       }
     } else if (this.currentStep() === 'step2') {
       if (this.validateStep2()) {
         this.currentStep.set('results');
-        // AC3.1: Scroll to results area
-        setTimeout(() => this.scrollService.scrollToSection('retirement-results-anchor'), 100);
+        // this.scrollService.scrollToNavbarSection('retirement-simulator');
+        setTimeout(() => this.scrollService.scrollToSection('retirement-simulator'), 100);
       }
     }
   }
@@ -275,7 +275,7 @@ export class RetirementSimulator {
     } else if (this.currentStep() === 'results') {
       this.currentStep.set('step2');
     }
-    this.scrollService.scrollToSection('retirement-simulator');
+    this.scrollService.scrollToNavbarSection('retirement-simulator');
   }
 
   goToStep(step: 'step1' | 'step2' | 'results') {
@@ -283,7 +283,8 @@ export class RetirementSimulator {
     if (step === 'step2' && !this.validateStep1()) return;
     this.currentStep.set(step);
     // Explicitly scroll to the top of the section to avoid "jumping" to the next section or footer
-    this.scrollService.scrollToSection('retirement-simulator');
+    // this.scrollService.scrollToNavbarSection('retirement-simulator');
+    setTimeout(() => this.scrollService.scrollToNavbarSection('retirement-simulator'), 100);
   }
 
   private animateValue(type: 'freedomAge' | 'runOutAge', end: number, duration: number) {

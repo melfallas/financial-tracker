@@ -2,7 +2,7 @@
     class="cow-banner w-full py-16 px-6 md:px-12 shadow-2xl">
 
     <div class="container mx-auto flex flex-col md:flex-row items-center justify-center gap-12">
-        <div class="flex flex-col items-center md:items-start space-y-8 flex-1">
+        <div class="flex flex-col items-center md:items-start space-y-8 flex-none">
             <h2 class="text-4xl md:text-5xl font-black text-center md:text-left leading-tight mb-6">
                 El Costo de Esperar
             </h2>
@@ -12,8 +12,9 @@
                     <label for="savings-input" class="opacity-90">Si tienes</label>
                     <div class="relative">
                         <span class="absolute left-3 top-1/2 -translate-y-1/2 font-bold text-white">$</span>
-                        <input id="savings-input" type="number" min="0" step="1000" [ngModel]="displaySavings"
+                        <input id="savings-input" type="number" min="1" step="1000" [ngModel]="displaySavings"
                             (ngModelChange)="updateSavings($event)"
+                            (blur)="onSavingsBlur()"
                             class="cow-input bg-white/10 border border-white/30 rounded-lg py-2 pl-8 pr-4 text-white font-bold w-36 focus:outline-none focus:ring-2 focus:ring-emerald-400 transition-all text-right"
                             placeholder="Ej. 1000" aria-label="Ahorros Actuales" />
                     </div>
@@ -24,6 +25,7 @@
                     <div class="relative">
                         <input id="years-input" type="number" min="1" max="100" [ngModel]="displayYears"
                             (ngModelChange)="updateYears($event)"
+                            (blur)="onYearsBlur()"
                             class="cow-input bg-white/10 border border-white/30 rounded-lg py-2 px-4 text-white font-bold w-24 focus:outline-none focus:ring-2 focus:ring-emerald-400 transition-all text-center"
                             placeholder="Ej. 20" aria-label="Años para calcular" />
                     </div>
@@ -35,6 +37,7 @@
                     <div class="relative">
                         <input id="inflation-input" type="number" min="1" max="50" step="0.1" [ngModel]="displayInflation"
                             (ngModelChange)="updateInflation($event)"
+                            (blur)="onInflationBlur()"
                             class="cow-input bg-white/10 border border-white/30 rounded-lg py-2 pl-4 pr-10 text-white font-bold w-24 focus:outline-none focus:ring-2 focus:ring-emerald-400 transition-all text-right"
                             placeholder="Ej. 6" aria-label="Tasa de Inflación" />
                         <span class="absolute right-3 top-1/2 -translate-y-1/2 font-bold text-white">%</span>

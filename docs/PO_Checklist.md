@@ -71,7 +71,7 @@ This checklist serves as the final validation gate for the Product Owner to ensu
 | **US-MVP1.5** | Navbar Section Navigation           | 🟢 Done | **Done**        |
 | **US-MVP1.6** | Retirement Simulator Fixes          | 🟢 Done | **Done**        |
 | **US-MVP1.7** | Wealth Gap Chart Fixes              | 🟢 Done | **Done**        |
-| **US-MVP1.8** | Cost of Waiting Banner Fixes        | 📂 TODO | **Ready**       |
+| **US-MVP1.8** | Cost of Waiting Banner Fixes        | 🟢 Done | **Done**        |
 | **US-MVP1.9** | Cross-Cutting Fixes                 | 📂 TODO | **Ready**       |
 
 ---

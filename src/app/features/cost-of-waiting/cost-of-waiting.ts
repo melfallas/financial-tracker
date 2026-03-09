@@ -25,6 +25,7 @@ import { ScrollService } from '../../core/services/scroll.service';
 export class CostOfWaiting implements AfterViewInit, OnDestroy {
     private stateService = inject(SimulatorsStateService);
     protected scrollService = inject(ScrollService);
+    private readonly animationDuration = 1200;
 
     // Bind to shared state
     get displaySavings() { return this.stateService.initialCapital(); }
@@ -54,28 +55,44 @@ export class CostOfWaiting implements AfterViewInit, OnDestroy {
         // Effect to trigger animation whenever the estimated loss changes
         effect(() => {
             const targetLoss = this.estimatedLoss();
-            this.animateValue(this.animatedLoss(), targetLoss, 1200);
+            this.animateValue(this.animatedLoss(), targetLoss, this.animationDuration);
         });
     }
 
     updateSavings(val: any) {
-    this.stateService.updateInitialCapital(val);
-  }
-  
-  updateYears(val: any) {
-    this.stateService.updateYears(val);
-  }
-  
-  updateInflation(val: any) {
-    this.stateService.updateAnnualInflation(val);
-  }
+        this.stateService.updateInitialCapital(val);
+    }
+
+    updateYears(val: any) {
+        this.stateService.updateYears(val);
+    }
+
+    updateInflation(val: any) {
+        this.stateService.updateAnnualInflation(val);
+    }
+
+    // AC1.1-AC1.3: Auto-correct empty/zero values on blur (silently restore minimum valid value)
+    onSavingsBlur() {
+        const val = this.stateService.initialCapital();
+        if (!val || val <= 0) this.stateService.updateInitialCapital(1);
+    }
+
+    onYearsBlur() {
+        const val = this.stateService.years();
+        if (!val || val <= 0) this.stateService.updateYears(1);
+    }
+
+    onInflationBlur() {
+        const val = this.stateService.annualInflation();
+        if (!val || val <= 0) this.stateService.updateAnnualInflation(1);
+    }
 
     ngAfterViewInit() {
         this.observer = new IntersectionObserver(
             (entries) => {
                 entries.forEach((entry) => {
                     if (entry.isIntersecting) {
-                        this.animateValue(0, this.estimatedLoss(), 1200);
+                        this.animateValue(0, this.estimatedLoss(), this.animationDuration);
                         this.observer?.disconnect();
                     }
                 });

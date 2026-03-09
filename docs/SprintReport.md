@@ -82,7 +82,7 @@
 |            |                       |
 | ---------- | --------------------- |
 | **Period** | 2026-03-06 (Start)    |
-| **Status** | 🔄 ACTIVE / TODO      |
+| **Status** | 🔄 ACTIVE — 8/9 DONE  |
 | **Epic**   | Epic 7: MVP#1 Closure |
 
 | Story                | Description                                      | Priority | Status  |
@@ -90,7 +90,7 @@
 | US-MVP1.9 (sub2+3)   | GitHub Pages 404 Fix + Chart.js Registration Fix | P0       | ✅ DONE |
 | US-MVP1.7 (sub1-6)   | WGC Redesign + Defaults + Shared Mapping + Fixes | P0       | ✅ DONE |
 | US-MVP1.6 (sub2)     | Retirement Sim Savings Sync Bug                  | P0       | ✅ DONE |
-| US-MVP1.8            | Cost of Waiting Banner Fixes                     | P0       | 📂 TODO |
+| US-MVP1.8            | Cost of Waiting Banner Fixes                     | P0       | ✅ DONE |
 | US-MVP1.6 (sub1+3+4) | Retirement Sim Age Validation + Scroll           | P0       | ✅ DONE |
 | US-MVP1.9 (sub1)     | Button Style Fix ("Comenzar mi Diagnóstico")     | P1       | 📂 TODO |
 | US-MVP1.1            | "Asesoría Gratuita" CTA Button                   | P0       | ✅ DONE |
@@ -141,7 +141,7 @@
 | Sprint 1            | 5                 | 0                | Foundation — all done              |
 | Sprint 2            | 4                 | 0                | Visual hook — all done             |
 | Sprint 3            | 4                 | 3 (US5.x)        | US5.x deferred by product decision |
-| Sprint 4            | 7                 | —                | Active now                         |
+| Sprint 4            | 8 (🔄 1 TODO)     | —                | Active now                         |
 | Sprint 5            | 0 (Frozen)        | —                | Post-MVP#1                         |
 | **Total Completed** | **20/22**         | —                | **91% of original backlog done**   |
 

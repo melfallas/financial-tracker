@@ -14,12 +14,16 @@
 }
 
 .capital-erosion-text {
-    color: #ECEFF1;
-    color: #929BA0;
     color: #B6C1D0;
 }
 
-
+/* AC2.3: Responsive clamp() font-size for animated amounts to prevent layout shifts at $100K+ */
+.cow-amount-text {
+    font-size: clamp(1.25rem, 5vw, 4.5rem);
+    line-height: 1.1;
+    word-break: break-word;
+    overflow-wrap: break-word;
+}
 
 .cow-input {
     box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);

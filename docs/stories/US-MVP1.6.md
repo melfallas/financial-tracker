@@ -58,6 +58,17 @@ Four distinct bugs have been identified in the Retirement Simulator that affect 
 | AC4.1 | After **both** PDF download AND email confirmation are successful, the **"Agenda tu Llamada de Revisión"** section (`#agenda-llamada`) is smooth-scrolled into view and centered. |
 | AC4.2 | This creates the natural conversion funnel: Plan Generated → Downloaded → Email Sent → Schedule a Call.                                                                           |
 | AC4.3 | If only one of download or email completes (error case), the scroll does NOT fire — only when both succeed.                                                                       |
+|       |                                                                                                                                                                                   |
+
+### Sub-Issue 5: UX Focus & Button Disabling
+
+| #     | Criterion                                                                                                                                                                                 |
+| ----- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| AC5.1 | On Step 1 (Situación), the `Tu Edad Actual` input (#current-age) automatically receives focus with a visible cursor when navigated via navbar or internal steps (excluding initial load). |
+| AC5.2 | On Step 2 (Metas), the `Gastos Mensuales` input (#expense) automatically receives focus with a visible cursor.                                                                            |
+| AC5.3 | On Step 3 (Resultados), the `Obtener mi Plan` button is **disabled upon click** and never re-enables (unless page is refreshed).                                                          |
+| AC5.4 | The disabled button follows the styling guidelines (60% opacity, not-allowed cursor, no shadow).                                                                                          |
+| AC5.5 | The button text changes reactively: "Completa los Datos" (Form), "Enviando Plan" (Sending), "Error en Envío" (Failed), "Plan Enviado" (Sent).                                             |
 
 ---
 
@@ -76,6 +87,8 @@ Four distinct bugs have been identified in the Retirement Simulator that affect 
 - [x] Savings sync verified with unit test.
 - [x] Scroll to Obtener Plan on step 3.
 - [x] Scroll to Agenda section after download+email success.
+- [x] Auto-focus on inputs in Step 1 and Step 2.
+- [x] Plan button disabled with specific styling and reactive labels (Completa/Enviando/Error/Enviado).
 - [x] Compliance report updated.
 
 ---

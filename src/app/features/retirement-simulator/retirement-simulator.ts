@@ -1,4 +1,4 @@
-import { Component, ChangeDetectionStrategy, signal, computed, inject, effect, untracked, viewChild, output } from '@angular/core';
+import { Component, ChangeDetectionStrategy, signal, computed, inject, effect, untracked, viewChild, output, ElementRef, input } from '@angular/core';
 import { CommonModule, CurrencyPipe, DecimalPipe } from '@angular/common';
 import { FormsModule, ReactiveFormsModule, FormBuilder, Validators } from '@angular/forms';
 import { BaseChartDirective } from 'ng2-charts';
@@ -6,7 +6,7 @@ import { ChartConfiguration, ChartData, Chart, Filler } from 'chart.js';
 import { WealthGapService } from '../wealth-gap-chart/wealth-gap.service';
 import { SimulatorsStateService } from '../../core/services/simulators-state.service';
 import { calculateRetirement } from '@shared/utils';
-import { RetirementInput, RetirementResult, Lead } from '@shared/types';
+import { RetirementInput, RetirementResult, Lead, EmailStatus } from '@shared/types';
 import { LeadForm } from '../lead-form/lead-form';
 import { ScrollService } from '../../core/services/scroll.service';
 
@@ -129,7 +129,62 @@ export class RetirementSimulator {
     return inflation >= returnRate;
   });
 
+  private readonly ageInput = viewChild<ElementRef<HTMLInputElement>>('ageInput');
+  private readonly expenseInput = viewChild<ElementRef<HTMLInputElement>>('expenseInput');
+
+  emailStatus = input<EmailStatus>('idle');
+  private hasStartedProcess = signal<boolean>(false);
+
+  buttonLabel = computed(() => {
+    const status = this.emailStatus();
+    if (status === 'sending') return 'Enviando Plan';
+    if (status === 'failed') return 'Error en Envío';
+    if (status === 'sent') return 'Plan Enviado';
+    if (this.showCaptureForm()) return 'Completa los Datos';
+    return 'Obtener mi Plan';
+  });
+
+  isDownloading = computed(() => this.hasStartedProcess() || this.emailStatus() !== 'idle');
+  private isFirstLoad = signal<boolean>(true);
+
   constructor() {
+    // Effect to handle navigation from navbar/other components
+    effect(() => {
+      const active = this.scrollService.activeSection();
+      if (active === 'retirement-simulator' && this.isFirstLoad()) {
+        untracked(() => {
+          this.isFirstLoad.set(false);
+          // The reactive signal change will trigger the focus effect below
+        });
+      }
+    });
+
+    // // Effect to handle input focus on step change
+    // effect(() => {
+    //   const step = this.currentStep();
+    //   const ageEl = this.ageInput();
+    //   const expEl = this.expenseInput();
+    //   const firstLoad = this.isFirstLoad();
+
+    //   // Focusing Step 1 if navigated or returning to step
+    //   if (step === 'step1') {
+    //     if (!firstLoad && ageEl) {
+    //       // 200ms allows smooth scroll to finish so the caret/cursor remains stable and visible
+    //       setTimeout(() => {
+    //         const el = ageEl.nativeElement;
+    //         el.focus();
+    //         el.select();
+    //       }, 200);
+    //     }
+    //   } else if (step === 'step2' && expEl) {
+    //     setTimeout(() => {
+    //       const el = expEl.nativeElement;
+    //       el.focus();
+    //       el.select();
+    //     }, 200);
+    //   }
+    // });
+
     // Effect to trigger confetti on results step
     effect(() => {
       if (this.currentStep() === 'results' && !this.isUnreachable()) {
@@ -322,6 +377,7 @@ export class RetirementSimulator {
 
   // Capture Interaction
   initiateDownload() {
+    this.hasStartedProcess.set(true);
     const lead = this.capturedLead();
     if (lead) {
       // Already have the lead, just emit the event to trigger PDF/Email

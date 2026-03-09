@@ -157,6 +157,7 @@ MVP#1 is complete when:
 - [ ] Lead form → PDF → Email → Review Call section funnel works end-to-end.
 - [x] Navbar navigation works for all 5 sections.
 - [x] Footer visible with dynamic copyright.
+- [x] Case-sensitive focus and button disabling logic in Simulator.
 - [ ] PO signs off on the checklist.
 
 ---

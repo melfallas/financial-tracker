@@ -88,6 +88,7 @@ This checklist serves as the final validation gate for the Product Owner to ensu
 - [x] Savings sync verified: $4000 in simulator → $4000 in WGC Capital Inicial, $4000 in CoW "Si tienes".
 - [x] All new components use `templateUrl`/`styleUrl` (no inline).
 - [x] All new components use `ft-` selector prefix.
+- [x] Input focus (Step 1/2) and Download button disabling (Step 3) verified.
 - [ ] Responsive validated on mobile, tablet, desktop, large, XL.
 
 ---

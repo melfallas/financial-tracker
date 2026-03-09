@@ -11,11 +11,8 @@ import { EmailService } from '../../../core/services/email.service';
 import { IEmailProvider } from '../../../core/interfaces/i-email-provider';
 import { WealthGapService } from '../../wealth-gap-chart/wealth-gap.service';
 import { LanguageService } from '../../../core/services/language.service';
-import { Lead } from '@shared/types';
+import { Lead, EmailStatus } from '@shared/types';
 import { ScrollService } from '../../../core/services/scroll.service';
-
-/** Tracks the async email dispatch state to drive UI feedback */
-export type EmailDispatchStatus = 'idle' | 'sending' | 'sent' | 'failed';
 
 @Component({
   selector: 'ft-home-page',
@@ -35,7 +32,7 @@ export class HomePage {
   private retirementComp = viewChild(RetirementSimulator);
 
   /** Drives the email dispatch feedback UI */
-  readonly emailStatus = signal<EmailDispatchStatus>('idle');
+  readonly emailStatus = signal<EmailStatus>('idle');
   readonly generatedPdfUri = signal<string | null>(null);
   readonly createdLead = signal<Lead | null>(null);
   readonly bookingUrlStr = signal<string | null>(null);

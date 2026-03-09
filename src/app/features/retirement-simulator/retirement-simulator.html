@@ -43,7 +43,7 @@
                     [class.ring-2]="errors()['currentAge']" [class.ring-red-500]="errors()['currentAge']">
                     <label for="current-age" class="text-sm font-bold uppercase tracking-wider opacity-60">Tu Edad
                         Actual</label>
-                    <input type="number" id="current-age" [ngModel]="currentAge"
+                    <input #ageInput type="number" id="current-age" [ngModel]="currentAge"
                         (ngModelChange)="updateCurrentAge($event)" placeholder="Digita tu edad"
                         class="bg-transparent border-0 border-b-2 border-emerald-200 text-3xl font-black text-deep-blue focus:ring-0 focus:border-emerald-500 transition-colors" />
                     @if (errors()['currentAge']) {
@@ -109,7 +109,7 @@
                         <div class="relative">
                             <span
                                 class="absolute left-0 top-1/2 -translate-y-1/2 text-deep-blue text-2xl font-black opacity-30">$</span>
-                            <input type="number" id="expense" [ngModel]="targetMonthlyExpense"
+                            <input #expenseInput type="number" id="expense" [ngModel]="targetMonthlyExpense"
                                 (ngModelChange)="updateTargetMonthlyExpense($event)" placeholder="Digita tus gastos"
                                 class="bg-transparent border-0 border-b-2 border-emerald-200 text-3xl font-black text-deep-blue pl-6 w-full focus:ring-0 focus:border-emerald-500 transition-colors" />
                         </div>
@@ -251,8 +251,9 @@
                         <span class="opacity-50">✎</span> Editar Datos
                     </button>
                     <button (click)="initiateDownload()"
-                        class="bg-deep-blue text-white px-10 py-5 rounded-3xl font-black text-xl shadow-2xl hover:scale-105 transition-all w-full sm:w-auto">
-                        Obtener mi Plan
+                        [disabled]="isDownloading()"
+                        class="bg-deep-blue text-white px-10 py-5 rounded-3xl font-black text-xl shadow-2xl transition-all w-full sm:w-auto hover:enabled:scale-105 disabled:opacity-60 disabled:cursor-not-allowed disabled:shadow-none">
+                        {{ buttonLabel() }}
                     </button>
                 </div>
             </div>

@@ -15,18 +15,34 @@ export class SimulatorsStateService {
   readonly annualInflation = signal<number | null>(this.configService.get('annual_inflation', 6));
   readonly years = signal<number | null>(this.configService.get('term_in_years', 20));
 
+  readonly targetMonthlyExpense = signal<number | null>(this.configService.get('monthly_expenses', null));
+
   // Retirement specific signals
   readonly currentAge = signal<number | null>(this.configService.get('current_age', null));
   readonly retirementAge = signal<number | null>(this.configService.get('retirement_age', 65));
-  readonly targetMonthlyExpense = signal<number | null>(this.configService.get('monthly_expenses', null));
+
+  /**
+   * Safely parses a value into a number or null.
+   * Handles strings with commas (thousands separators) and empty strings.
+   */
+  private parseSafeNumber(val: any): number | null {
+    if (val === null || val === undefined || val === '') return null;
+    if (typeof val === 'number') return isNaN(val) ? null : val;
+    
+    // Remove commas (thousands separator common in some locales)
+    const sanitized = val.toString().replace(/,/g, '');
+    const parsed = parseFloat(sanitized);
+    
+    return isNaN(parsed) ? null : parsed;
+  }
 
   // Update methods
-  updateInitialCapital(val: number | null) { this.initialCapital.set(val); }
-  updateMonthlyContribution(val: number | null) { this.monthlyContribution.set(val); }
-  updateAnnualReturn(val: number | null) { this.annualReturn.set(val); }
-  updateAnnualInflation(val: number | null) { this.annualInflation.set(val); }
-  updateYears(val: number | null) { this.years.set(val); }
-  updateCurrentAge(val: number | null) { this.currentAge.set(val); }
-  updateRetirementAge(val: number | null) { this.retirementAge.set(val); }
-  updateTargetMonthlyExpense(val: number | null) { this.targetMonthlyExpense.set(val); }
+  updateInitialCapital(val: any) { this.initialCapital.set(this.parseSafeNumber(val)); }
+  updateMonthlyContribution(val: any) { this.monthlyContribution.set(this.parseSafeNumber(val)); }
+  updateAnnualReturn(val: any) { this.annualReturn.set(this.parseSafeNumber(val)); }
+  updateAnnualInflation(val: any) { this.annualInflation.set(this.parseSafeNumber(val)); }
+  updateYears(val: any) { this.years.set(this.parseSafeNumber(val)); }
+  updateCurrentAge(val: any) { this.currentAge.set(this.parseSafeNumber(val)); }
+  updateRetirementAge(val: any) { this.retirementAge.set(this.parseSafeNumber(val)); }
+  updateTargetMonthlyExpense(val: any) { this.targetMonthlyExpense.set(this.parseSafeNumber(val)); }
 }

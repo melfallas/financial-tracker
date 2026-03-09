@@ -258,7 +258,7 @@
             </div>
 
             @if (showCaptureForm()) {
-            <div class="mt-8 fade-in">
+            <div id="lead-capture-section" class="mt-8 fade-in">
                 <ft-lead-form (onSuccess)="onLeadCaptured($event)"
                     (onDownloadClick)="initiateDownload()"></ft-lead-form>
             </div>

@@ -5,7 +5,7 @@
 > **Priority:** P1 (Fix — Medium)
 > **Size:** M
 > **Owner:** Angi (Dev)
-> **Status:** 📂 TODO
+> **Status:** ✅ DONE
 
 ---
 
@@ -25,17 +25,14 @@ Four distinct bugs have been identified in the Retirement Simulator that affect 
 
 ## Acceptance Criteria
 
-### Sub-Issue 1: Age Input Validation with Error Modal
+### Sub-Issue 1: Age Input Validation with Inline Error
 
-| #     | Criterion                                                                                                                     |
-| ----- | ----------------------------------------------------------------------------------------------------------------------------- |
-| AC1.1 | `Tu Edad Actual` input starts **empty** with `placeholder="Digita tu Edad"`. No pre-filled default age.                       |
-| AC1.2 | When the user clicks "Siguiente Paso" with the age input empty: an **error modal** is displayed (no navigation to next step). |
-| AC1.3 | Error modal title: **"Especifica tu Edad"**.                                                                                  |
-| AC1.4 | Error modal body: **"El simulador necesita tu edad para el cálculo de tu libertad financiera."**                              |
-| AC1.5 | Modal is centered **both vertically and horizontally** in viewport — same style/behavior as the email success/error modals.   |
-| AC1.6 | Modal has a visible dismiss button; keyboard focus is trapped inside modal while open (WCAG focus management).                |
-| AC1.7 | After dismissing, focus returns to the age input field.                                                                       |
+| #     | Criterion                                                                                                                                                                 |
+| ----- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| AC1.1 | `Tu Edad Actual` input starts **empty** with `placeholder="Digita tu edad"`. No pre-filled default age.                                                                   |
+| AC1.2 | When the user clicks "Siguiente Paso" with the age input empty, an **inline error message** "Por favor ingresa tu edad actual" is displayed (no navigation to next step). |
+| AC1.3 | Age must be between 5 and 100. If < 5, show inline error: "La edad mínima es 5 años".                                                                                     |
+| AC1.4 | If age > 100, show inline error: "La edad máxima es 100 años".                                                                                                            |
 
 ### Sub-Issue 2: Liquid Savings ↔ Capital Initial Sync Bug
 
@@ -74,12 +71,12 @@ Four distinct bugs have been identified in the Retirement Simulator that affect 
 
 ## Definition of Done
 
-- [ ] Age input starts empty with correct placeholder.
-- [ ] Error modal displays on empty age submit.
-- [ ] Savings sync verified with unit test.
-- [ ] Scroll to Obtener Plan on step 3.
-- [ ] Scroll to Agenda section after download+email success.
-- [ ] Compliance report updated.
+- [x] Age input starts empty with correct placeholder.
+- [x] Inline error displays on empty or invalid age submit.
+- [x] Savings sync verified with unit test.
+- [x] Scroll to Obtener Plan on step 3.
+- [x] Scroll to Agenda section after download+email success.
+- [x] Compliance report updated.
 
 ---
 

@@ -69,7 +69,7 @@ This checklist serves as the final validation gate for the Product Owner to ensu
 | **US-MVP1.3** | Review Call Section                 | 🟢 Done | **Done**        |
 | **US-MVP1.4** | Footer Component                    | 🟢 Done | **Done**        |
 | **US-MVP1.5** | Navbar Section Navigation           | 🟢 Done | **Done**        |
-| **US-MVP1.6** | Retirement Simulator Fixes          | 📂 TODO | **Ready**       |
+| **US-MVP1.6** | Retirement Simulator Fixes          | 🟢 Done | **Done**        |
 | **US-MVP1.7** | Wealth Gap Chart Fixes              | 📂 TODO | **Ready**       |
 | **US-MVP1.8** | Cost of Waiting Banner Fixes        | 📂 TODO | **Ready**       |
 | **US-MVP1.9** | Cross-Cutting Fixes                 | 📂 TODO | **Ready**       |
@@ -81,11 +81,11 @@ This checklist serves as the final validation gate for the Product Owner to ensu
 - [ ] GitHub Pages deployment serves app without 404.
 - [ ] All Chart.js charts render without console errors.
 - [ ] Lead form → PDF download → Email → Review Call section flow works end-to-end.
-- [ ] Navbar smooth-scrolls to all 5 sections.
+- [x] Navbar smooth-scrolls to all 5 sections.
 - [ ] Footer displays with dynamic copyright year.
 - [ ] "Asesoría Gratuita" button links to Calendly correctly.
 - [ ] Slider track fill works on all sliders on load and on change.
-- [ ] Savings sync verified: $4000 in simulator → $4000 in WGC Capital Inicial, $4000 in CoW "Si tienes".
+- [x] Savings sync verified: $4000 in simulator → $4000 in WGC Capital Inicial, $4000 in CoW "Si tienes".
 - [ ] All new components use `templateUrl`/`styleUrl` (no inline).
 - [ ] All new components use `ft-` selector prefix.
 - [ ] Responsive validated on mobile, tablet, desktop, large, XL.

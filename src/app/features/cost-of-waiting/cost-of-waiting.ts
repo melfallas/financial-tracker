@@ -59,16 +59,16 @@ export class CostOfWaiting implements AfterViewInit, OnDestroy {
     }
 
     updateSavings(val: any) {
-        this.stateService.updateInitialCapital(val === '' || val === null ? null : +val);
-    }
-
-    updateYears(val: any) {
-        this.stateService.updateYears(val === '' || val === null ? null : +val);
-    }
-
-    updateInflation(val: any) {
-        this.stateService.updateAnnualInflation(val === '' || val === null ? null : +val);
-    }
+    this.stateService.updateInitialCapital(val);
+  }
+  
+  updateYears(val: any) {
+    this.stateService.updateYears(val);
+  }
+  
+  updateInflation(val: any) {
+    this.stateService.updateAnnualInflation(val);
+  }
 
     ngAfterViewInit() {
         this.observer = new IntersectionObserver(

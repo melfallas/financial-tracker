@@ -167,30 +167,30 @@ export class RetirementSimulator {
 
   // Update methods
   updateCurrentAge(val: any) {
-    this.stateService.updateCurrentAge(val === '' || val === null ? null : +val);
+    this.stateService.updateCurrentAge(val);
     if (this.errors()['currentAge']) this.validateStep1();
   }
   updateInitialCapital(val: any) {
-    this.stateService.updateInitialCapital(val === '' || val === null ? null : +val);
+    this.stateService.updateInitialCapital(val);
     if (this.errors()['initialCapital']) this.validateStep1();
   }
   updateMonthlyContribution(val: any) {
-    this.stateService.updateMonthlyContribution(val === '' || val === null ? null : +val);
+    this.stateService.updateMonthlyContribution(val);
   }
   updateTargetMonthlyExpense(val: any) {
-    this.stateService.updateTargetMonthlyExpense(val === '' || val === null ? null : +val);
+    this.stateService.updateTargetMonthlyExpense(val);
     if (this.errors()['targetMonthlyExpense']) this.validateStep2();
   }
   updateAnnualInflation(val: any) {
-    this.stateService.updateAnnualInflation(val === '' || val === null ? null : +val);
+    this.stateService.updateAnnualInflation(val);
     if (this.errors()['annualInflation']) this.validateStep2();
   }
   updateRetirementAge(val: any) {
-    this.stateService.updateRetirementAge(val === '' || val === null ? null : +val);
+    this.stateService.updateRetirementAge(val);
     if (this.errors()['retirementAge']) this.validateStep2();
   }
   updateAnnualReturn(val: any) {
-    this.stateService.updateAnnualReturn(val === '' || val === null ? null : +val);
+    this.stateService.updateAnnualReturn(val);
     if (this.errors()['annualReturn']) this.validateStep2();
   }
 
@@ -329,6 +329,8 @@ export class RetirementSimulator {
     } else {
       // First time, show the form
       this.showCaptureForm.set(true);
+      // Smooth scroll to the lead capture form anchor
+      setTimeout(() => this.scrollService.scrollToSection('lead-capture-section'), 100);
     }
   }
 

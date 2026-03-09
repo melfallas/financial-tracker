@@ -8,6 +8,8 @@ import { routes } from './app.routes';
 // Must run before any chart component renders (module-level side-effect)
 import {
   Chart,
+  LineController,
+  BarController,
   CategoryScale,
   LinearScale,
   BarElement,
@@ -21,6 +23,8 @@ import {
 } from 'chart.js';
 
 Chart.register(
+  LineController,
+  BarController,
   CategoryScale,
   LinearScale,
   BarElement,

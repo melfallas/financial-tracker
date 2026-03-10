@@ -1,9 +1,10 @@
-<!-- ![Financial Tracker](financial-tracker-banner.png) -->
+![Financial Tracker](financial-tracker-banner.svg)
 
 # Financial Tracker: Your Investment Advisor
 
-<!-- [![Version](https://img.shields.io/npm/v/bmad-method?color=blue&label=version)](https://melfallas.github.io/financial-tracker/) -->
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE) [![Node.js Version](https://img.shields.io/badge/node-%3E%3D20.0.0-brightgreen)](https://nodejs.org)
+[![Version](https://img.shields.io/badge/version-1.0.0-blue.svg)](https://github.com/melfallas/financial-tracker/blob/main/CHANGELOG.md) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE) [![Node.js Version](https://img.shields.io/badge/node-%3E%3D20.0.0-brightgreen)](https://nodejs.org) [![pnpm Version](https://img.shields.io/badge/pnpm-%3E%3D10.0.0-orange)](https://pnpm.io) [![Angular Version](https://img.shields.io/badge/angular-%3E%3D21.0.0-red)](https://angular.dev) [![TypeScript Version](https://img.shields.io/badge/typescript-%3E%3D5.0.0-3178C6)](https://www.typescriptlang.org/) [![Tailwind CSS Version](https://img.shields.io/badge/tailwind-%3E%3D4.0.0-38B2AC)](https://tailwindcss.com/)
+
+
 
 > ## 🚨 **v1 STABLE - NO NEW FEATURES** 🚨
 > This is the **stable, production-ready v1 version** of Financial Tracker.

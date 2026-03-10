@@ -13,6 +13,7 @@ import { WealthGapService } from '../../wealth-gap-chart/wealth-gap.service';
 import { LanguageService } from '../../../core/services/language.service';
 import { Lead, EmailStatus } from '@shared/types';
 import { ScrollService } from '../../../core/services/scroll.service';
+import { BOOKING_URL } from '../../../core/constants/booking';
 
 @Component({
   selector: 'ft-home-page',
@@ -60,22 +61,6 @@ export class HomePage {
     let retirementImage = this.retirementComp()?.getChartImage() ?? '';
     const lang = this.langService.currentLanguage();
 
-    console.log('wealthImage: ', wealthImage);
-    console.log('retirementImage: ', retirementImage);
-    console.log('lang: ', lang);
-
-    // if (!wealthImage) {
-    //   wealthImage = this.generateMockChartImage('#4e73df', 'Wealth Gap Chart Placeholder');
-    // }
-
-    // if (!retirementImage) {
-    //   retirementImage = this.generateMockChartImage('#17a2b8', 'Retirement Chart Placeholder');
-    // }
-
-    // console.log('wealthImage: ', wealthImage);
-    // console.log('retirementImage: ', retirementImage);
-    // console.log('lang: ', lang);
-
     try {
       const pdfDataUri = await this.pdfService.generateReport(
         lead,
@@ -85,14 +70,12 @@ export class HomePage {
         lang
       );
 
-      const bookingUri = "https://calendly.com/mfallaspsna/30min";
-      
       this.createdLead.set(lead);
       this.generatedPdfUri.set(pdfDataUri);
-      this.bookingUrlStr.set(bookingUri);
+      this.bookingUrlStr.set(BOOKING_URL);
 
       // Dispatch email asynchronously — fire-and-forget; success UI is not blocked
-      this.dispatchEmail(lead, pdfDataUri, bookingUri, lang).catch((err) => {
+      this.dispatchEmail(lead, pdfDataUri, BOOKING_URL, lang).catch((err) => {
         console.error('[HomePage] Email dispatch failed:', err);
       });
 
@@ -124,7 +107,7 @@ export class HomePage {
       link.href = uri;
       link.download = filename;
       link.click();
-      
+
       // Close the modal upon successful download initiation
       this.closeEmailModal();
     }
@@ -134,7 +117,7 @@ export class HomePage {
     const status = this.emailStatus();
     if (status === 'failed' || status === 'sent' || status === 'sending') {
       this.emailStatus.set('idle');
-      
+
       // AC4.1: If success, scroll to Agenda
       if (status === 'sent' && this.isPlanDownloaded()) {
         setTimeout(() => this.scrollService.scrollToSection('agenda-llamada'), 300);
@@ -206,7 +189,7 @@ export class HomePage {
 
     // console.log('htmlBody: ');
     // console.log(htmlBody);
-    
+
     // Set a 5-second fallback timeout per US2.3 Non-Functional Requirements
     const timeoutId = setTimeout(() => {
       if (this.emailStatus() === 'sending') {
@@ -215,7 +198,7 @@ export class HomePage {
     }, 5000);
 
     const filename = `Plan_Financiero_${lead.firstName}_${lead.lastName}.pdf`;
-    
+
     let emailPayload = {
       to: lead.email,
       leadFirstName: lead.firstName,

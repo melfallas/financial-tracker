@@ -21,8 +21,10 @@ It will receive **critical patches only** - no new features will be added.
 - [Project Status](#-project-status)
 - [Key Features](#-key-features)
 - [Technical Stack](#-technical-stack)
+- [Quick Start](#-quick-start)
 - [Getting Started](#-getting-started)
 - [Project Structure](#-project-structure)
+- [Project Documents](#-project-documents)
 - [Contributing](#-contributing)
 - [License](#-license)
 
@@ -129,12 +131,20 @@ Whole project structure documentation:
 - [Change Log](docs/CHANGELOG.md)
 - [Release Notes](docs/RELEASE_NOTES.md)
 
-### 🎯 Sprint & Planning Documents
+###  Design Documents
+- [PRD](docs/PRD.md)
+- [User Flow](docs/BMAD%20Agents%20Artifacts/User%20Flow.md)
+- [System Context](docs/BMAD%20Agents%20Artifacts/System%20Context.md)
+- [Technical File Dictionary](docs/BMAD%20Agents%20Artifacts/Technical%20File%20Dictionary.md)
+- [Project Specifications](docs/BMAD%20Agents%20Artifacts/Project%20Specifications%20-%20Medium.md)
 
-- [Backlog](docs/Backlog.md)
-- [PO Checklist](docs/PO_Checklist.md)
-- [Sprint Report](docs/SprintReport.md)
-- [Dependency Analysis](docs/Dependency-Analysis.md)
+
+###  UX/UI Documents
+- [UX/UI Knowledge Base](docs/BMAD%20Agents%20Artifacts/UX.md)
+- [Design Guidelines](docs/Product%20Design/Design%20Docs/EN/01.%20UI%20Design%20Guidelines.md)
+- [Color Pallete](docs/Product%20Design/Design%20Docs/EN/02.%20Color%20Pallete.md)
+- [Frontend Specification](docs/Product%20Design/Frontend%20Specification.md)
+- [Atoms & Molecules](docs/Product%20Design/Atoms-and-Molecules.md)
 
 ### 🏗️ Architecture Documents
 
@@ -143,6 +153,13 @@ Whole project structure documentation:
 - [Data Schema](docs/Architecture-Data-Schema.md)
 - [Testing Strategy](docs/TESTING_STRATEGY.md)
 - [Language Standards](docs/LANGUAGE_STANDARDS.md)
+
+### 🎯 Sprint & Planning Documents
+
+- [Backlog](docs/Backlog.md)
+- [PO Checklist](docs/PO_Checklist.md)
+- [Sprint Report](docs/SprintReport.md)
+- [Dependency Analysis](docs/Dependency-Analysis.md)
 
 ## 🤝 Contributing
 

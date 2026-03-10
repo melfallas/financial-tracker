@@ -1,0 +1,38 @@
+<footer class="footer-container" aria-labelledby="footer-brand">
+  <!-- Top Navigation Sections -->
+  <nav class="footer-nav" aria-label="Secciones de navegación">
+    <a href="#hero" class="nav-link">Diagnóstico</a>
+    <a href="#wealth-gap" class="nav-link">Brecha</a>
+    <a href="#cost-of-waiting" class="nav-link">Impacto</a>
+    <a href="#retirement-simulator" class="nav-link">Retiro</a>
+    <a href="#review-call" class="nav-link">Asesoría</a>
+  </nav>
+
+  <div class="footer-main">
+    <!-- Left Section: Brand & Disclaimer -->
+    <div class="footer-brand-section">
+      <span id="footer-brand" class="brand-name">Financial Tracker</span>
+      <p class="brand-disclaimer">
+        La información proporcionada es solo con fines educativos y no constituye asesoramiento financiero.
+      </p>
+    </div>
+
+    <!-- Right Section: CTA -->
+    <div class="footer-cta-section">
+      <h4 class="cta-title">Agenda tu Cita</h4>
+      <a [href]="BOOKING_URL" target="_blank" class="cta-button">
+        Quiero mi Asesoría Gratuita
+      </a>
+    </div>
+  </div>
+
+  <!-- Bottom Section: Copyright & Legal -->
+  <div class="footer-bottom">
+    <p class="copyright-text">&copy; {{ currentYear() }} Financial Tracker</p>
+    <p class="rights-reserved">Todos los derechos reservados.</p>
+    <div class="legal-links">
+      <a href="#" class="legal-link">Términos</a>
+      <a href="#" class="legal-link">Privacidad</a>
+    </div>
+  </div>
+</footer>

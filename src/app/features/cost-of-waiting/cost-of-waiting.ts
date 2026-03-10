@@ -7,13 +7,13 @@ import {
     ElementRef,
     ViewChild,
     AfterViewInit,
-    untracked,
     OnDestroy,
     computed
 } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { CurrencyPipe, DecimalPipe } from '@angular/common';
-import { WealthGapService } from '../wealth-gap-chart/wealth-gap.service';
+import { CurrencyPipe } from '@angular/common';
+import { SimulatorsStateService } from '../../core/services/simulators-state.service';
+import { ScrollService } from '../../core/services/scroll.service';
 
 @Component({
     selector: 'ft-cost-of-waiting',
@@ -23,78 +23,68 @@ import { WealthGapService } from '../wealth-gap-chart/wealth-gap.service';
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CostOfWaiting implements AfterViewInit, OnDestroy {
-    private wealthGapService = inject(WealthGapService);
+    private stateService = inject(SimulatorsStateService);
+    protected scrollService = inject(ScrollService);
+    private readonly animationDuration = 1200;
 
-    // Input signals tied to the WealthGapService
-    displaySavings = signal<number>(this.wealthGapService.inputs().initialCapital);
-    displayYears = signal<number>(this.wealthGapService.inputs().years);
-    displayInflation = signal<number>(this.wealthGapService.inputs().annualInflationRate);
+    // Bind to shared state
+    get displaySavings() { return this.stateService.initialCapital(); }
+    get displayYears() { return this.stateService.years(); }
+    get displayInflation() { return this.stateService.annualInflation(); }
 
     // Business Logic: Compound inflation loss
-    // Principal loss = Principal * ( (1 + annualInflation/100/12)^(years * 12) - 1 )
     estimatedLoss = computed(() => {
-        const savings = this.displaySavings();
-        const annualRate = this.displayInflation();
+        const savings = this.stateService.initialCapital() ?? 0;
+        const annualRate = this.stateService.annualInflation() ?? 0;
+        const years = this.stateService.years() ?? 0;
         const monthlyRate = annualRate / 100 / 12;
-        const totalMonths = this.displayYears() * 12;
+        const totalMonths = years * 12;
 
-        // We calculate the difference between nominal value and real value (erosion)
-        // Nominal value doesn't change if keeping in 'standard account' (0% return)
-        // Real Value = Savings / (1 + monthlyInflation)^totalMonths
-        // Loss = Savings - Real Value
         const realValue = savings / Math.pow(1 + monthlyRate, totalMonths);
         return savings - realValue;
     });
 
     animatedLoss = signal<number>(0);
-    animatedRemaining = computed(() => this.displaySavings() - this.animatedLoss());
+    animatedRemaining = computed(() => (this.stateService.initialCapital() ?? 0) - this.animatedLoss());
     private animationFrameId?: number;
     private observer?: IntersectionObserver;
 
     @ViewChild('bannerSection') bannerSection?: ElementRef<HTMLElement>;
 
     constructor() {
-        // Effect to sync and animate whenever the estimated loss changes
-        effect(
-            () => {
-                const targetLoss = this.estimatedLoss();
-                this.animateValue(this.animatedLoss(), targetLoss, 600);
+        // Effect to trigger animation whenever the estimated loss changes
+        effect(() => {
+            const targetLoss = this.estimatedLoss();
+            this.animateValue(this.animatedLoss(), targetLoss, this.animationDuration);
+        });
+    }
 
-                // Update global service values if changed locally
-                untracked(() => {
-                    const currentInputs = this.wealthGapService.inputs();
-                    if (this.displaySavings() !== currentInputs.initialCapital) {
-                        this.wealthGapService.updateInput('initialCapital', this.displaySavings());
-                    }
-                    if (this.displayYears() !== currentInputs.years) {
-                        this.wealthGapService.updateInput('years', this.displayYears());
-                    }
-                    if (this.displayInflation() !== currentInputs.annualInflationRate) {
-                        this.wealthGapService.updateInput('annualInflationRate', this.displayInflation());
-                    }
-                });
-            },
-            { allowSignalWrites: true }
-        );
+    updateSavings(val: any) {
+        this.stateService.updateInitialCapital(val);
+    }
 
-        // Sync from global service back to local signals
-        effect(
-            () => {
-                const globalInputs = this.wealthGapService.inputs();
-                untracked(() => {
-                    if (globalInputs.initialCapital !== this.displaySavings()) {
-                        this.displaySavings.set(globalInputs.initialCapital);
-                    }
-                    if (globalInputs.years !== this.displayYears()) {
-                        this.displayYears.set(globalInputs.years);
-                    }
-                    if (globalInputs.annualInflationRate !== this.displayInflation()) {
-                        this.displayInflation.set(globalInputs.annualInflationRate);
-                    }
-                });
-            },
-            { allowSignalWrites: true }
-        );
+    updateYears(val: any) {
+        this.stateService.updateYears(val);
+    }
+
+    updateInflation(val: any) {
+        this.stateService.updateAnnualInflation(val);
+    }
+
+    // AC1.1-AC1.3: Auto-correct empty/zero values on blur (silently restore minimum valid value)
+    onSavingsBlur() {
+        const val = this.stateService.initialCapital();
+        if (!val || val <= 0) this.stateService.updateInitialCapital(1);
+    }
+
+    onYearsBlur() {
+        const val = this.stateService.years();
+        if (!val || val <= 0) this.stateService.updateYears(1);
+    }
+
+    onInflationBlur() {
+        const val = this.stateService.annualInflation();
+        if (!val || val <= 0) this.stateService.updateAnnualInflation(1);
     }
 
     ngAfterViewInit() {
@@ -102,7 +92,7 @@ export class CostOfWaiting implements AfterViewInit, OnDestroy {
             (entries) => {
                 entries.forEach((entry) => {
                     if (entry.isIntersecting) {
-                        this.animateValue(0, this.estimatedLoss(), 1200);
+                        this.animateValue(0, this.estimatedLoss(), this.animationDuration);
                         this.observer?.disconnect();
                     }
                 });
@@ -141,12 +131,7 @@ export class CostOfWaiting implements AfterViewInit, OnDestroy {
         this.animationFrameId = requestAnimationFrame(step);
     }
 
-    scrollToCapture() {
-        const el = document.getElementById('lead-capture-form');
-        if (el) {
-            el.scrollIntoView({ behavior: 'smooth' });
-        } else {
-            window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
-        }
+    scrollToSimulator() {
+        this.scrollService.scrollToSection('retirement-simulator');
     }
 }

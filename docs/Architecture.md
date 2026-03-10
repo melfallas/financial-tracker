@@ -691,4 +691,35 @@ To comply with BMAD security standards and avoid leaking repo-specific secrets, 
 
 ---
 
-_— Winston, Architect · Financial Tracker · BMAD v4 · v2.3.0 · 2026-02-27 (Updated: ngx-env integration, verified Email Architecture)_
+## 18. 🧠 Shared Simulator State & Data Mapping
+
+To ensure a consistent user experience across the narrative scroll, specific financial parameters are synchronized globally via the `SimulatorsStateService`.
+
+### 18.1 Global State Synchronization Rules
+
+- **Initial Capital:** `initial_capital` maps to:
+  - "Capital Inicial" (Wealth Gap Chart)
+  - "Si tienes" (Cost of Waiting)
+  - "Ahorros Líquidos" (Retirement Simulator)
+- **Shared Parameters:** The following fields are synchronized across **ALL** simulators:
+  - `monthly_contributions` (Aporte Mensual)
+  - `term_in_years` (Plazo en Años)
+  - `annual_return` (Retorno Anual)
+  - `annual_inflation` (Inflación Anual)
+- **Calculation Threshold:** High-inflation warnings are triggered based on the `critical_inflation` parameter in the global configuration.
+
+### 18.2 Input Validation & Null Handling
+
+- **Empty State:** All numeric inputs can be `null` (empty strings in templates).
+- **Validation Gates:** Components must display appropriate placeholders. If a required input is `null` (except `monthly_contributions` which allows `0`), calculation or step progression must be blocked with a visible error message.
+- **Retirement Specific:** `current_age` and `monthly_expenses` are `null` by default. Navigation to Step 2 or Results is blocked if they remain empty.
+
+### 18.3 API & Mock Definitions (snake_case)
+
+- **Standard:** All JSON definitions (defaults, API responses, mocks) must strictly follow **snake_case**.
+- **Language:** All field names must be in **English**.
+- **Initialization:** Defaults are loaded once via `SimulatorConfigService` from `src/assets/config/simulator-defaults.json`.
+
+---
+
+_— Winston, Architect · Financial Tracker · BMAD v4 · v2.4.0 · 2026-03-07 (Updated: Shared State & snake_case Validation Rules)_

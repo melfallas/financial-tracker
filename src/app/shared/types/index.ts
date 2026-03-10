@@ -57,3 +57,4 @@ export interface InteractionLog {
     duration_ms: number;
     timestamp: string;
 }
+export type EmailStatus = 'idle' | 'sending' | 'sent' | 'failed';

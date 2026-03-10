@@ -1,0 +1,162 @@
+:host {
+  display: block;
+  width: 100%;
+}
+
+.footer-container {
+  background-color: #f8fafc; /* Minimalist Light Gray */
+  color: var(--color-deep-blue);
+  padding: 3rem 1.5rem 2rem;
+  border-top: 1px solid #e2e8f0;
+}
+
+/* Top Navigation Section */
+.footer-nav {
+  max-width: 1200px;
+  margin: 0 auto 3rem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1.5rem 2.5rem;
+  border-bottom: 1px solid #e2e8f0;
+  padding-bottom: 2rem;
+}
+
+.nav-link {
+  color: var(--color-deep-blue);
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 0.9375rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  transition: color 0.2s ease;
+}
+
+.nav-link:hover {
+  color: var(--color-emerald-green);
+}
+
+/* Main Content Section (Logo + CTA) */
+.footer-main {
+  max-width: 1200px;
+  margin: 0 auto 3rem;
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+  align-items: center;
+  text-align: center;
+}
+
+.brand-name {
+  font-size: 1.5rem;
+  font-weight: 900;
+  display: block;
+  margin-bottom: 0.5rem;
+  color: var(--color-deep-blue);
+}
+
+.brand-disclaimer {
+  font-size: 0.8125rem;
+  line-height: 1.5;
+  color: #64748b;
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+.footer-cta-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.cta-title {
+  font-size: 1.125rem;
+  font-weight: 800;
+  margin: 0;
+  text-align: center;
+  width: 100%;
+}
+
+.cta-button {
+  background-color: var(--color-emerald-green);
+  color: white;
+  padding: 0.875rem 1.75rem;
+  border-radius: 0.75rem;
+  text-decoration: none;
+  font-weight: 800;
+  font-size: 0.9375rem;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 4px 15px rgba(16, 185, 129, 0.2);
+}
+
+.cta-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(16, 185, 129, 0.3);
+  background-color: #059669; /* Slightly darker emerald */
+}
+
+/* Bottom Section (Copyright + Legal) */
+.footer-bottom {
+  max-width: 1200px;
+  margin: 0 auto;
+  border-top: 1px solid #e2e8f0;
+  padding-top: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.copyright-text {
+  font-size: 0.875rem;
+  font-weight: 500;
+  margin: 0;
+  color: var(--color-deep-blue);
+}
+
+.rights-reserved {
+  font-size: 0.8125rem;
+  color: #94a3b8;
+  margin: 0;
+}
+
+.legal-links {
+  display: flex;
+  gap: 1.5rem;
+  margin-top: 0.5rem;
+}
+
+.legal-link {
+  color: #94a3b8;
+  text-decoration: none;
+  font-size: 0.8125rem;
+  transition: color 0.2s ease;
+}
+
+.legal-link:hover {
+  color: var(--color-deep-blue);
+  text-decoration: underline;
+}
+
+/* Tablet/Desktop Adjustments */
+@media (min-width: 768px) {
+  .footer-main {
+    flex-direction: row;
+    justify-content: space-between;
+    text-align: left;
+    align-items: flex-start;
+  }
+
+  .footer-brand-section {
+    flex: 1;
+  }
+
+  .brand-disclaimer {
+    margin-left: 0;
+  }
+
+  .footer-cta-section {
+    align-items: flex-end;
+  }
+}

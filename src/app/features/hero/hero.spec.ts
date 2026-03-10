@@ -23,7 +23,7 @@ describe('HeroComponent', () => {
 
     it('should render the H1 title', () => {
         const h1 = fixture.debugElement.query(By.css('h1')).nativeElement;
-        expect(h1.textContent).toContain(' Controla tu futuro,  y alcanza tu Libertad Financiera');
+        expect(h1.textContent).toContain(' Controla tu futuro  y alcanza tu Libertad Financiera');
     });
 
     // it('should call scrollToDiagnostic when CTA button is clicked', () => {

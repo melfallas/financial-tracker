@@ -14,16 +14,16 @@ describe('WealthGapService', () => {
   });
 
   describe('default inputs', () => {
-    it('should have default initial capital of 5000', () => {
-      expect(service.inputs().initialCapital).toBe(5000);
+    it('should have default initial capital of 1000', () => {
+      expect(service.inputs().initialCapital).toBe(1000);
     });
 
-    it('should have default monthly contribution of 200', () => {
-      expect(service.inputs().monthlyContribution).toBe(200);
+    it('should have default monthly contribution of 0', () => {
+      expect(service.inputs().monthlyContribution).toBe(0);
     });
 
-    it('should have default annual return rate of 10', () => {
-      expect(service.inputs().annualReturnRate).toBe(10);
+    it('should have default annual return rate of 15', () => {
+      expect(service.inputs().annualReturnRate).toBe(15);
     });
 
     it('should have default annual inflation rate of 6', () => {

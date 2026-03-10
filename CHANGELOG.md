@@ -2,6 +2,41 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.0.0](https://github.com/melfallas/financial-tracker/compare/v0.12.0...v1.0.0) (2026-03-10)
+
+
+### Features
+
+* **bmad-architecture:** MVP-01 README enrichment from full doc scan and readme-update-activation rule ([66de19b](https://github.com/melfallas/financial-tracker/commit/66de19bf2ceedbeed42cde4d286231171d3f8d85))
+* **bmad-booking-constants:** US2.2 centralize booking URL into core constants Context: ✅ To maintain consistency and simplify future updates, hardcoded Calendly booking URLs were extracted from multiple components into a centralized core constant. This ensures a single source of truth for the conversion anchor across the application. Changes: ✅ Migrated hardcoded booking Uri in HomePage to use BOOKING_URL constant from src/app/core/constants/booking. ✅ Updated Footer component and template to implement [href] binding to the centralized BOOKING_URL. Impact: ✅ Simplifies global maintenance of the booking link, reducing the risk of broken links or inconsistent destination URLs during future marketing pivots. ✅ Enhances code quality by adhering to the DRY (Don't Repeat Yourself) principle. Docs: ✅ ([9dcb77e](https://github.com/melfallas/financial-tracker/commit/9dcb77e8628fe25a2560b1a8c3e8d375e9ac727c))
+* **bmad-documentation:** MVP1 generate professional SVG banner for README based on design inspiration Context: ✅ To ensure a premium, scalable visual identity for the repository, a new SVG banner was created for the ([71ded74](https://github.com/melfallas/financial-tracker/commit/71ded74192af6a724e250a27d1b3d64988e84d44))
+* **bmad-simulator-config:** US2.2 resolve 404 error by migrating simulator assets to public folder Context: ✅ Application bootstrap was failing due to a critical 404 Not Found error when requesting simulator-defaults.json, which was incorrectly located in the src/assets directory instead of the public folder. Changes: ✅ Migrated the src/assets/ folder structure directly into the public/assets/ directory. ✅ Ensured the simulator configuration is correctly served by the Angular development server from its new location. Impact: ✅ Resolves the 404 Not Found error and allows the application's simulator services to initialize successfully during bootstrap. ✅ Standardizes the project's static asset structure according to modern Angular serving requirements. Docs: ✅ ([c678e30](https://github.com/melfallas/financial-tracker/commit/c678e306d62ecab3b0f59eba2efdd032f2604ffb))
+
+## [0.12.0](https://github.com/melfallas/financial-tracker/compare/v0.11.0...v0.12.0) (2026-03-09)
+
+
+### Features
+
+* **bmad-cost-of-waiting:** US-MVP1.8 improve input validation and layout stability of Banner Input Auto-Correct & Layout Stability ([9adfa76](https://github.com/melfallas/financial-tracker/commit/9adfa76ab5f6c826fed364024adf9b4a62f375ee))
+* **bmad-cta:** US-MVP1.1 "Free Advisoring" CTA Button Alignment ([ffc4323](https://github.com/melfallas/financial-tracker/commit/ffc432326c9d13f5460d1675da8817d72306ae18))
+* **bmad-layout-footer:** US-MVP1.4 Implement minimalist footer component ([1ef3f16](https://github.com/melfallas/financial-tracker/commit/1ef3f16535f075221635ac9f7d94b0f3d732e03a))
+* **bmad-navigation:** US-MVP1.5 Navbar Section Navigation & ID Homologation ([ddcc058](https://github.com/melfallas/financial-tracker/commit/ddcc058a7348a34e6fcd2482910ff368c6c18436))
+* **bmad-retirement-simulator:** US-MVP1.6 Reactive Action Button & Persistent State ([e614011](https://github.com/melfallas/financial-tracker/commit/e61401140fc5fd4ac9eaccda337957123818967a))
+* **bmad-retirement-sim:** US-MVP1.6 Fix savings synchronization and step 3 scroll behavior ([6ee0569](https://github.com/melfallas/financial-tracker/commit/6ee05694fb3b9b15844c4621aa91d4bee6f264fb))
+* **bmad-review-call:** US-MVP1.3 Implementation of "Schedule Call" conversion section ([b34000d](https://github.com/melfallas/financial-tracker/commit/b34000daca16dadfc1f94df2ea32023aca9b149b))
+* **bmad-simulators:** US-MVP1.7 WGC Redesign, Centralized State & Dynamic Config ([eca0e8e](https://github.com/melfallas/financial-tracker/commit/eca0e8e1f0136f95d98b435480ba6b9abf9a2400))
+* **bmad-wealth-gap:** US-MVP1.2 "Avoid Lost" CTA Button ([4583531](https://github.com/melfallas/financial-tracker/commit/4583531f1b23d9439e04eacda4074644b8c8f4ea))
+* **bmad-wealth-gap:** US-MVP1.2 Adjust CTA layout to fill space below chart ([8597f2a](https://github.com/melfallas/financial-tracker/commit/8597f2a640be6de1aece30f4cbe2c57e9cdfd13f))
+* Enhancing input validation and null handling into Retirement Simulator features, integrate them into a new Home Page, and add related state, PDF, email, and scrolling services. ([a722a03](https://github.com/melfallas/financial-tracker/commit/a722a0304e11dd133dfdee0e991d11874a7d1072))
+* Establish BMAD core configuration, project index, and architectural rules, alongside new MVP1 user stories. ([94db893](https://github.com/melfallas/financial-tracker/commit/94db893454907dd09adafe99fe59cab9e56e79d5))
+* Establish initial project documentation, sprint reports, user stories, and a PO checklist for the MVP. ([0aeb640](https://github.com/melfallas/financial-tracker/commit/0aeb64053b4286fef04986fa75f63ccee02cf341))
+* Implement core financial simulators and charts, establish GitHub Pages deployment, and apply critical MVP[#1](https://github.com/melfallas/financial-tracker/issues/1) fixes including 404 and Chart.js rendering. ([ac027bd](https://github.com/melfallas/financial-tracker/commit/ac027bde3dcbfb9b01d2a7809f6de771b6611a40))
+
+
+### Bug Fixes
+
+* **bmad-charts:** Fix missing Chart.js controller registrations ([428ab37](https://github.com/melfallas/financial-tracker/commit/428ab379126b58feb8c1c833e0c1a8f3f32ae5c8))
+
 ## [0.11.0](https://github.com/melfallas/financial-tracker/compare/v0.10.0...v0.11.0) (2026-03-07)
 
 

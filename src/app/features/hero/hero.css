@@ -17,8 +17,9 @@
   }
 }
 
-::ng-deep .cta-hero button {
-  padding: 1.25rem 2.5rem !important;
-  font-size: 1.25rem !important;
-  border-radius: 999px !important;
+/* AC1.1-AC1.3: Set button dimensions via CSS custom properties — no ::ng-deep or !important needed */
+.cta-hero {
+  --btn-padding: 1.25rem 2.5rem;
+  --btn-font-size: 1.25rem;
+  --btn-radius: 999px;
 }

@@ -1,0 +1,40 @@
+<svg width="1200" height="400" viewBox="0 0 1200 400" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect width="1200" height="400" fill="white"/>
+  
+  <!-- Text Section -->
+  <text x="80" y="160" font-family="'Inter', sans-serif" font-weight="800" font-size="72" fill="#1A3C6E">Financial</text>
+  <text x="80" y="240" font-family="'Inter', sans-serif" font-weight="800" font-size="72" fill="#00C853">Tracker</text>
+  
+  <!-- CTA Button -->
+  <rect x="80" y="280" width="220" height="60" rx="8" fill="#00C853"/>
+  <text x="190" y="318" font-family="'Inter', sans-serif" font-weight="600" font-size="20" fill="white" text-anchor="middle">Get Started</text>
+  
+  <!-- Sprout and Coins Visualization -->
+  <g transform="translate(750, 100)">
+    <!-- Coins Base -->
+    <ellipse cx="0" cy="220" rx="180" ry="40" fill="#E2E8F0"/>
+    <ellipse cx="-40" cy="210" rx="60" ry="15" fill="#D4AF37"/>
+    <ellipse cx="30" cy="215" rx="70" ry="18" fill="#CD7F32"/>
+    <ellipse cx="-10" cy="225" rx="80" ry="20" fill="#B8860B"/>
+    <ellipse cx="60" cy="205" rx="50" ry="12" fill="#DAA520"/>
+    
+    <!-- Sprout Stem -->
+    <path d="M0 210 C0 150 -10 100 0 50" stroke="#4ADE80" stroke-width="8" stroke-linecap="round" fill="none"/>
+    
+    <!-- Leaves -->
+    <!-- Center Leaf -->
+    <path d="M0 50 Q 0 10 -20 10 Q -20 30 0 50" fill="#00C853" transform="rotate(-15, 0, 50)"/>
+    <!-- Right Leaf -->
+    <path d="M0 120 Q 40 100 60 120 Q 40 140 0 120" fill="#22C55E" transform="rotate(-10, 0, 120)"/>
+    <!-- Left Leaf -->
+    <path d="M0 150 Q -40 130 -60 150 Q -40 170 0 150" fill="#15803D" transform="rotate(10, 0, 150)"/>
+    
+    <!-- Growth Detail -->
+    <circle cx="0" cy="50" r="4" fill="#00C853"/>
+  </g>
+  
+  <!-- Subtle Decorative Accents -->
+  <circle cx="1100" cy="100" r="100" fill="#F1F5F9" opacity="0.5"/>
+  <circle cx="100" cy="350" r="40" fill="#F1F5F9" opacity="0.3"/>
+</svg>

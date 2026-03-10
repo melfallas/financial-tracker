@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.0.0](https://github.com/melfallas/financial-tracker/compare/v0.12.0...v1.0.0) (2026-03-10)
+
+
+### Features
+
+* **bmad-architecture:** MVP-01 README enrichment from full doc scan and readme-update-activation rule ([66de19b](https://github.com/melfallas/financial-tracker/commit/66de19bf2ceedbeed42cde4d286231171d3f8d85))
+* **bmad-booking-constants:** US2.2 centralize booking URL into core constants Context: ✅ To maintain consistency and simplify future updates, hardcoded Calendly booking URLs were extracted from multiple components into a centralized core constant. This ensures a single source of truth for the conversion anchor across the application. Changes: ✅ Migrated hardcoded booking Uri in HomePage to use BOOKING_URL constant from src/app/core/constants/booking. ✅ Updated Footer component and template to implement [href] binding to the centralized BOOKING_URL. Impact: ✅ Simplifies global maintenance of the booking link, reducing the risk of broken links or inconsistent destination URLs during future marketing pivots. ✅ Enhances code quality by adhering to the DRY (Don't Repeat Yourself) principle. Docs: ✅ ([9dcb77e](https://github.com/melfallas/financial-tracker/commit/9dcb77e8628fe25a2560b1a8c3e8d375e9ac727c))
+* **bmad-documentation:** MVP1 generate professional SVG banner for README based on design inspiration Context: ✅ To ensure a premium, scalable visual identity for the repository, a new SVG banner was created for the ([71ded74](https://github.com/melfallas/financial-tracker/commit/71ded74192af6a724e250a27d1b3d64988e84d44))
+* **bmad-simulator-config:** US2.2 resolve 404 error by migrating simulator assets to public folder Context: ✅ Application bootstrap was failing due to a critical 404 Not Found error when requesting simulator-defaults.json, which was incorrectly located in the src/assets directory instead of the public folder. Changes: ✅ Migrated the src/assets/ folder structure directly into the public/assets/ directory. ✅ Ensured the simulator configuration is correctly served by the Angular development server from its new location. Impact: ✅ Resolves the 404 Not Found error and allows the application's simulator services to initialize successfully during bootstrap. ✅ Standardizes the project's static asset structure according to modern Angular serving requirements. Docs: ✅ ([c678e30](https://github.com/melfallas/financial-tracker/commit/c678e306d62ecab3b0f59eba2efdd032f2604ffb))
+
 ## [0.12.0](https://github.com/melfallas/financial-tracker/compare/v0.11.0...v0.12.0) (2026-03-09)
 
 
